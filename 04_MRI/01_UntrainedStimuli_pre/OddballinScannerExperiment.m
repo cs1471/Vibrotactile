@@ -1,7 +1,8 @@
 % Automaticity
-function trialOutput = VTinScannerExperiment(name,exptdesign)
+function trialOutput = OddballinScannerExperiment(name,exptdesign)
 
 try
+    %dbstop if error;
     % following codes should be used when you are getting key presses using
     % fast routines like kbcheck.
     KbName('UnifyKeyNames');
@@ -11,7 +12,7 @@ try
     oldLevel = Screen('Preference', 'VisualDebugLevel', 1);
     %     oldEnableFlag = Screen('Preference', 'SuppressAllWarnings', 1);
     %     warning offc
-    HideCursor;
+    %HideCursor;
 
     WaitSecs(1); % make sure it is loaded into memory;
 
@@ -20,7 +21,7 @@ try
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     % open a screen and display instructions
     screens = Screen('Screens');
-    screenNumber = min(screens);
+    screenNumber = min(screens)+1;
 
     % Open window with default settings:
     [w windowRect] = Screen('OpenWindow', screenNumber,[128 128 128]);
@@ -53,50 +54,13 @@ try
         %flush event cue
         evt=1;
         while ~isempty(evt)
-            evt = CMUBox('GetEvent', exptdesign.boxHandle);
+            evt = CMUBox('GetEvent', exptdesign.boxHandle); %empty queue 
         end
         % Get the responses keyed in from subject
         drawAndCenterText(w,'Please press the button.',0);
-        evt = CMUBox('GetEvent', exptdesign.boxHandle, 1);
-        responseMapping.button1 = evt.state;
+        evt = CMUBox('GetEvent', exptdesign.boxHandle, 1); % get event for button pressed
+        responseMapping.button1 = evt.state; % stores button box in variable
       
-        % Let the scanner signal the scan to start
-        drawAndCenterText(w,'Please get ready.\n\nThe experiment will begin shortly.',0);
-        % WARNING: TRRIGGER CORRESPONDS TO A PRESS OF BUTTON 3!!!
-        triggername=1;
-        trigger=0;
-        while ~isequal(triggername,trigger)
-            evt = CMUBox('GetEvent', exptdesign.boxHandle, 1);
-            trigger = evt.state;
-            starttime = evt.time;
-        end
-        exptdesign.scanStart = starttime;
-        exptdesign.responseMapping=responseMapping;
-    else
-        responseMapping=exptdesign.responseKeyChange;
-        drawAndCenterText(w,'Hit Enter to Continue...',1);
-        exptdesign.scanStart = GetSecs;
-    end
-    
-    runCounter=0;
-
-
-    %Display experiment instructions
-    drawAndCenterText(w,['\nOn each trial, you will feel 6 vibrations \n'...
-             'You will indicate the vibration that felt different from the other 5 vibrations\n'...
-             'by pushing the button.'  ],1)
-         
-    if exptdesign.responseBox
-        %flush event cue
-        evt=1;
-        while ~isempty(evt)
-            evt = CMUBox('GetEvent', exptdesign.boxHandle);
-        end
-        % Get the responses keyed in from subject
-        drawAndCenterText(w,'Please press the button.',0);
-        evt = CMUBox('GetEvent', exptdesign.boxHandle, 1);
-        responseMapping.button=evt.state;
-        
         % Let the scanner signal the scan to start
         drawAndCenterText(w,'Please get ready.\n\nThe experiment will begin shortly.',0);
         % WARNING: TRRIGGER CORRESPONDS TO A PRESS OF BUTTON 3!!!
@@ -115,15 +79,22 @@ try
         exptdesign.scanStart = GetSecs;
     end
     
-   drawAndCenterText(w, 'Experiment will start shortly',1)
+    runCounter=1;
+
+
+    %Display experiment instructions
+    drawAndCenterText(w,['\nOn each trial, you will feel 6 vibrations \n'...
+             'You will indicate the vibration that felt different from the other 5 vibrations\n'...
+             'by pushing the button.'  ],1)
         
    response = exptdesign.response;
 
     %load training stimuli
-    [stimuliShuffled, oddball] = makeStimuli(response);
-    
+%     [stimuliShuffled, oddball] = makeStimuli(response);
+    load stimuliShuffled.mat
     stimuli = stimuliShuffled(:,:,runCounter);
   
+    sResp = zeros(6,24);
     %generate a correctResponse map
     for i = 1:size(stimuli,2)
         for j = 1:size(stimuli,1)
@@ -138,7 +109,9 @@ try
     for iBlock=1:size(stimuli,1)%how many blocks to run this training session
         stimulusTracking=[]; 
         
-        stimuliBlock = [stimuli{iBlock,:}];
+        for i = 1:size(stimuli,2)
+            stimuliBlock{i} = stimuli{iBlock,i};
+        end
         
         %iterate over trials
         for iTrial=1:size(stimuli,2)
@@ -148,32 +121,26 @@ try
                 evt = CMUBox('GetEvent', exptdesign.boxHandle);
             end
            
-           
-           
            %draw fixation
            Screen('DrawTexture', w, fixationTexture);
            [FixationVBLTimestamp FixationOnsetTime FixationFlipTimestamp FixationMissed] = Screen('Flip',w);
            
-           trialOutput(numRuns).trialStartTime(trial)= GetSecs;
-           trialOutput(numRuns).numBlocks(trial) = exptdesign.numBlocks;
-           trialOutput(numRuns).runIndex(trial) = numRuns;
-           trialOutput(numRuns).numTrials(trial) = exptdesign.numTrialsPerSession;
-           trialOutput(numRuns).trialIndex(trial) = trial;
-           
            %after 700 ms, present the vibrotactile stimulus
            wait1 = .7;
-           WaitSecs(wait1);
-%            constructStimuli(stimuliBlock(:, iTrial));
-           
-           drawAndCenterText(w, 'Break /n/n/n Press button if felt unique vibration pattern',1)
-           [RespVBLTimestamp RespOnsetTime RespFlipTimestamp RespMissed] = Screen('Flip', w, wait1);
-           
            %record response start time
            responseStartTime=GetSecs;
-           %record subject responses
-           numericalAnswer(responseMapping);
+           
+           constructStimuli(stimuliBlock, iTrial);
+           
+           drawAndCenterText(w, 'Break /n/n/n Press button if felt unique vibration pattern',0,wait1)
+%            [RespVBLTimestamp RespOnsetTime RespFlipTimestamp RespMissed] = Screen('Flip', w, wait1);
+            evt = CMUBox('GetEvent', exptdesign.boxHandle);
+            if ~isempty(evt)
+                sResp = 1;
+            end
+        
            %record end time of response
-           responseFinishedTime=GetSecs;
+           responseFinishedTime=evt.time;
           
            %record parameters for the trial
            trialOutput(iBlock).responseStartTime(iTrial)=responseStartTime;
@@ -181,26 +148,15 @@ try
            trialOutput(iBlock).RT(iTrial)=responseFinishedTime-responseStartTime;
            trialOutput(iBlock).sResp(iTrial)=sResp;
            trialOutput(iBlock).wait1(iTrial)=wait1;
-           
-           %save stimulus presentation timestamps
-           [FixationVBLTimestamp FixationOnsetTime FixationFlipTimestamp FixationMissed]
-           [RespVBLTimestamp RespOnsetTime RespFlipTimestamp RespMissed]
-           %
            trialOutput(iBlock).FixationVBLTimestamp(iTrial)=FixationVBLTimestamp;
            trialOutput(iBlock).FixationOnsetTime(iTrial)=FixationOnsetTime;
            trialOutput(iBlock).FixationFlipTimestamp(iTrial)=FixationFlipTimestamp;
-           trialOutput(iBlock).FixationMissed(iTrial)=FixationMissed;
-           trialOutput(iBlock).RespVBLTimestamp(iTrial)=RespVBLTimestamp;
-           trialOutput(iBlock).RespOnsetTime(iTrial)=RespOnsetTime;
-           trialOutput(iBlock).RespFlipTimestamp(iTrial)=RespFlipTimestamp;
-           trialOutput(iBlock).RespMissed(iTrial)=RespMissed;
-
-           if iTrial==exptdesign.numTrialsPerSession && iBlock == exptdesign.numBlocks
-               %calculate accuracy
-%                accuracyForLevel=mean(trialOutput(iBlock).accuracy);
-
-               Screen('CloseAll')
-           end
+           trialOutput(iBlock).FixationMissed(iTrial)=FixationMissed;             
+           runOutput(runCounter).trialStartTime(iTrial)= GetSecs;
+           runOutput(runCounter).iBlocks(iTrial) = exptdesign.iBlocks;
+           runOutput(runCounter).runIndex(iTrial) = runCounter;
+           runOutput(runCounter).numTrials(iTrial) = exptdesign.numTrialsPerSession;
+           runOutput(runCounter).trialIndex(iTrial) = iTrial;
            
         end
         %record parameters for the block
@@ -212,12 +168,8 @@ try
     Screen('Flip',w)
     
     ShowCursor;
-    
-    if exptdesign.responseBox
-        CMUBox('Close',exptdesign.boxHandle);
-    end
-    
-       %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+  
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     %		END
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     
@@ -228,7 +180,7 @@ try
         %save the history data (stimuli, last level passed)
     toc;
 
-    WaitSecs('UntilTime',exptdesign.scanStart + 12.24*(numBlocks) + 6.12*(runCounter+1))
+    WaitSecs('UntilTime',exptdesign.scanStart + 10*(numBlocks) + 6*(runCounter+1))
     % End of experiment, close window:
     Screen('CloseAll');
     Priority(0);
@@ -274,45 +226,31 @@ try
 end
 end
 
-function drawAndCenterText(window,message,wait)
+function drawAndCenterText(window,message,wait, time)
     if nargin < 3
         wait = 1;
+    end
+    
+    if nargin <4
+        time =0;
     end
     
     % Now horizontally and vertically centered:
     [nx, ny, bbox] = DrawFormattedText(window, message, 'center', 'center', 0);
     black = BlackIndex(window); % pixel value for black               
-    Screen('Flip',window);
+    Screen('Flip',window, time);
     
     %KbWait(1) waits for a button press to continue
-    KbWait([],2);
+    
 %     WaitSecs(0.2); %this is necessary on the windows XP machine to wait for mouse response -- DOES delay timing!
 end
 
+function constructStimuli(stimuliBlock,iTrial)
+     f = stimuliBlock{1,iTrial}(1,:);
+     p = stimuliBlock{1,iTrial}(2,:);
 
-
-function sResp = numericalAnswer(responseMapping)
-if exptdesign.responseBox
-        evt = CMUBox('GetEvent', exptdesign.boxHandle);
-        if ~isempty(evt)
-            response=KbPress;
-            if response == KbPress
-                sResp = 1;
-            else
-                sResp = 0;
-            end
-        end
-end
-end
-
-
-
-function constructStimuli(stimuliBlock)
-    f = stimuliBlock(1,:);
-    p = stimuliBlock(2,:);
-
-    if size(stimuliBlock,2) > 1
-        constructOddStimuli(stimuliBlock)
+    if length(f) > 1 
+        constructOddStimuli(stimuliBlock, iTrial)
     else
         stim = {...
             {'fixed',f,1,300},...
@@ -329,9 +267,9 @@ function constructStimuli(stimuliBlock)
     end
 end
 
-function constructOddStimuli(stimuliBlock)
-   f = stimuliBlock(1,:);
-   p = stimuliBlock(2,:);
+function constructOddStimuli(stimuliBlock, iTrial)
+    f = stimuliBlock{1,iTrial}(1,:);
+    p = stimuliBlock{1,iTrial}(2,:);
     
     stim = {...
             {'fixed',f(1),1,300},...
