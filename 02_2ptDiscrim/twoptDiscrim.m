@@ -28,10 +28,10 @@
     end
     
     %combine frequency combinations with position pairs 
-    %stimuli = [repmat(frequency(:,1),1,44), repmat(frequency(:,2),1,44), repmat(frequency(:,3),1,44), repmat(frequency(:,4),1,44);...
-    %           repmat(stimulator,1,4)];
+    stimuli = [repmat(frequency(:,1),1,44), repmat(frequency(:,2),1,44), repmat(frequency(:,3),1,44), repmat(frequency(:,4),1,44);...
+              repmat(stimulator,1,4)];
     
-    stimuli = [repmat(frequency(:,1),1,44); stimulator(:,:)];
+%     stimuli = [repmat(frequency(:,1),4,44); stimulator(:,:)];
     
    %create cells with various same/different stimuli - how do I encorporate same? As of now all different        
    p = 1;        
