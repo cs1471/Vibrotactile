@@ -48,6 +48,8 @@ if exptdesign.responseBox
     exptdesign.boxHandle = CMUBox('Open', 'pst', 'COM3', 'norelease');
 end
 
+stimGenPTB('open')
+
 %loop over runs here 
 [trialoutput] = OddballinScannerExperiment(name,exptdesign);
 
@@ -55,3 +57,5 @@ if exptdesign.responseBox
     CMUBox('Close',exptdesign.boxHandle);
     disp('Ensure dip switches are set back to 4');
 end
+
+stimGenPTB('close')
