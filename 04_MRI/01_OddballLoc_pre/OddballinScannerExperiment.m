@@ -12,7 +12,7 @@ try
     oldLevel = Screen('Preference', 'VisualDebugLevel', 1);
     %     oldEnableFlag = Screen('Preference', 'SuppressAllWarnings', 1);
     %     warning offc
-    %HideCursor;
+    HideCursor;
 
     WaitSecs(1); % make sure it is loaded into memory;
 
@@ -41,21 +41,24 @@ try
         Screen('TextStyle', w, 1+2);
     end;
     
-    % FIXATION IMAGE
+    % Load fixation image from file
     fixationImage = imread(exptdesign.fixationImage);
 
-    % MAKE TEXTURES
+    % generate fixation texture from image
     fixationTexture = Screen('MakeTexture', w, double(fixationImage));
 
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     %		INTRO EXPERIMENT
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     if exptdesign.responseBox
-        %flush event cue
+        %flush event queue
         evt=1;
+        
+        %%while there is no event continue to flush queue
         while ~isempty(evt)
             evt = CMUBox('GetEvent', exptdesign.boxHandle); %empty queue 
         end
+        
         % Get the responses keyed in from subject
         drawAndCenterText(w,'Please press the button.',0);
         evt = CMUBox('GetEvent', exptdesign.boxHandle, 1); % get event for button pressed
@@ -64,21 +67,29 @@ try
         % Let the scanner signal the scan to start
         drawAndCenterText(w,'Please get ready.\n\nThe experiment will begin shortly.',0);
         % WARNING: TRRIGGER CORRESPONDS TO A PRESS OF BUTTON 3!!!
-        triggername=4;
-        trigger=0;
+        triggername=4; %4 == button press on box 3
+        trigger=0; %set equal to a different value 
+        
+        %while loop that continues to iterate until trigger is pressed at
+        %which point triggername == trigger
         while ~isequal(triggername,trigger)
             evt = CMUBox('GetEvent', exptdesign.boxHandle, 1);
             trigger = evt.state;
             starttime = evt.time;
         end
+        
+        %store start time and response mapping in exptdesign struct
         exptdesign.scanStart = starttime;
         exptdesign.responseMapping=responseMapping;
     else
+        %checks for in between runs so that experminter can control run
+        %start
         responseMapping=exptdesign.responseKeyChange;
         drawAndCenterText(w,'Hit Enter to Continue...',1);
         exptdesign.scanStart = GetSecs;
     end
     
+    %marks the number of runs passed in from exptdesign struct
     runCounter=exptdesign.iRuns;
 
 
@@ -86,7 +97,8 @@ try
     drawAndCenterText(w,['\nOn each trial, you will feel 6 vibrations \n'...
              'You will indicate the vibration that felt different from the other 5 vibrations\n'...
              'by pushing the button.'  ],1)
-        
+   
+   %passes in response profile from wrapper function
    response = exptdesign.response;
 
     %load training stimuli
@@ -121,20 +133,14 @@ try
                 evt = CMUBox('GetEvent', exptdesign.boxHandle);
             end
            
-           
            %draw fixation
            Screen('DrawTexture', w, fixationTexture);
            [FixationVBLTimestamp FixationOnsetTime FixationFlipTimestamp FixationMissed] = Screen('Flip',w, exptdesign.scanStart + 10*(iBlock-1) + (iTrial-1));
            
-           %after 700 ms, present the vibrotactile stimulus
-           wait1 = .7;
-           %record response start time
-           
+           %call function that generates stimuli for driver box
            constructStimuli(stimuliBlock, iTrial);
           
-           %record parameters for the trial
-           %record parameters for the block
-            %stimuli, order
+           %record parameters for the trial and block
            trialOutput(iBlock,1).stimuli = stimuliBlock;
            trialOutput(iBlock,1).FixationVBLTimestamp(iTrial)=FixationVBLTimestamp;
            trialOutput(iBlock,1).FixationOnsetTime(iTrial)=FixationOnsetTime;
@@ -148,18 +154,25 @@ try
            
         end
         
-         evt = CMUBox('GetEvent', exptdesign.boxHandle);
-            responseFinishedTime = 0;
-            sResp=0;
-            if ~isempty(evt)
-                sResp = 1;
-                %record end time of response
-                responseFinishedTime=evt.time;
-            end
-            trialOutput(iBlock,1).sResp=sResp;
-            trialOutput(iBlock,1).responseStartTime=responseStartTime;
-            trialOutput(iBlock,1).responseFinishedTime=responseFinishedTime;
-            trialOutput(iBlock,1).RT=responseFinishedTime-responseStartTime;
+        %if button pressed record response
+        evt = CMUBox('GetEvent', exptdesign.boxHandle);
+        
+        %set variables == 0 if no response
+        responseFinishedTime = 0;
+        sResp=0;
+        
+        %sResp ==1 if button pressed
+        if ~isempty(evt)
+            sResp = 1;
+            %record end time of response
+            responseFinishedTime=evt.time;
+        end
+        
+        %trialOutput
+        trialOutput(iBlock,1).sResp=sResp;
+        trialOutput(iBlock,1).responseStartTime=responseStartTime;
+        trialOutput(iBlock,1).responseFinishedTime=responseFinishedTime;
+        trialOutput(iBlock,1).RT=responseFinishedTime-responseStartTime;
            
     end
     
@@ -176,7 +189,6 @@ try
     tic;
      %save the session data in the data directory
         save(['./data_Oddball_Localizer_Pre/' exptdesign.number '/' exptdesign.subjectName '_block' num2str(iBlock) '.run' num2str(exptdesign.iRuns) '.mat'], 'trialOutput', 'exptdesign');
-        %save the history data (stimuli, last level passed)
     toc;
 
     
@@ -189,28 +201,6 @@ try
     catch
     % This "catch" section executes in case of an error in the "try"
     % section []
-    if exptdesign.netstationPresent
-        % Tell Netstation to stop recording
-        [status error] = NetStation('StopRecording');
-        if status ==1 % there was an error!
-            status;
-            error;
-            ME = MException('NETSTATION:CouldNotStopRecord', ['Could not tell Netstation to stop recording.  Please check the IP and connection and try again.\n  Error:' error]);
-            %              throw(ME);
-            disp('ERROR stopping recoring in Netstation!');
-        end
-
-        [status error] = NetStation('Disconnect');
-        if status ==1 % there was an error!
-            status;
-            error;
-            ME = MException('NETSTATION:CouldNotStopRecord', ['Could not tell Netstation to stop recording.  Please check the IP and connection and try again.\n  Error:' error]);
-            %              throw(ME);
-            disp('ERROR disconnecting from Netstation!');
-
-        end
-    end
-    
     if exptdesign.responseBox
         CMUBox('Close',exptdesign.boxHandle);
     end
@@ -238,10 +228,6 @@ function drawAndCenterText(window,message,wait, time)
     [nx, ny, bbox] = DrawFormattedText(window, message, 'center', 'center', 0);
     black = BlackIndex(window); % pixel value for black               
     Screen('Flip',window, time);
-    
-    %KbWait(1) waits for a button press to continue
-    
-%     WaitSecs(0.2); %this is necessary on the windows XP machine to wait for mouse response -- DOES delay timing!
 end
 
 function constructStimuli(stimuliBlock,iTrial)
