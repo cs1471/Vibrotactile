@@ -2,6 +2,7 @@
 
 % get subject info
 name = input('\n\nEnter Subject ID:\n\n','s');
+%name = '915';
 number = name;
 exptdesign.number = number;
 if isempty(name)
@@ -12,9 +13,8 @@ end
 WaitSecs(0.25);
 
 %check if subject has data on file
-if exist(['./data/' number],'dir')
-else
-    mkdir(['./data/' number])
+if ~exist(['./data_Oddball_Localizer_Pre/' number],'dir')
+    mkdir(['./data_Oddball_Localizer_Pre/' number])
 end
 
 exptdesign.subjectName = name;
@@ -22,7 +22,7 @@ exptdesign.netstationPresent = 0;       % Controls whether or not Netstation is 
 exptdesign.netstationIP = '10.0.0.45';  % IP address of the Netstation Computer
 exptdesign.netstationSyncLimit = 2;     % Limit under which to sync the Netstation Computer and the Psychtoolbox IN MILLISECONDS
 
-exptdesign.numBlocks = 24;              % number of blocks (160 trials each) to complete this training session
+exptdesign.iBlocks = 24;              % number of blocks (160 trials each) to complete this training session
 exptdesign.numTrialsPerSession = 6;    % number of trials per block, could also pull this from dim2 of trainingStimuli
 exptdesign.refresh = 0.016679454248257;
 exptdesign.responseBox = 1;             % Controls whether we are using the keyboard or the response box for subj. responses.
@@ -50,8 +50,10 @@ end
 
 stimGenPTB('open')
 
-%loop over runs here 
-[trialoutput] = OddballinScannerExperiment(name,exptdesign);
+for iRuns = 1:exptdesign.numRuns
+    exptdesign.iRuns=iRuns;
+    [trialoutput.runs] = OddballinScannerExperiment(name,exptdesign);
+end
 
 if exptdesign.responseBox
     CMUBox('Close',exptdesign.boxHandle);

@@ -2,7 +2,7 @@
 function trialOutput = OddballinScannerExperiment(name,exptdesign)
 
 try
-    %dbstop if error;
+%     dbstop if error;
     % following codes should be used when you are getting key presses using
     % fast routines like kbcheck.
     KbName('UnifyKeyNames');
@@ -21,7 +21,7 @@ try
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     % open a screen and display instructions
     screens = Screen('Screens');
-    screenNumber = min(screens)+1;
+    screenNumber = min(screens);
 
     % Open window with default settings:
     [w windowRect] = Screen('OpenWindow', screenNumber,[128 128 128]);
@@ -79,7 +79,7 @@ try
         exptdesign.scanStart = GetSecs;
     end
     
-    runCounter=1;
+    runCounter=exptdesign.iRuns;
 
 
     %Display experiment instructions
@@ -94,7 +94,6 @@ try
     load stimuliShuffled.mat
     stimuli = stimuliShuffled(:,:,runCounter);
   
-    sResp = zeros(6,24);
     %generate a correctResponse map
     for i = 1:size(stimuli,2)
         for j = 1:size(stimuli,1)
@@ -109,6 +108,7 @@ try
     for iBlock=1:size(stimuli,1)%how many blocks to run this training session
         stimulusTracking=[]; 
         
+        responseStartTime=GetSecs;
         for i = 1:size(stimuli,2)
             stimuliBlock{i} = stimuli{iBlock,i};
         end
@@ -121,47 +121,46 @@ try
                 evt = CMUBox('GetEvent', exptdesign.boxHandle);
             end
            
+           
            %draw fixation
            Screen('DrawTexture', w, fixationTexture);
-           [FixationVBLTimestamp FixationOnsetTime FixationFlipTimestamp FixationMissed] = Screen('Flip',w);
+           [FixationVBLTimestamp FixationOnsetTime FixationFlipTimestamp FixationMissed] = Screen('Flip',w, exptdesign.scanStart + 10*(iBlock-1) + (iTrial-1));
            
            %after 700 ms, present the vibrotactile stimulus
            wait1 = .7;
            %record response start time
-           responseStartTime=GetSecs;
            
            constructStimuli(stimuliBlock, iTrial);
-           
-           drawAndCenterText(w, 'Break /n/n/n Press button if felt unique vibration pattern',0,wait1)
-%            [RespVBLTimestamp RespOnsetTime RespFlipTimestamp RespMissed] = Screen('Flip', w, wait1);
-            evt = CMUBox('GetEvent', exptdesign.boxHandle);
-            if ~isempty(evt)
-                sResp = 1;
-            end
-        
-           %record end time of response
-           responseFinishedTime=evt.time;
           
            %record parameters for the trial
-           trialOutput(iBlock).responseStartTime(iTrial)=responseStartTime;
-           trialOutput(iBlock).responseFinishedTime(iTrial)=responseFinishedTime;
-           trialOutput(iBlock).RT(iTrial)=responseFinishedTime-responseStartTime;
-           trialOutput(iBlock).sResp(iTrial)=sResp;
-           trialOutput(iBlock).wait1(iTrial)=wait1;
-           trialOutput(iBlock).FixationVBLTimestamp(iTrial)=FixationVBLTimestamp;
-           trialOutput(iBlock).FixationOnsetTime(iTrial)=FixationOnsetTime;
-           trialOutput(iBlock).FixationFlipTimestamp(iTrial)=FixationFlipTimestamp;
-           trialOutput(iBlock).FixationMissed(iTrial)=FixationMissed;             
-           runOutput(runCounter).trialStartTime(iTrial)= GetSecs;
-           runOutput(runCounter).iBlocks(iTrial) = exptdesign.iBlocks;
-           runOutput(runCounter).runIndex(iTrial) = runCounter;
-           runOutput(runCounter).numTrials(iTrial) = exptdesign.numTrialsPerSession;
-           runOutput(runCounter).trialIndex(iTrial) = iTrial;
+           %record parameters for the block
+            %stimuli, order
+           trialOutput(iBlock,1).stimuli = stimuliBlock;
+           trialOutput(iBlock,1).FixationVBLTimestamp(iTrial)=FixationVBLTimestamp;
+           trialOutput(iBlock,1).FixationOnsetTime(iTrial)=FixationOnsetTime;
+           trialOutput(iBlock,1).FixationFlipTimestamp(iTrial)=FixationFlipTimestamp;
+           trialOutput(iBlock,1).FixationMissed(iTrial)=FixationMissed;             
+           runOutput(runCounter,1).trialStartTime(iTrial)= GetSecs;
+           runOutput(runCounter,1).iBlocks(iTrial) = exptdesign.iBlocks;
+           runOutput(runCounter,1).runIndex(iTrial) = runCounter;
+           runOutput(runCounter,1).numTrials(iTrial) = exptdesign.numTrialsPerSession;
+           runOutput(runCounter,1).trialIndex(iTrial) = iTrial;
            
         end
-        %record parameters for the block
-        %stimuli, order
-        trialOutput.stimuli = stimuli;
+        
+         evt = CMUBox('GetEvent', exptdesign.boxHandle);
+            responseFinishedTime = 0;
+            sResp=0;
+            if ~isempty(evt)
+                sResp = 1;
+                %record end time of response
+                responseFinishedTime=evt.time;
+            end
+            trialOutput(iBlock,1).sResp=sResp;
+            trialOutput(iBlock,1).responseStartTime=responseStartTime;
+            trialOutput(iBlock,1).responseFinishedTime=responseFinishedTime;
+            trialOutput(iBlock,1).RT=responseFinishedTime-responseStartTime;
+           
     end
     
     Screen('DrawTexture', w, fixationTexture);
@@ -176,11 +175,11 @@ try
     %  Write the trial specific data to the output file.
     tic;
      %save the session data in the data directory
-        save(['./data_Oddball_Localizer_Pre/' exptdesign.number '/' datestr(now, 'yyyymmdd_HHMM') '-' exptdesign.subjectName '_block' num2str(iBlock) '/' exptdesign.run '.mat'], 'trialOutput', 'exptdesign');
+        save(['./data_Oddball_Localizer_Pre/' exptdesign.number '/' exptdesign.subjectName '_block' num2str(iBlock) '.run' num2str(exptdesign.iRuns) '.mat'], 'trialOutput', 'exptdesign');
         %save the history data (stimuli, last level passed)
     toc;
 
-    WaitSecs('UntilTime',exptdesign.scanStart + 10*(numBlocks) + 6*(runCounter+1))
+    
     % End of experiment, close window:
     Screen('CloseAll');
     Priority(0);
@@ -272,12 +271,12 @@ function constructOddStimuli(stimuliBlock, iTrial)
     p = stimuliBlock{1,iTrial}(2,:);
     
     stim = {...
-            {'fixed',f(1),1,300},...
-            {'durchannel',p(1),1, 90},...
-            {'fixed',f(1),1,300},...
-            {'durchannel',p(2), 100,190},...
-            {'fixed',f(1),1,300},...
-            {'durchannel',p(3), 200,290},...
+            {'fixed',f(1),1,90},...
+            {'fixchan',p(1),1, 90},...
+            {'fixed',f(1),100,190},...
+            {'fixchan',p(2), 100,190},...
+            {'fixed',f(1),200,290},...
+            {'fixchan',p(3), 200,290},...
            };
 
     [t,s]=buildTSM_nomap(stim);    
