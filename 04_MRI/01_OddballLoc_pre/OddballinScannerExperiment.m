@@ -116,7 +116,8 @@ try
             end
         end
     end
-     
+    
+    trialCounter = 1;
     for iBlock=1:size(stimuli,1)%how many blocks to run this training session
         stimulusTracking=[]; 
         
@@ -127,6 +128,8 @@ try
         
         %iterate over trials
         for iTrial=1:size(stimuli,2)
+            %initialize variable 
+            evt=1;
             
             %clear event responses stored in cue
             while ~isempty(evt)
@@ -135,45 +138,45 @@ try
            
            %draw fixation
            Screen('DrawTexture', w, fixationTexture);
-           [FixationVBLTimestamp FixationOnsetTime FixationFlipTimestamp FixationMissed] = Screen('Flip',w, exptdesign.scanStart + 10*(iBlock-1) + (iTrial-1));
+           [FixationVBLTimestamp FixationOnsetTime FixationFlipTimestamp FixationMissed] = Screen('Flip',w, exptdesign.scanStart + 10*(iBlock) + 1.02*(trialCounter-1)) %i changed the trial length to 1.02 seconds -PC
            
            %call function that generates stimuli for driver box
            constructStimuli(stimuliBlock, iTrial);
+           
+           while GetSecs < (FixationOnsetTime + 1) && isempty(evt)%%% this is what I just added, the (FixationOnsetTime + 1) means you will check for an answer for 1 second, isempty(evt)means you will stop waiting once there is a response -PC
+           %if button pressed record response
+           evt = CMUBox('GetEvent', exptdesign.boxHandle);
+           end
+           
+           %set variables == 0 if no response
+           responseFinishedTime = 0;
+           sResp=0;
+           
+           %sResp ==1 if button pressed
+           if ~isempty(evt)
+               sResp = 1;
+               %record end time of response
+               responseFinishedTime=evt.time;
+           end
           
-           %record parameters for the trial and block
-           trialOutput(iBlock,1).stimuli = stimuliBlock;
-           trialOutput(iBlock,1).FixationVBLTimestamp(iTrial)=FixationVBLTimestamp;
-           trialOutput(iBlock,1).FixationOnsetTime(iTrial)=FixationOnsetTime;
-           trialOutput(iBlock,1).FixationFlipTimestamp(iTrial)=FixationFlipTimestamp;
-           trialOutput(iBlock,1).FixationMissed(iTrial)=FixationMissed;             
+           %record parameters for the trial and block           
            runOutput(runCounter,1).trialStartTime(iTrial)= GetSecs;
            runOutput(runCounter,1).iBlocks(iTrial) = exptdesign.iBlocks;
            runOutput(runCounter,1).runIndex(iTrial) = runCounter;
            runOutput(runCounter,1).numTrials(iTrial) = exptdesign.numTrialsPerSession;
            runOutput(runCounter,1).trialIndex(iTrial) = iTrial;
+           trialOutput(iBlock,1).sResp=sResp;
+           trialOutput(iBlock,1).responseStartTime=responseStartTime;
+           trialOutput(iBlock,1).responseFinishedTime=responseFinishedTime;
+           trialOutput(iBlock,1).RT=responseFinishedTime-responseStartTime;
+           trialOutput(iBlock,1).stimuli = stimuliBlock;
+           trialOutput(iBlock,1).FixationVBLTimestamp(iTrial)=FixationVBLTimestamp;
+           trialOutput(iBlock,1).FixationOnsetTime(iTrial)=FixationOnsetTime;
+           trialOutput(iBlock,1).FixationFlipTimestamp(iTrial)=FixationFlipTimestamp;
+           trialOutput(iBlock,1).FixationMissed(iTrial)=FixationMissed;
            
+           trialCounter = trialCounter + 1;
         end
-        
-        %if button pressed record response
-        evt = CMUBox('GetEvent', exptdesign.boxHandle);
-        
-        %set variables == 0 if no response
-        responseFinishedTime = 0;
-        sResp=0;
-        
-        %sResp ==1 if button pressed
-        if ~isempty(evt)
-            sResp = 1;
-            %record end time of response
-            responseFinishedTime=evt.time;
-        end
-        
-        %trialOutput
-        trialOutput(iBlock,1).sResp=sResp;
-        trialOutput(iBlock,1).responseStartTime=responseStartTime;
-        trialOutput(iBlock,1).responseFinishedTime=responseFinishedTime;
-        trialOutput(iBlock,1).RT=responseFinishedTime-responseStartTime;
-           
     end
     
     Screen('DrawTexture', w, fixationTexture);

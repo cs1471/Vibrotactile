@@ -38,7 +38,7 @@ if exptdesign.responseBox
     % Ensure button-box configuration is correct
     disp('Ensure dip switches are set to E-PRIME and 5+');
     input('Hit Enter to Continue...');
-    exptdesign.boxHandle = CMUBox('Open', 'pst', 'COM1', 'norelease');
+    exptdesign.boxHandle = CMUBox('Open', 'pst', 'COM3', 'norelease');
 end
 
 %open com2 port for stimulator
