@@ -1,4 +1,4 @@
-function PositionLocalizationExperiment(name,exptdesign)
+function spatialLocalizationExperiment(name,exptdesign)
 
     % PositionLocalization
     % Patrick Malone pmalone333@gmail.com, Courtney Sprouse

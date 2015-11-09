@@ -1,4 +1,4 @@
-% PositionLocalizationWrapper
+% SpatialLocalizationWrapper
 % Wrapper, calls PositionLocalizationExperiment.m
 % Patrick Malone pmalone333@gmail.com && Courtney Sprouse
 % cs1471@georgetown.edu && Levan Bokeria levan.bokeria@georgetown.edu
@@ -13,7 +13,8 @@ number=name;
 exptdesign.number=number;
 preOrPostTrain = input('\n\nIs this pre or post-training? Enter 1 for pre-training, 2 for post-training:\n\n','s');
 exptdesign.preOrPostTrain = preOrPostTrain; % 1 for pre, 2 for post
-response = input('\n\nIs this 
+response = input('\n\nPlease enter the response profile');
+exptdesign.response = response;
 if isempty(name)
     name = ['MR000'];
 else
@@ -34,4 +35,4 @@ exptdesign.refresh = 0.016679454248257;
 exptdesign.fixationImage = 'imgsscaled/fixation.bmp';  % image for the fixation cross
 exptdesign.imageDirectory = 'imgsscaled/';
 
-PositionLocalizationExperiment(name,exptdesign);
+spatialLocalizationExperiment(name,exptdesign);

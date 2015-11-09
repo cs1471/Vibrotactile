@@ -16,4 +16,4 @@ stimuli = [pair1; pair2];
 stimuli = [repmat(stimuli,1,3)]; 
 
 % populate trial structure with 2 instances of the same stimulus
-save ('positionLocalizationStimuli_1.mat','stimuli')
+save ('spatialLocalizationStimuli_1.mat','stimuli')

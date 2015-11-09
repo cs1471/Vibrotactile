@@ -1,4 +1,4 @@
-% PositionLocalizationWrapper
+% SpatialLocalizationWrapper
 % Wrapper, calls PositionLocalizationExperiment.m
 % Patrick Malone pmalone333@gmail.com && Courtney Sprouse
 % cs1471@georgetown.edu && Levan Bokeria levan.bokeria@georgetown.edu
@@ -35,4 +35,4 @@ exptdesign.refresh = 0.016679454248257;
 exptdesign.fixationImage = 'imgsscaled/fixation.bmp';  % image for the fixation cross
 exptdesign.imageDirectory = 'imgsscaled/';
 
-PositionLocalizationExperiment(name,exptdesign);
+spatialLocalizationExperiment(name,exptdesign);
