@@ -38,7 +38,7 @@ if exptdesign.responseBox
     % Ensure button-box configuration is correct
     disp('Ensure dip switches are set to E-PRIME and 5+');
     input('Hit Enter to Continue...');
-    exptdesign.boxHandle = CMUBox('Open', 'pst', 'COM1', 'norelease');
+    exptdesign.boxHandle = CMUBox('Open', 'pst', 'COM3', 'norelease');
 end
 
 %open com2 port for stimulator
@@ -47,7 +47,7 @@ stimGenPTB('open')
 %run all 6 runs right after the last 
 for iRuns = 1:exptdesign.numRuns
     exptdesign.iRuns=iRuns;
-    [trialoutput.runs] = CategorizationinScannerExperiment(name,exptdesign);
+    [trialoutput.runs] = CategorizationExperimentInScanner(name,exptdesign);
 end
 
 %close com3 port

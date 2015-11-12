@@ -1,6 +1,6 @@
-function spatialLocalizationExperiment(name,exptdesign)
+function frequencyDiscrimExperiment(name,exptdesign)
 
-    % spatialLocalization
+    % frequencyDiscrimination
     % Patrick Malone pmalone333@gmail.com, Courtney Sprouse
     % cs1471@georgetown.edu, Levan Bokeria levan.bokeria@georgetown.edu
     
@@ -23,15 +23,15 @@ function spatialLocalizationExperiment(name,exptdesign)
     drawAndCenterText(w, ['Please review instructions \n'...
         'Please click a mouse button to advance at each screen'],1)
     
-    drawAndCenterText(w,['\nOn each trial, you will feel 2 vibrations, one after the other. \n'...
+    drawAndCenterText(w,['\nOn each trial, you will feel 2 sets of vibrations, one after the other. \n'...
              'Indicate whether the vibrations are the same or different\n'...
              'by clicking the mouse button for "same" and the other button for "different" the reponses will change across blocks.\n'],1)
          
     %load training stimuli
     if exptdesign.response == 0
-        load('positionLocalizationStimuli_0.mat');
+        load('frequencyStimuli_0.mat');
     else
-        load('positionLocalizationStimuli_1.mat');
+        load('frequencyLocalizationStimuli_1.mat');
     end
     
     for iBlock=1:exptdesign.numBlocks
@@ -51,7 +51,7 @@ function spatialLocalizationExperiment(name,exptdesign)
                 drawAndCenterText(w, ['Please review instructions \n'...
                             'Please click a mouse button to advance at each screen'],1)
     
-                drawAndCenterText(w,['\nOn each trial, you will feel 2 vibrations, one after the other. \n'...
+                drawAndCenterText(w,['\nOn each trial, you will feel 2 sets of vibrations, one after the other. \n'...
                     'Indicate whether the vibrations are the same or different\n'...
                     'by clicking the left mouse button for "same" and right button for "different".\n'],1)
                
@@ -61,7 +61,7 @@ function spatialLocalizationExperiment(name,exptdesign)
                 drawAndCenterText(w, ['Please review instructions \n'...
                             'Please click a mouse button to advance at each screen'],1)
     
-                drawAndCenterText(w,['\nOn each trial, you will feel 2 vibrations, one after the other. \n'...
+                drawAndCenterText(w,['\nOn each trial, you will feel 2 sets of vibrations, one after the other. \n'...
                     'Indicate whether the vibrations are the same or different\n'...
                     'by clicking the right mouse button for "same" and left mouse button for "different".\n'],1)
            end
