@@ -23,15 +23,15 @@ function frequencyDiscrimExperiment(name,exptdesign)
     drawAndCenterText(w, ['Please review instructions \n'...
         'Please click a mouse button to advance at each screen'],1)
     
-    drawAndCenterText(w,['\nOn each trial, you will feel 2 sets of vibrations, one after the other. \n'...
+    drawAndCenterText(w,['\nOn each trial, you will feel 2 vibrations, one after the other. \n'...
              'Indicate whether the vibrations are the same or different\n'...
              'by clicking the mouse button for "same" and the other button for "different" the reponses will change across blocks.\n'],1)
          
     %load training stimuli
     if exptdesign.response == 0
-        load('frequencyStimuli_0.mat');
+        load('frequencyDiscrimStimuli_0.mat');
     else
-        load('frequencyLocalizationStimuli_1.mat');
+        load('frequencyDiscrimStimuli_1.mat');
     end
     
     for iBlock=1:exptdesign.numBlocks
@@ -56,7 +56,6 @@ function frequencyDiscrimExperiment(name,exptdesign)
                     'by clicking the left mouse button for "same" and right button for "different".\n'],1)
                
                 %after 300-800 ms, present the vibrotactile stimulus
-                %on odd blocks, lower frequency @top is on left of screen
            else
                 drawAndCenterText(w, ['Please review instructions \n'...
                             'Please click a mouse button to advance at each screen'],1)
@@ -148,7 +147,7 @@ function frequencyDiscrimExperiment(name,exptdesign)
         
         
         %save the session data in the data directory
-        save(['./data/' exptdesign.number '/' datestr(now, 'yyyymmdd_HHMM') '-' exptdesign.subjectName '_block' num2str(iBlock) '.mat'], 'trialOutput', 'exptdesign');
+        save(['./FreqDiscrimData/' exptdesign.number '/' datestr(now, 'yyyymmdd_HHMM') '-' exptdesign.subjectName '_block' num2str(iBlock) '.mat'], 'trialOutput', 'exptdesign');
         %save the history data (stimuli, last level passed)
         
         
