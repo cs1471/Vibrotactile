@@ -1,6 +1,6 @@
-function spatialLocalizationExperiment(name,exptdesign)
+function frequencyDiscrimExperiment(name,exptdesign)
 
-    % spatialLocalization
+    % frequencyDiscrimination
     % Patrick Malone pmalone333@gmail.com, Courtney Sprouse
     % cs1471@georgetown.edu, Levan Bokeria levan.bokeria@georgetown.edu
     
@@ -16,56 +16,46 @@ function spatialLocalizationExperiment(name,exptdesign)
     HideCursor;
     %load images
     fixationImage = imread(exptdesign.fixationImage);
-    
     fixationTexture=Screen('MakeTexture', w, double(fixationImage));
     
     %load training stimuli
     if exptdesign.response == 0
-        load('spatialLocalizationStimuli_0.mat');
+        load('frequencyDiscrimStimuli_0.mat');
     else
-        load('spatialLocalizationStimuli_1.mat');
+        load('frequencyDiscrimStimuli_1.mat');
     end
     
     for iBlock=1:exptdesign.numBlocks
-        %randomize the stimuli for this level
-        order=randperm(size(stimuli,2));
-        stimuli=stimuli(:, order);
-        %lower and upper limit of fixation before stimulus is presented
-        ll=.3;
-        ul=.8;
-        
-        if mod(iBlock,2)
+         if mod(iBlock,2)
             drawAndCenterText(w, ['Please review instructions \n Click the mouse to continue\n'...
                 'Please click a mouse button to advance'],1)
             
-            KbWait(1);
-
             drawAndCenterText(w,['\nOn each trial, you will feel 2 vibrations, one after the other. \n'...
                 'Indicate whether the vibrations are the same or different\n'...
                 'by clicking the left mouse button for "same" and right button for "different".\n'...
                 'Please click the mouse to continue\n'],1)
-            
-            KbWait(1);
             %after 300-800 ms, present the vibrotactile stimulus
             %on odd blocks, lower frequency @top is on left of screen
         else
             drawAndCenterText(w, ['Please review instructions \n Click the mouse to continue\n'...
                 'Please click a mouse button to advance'],1)
             
-            KbWait(1);
-            
             drawAndCenterText(w,['\nOn each trial, you will feel 2 vibrations, one after the other. \n'...
                 'Indicate whether the vibrations are the same or different\n'...
                 'by clicking the right mouse button for "same" and left mouse button for "different".\n'...
                 'Please click the mouse to continue\n'],1)
-             
-            KbWait(1);
         end
         
         drawAndCenterText(w,['Block #' num2str(iBlock) ' of ' num2str(exptdesign.numBlocks) '\n\n\n\n'...
             'Click the mouse to continue'],1);
         %WaitSecs(1);
-        KbWait(1);
+        
+        %randomize the stimuli for this level
+        order=randperm(size(stimuli,2));
+        stimuli=stimuli(:, order);
+        %lower and upper limit of fixation before stimulus is presented
+        ll=.3;
+        ul=.8;
         
         for iTrial=1:exptdesign.numTrialsPerSession
            Screen('DrawTexture', w, fixationTexture);
@@ -75,11 +65,14 @@ function spatialLocalizationExperiment(name,exptdesign)
            wait2 = .5;
            WaitSecs(wait1);
            constructStimuli(stimuli(1:2,iTrial)); % present stim 1
-           % copied this wait code from above; 
            WaitSecs(wait2);
            constructStimuli(stimuli(3:4,iTrial)); % present stim 2
+           drawAndCenterText(w,'Were the vibrations the same or different? \n', 0);
+           responseStartTime=GetSecs;
+           sResp=getResponseMouse(1.5);
+           responseFinishedTime=GetSecs;
            
-            if isequal(stimuli(1:2, iTrial),stimuli(3:4,iTrial))
+           if isequal(stimuli(1:2, iTrial),stimuli(3:4,iTrial))
                if mod(iBlock,2) % are stimuli the same?
                    correctResponse=1;
                else 
@@ -91,14 +84,8 @@ function spatialLocalizationExperiment(name,exptdesign)
                else 
                    correctResponse=1;
                end
-            end
-            
-           
-           drawAndCenterText(w,'Were the vibrations the same or different? \n',0)
-           responseStartTime=GetSecs;
-           sResp=getResponseMouse(1.5);
-           responseFinishedTime=GetSecs;
-          
+           end
+
            %score the answer -- is sResp(iTrial)==correctResponse?
            if sResp==correctResponse
                accuracy=1;
@@ -121,8 +108,7 @@ function spatialLocalizationExperiment(name,exptdesign)
            trialOutput(iBlock).FixationMissed(iTrial)=FixationMissed;
 %            trialOutput(iBlock).RespVBLTimestamp(iTrial)=RespVBLTimestamp;
 %            trialOutput(iBlock).RespOnsetTime(iTrial)=RespOnsetTime;
-%            trialOutput(iBlock).RespFlipTimestamp(iTrial)=RespFlipTimestamp;
-%            trialOutput(iBlock).RespMissed(iTrial)=RespMissed;
+%            trialOutput(iBlock).RespFlipTimestamp(iTrial)=RespFlipTimestamp;            trialOutput(iBlock).RespMissed(iTrial)=RespMissed;
            trialOutput(iBlock).order=order;
            trialOutput(iBlock).stimuli=stimuli;
            
@@ -202,14 +188,11 @@ function numericalanswer = getResponseMouse(waitTime)
        end
 
   end
-  if numericalanswer == -1
-      numericalanswer =0;
-  end
 end
 
 function constructStimuli(stimulus)
-    f = stimulus(2);
-    p = stimulus(1);
+    f = stimulus(1);
+    p = stimulus(2);
 
     stim = {...
         {'fixed',f,1,300},...

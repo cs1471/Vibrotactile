@@ -1,5 +1,5 @@
-% SpatialLocalizationWrapper
-% Wrapper, calls PositionLocalizationExperiment.m
+% FrequencyDiscrimWrapper
+% Wrapper, calls frequencyDiscrimExperiment.m
 % Patrick Malone pmalone333@gmail.com && Courtney Sprouse
 % cs1471@georgetown.edu && Levan Bokeria levan.bokeria@georgetown.edu
 
@@ -10,11 +10,11 @@ input('\n\nDoes participant have ear plugs? Hit Enter when "Yes."\n')
 %get subject info
 name = input('\n\nEnter Subject NUMBER:\n\n','s');
 number=name;
-exptdesign.subjectName=number;
 exptdesign.number=number;
+exptdesign.subjectName=number;
 preOrPostTrain = input('\n\nIs this pre or post-training? Enter 1 for pre-training, 2 for post-training:\n\n','s');
 exptdesign.preOrPostTrain = preOrPostTrain; % 1 for pre, 2 for post
-response = input('\n\nPlease enter the response profile\n\n');
+response = input('\n\nPlease enter the response profile (0 or 1)\n\n');
 exptdesign.response = response;
 if isempty(name)
     name = ['MR000'];
@@ -28,7 +28,7 @@ else
     mkdir(['./data/' number])
 end
 
-exptdesign.numBlocks = 5;              % number of blocks
+exptdesign.numBlocks = 4;              % number of blocks
 exptdesign.numTrialsPerSession = 5;
 
 exptdesign.refresh = 0.016679454248257; 
@@ -36,4 +36,6 @@ exptdesign.refresh = 0.016679454248257;
 exptdesign.fixationImage = 'imgsscaled/fixation.bmp';  % image for the fixation cross
 exptdesign.imageDirectory = 'imgsscaled/';
 
-spatialLocalizationExperiment(name,exptdesign);
+stimGenPTB('open')
+frequencyDiscrimExperiment(name,exptdesign);
+stimGenPTB('close')
