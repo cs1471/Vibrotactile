@@ -141,9 +141,11 @@ try
            [FixationVBLTimestamp FixationOnsetTime FixationFlipTimestamp FixationMissed] = Screen('Flip',w, exptdesign.scanStart + 10*(iBlock) + 1*(trialCounter-1)) %i changed the trial length to 1 seconds CS and LB. 
            
            %call function that generates stimuli for driver box
+           stimulusOnset = GetSecs;
            constructStimuli(stimuliBlock, iTrial);
+           stimulusFinished = GetSecs;
            
-           while GetSecs < (FixationOnsetTime + .7) && isempty(evt)%%% this is what I just added, the (FixationOnsetTime + 1) means you will check for an answer for 1 second, isempty(evt)means you will stop waiting once there is a response -PC
+           while GetSecs < (stimulusFinished + .7) && isempty(evt)%%% this is what I just added, the (FixationOnsetTime + 1) means you will check for an answer for 1 second, isempty(evt)means you will stop waiting once there is a response -PC
            %if button pressed record response
            evt = CMUBox('GetEvent', exptdesign.boxHandle);
            end
@@ -165,11 +167,14 @@ try
            runOutput(runCounter,1).runIndex(iTrial) = runCounter;
            runOutput(runCounter,1).numTrials(iTrial) = exptdesign.numTrialsPerSession;
            runOutput(runCounter,1).trialIndex(iTrial) = iTrial;
-           trialOutput(iBlock,1).sResp=sResp;
-           trialOutput(iBlock,1).responseStartTime=responseStartTime;
-           trialOutput(iBlock,1).responseFinishedTime=responseFinishedTime;
-           trialOutput(iBlock,1).RT=responseFinishedTime-responseStartTime;
-           trialOutput(iBlock,1).stimuli = stimuliBlock;
+           trialOutput(iBlock,1).sResp(iTrial)=sResp;
+           trialOutput(iBlock,1).stimulusOnset(iTrial)=stimulusOnset;
+           trialOutput(iBlock,1).stimulusDuration(iTrial)=stimulusFinished-stimulusOnset;
+           trialOutput(iBlock,1).stimulusFinished(iTrial)=stimulusFinished;
+           trialOutput(iBlock,1).responseStartTime(iTrial)=responseStartTime;
+           trialOutput(iBlock,1).responseFinishedTime(iTrial)=responseFinishedTime;
+           trialOutput(iBlock,1).RT(iTrial)=responseFinishedTime-responseStartTime;
+           trialOutput(iBlock,1).stimuli(iTrial) = stimuliBlock;
            trialOutput(iBlock,1).FixationVBLTimestamp(iTrial)=FixationVBLTimestamp;
            trialOutput(iBlock,1).FixationOnsetTime(iTrial)=FixationOnsetTime;
            trialOutput(iBlock,1).FixationFlipTimestamp(iTrial)=FixationFlipTimestamp;
@@ -181,7 +186,8 @@ try
     
     Screen('DrawTexture', w, fixationTexture);
     Screen('Flip',w)
-    
+    WaitSecs(10);
+     
     ShowCursor;
   
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -231,6 +237,7 @@ function drawAndCenterText(window,message,wait, time)
     [nx, ny, bbox] = DrawFormattedText(window, message, 'center', 'center', 0);
     black = BlackIndex(window); % pixel value for black               
     Screen('Flip',window, time);
+    if wait, KbWait(); end
 end
 
 function constructStimuli(stimuliBlock, iTrial)
