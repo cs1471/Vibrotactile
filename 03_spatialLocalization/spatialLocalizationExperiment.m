@@ -38,34 +38,31 @@ function spatialLocalizationExperiment(name,exptdesign)
             drawAndCenterText(w, ['Please review instructions \n Click the mouse to continue\n'...
                 'Please click a mouse button to advance'],1)
             
-            KbWait(1);
-
             drawAndCenterText(w,['\nOn each trial, you will feel 2 vibrations, one after the other. \n'...
-                'Indicate whether the vibrations are the same or different\n'...
-                'by clicking the left mouse button for "same" and right button for "different".\n'...
+                'Indicate whether the vibrations are the same or different.\n'...
+                
+                'LEFT mouse button = "SAME"\n\n'... 
+                'RIGHT = "DIFFERENT".\n\n'...
                 'Please click the mouse to continue\n'],1)
             
-            KbWait(1);
             %after 300-800 ms, present the vibrotactile stimulus
             %on odd blocks, lower frequency @top is on left of screen
         else
             drawAndCenterText(w, ['Please review instructions \n Click the mouse to continue\n'...
                 'Please click a mouse button to advance'],1)
-            
-            KbWait(1);
-            
+                        
             drawAndCenterText(w,['\nOn each trial, you will feel 2 vibrations, one after the other. \n'...
-                'Indicate whether the vibrations are the same or different\n'...
-                'by clicking the right mouse button for "same" and left mouse button for "different".\n'...
+                'Indicate whether the vibrations are the same or different.\n'...
+                
+                'RIGHT mouse button = "SAME"\n\n'... 
+                'LEFT = "DIFFERENT".\n\n'...
                 'Please click the mouse to continue\n'],1)
              
-            KbWait(1);
         end
         
         drawAndCenterText(w,['Block #' num2str(iBlock) ' of ' num2str(exptdesign.numBlocks) '\n\n\n\n'...
             'Click the mouse to continue'],1);
         %WaitSecs(1);
-        KbWait(1);
         
         for iTrial=1:exptdesign.numTrialsPerSession
            Screen('DrawTexture', w, fixationTexture);
@@ -133,14 +130,12 @@ function spatialLocalizationExperiment(name,exptdesign)
                drawAndCenterText(w, ['Your accuracy was ' num2str(round(accuracyForLevel.*100)) '%\n\n\n'...
                     'Click mouse to continue' ],1)
                %WaitSecs(2);
-               KbWait(1);
            elseif iTrial==size(stimuli,2) && iBlock == exptdesign.numBlocks
                %calculate accuracy
                accuracyForLevel=mean(trialOutput(iBlock).accuracy);
                drawAndCenterText(w, ['Your accuracy was ' num2str(round(accuracyForLevel.*100)) '%\n\n\n'...
                    'You have completed this training session.  Great job!' ],1)
                %WaitSecs(2);
-               KbWait(1);
                Screen('CloseAll')
            end
            
