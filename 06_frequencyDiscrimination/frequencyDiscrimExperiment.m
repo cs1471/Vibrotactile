@@ -115,14 +115,14 @@ function frequencyDiscrimExperiment(name,exptdesign)
            trialOutput(iBlock).stimuli=stimuli;
            
            %tell subject how they did on last block
-           if iTrial==size(stimuli,2) && iBlock < exptdesign.numBlocks
+           if iTrial==exptdesign.numTrialsPerSession && iBlock < exptdesign.numBlocks
                %calculate accuracy
                accuracyForLevel=mean(trialOutput(iBlock).accuracy);
                drawAndCenterText(w, ['Your accuracy was ' num2str(round(accuracyForLevel.*100)) '%\n\n\n'...
                     'Click mouse to continue' ],1)
                %WaitSecs(2);
                KbWait(1);
-           elseif iTrial==size(stimuli,2) && iBlock == exptdesign.numBlocks
+           elseif iTrial==exptdesign.numTrialsPerSession && iBlock == exptdesign.numBlocks
                %calculate accuracy
                accuracyForLevel=mean(trialOutput(iBlock).accuracy);
                drawAndCenterText(w, ['Your accuracy was ' num2str(round(accuracyForLevel.*100)) '%\n\n\n'...
