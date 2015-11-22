@@ -84,7 +84,7 @@ try
     else
         %checks for in between runs so that experminter can control run
         %start
-        responseMapping=exptdesign.responseKeyChange;
+        responseMapping = exptdesign.responseKeyChange;
         drawAndCenterText(w,'Hit Enter to Continue...',1);
         exptdesign.scanStart = GetSecs;
     end
@@ -104,7 +104,7 @@ try
     %load training stimuli
 %     [stimuliShuffled, oddball] = makeStimuli(response);
     load stimuliShuffled.mat
-    stimuli = stimuliShuffled(:,:,runCounter);
+    stimuli = stimuliAllRuns{runCounter};
   
     %generate a correctResponse map
     for i = 1:size(stimuli,2)
@@ -224,7 +224,7 @@ try
 end
 end
 
-function drawAndCenterText(window,message,wait, time)
+function drawAndCenterText(window,message, wait, time)
     if nargin < 3
         wait = 1;
     end
