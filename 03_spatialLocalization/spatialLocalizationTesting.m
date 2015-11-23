@@ -28,8 +28,8 @@ else
     mkdir(['./data/' number])
 end
 
-exptdesign.numBlocks = 5;              % number of blocks
-exptdesign.numTrialsPerSession = 5;
+exptdesign.numBlocks = 7;              % number of blocks
+exptdesign.numTrialsPerSession = 144;
 
 exptdesign.refresh = 0.016679454248257; 
 
