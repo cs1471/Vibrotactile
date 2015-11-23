@@ -1,4 +1,4 @@
-function [stimuliAllRuns,f1,f2,oddChannels] = makeOddballStimuli(nRuns, response)
+function [stimuliAllRunsRaw,f1,f2,oddChannels] = makeOddballStimuli(nRuns, response)
 
 if (nargin < 1)
     nRuns = 6
@@ -40,7 +40,7 @@ end
     pairF2P2 = repmat(pairF2P2,1,6); 
 
     for iRun = 1:nRuns
-        stimuliAllRuns{iRun} = [pairF1P1; pairF1P2; pairF2P1; pairF2P2;...
+        stimuliAllRunsRaw{iRun} = [pairF1P1; pairF1P2; pairF2P1; pairF2P2;...
                    pairF1P1; pairF1P2; pairF2P1; pairF2P2];  
            
 %         odds = zeros(1,size(stimuli,1));

@@ -1,10 +1,15 @@
-% randomize stimuli creation
+function stimuliAllRuns = automateStimuli(nRuns,response)
 
-%% Define the session master matrix
-clear;
+
 
 nCond = 12;
-nRuns = 6;
+if (nargin < 1) 
+    nRuns = 6; 
+    response = 0;
+end
+
+
+%% Define the session master matrix
 
 sessionMatrix = zeros(nCond,nRuns);
 sessionMatrix(:,1:3) = 1;
@@ -51,11 +56,9 @@ end
 
 %% Generate the raw matrix of stimuli for each run
 
-% For responce = 0;
-response = 0;
 [stimuliAllRuns,f1,f2,oddChannels] = makeOddballStimuli(nRuns,response);
 
-%% Populate the second columnt of each run matrix with oddballs
+%% Populate the run matrix with oddballs and randomize its location
 
 for iRun = 1:nRuns
     oddIdx = find(sessionMatrix(:,iRun) == 1);
@@ -80,7 +83,6 @@ for iRun = 1:nRuns
         
         for iOddIdx = 1:length(oddIdx)
         oddBlock = oddIdx(iOddIdx);
-%         sum(cellfun(@length,stimuliAllRuns{iRun}(:,2:6)),1)
            if ~ismember(48,sum(cellfun(@length,stimuliAllRuns{iRun}(:,2:6)),1))
                oddballSpread = 1;
                display('Oddball spread within blocks!')
@@ -94,12 +96,14 @@ for iRun = 1:nRuns
     
     end
     
-    % Finally. randomize the blocks, while making sure oddball occurrs in
-    % the last 6 blocks at least once.
+    % Finally, randomize the blocks so that you get two oddball blocks
+    % in the first 8, second 8, and third 8 blocks. 
     blocksSpread = [];
-    
     while isempty(blocksSpread)
-       if ~isequal(12*ones(1,5),sum(cellfun(@length,stimuliAllRuns{iRun}(19:24,2:6)),1))
+       if numel(find(sum(cellfun(@length,stimuliAllRuns{iRun}(1:8,  2:6)),1) > 16)) == 2 && ...
+          numel(find(sum(cellfun(@length,stimuliAllRuns{iRun}(9:16, 2:6)),1) > 16)) == 2 && ...
+          numel(find(sum(cellfun(@length,stimuliAllRuns{iRun}(17:24,2:6)),1) > 16)) == 2
+               
            blockSpread = 1;
            display('blocks spread too!')
            break 
@@ -110,6 +114,9 @@ for iRun = 1:nRuns
     end
 end
 
+%% Save the matrix
 
+save(['./stimuliAllRunsRP' int2str(response) '.mat'],'stimuliAllRuns');
 
+end
 

@@ -103,7 +103,7 @@ try
 
     %load training stimuli
 %     [stimuliShuffled, oddball] = makeStimuli(response);
-    load stimuliShuffled.mat
+    load(['stimuliAllRunsRP' int2str(response) '.mat']);
     stimuli = stimuliAllRuns{runCounter};
   
     %generate a correctResponse map
