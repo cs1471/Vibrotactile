@@ -1,4 +1,4 @@
-function [stimuliShuffled, oddball] = makeOddballStimuli(numRuns, response)
+function [stimuliShuffled, oddball] = makeCategorizationStimuli(numRuns, response)
 
 numRuns=6
 response=0

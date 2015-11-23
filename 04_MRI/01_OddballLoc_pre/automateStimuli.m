@@ -54,9 +54,14 @@ else
 end
 
 
-%% Generate the raw matrix of stimuli for each run
-
+%% Generate the raw matrix of stimuli for each run.
 [stimuliAllRuns,f1,f2,oddChannels] = makeOddballStimuli(nRuns,response);
+
+forPatrick.dataKey(:,1) = stimuliAllRuns{1}(:,1);
+forPatrick.dataKey(:,2) = mat2cell([1:12 1:12]',ones(1,24),1);
+forPatrick.currentIndices = [1:12 1:12]';
+forPatrick.oddballPosition = zeros(1,24)';
+
 
 %% Populate the run matrix with oddballs and randomize its location
 
@@ -110,6 +115,7 @@ for iRun = 1:nRuns
        else
             blockIdx = randperm(24);
             stimuliAllRuns{iRun} = stimuliAllRuns{iRun}(blockIdx,:);
+            forPatrick.currentIndices = forPatrick.currentIndices(blockIdx,:);
        end
     end
 end
