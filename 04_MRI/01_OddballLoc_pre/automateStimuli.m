@@ -30,6 +30,7 @@ while isempty(topRandomized)
     end
 end
 
+% Randomize the bottom half of the matrix
 bottomRandomized = [];
 while isempty(bottomRandomized)
     for iRow = nCond/2+1:nCond
@@ -54,29 +55,33 @@ else
 end
 
 
-%% Generate the raw matrix of stimuli for each run.
+%% Generate the raw matrix of stimuli for each run and a raw metadata struct.
 [stimuliAllRuns,f1,f2,oddChannels] = makeOddballStimuli(nRuns,response);
 
-forPatrick.dataKey(:,1) = stimuliAllRuns{1}(:,1);
-forPatrick.dataKey(:,2) = mat2cell([1:12 1:12]',ones(1,24),1);
-forPatrick.currentIndices = [1:12 1:12]';
-forPatrick.oddballPosition = zeros(1,24)';
+% Make meta data
+metaData = cell(1,nRuns);
 
+for iRun = 1:nRuns
+    metaData{iRun}.dataKey(:,1) = stimuliAllRuns{1}(:,1);
+    metaData{iRun}.dataKey(:,2) = mat2cell([1:12 1:12]',ones(1,24),1);
+    metaData{iRun}.runIndices = [1:12 1:12]';
+    metaData{iRun}.oddballPosition = zeros(1,24)';
+end
 
 %% Populate the run matrix with oddballs and randomize its location
 
 for iRun = 1:nRuns
     oddIdx = find(sessionMatrix(:,iRun) == 1);
+    metaData{iRun}.oddballPosition(oddIdx) = 1;
     
     % Populate the second column with oddballs.
     for iOddIdx = 1:length(oddIdx)
-        % Is the oddball clock f1 or f2 stimulus?
+        % Is the oddball block f1 or f2 stimulus?
         if stimuliAllRuns{iRun}{oddIdx(iOddIdx),1}(1) == f1
             oddStimuli = [f2 f2 f2; oddChannels];
         else
             oddStimuli = [f1 f1 f1; oddChannels];
         end
-        
         % Write the oddball stimuli in the second column of the run matrix.
         stimuliAllRuns{iRun}{oddIdx(iOddIdx),2} = oddStimuli;
     end
@@ -85,7 +90,6 @@ for iRun = 1:nRuns
     % repeated twice only on one trial positions. 
     oddballSpread = [];
     while isempty(oddballSpread)
-        
         for iOddIdx = 1:length(oddIdx)
         oddBlock = oddIdx(iOddIdx);
            if ~ismember(48,sum(cellfun(@length,stimuliAllRuns{iRun}(:,2:6)),1))
@@ -98,7 +102,6 @@ for iRun = 1:nRuns
               stimuliAllRuns{iRun}(oddBlock,trialIdx);
            end
         end
-    
     end
     
     % Finally, randomize the blocks so that you get two oddball blocks
@@ -110,19 +113,19 @@ for iRun = 1:nRuns
           numel(find(sum(cellfun(@length,stimuliAllRuns{iRun}(17:24,2:6)),1) > 16)) == 2
                
            blockSpread = 1;
-           display('blocks spread too!')
+           display('Blocks have been spread too!')
            break 
        else
             blockIdx = randperm(24);
-            stimuliAllRuns{iRun} = stimuliAllRuns{iRun}(blockIdx,:);
-            forPatrick.currentIndices = forPatrick.currentIndices(blockIdx,:);
+            stimuliAllRuns{iRun}           = stimuliAllRuns{iRun}          (blockIdx,:);
+            metaData{iRun}.runIndices      = metaData{iRun}.runIndices     (blockIdx,:);
+            metaData{iRun}.oddballPosition = metaData{iRun}.oddballPosition(blockIdx,:);            
        end
     end
 end
 
-%% Save the matrix
-
-save(['./stimuliAllRunsRP' int2str(response) '.mat'],'stimuliAllRuns');
+%% Save the matrix and metadata
+save(['./stimuliAllRunsRP' int2str(response) '.mat'],'stimuliAllRuns','metaData');
 
 end
 
