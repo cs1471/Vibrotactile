@@ -174,7 +174,7 @@ try
            trialOutput(iBlock,1).responseStartTime(iTrial)=responseStartTime;
            trialOutput(iBlock,1).responseFinishedTime(iTrial)=responseFinishedTime;
            trialOutput(iBlock,1).RT(iTrial)=responseFinishedTime-responseStartTime;
-           trialOutput(iBlock,1).stimuli(iTrial) = stimuliBlock;
+           trialOutput(iBlock,1).stimuli = stimuliBlock;
            trialOutput(iBlock,1).FixationVBLTimestamp(iTrial)=FixationVBLTimestamp;
            trialOutput(iBlock,1).FixationOnsetTime(iTrial)=FixationOnsetTime;
            trialOutput(iBlock,1).FixationFlipTimestamp(iTrial)=FixationFlipTimestamp;
