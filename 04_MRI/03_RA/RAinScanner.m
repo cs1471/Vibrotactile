@@ -10,26 +10,26 @@ end
 WaitSecs(0.25);
 
 %check if subject has data on file
-if ~exist(['./data_Categorizaiton_Localizer_Pre/' number],'dir')
-    mkdir(['./data_Categorizaiton_Localizer_Pre/' number])
+if ~exist(['./data_RAscan/' number],'dir')
+    mkdir(['./data_RAscan/' number])
 end
 
 exptdesign.subjectName = name;
 
 %Trial/Block/Run lengths
-exptdesign.iBlocks = 24;              
-exptdesign.numTrialsPerSession = 6;    
+exptdesign.numBlocks = 2;              
+exptdesign.numTrialsPerSession = 120;    
 exptdesign.refresh = 0.016679454248257;
 exptdesign.numRuns = 6;
 
-%fixation location/duration
-exptdesign.fixationDuration =0.700;            
+%fixation location/duration         
 exptdesign.fixationImage = 'imgsscaled/fixation.bmp';  
-exptdesign.imageDirectory = 'imgsscaled/';   
+exptdesign.imageDirectory = 'imgsscaled/';  
+exptdesign.interStimuliDuration = .4;
 
 % Decide which response mapping you are using
 exptdesign.response = input('\n\nEnter response key profile (option 0 or 1):\n\n');
-exptdesign.responseDuration = .7;                % amount of time to allow for a response in seconds
+exptdesign.responseDuration = 3.08;                % amount of time to allow for a response in seconds
 exptdesign.responseBox = 1;             % Controls whether we are using the keyboard or the response box for subj. responses.
 exptdesign.usespace=0;                  % use space bar to start each trial?
 
