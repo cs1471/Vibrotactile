@@ -1,9 +1,17 @@
-function [stimuliShuffled, oddball] = makeOddballStimuli(numRuns, response)
+function [stimuliAllRunsRaw,f1,f2,oddChannels] = makeOddballStimuli(nRuns, response)
+
+if (nargin < 1)
+    nRuns = 6
+    response = 0
+end
+
 
     if response == 0
         position = [1 3 5 9 11 13];
+        oddChannels = [1 7 13];
     elseif response == 1
         position = [2 4 6 10 12 14];
+        oddChannels = [2 8 14];
     end
 
     %creat category prototype frequncies 
@@ -31,15 +39,15 @@ function [stimuliShuffled, oddball] = makeOddballStimuli(numRuns, response)
     pairF1P2 = repmat(pairF1P2,1,6);
     pairF2P2 = repmat(pairF2P2,1,6); 
 
-    for i = 1:numRuns
-        stimuli = [pairF1P1; pairF2P1; pairF1P2; pairF2P2...
-               ; pairF1P1; pairF2P1; pairF1P2; pairF2P2];  
+    for iRun = 1:nRuns
+        stimuliAllRunsRaw{iRun} = [pairF1P1; pairF1P2; pairF2P1; pairF2P2;...
+                   pairF1P1; pairF1P2; pairF2P1; pairF2P2];  
            
-        odds = zeros(1,size(stimuli,1));
-        odds(1,2:7) = ones;   
-           
-        oddsIndex = randperm(length(odds));
-        odds = odds(oddsIndex);
+%         odds = zeros(1,size(stimuli,1));
+%         odds(1,2:7) = ones;   
+%            
+%         oddsIndex = randperm(length(odds));
+%         odds = odds(oddsIndex);
 %        
 %         for j = 1:size(stimuli,1)
 %             if odds(j) == 1
@@ -55,11 +63,11 @@ function [stimuliShuffled, oddball] = makeOddballStimuli(numRuns, response)
 %             end
 %         end
 %         
-        stimuli = shake(stimuli,2);
+%         stimuli = shake(stimuli,2);
 
-        ind = randperm(numel(stimuli(:,1)))'; %// random permutation
-        stimuliShuffled(:,:,i) = stimuli(ind,:);
-        clear stimuli
+%         ind = randperm(numel(stimuli(:,1)))'; %// random permutation
+%         stimuliShuffled(:,:,i) = stimuli(ind,:);
+%         clear stimuli
     end
-    save stimuliShuffled.mat stimuliShuffled
+%     save stimuliShuffled.mat stimuliShuffled
 end

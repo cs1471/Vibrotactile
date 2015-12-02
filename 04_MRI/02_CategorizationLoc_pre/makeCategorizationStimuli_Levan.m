@@ -1,4 +1,4 @@
-function [stimuliShuffled, oddball] = makeCategorizationStimuli(numRuns, response)
+function [stimuliShuffled, oddball] = makeCategorizationStimuli_Levan(numRuns, response)
 
 numRuns=6
 response=0
@@ -31,7 +31,7 @@ response=0
         end
     end
 
-    for i = 1:numRuns
+    for iRun = 1:numRuns
         
         %replicate 2X6 times for total number of stimuli 
         stimuli = repmat(stimulator,2,6); 
@@ -56,11 +56,12 @@ response=0
 %             end
 %         end
 %         
-        stimuli = shake(stimuli,2);
+%         stimuli = shake(stimuli,2);
 
-        ind = randperm(numel(stimuli(:,1)))'; %// random permutation
-        stimuliShuffled(:,:,i) = stimuli(ind,:);
-        clear stimuli
+%         ind = randperm(numel(stimuli(:,1)))'; %// random permutation
+%         stimuliShuffled(:,:,i) = stimuli(ind,:);
+          stimuliAllRuns{iRun} = stimuli;
+%         clear stimuli
     end
-    save stimuliShuffled.mat stimuliShuffled
+%     save stimuliShuffled.mat stimuliShuffled
 end
