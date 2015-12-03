@@ -162,7 +162,7 @@ try
                trouble = evt.trouble;
            end
            
-           %record parameters for the trial and block           
+           %record parameters for the trial and block
            trialOutput(iBlock,1).sResp(iTrial) = sResp;
            trialOutput(iBlock,1).correctResponse = correctResponse;
            trialOutput(iBlocl,1).trouble(iTrial)=trouble;

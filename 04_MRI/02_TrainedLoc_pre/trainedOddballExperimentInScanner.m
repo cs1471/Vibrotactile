@@ -103,9 +103,9 @@ try
 
     %load training stimuli
 %     [stimuliShuffled, oddball] = makeStimuli(response);
-    load stimuliShuffledCelled.mat
-    stimuli = stimuliShuffled{runCounter};
-  
+    load(['stimuliAllRunsRP' int2str(response) '.mat']);
+    stimuli = stimuliAllRuns{runCounter};
+    
     %generate a correctResponse map
     for i = 1:size(stimuli,2)
         for j = 1:size(stimuli,1)

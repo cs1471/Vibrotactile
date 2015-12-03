@@ -47,7 +47,7 @@ stimGenPTB('open')
 %run all 6 runs right after the last 
 for iRuns = 1:exptdesign.numRuns
     exptdesign.iRuns=iRuns;
-    [trialOutput.run] = CategorizationExperimentInScanner(name,exptdesign);
+    [trialOutput.run] = trainedOddballExperimentInScanner(name,exptdesign);
 end
 
 %close com3 port
