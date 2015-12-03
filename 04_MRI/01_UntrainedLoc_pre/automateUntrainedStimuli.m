@@ -1,4 +1,4 @@
-function stimuliAllRuns = automateStimuli(nRuns,response)
+function stimuliAllRuns = automateUntrainedStimuli(nRuns,response)
 
 
 
@@ -76,12 +76,14 @@ for iRun = 1:nRuns
     
     % Populate the second column with oddballs.
     for iOddIdx = 1:length(oddIdx)
-        % Is the oddball block f1 or f2 stimulus?
-        if stimuliAllRuns{iRun}{oddIdx(iOddIdx),1}(1) == f1
-            oddStimuli = [f2 f2 f2; oddChannels];
-        else
-            oddStimuli = [f1 f1 f1; oddChannels];
-        end
+%         % Is the oddball block f1 or f2 stimulus?
+%         if stimuliAllRuns{iRun}{oddIdx(iOddIdx),1}(1) == f1
+%             oddStimuli = [f2 f2 f2; oddChannels];
+%         else
+%             oddStimuli = [f1 f1 f1; oddChannels];
+%         end
+        oddStimuli = [f2 f2 f2; oddChannels];
+
         % Write the oddball stimuli in the second column of the run matrix.
         stimuliAllRuns{iRun}{oddIdx(iOddIdx),2} = oddStimuli;
     end
@@ -121,6 +123,17 @@ for iRun = 1:nRuns
             metaData{iRun}.conditionIndices      = metaData{iRun}.conditionIndices     (blockIdx,:);
             metaData{iRun}.oddballPosition = metaData{iRun}.oddballPosition(blockIdx,:);            
        end
+    end
+end
+
+%% Do final check that everything looks alright.
+
+for iRun = 1:nRuns
+    % Does each run have 6 oddballs?
+    if length(find(cellfun(@length,stimuliAllRuns{iRun}) == 3)) ~= 6
+        error = input(['something is wrong with run ' int2str(iRun) ' oddballs']);
+    else
+        display('oddball numbers are correct')
     end
 end
 

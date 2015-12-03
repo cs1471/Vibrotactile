@@ -2,7 +2,7 @@ function [stimuliAllRunsRaw,f1,f2,oddChannels] = makeUntrainedOddballStimuli(nRu
 
 if (nargin < 1)
     nRuns = 6
-    response = 0
+    response = 1
 end
 
 
