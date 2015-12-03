@@ -121,7 +121,6 @@ try
     for iBlock=1:size(stimuli,1)%how many blocks to run this training session
         stimulusTracking=[]; 
         
-        responseStartTime=GetSecs;
         for i = 1:size(stimuli,2)
             stimuliBlock{i} = stimuli{iBlock,i};
         end
@@ -138,16 +137,17 @@ try
            
            %draw fixation
            Screen('DrawTexture', w, fixationTexture);
-           [FixationVBLTimestamp FixationOnsetTime FixationFlipTimestamp FixationMissed] = Screen('Flip',w, exptdesign.scanStart + 10*(iBlock) + 1*(trialCounter-1)) %i changed the trial length to 1 seconds CS and LB. 
+           [FixationVBLTimestamp FixationOnsetTime FixationFlipTimestamp FixationMissed] = Screen('Flip',w, exptdesign.scanStart + 10*(iBlock) + 1*(trialCounter-1)) 
            
            %call function that generates stimuli for driver box
            stimulusOnset = GetSecs;
            constructStimuli(stimuliBlock, iTrial);
            stimulusFinished = GetSecs;
            
-           while GetSecs < (stimulusFinished + .7) && isempty(evt)%%% this is what I just added, the (FixationOnsetTime + 1) means you will check for an answer for 1 second, isempty(evt)means you will stop waiting once there is a response -PC
-           %if button pressed record response
-           evt = CMUBox('GetEvent', exptdesign.boxHandle);
+           responseStartTime=GetSecs;
+           while GetSecs < (stimulusFinished + .7) && isempty(evt)
+                %if button pressed record response
+                evt = CMUBox('GetEvent', exptdesign.boxHandle);
            end
            
            %set variables == 0 if no response
@@ -159,8 +159,9 @@ try
                sResp = 1;
                %record end time of response
                responseFinishedTime=evt.time;
+               trouble = evt.trouble;
            end
-          
+           
            %record parameters for the trial and block           
            runOutput(runCounter,1).trialStartTime(iTrial)= GetSecs;
            runOutput(runCounter,1).iBlocks(iTrial) = exptdesign.iBlocks;
@@ -168,6 +169,7 @@ try
            runOutput(runCounter,1).numTrials(iTrial) = exptdesign.numTrialsPerSession;
            runOutput(runCounter,1).trialIndex(iTrial) = iTrial;
            trialOutput(iBlock,1).sResp(iTrial)=sResp;
+           trialOutput(iBlocl,1).trouble(iTrial)=trouble;
            trialOutput(iBlock,1).stimulusOnset(iTrial)=stimulusOnset;
            trialOutput(iBlock,1).stimulusDuration(iTrial)=stimulusFinished-stimulusOnset;
            trialOutput(iBlock,1).stimulusFinished(iTrial)=stimulusFinished;
