@@ -10,8 +10,8 @@ end
 WaitSecs(0.25);
 
 %check if subject has data on file
-if ~exist(['./data_Categorizaiton_Localizer_Pre/' number],'dir')
-    mkdir(['./data_Categorizaiton_Localizer_Pre/' number])
+if ~exist(['./data_Trained_Oddball_Localizer_Pre/' number],'dir')
+    mkdir(['./data_Trained_Oddbal_Localizer_Pre/' number])
 end
 
 exptdesign.subjectName = name;

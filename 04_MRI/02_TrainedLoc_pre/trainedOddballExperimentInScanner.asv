@@ -1,6 +1,6 @@
 % Automaticity
 function trialOutput = trainedOddballExperimentInScanner(name,exptdesign)
-dbstop if error;
+
 try
 %     dbstop if error;
     % following codes should be used when you are getting key presses using
@@ -195,13 +195,11 @@ try
     %  Write the trial specific data to the output file.
     tic;
      %save the session data in the data directory
-     if ~exist(['./data_Trained_Oddball_Localizer_Pre/' exptdesign.number '/'])
-         mkdir(['./data_Trained_Oddball_Localizer_Pre/' exptdesign.number '/'])
-     end
-        save(['./data_Trained_Oddball_Localizer_Pre/' exptdesign.number '/' name '_block' num2str(iBlock) '.run' num2str(exptdesign.iRuns) '.mat'], 'trialOutput', 'exptdesign');
+     if ~exist(['./data_Categorizaiton_Localizer_Pre/' exptdesign.number '/'])
+         mkdir(
+        save(['./data_Categorizaiton_Localizer_Pre/' exptdesign.number '/' name '_block' num2str(iBlock) '.run' num2str(exptdesign.iRuns) '.mat'], 'trialOutput', 'exptdesign');
     toc;
 
-    
     
     % End of experiment, close window:
     Screen('CloseAll');
@@ -239,7 +237,7 @@ function drawAndCenterText(window,message,wait, time)
     [nx, ny, bbox] = DrawFormattedText(window, message, 'center', 'center', 0);
     black = BlackIndex(window); % pixel value for black               
     Screen('Flip',window, time);
-%     if wait, KbWait(); end
+    if wait, KbWait(); end
 end
 
 function constructStimuli(stimuliBlock, iTrial)
