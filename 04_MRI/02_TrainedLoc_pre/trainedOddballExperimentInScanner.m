@@ -162,11 +162,6 @@ try
            end
            
            %record parameters for the trial and block           
-           runOutput(runCounter,1).trialStartTime(iTrial)= GetSecs;
-           runOutput(runCounter,1).iBlocks(iTrial) = exptdesign.iBlocks;
-           runOutput(runCounter,1).runIndex(iTrial) = runCounter;
-           runOutput(runCounter,1).numTrials(iTrial) = exptdesign.numTrialsPerSession;
-           runOutput(runCounter,1).trialIndex(iTrial) = iTrial;
            trialOutput(iBlock,1).sResp(iTrial)=sResp;
            trialOutput(iBlock,1).correctResponse(iTrial)=correctResponse;
            trialOutput(iBlocl,1).trouble(iTrial)=trouble;
@@ -199,7 +194,7 @@ try
     %  Write the trial specific data to the output file.
     tic;
      %save the session data in the data directory
-        save(['./data_Categorizaiton_Localizer_Pre/' name '/' name '_block' num2str(iBlock) '.run' num2str(exptdesign.iRuns) '.mat'], 'runOutput', 'trialOutput', 'exptdesign');
+        save(['./data_Categorizaiton_Localizer_Pre/' name '/' name '_block' num2str(iBlock) '.run' num2str(exptdesign.iRuns) '.mat'], 'trialOutput', 'exptdesign');
     toc;
 
     
