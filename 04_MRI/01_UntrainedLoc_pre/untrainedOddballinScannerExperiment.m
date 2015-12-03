@@ -169,7 +169,8 @@ try
            runOutput(runCounter,1).runIndex(iTrial) = runCounter;
            runOutput(runCounter,1).numTrials(iTrial) = exptdesign.numTrialsPerSession;
            runOutput(runCounter,1).trialIndex(iTrial) = iTrial;
-           trialOutput(iBlock,1).sResp(iTrial)=sResp;
+           trialOutput(iBlock,1).sResp(iTrial)=sResp
+           trialOutput(iBlocl,1).trouble(iTrial)=trouble;
            trialOutput(iBlock,1).stimulusOnset(iTrial)=stimulusOnset;
            trialOutput(iBlock,1).stimulusDuration(iTrial)=stimulusFinished-stimulusOnset;
            trialOutput(iBlock,1).stimulusFinished(iTrial)=stimulusFinished;
