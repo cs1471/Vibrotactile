@@ -119,7 +119,6 @@ try
     
     trialCounter = 1;
     for iBlock=1:size(stimuli,1)%how many blocks to run this training session
-        stimulusTracking=[]; 
         
         for i = 1:size(stimuli,2)
             stimuliBlock{i} = stimuli{iBlock,i};
@@ -145,7 +144,7 @@ try
            stimulusFinished = GetSecs;
            
            responseStartTime=GetSecs;
-           while GetSecs < (stimulusFinished + .7) && isempty(evt)
+           while GetSecs < (stimulusFinished + exptdesign.responseDuration) && isempty(evt)
                 %if button pressed record response
                 evt = CMUBox('GetEvent', exptdesign.boxHandle);
            end
@@ -169,6 +168,7 @@ try
            runOutput(runCounter,1).numTrials(iTrial) = exptdesign.numTrialsPerSession;
            runOutput(runCounter,1).trialIndex(iTrial) = iTrial;
            trialOutput(iBlock,1).sResp(iTrial)=sResp;
+           trialOutput(iBlock,1).correctResponse(iTrial)=correctResponse;
            trialOutput(iBlocl,1).trouble(iTrial)=trouble;
            trialOutput(iBlock,1).stimulusOnset(iTrial)=stimulusOnset;
            trialOutput(iBlock,1).stimulusDuration(iTrial)=stimulusFinished-stimulusOnset;
@@ -199,7 +199,7 @@ try
     %  Write the trial specific data to the output file.
     tic;
      %save the session data in the data directory
-        save(['./data_Categorizaiton_Localizer_Pre/' exptdesign.number '/' exptdesign.subjectName '_block' num2str(iBlock) '.run' num2str(exptdesign.iRuns) '.mat'], 'runOutput', 'trialOutput', 'exptdesign');
+        save(['./data_Categorizaiton_Localizer_Pre/' name '/' name '_block' num2str(iBlock) '.run' num2str(exptdesign.iRuns) '.mat'], 'runOutput', 'trialOutput', 'exptdesign');
     toc;
 
     
