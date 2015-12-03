@@ -64,7 +64,7 @@ metaData = cell(1,nRuns);
 for iRun = 1:nRuns
     metaData{iRun}.dataKey(:,1) = stimuliAllRuns{1}(:,1);
     metaData{iRun}.dataKey(:,2) = mat2cell([1:12 1:12]',ones(1,24),1);
-    metaData{iRun}.runIndices = [1:12 1:12]';
+    metaData{iRun}.conditionIndices = [1:12 1:12]';
     metaData{iRun}.oddballPosition = zeros(1,24)';
 end
 
@@ -118,7 +118,7 @@ for iRun = 1:nRuns
        else
             blockIdx = randperm(24);
             stimuliAllRuns{iRun}           = stimuliAllRuns{iRun}          (blockIdx,:);
-            metaData{iRun}.runIndices      = metaData{iRun}.runIndices     (blockIdx,:);
+            metaData{iRun}.conditionIndices      = metaData{iRun}.conditionIndices     (blockIdx,:);
             metaData{iRun}.oddballPosition = metaData{iRun}.oddballPosition(blockIdx,:);            
        end
     end

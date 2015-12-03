@@ -1,10 +1,10 @@
 function stimuliAllRuns = automateTrainedStimuli(nRuns,response)
 
 nCond = 12;
-% if (nargin < 1) 
+if (nargin < 1) 
     nRuns = 6; 
     response = 0;
-% end
+end
 
 %% Define the session master matrix.
 % This is an nConditions-x-nRuns matrix specifying which condition will have
@@ -63,7 +63,7 @@ metaData = cell(1,nRuns);
 for iRun = 1:nRuns
     metaData{iRun}.dataKey(:,1) = stimuliAllRuns{1}(:,1);
     metaData{iRun}.dataKey(:,2) = mat2cell([1:12 1:12]',ones(1,24),1);
-    metaData{iRun}.runIndices = [1:12 1:12]';
+    metaData{iRun}.conditionIndices = [1:12 1:12]';
     metaData{iRun}.oddballPosition = zeros(1,24)';
 end
 
@@ -87,7 +87,7 @@ for iRun = 1:nRuns
     end
     
     % Now randomize the oddball position within blocks, until oddball is
-    % repeated twice only on one trial positions. 
+    % repeated twice only on one trial positions.
     oddballSpread = [];
     while isempty(oddballSpread)
         for iOddIdx = 1:length(oddIdx)
@@ -118,12 +118,23 @@ for iRun = 1:nRuns
        else
             blockIdx = randperm(24);
             stimuliAllRuns{iRun}           = stimuliAllRuns{iRun}          (blockIdx,:);
-            metaData{iRun}.runIndices      = metaData{iRun}.runIndices     (blockIdx,:);
+            metaData{iRun}.conditionIndices      = metaData{iRun}.conditionIndices     (blockIdx,:);
             metaData{iRun}.oddballPosition = metaData{iRun}.oddballPosition(blockIdx,:);            
        end
     end
 end
 
+%% Do final check that everything looks alright.
+
+
+for iRun = 1:nRuns
+    % Does each run have 6 oddballs?
+    if length(find(cellfun(@length,stimuliAllRuns{iRun}) == 3)) ~= 6
+        error = input(['something is wrong with run ' int2str(iRun) ' oddballs']);
+    else
+        display('oddball numbers are correct')
+    end
+end
 %% Save the matrix and metadata
 save(['./stimuliAllRunsRP' int2str(response) '.mat'],'stimuliAllRuns','metaData');
 

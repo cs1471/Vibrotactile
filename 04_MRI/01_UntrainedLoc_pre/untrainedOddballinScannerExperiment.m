@@ -167,6 +167,7 @@ try
            runOutput(runCounter,1).runIndex(iTrial) = runCounter;
            runOutput(runCounter,1).numTrials(iTrial) = exptdesign.numTrialsPerSession;
            runOutput(runCounter,1).trialIndex(iTrial) = iTrial;
+           runOutput(runCounter,1).runMetaData = metaData{runCounter};
            trialOutput(iBlock,1).sResp(iTrial)=sResp;
            trialOutput(iBlock,1).stimulusOnset(iTrial)=stimulusOnset;
            trialOutput(iBlock,1).stimulusDuration(iTrial)=stimulusFinished-stimulusOnset;
