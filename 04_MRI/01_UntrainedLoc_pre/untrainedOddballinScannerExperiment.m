@@ -1,5 +1,5 @@
-% Automaticity
-function trialOutput = CategorizationExperimentInScanner(name,exptdesign)
+
+function trialOutput = untrainedOddballinScannerExperiment(name,exptdesign)
 
 try
 %     dbstop if error;
@@ -84,7 +84,7 @@ try
     else
         %checks for in between runs so that experminter can control run
         %start
-        responseMapping=exptdesign.responseKeyChange;
+        responseMapping = exptdesign.responseKeyChange;
         drawAndCenterText(w,'Hit Enter to Continue...',1);
         exptdesign.scanStart = GetSecs;
     end
@@ -103,8 +103,8 @@ try
 
     %load training stimuli
 %     [stimuliShuffled, oddball] = makeStimuli(response);
-    load stimuliShuffled.mat
-    stimuli = stimuliShuffled(:,:,runCounter);
+    load(['stimuliAllRunsRP' int2str(response) '.mat']);
+    stimuli = stimuliAllRuns{runCounter};
   
     %generate a correctResponse map
     for i = 1:size(stimuli,2)
@@ -121,7 +121,6 @@ try
     for iBlock=1:size(stimuli,1)%how many blocks to run this training session
         stimulusTracking=[]; 
         
-        responseStartTime=GetSecs;
         for i = 1:size(stimuli,2)
             stimuliBlock{i} = stimuli{iBlock,i};
         end
@@ -138,14 +137,18 @@ try
            
            %draw fixation
            Screen('DrawTexture', w, fixationTexture);
-           [FixationVBLTimestamp FixationOnsetTime FixationFlipTimestamp FixationMissed] = Screen('Flip',w, exptdesign.scanStart + 10*(iBlock) + 1*(trialCounter-1)) %i changed the trial length to 1 seconds CS and LB. 
+           [FixationVBLTimestamp FixationOnsetTime FixationFlipTimestamp FixationMissed] = Screen('Flip',w, exptdesign.scanStart + 10*(iBlock) + 1*(trialCounter-1))
            
            %call function that generates stimuli for driver box
+           stimulusOnset = GetSecs;
            constructStimuli(stimuliBlock, iTrial);
+           stimulusFinished = GetSecs;
            
-           while GetSecs < (FixationOnsetTime + 1) && isempty(evt)%%% this is what I just added, the (FixationOnsetTime + 1) means you will check for an answer for 1 second, isempty(evt)means you will stop waiting once there is a response -PC
-           %if button pressed record response
-           evt = CMUBox('GetEvent', exptdesign.boxHandle);
+           responseStartTime=GetSecs;
+           
+           while GetSecs < (stimulusFinished + .7) && isempty(evt)
+                %if button pressed record response
+                evt = CMUBox('GetEvent', exptdesign.boxHandle);
            end
            
            %set variables == 0 if no response
@@ -157,18 +160,22 @@ try
                sResp = 1;
                %record end time of response
                responseFinishedTime=evt.time;
+               trouble = evt.trouble;
            end
-          
+           
            %record parameters for the trial and block           
            runOutput(runCounter,1).trialStartTime(iTrial)= GetSecs;
            runOutput(runCounter,1).iBlocks(iTrial) = exptdesign.iBlocks;
            runOutput(runCounter,1).runIndex(iTrial) = runCounter;
            runOutput(runCounter,1).numTrials(iTrial) = exptdesign.numTrialsPerSession;
            runOutput(runCounter,1).trialIndex(iTrial) = iTrial;
-           trialOutput(iBlock,1).sResp=sResp;
-           trialOutput(iBlock,1).responseStartTime=responseStartTime;
-           trialOutput(iBlock,1).responseFinishedTime=responseFinishedTime;
-           trialOutput(iBlock,1).RT=responseFinishedTime-responseStartTime;
+           trialOutput(iBlock,1).sResp(iTrial)=sResp;
+           trialOutput(iBlock,1).stimulusOnset(iTrial)=stimulusOnset;
+           trialOutput(iBlock,1).stimulusDuration(iTrial)=stimulusFinished-stimulusOnset;
+           trialOutput(iBlock,1).stimulusFinished(iTrial)=stimulusFinished;
+           trialOutput(iBlock,1).responseStartTime(iTrial)=responseStartTime;
+           trialOutput(iBlock,1).responseFinishedTime(iTrial)=responseFinishedTime;
+           trialOutput(iBlock,1).RT(iTrial)=responseFinishedTime-responseStartTime;
            trialOutput(iBlock,1).stimuli = stimuliBlock;
            trialOutput(iBlock,1).FixationVBLTimestamp(iTrial)=FixationVBLTimestamp;
            trialOutput(iBlock,1).FixationOnsetTime(iTrial)=FixationOnsetTime;
@@ -181,6 +188,7 @@ try
     
     Screen('DrawTexture', w, fixationTexture);
     Screen('Flip',w)
+    WaitSecs(10);
     
     ShowCursor;
   
@@ -191,7 +199,7 @@ try
     %  Write the trial specific data to the output file.
     tic;
      %save the session data in the data directory
-        save(['./data_Oddball_Localizer_Pre/' exptdesign.number '/' exptdesign.subjectName '_block' num2str(iBlock) '.run' num2str(exptdesign.iRuns) '.mat'], 'trialOutput', 'exptdesign');
+        save(['./data_Oddball_Localizer_Pre/' exptdesign.number '/' exptdesign.subjectName '_block' num2str(iBlock) '.run' num2str(exptdesign.iRuns) '.mat'], 'runOutput', 'trialOutput', 'exptdesign');
     toc;
 
     
@@ -218,7 +226,7 @@ try
 end
 end
 
-function drawAndCenterText(window,message,wait, time)
+function drawAndCenterText(window,message, wait, time)
     if nargin < 3
         wait = 1;
     end
@@ -233,21 +241,16 @@ function drawAndCenterText(window,message,wait, time)
     Screen('Flip',window, time);
 end
 
-function constructStimuli(stimuliBlock, iTrial)
+function constructStimuli(stimuliBlock,iTrial)
+     f = stimuliBlock{1,iTrial}(1,:);
+     p = stimuliBlock{1,iTrial}(2,:);
 
-     if size(stimuliBlock{iTrial},2) > 1
+    if length(f) > 1 
         constructOddStimuli(stimuliBlock, iTrial)
-     else
-         
-     f = stimuliBlock{1,iTrial}(1:2,:);
-     p = stimuliBlock{1,iTrial}(3:4,:);
-
-
+    else
         stim = {...
-            {'fixed',f(1),1,300},...
-            {'fixchan',p(1)},...
-            {'fixed',f(2),1,300},...
-            {'fixchan',p(2)},...
+            {'fixed',f,1,300},...
+            {'fixchan',p},...
             };
         
         [t,s]=buildTSM_nomap(stim);

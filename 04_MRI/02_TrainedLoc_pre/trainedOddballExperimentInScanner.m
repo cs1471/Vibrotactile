@@ -1,5 +1,5 @@
 % Automaticity
-function trialOutput = CategorizationExperimentInScanner(name,exptdesign)
+function trialOutput = trainedOddballExperimentInScanner(name,exptdesign)
 
 try
 %     dbstop if error;

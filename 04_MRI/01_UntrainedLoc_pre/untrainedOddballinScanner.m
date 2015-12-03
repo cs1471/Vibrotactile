@@ -46,7 +46,7 @@ stimGenPTB('open')
 
 for iRuns = 1:exptdesign.numRuns
     exptdesign.iRuns=iRuns;
-    [trialoutput.runs] = OddballinScannerExperiment(name,exptdesign);
+    [trialoutput.runs] = untrainedOddballinScannerExperiment(name,exptdesign);
 end
 
 %close com3 port
