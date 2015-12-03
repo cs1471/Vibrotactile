@@ -121,7 +121,6 @@ try
     for iBlock=1:size(stimuli,1)%how many blocks to run this training session
         stimulusTracking=[]; 
         
-        responseStartTime=GetSecs;
         for i = 1:size(stimuli,2)
             stimuliBlock{i} = stimuli{iBlock,i};
         end
@@ -138,12 +137,14 @@ try
            
            %draw fixation
            Screen('DrawTexture', w, fixationTexture);
-           [FixationVBLTimestamp FixationOnsetTime FixationFlipTimestamp FixationMissed] = Screen('Flip',w, exptdesign.scanStart + 10*(iBlock) + 1*(trialCounter-1)) %i changed the trial length to 1.02 seconds -PC
+           [FixationVBLTimestamp FixationOnsetTime FixationFlipTimestamp FixationMissed] = Screen('Flip',w, exptdesign.scanStart + 10*(iBlock) + 1*(trialCounter-1))
            
            %call function that generates stimuli for driver box
            stimulusOnset = GetSecs;
            constructStimuli(stimuliBlock, iTrial);
            stimulusFinished = GetSecs;
+           
+           responseStartTime=GetSecs;
            
            while GetSecs < (stimulusFinished + .7) && isempty(evt)
                 %if button pressed record response
@@ -159,8 +160,9 @@ try
                sResp = 1;
                %record end time of response
                responseFinishedTime=evt.time;
+               trouble = evt.trouble;
            end
-          
+           
            %record parameters for the trial and block           
            runOutput(runCounter,1).trialStartTime(iTrial)= GetSecs;
            runOutput(runCounter,1).iBlocks(iTrial) = exptdesign.iBlocks;

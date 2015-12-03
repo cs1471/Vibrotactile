@@ -145,21 +145,22 @@ try
            stimulusFinished = GetSecs;
            
            responseStartTime=GetSecs;
-           while GetSecs < (stimulusFinished + .7) && isempty(evt)
+           keypressed = 0;
+           while GetSecs < (stimulusFinished + .7) && keypressed==0%%% this is what I just added, the (FixationOnsetTime + 1) means you will check for an answer for 1 second, isempty(evt)means you will stop waiting once there is a response -PC
                 %if button pressed record response
                 evt = CMUBox('GetEvent', exptdesign.boxHandle);
-           end
-           
-           %set variables == 0 if no response
-           responseFinishedTime = 0;
-           sResp=0;
-           
-           %sResp ==1 if button pressed
-           if ~isempty(evt)
-               sResp = 1;
-               %record end time of response
-               responseFinishedTime=evt.time;
-               trouble = evt.trouble;
+                %sResp ==1 if button pressed
+                if ~isempty(evt)
+                    sResp = 1;
+                    keypressed = 1;
+                    %record end time of response
+                    responseFinishedTime=evt.time;
+                else
+                    %set variables == 0 if no response
+                    responseFinishedTime = 0;
+                    sResp=0;
+                end
+                trouble = evt.trouble;
            end
            
            %record parameters for the trial and block           
