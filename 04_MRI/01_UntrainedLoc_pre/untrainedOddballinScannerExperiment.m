@@ -1,5 +1,5 @@
 
-function trialOutput = OddballinScannerExperiment(name,exptdesign)
+function trialOutput = untrainedOddballinScannerExperiment(name,exptdesign)
 
 try
 %     dbstop if error;
