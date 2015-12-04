@@ -20,7 +20,7 @@ function oddballPractice(response)
     for iBlock = 1:nBlocks
         if iBlock == 1
             waitSecs(10);
-        end
+            end2
         for iTrial = 1:nTrials
             constructStimuli(stimuliBlock, iTrial)
             waitSecs(.7);
