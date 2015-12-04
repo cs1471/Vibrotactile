@@ -106,17 +106,6 @@ try
     load(['stimuliAllRunsRP' int2str(response) '.mat']);
     stimuli = stimuliAllRuns{runCounter};
     
-    %generate a correctResponse map
-    for i = 1:size(stimuli,2)
-        for j = 1:size(stimuli,1)
-            if (size(stimuli{j,i},2) > 1)
-                correctResponse(j,i) = 1;
-            else
-                correctResponse(j,i) = 0;
-            end
-        end
-    end
-    
     trialCounter = 1;
     for iBlock=1:size(stimuli,1)%how many blocks to run this training session
         
@@ -161,10 +150,22 @@ try
                %trouble = evt.trouble;
            end
            
+           if stimuliBlock{1,iTrial}(1,:) > 1
+                correctResponse = 1;
+           else
+                correctResponse = 0;
+           end
+           
+           % cross compare oddball position
+           if correctResponse ~= metaData{runCounter}.oddballPosition{iBlock}
+               Error = MException('Error:Mismatch','Oddball position mismatch');
+               throw(Error);
+           end
+               
            %record parameters for the trial and block           
-           trialOutput(iBlock,1).metaData = metaData;
-           trialOutput(iBlock,1).sResp(iTrial)=sResp;
-           %trialOutput.correctResponse=[correctResponse];
+           trialOutput(iBlock,1).metaData{runCounter} = metaData;
+           trialOutput(iBlock,1).sResp(iTrial) = sResp;
+           trialOutput(iBlock,1).correctResponse(iTrial) = correctResponse;
            %trialOutput(iBlock,1).trouble(iTrial)=trouble;
            trialOutput(iBlock,1).stimulusOnset(iTrial)=stimulusOnset;
            trialOutput(iBlock,1).stimulusDuration(iTrial)=stimulusFinished-stimulusOnset;
@@ -195,10 +196,7 @@ try
     %  Write the trial specific data to the output file.
     tic;
      %save the session data in the data directory
-     if ~exist(['./data_Trained_Oddball_Localizer_Pre/' exptdesign.number '/'])
-         mkdir(['./data_Trained_Oddball_Localizer_Pre/' exptdesign.number '/'])
-     end
-        save(['./data_Trained_Oddball_Localizer_Pre/' exptdesign.number '/' name '_block' num2str(iBlock) '.run' num2str(exptdesign.iRuns) '.mat'], 'trialOutput', 'exptdesign');
+        save([exptdesign.saveDir '/' name '_block' num2str(iBlock) '.run' num2str(exptdesign.iRuns) '.mat'], 'trialOutput', 'exptdesign');
     toc;
 
     
@@ -214,6 +212,11 @@ try
     % section []
     if exptdesign.responseBox
         CMUBox('Close',exptdesign.boxHandle);
+    end
+        
+    switch error.identifier
+        case 'Error:Mismatch'
+            warning('Mismatch between oddball. Would you like to continue?');
     end
     
     % above.  Importantly, it closes the onscreen window if it's open.

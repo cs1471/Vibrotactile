@@ -1,17 +1,17 @@
 % get subject info
-name = input('\n\nEnter Subject ID:\n\n','s');
-number = name;
+number = input('\n\nEnter Subject ID:\n\n','s');
 exptdesign.number = number;
-if isempty(name)
-    name = [datestr(now,'yyyy-mm-dd-') 'MR000'];
+if isempty(number)
+    name = [datestr(now,'yyyy-mm-dd-HH-MM') 'MR000'];
 else
-    name = [datestr(now,'yyyy-mm-dd-') name];
+    name = [datestr(now,'yyyy-mm-dd-HH-MM') number];
 end
 WaitSecs(0.25);
 
 %check if subject has data on file
-if ~exist(['./data_Trained_Oddball_Localizer_Pre/' number],'dir')
-    mkdir(['./data_Trained_Oddbal_Localizer_Pre/' number])
+exptdesign.saveDir = ['./data_Trained_Localizer/' number];
+if ~exist(exptdesign.saveDir,'dir')
+    mkdir(exptdesign.saveDir)
 end
 
 exptdesign.subjectName = name;
