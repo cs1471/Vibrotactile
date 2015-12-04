@@ -12,7 +12,9 @@ try
     oldLevel = Screen('Preference', 'VisualDebugLevel', 1);
     %     oldEnableFlag = Screen('Preference', 'SuppressAllWarnings', 1);
     %     warning offc
-    HideCursor;
+    if ~exptdesign.debugmode
+        HideCursor;
+    end
 
     WaitSecs(1); % make sure it is loaded into memory;
 
@@ -25,7 +27,7 @@ try
 
     % Open window with default settings:
     [w windowRect] = Screen('OpenWindow', screenNumber,[128 128 128]);
-%     [w windowRect] = Screen('OpenWindow', screenNumber,[128 128 128], [0 0 800 800]); %for debugging
+%     [w windowRect] = Screen('OpenWindow', screenNumber,[128 128 128], [0 0 200 200]); %for debugging
     white = WhiteIndex(w); % pixel value for white
     black = BlackIndex(w); % pixel value for black
     
@@ -72,19 +74,18 @@ try
         
         %while loop that continues to iterate until trigger is pressed at
         %which point triggername == trigger
-        while ~isequal(triggername,trigger)
-            evt = CMUBox('GetEvent', exptdesign.boxHandle, 1);
-            trigger = evt.state;
-            starttime = evt.time;
-        end
-        
+            while ~isequal(triggername,trigger)
+                evt = CMUBox('GetEvent', exptdesign.boxHandle, 1);
+                trigger = evt.state;
+                starttime = evt.time;
+            end
         %store start time and response mapping in exptdesign struct
         exptdesign.scanStart = starttime;
         exptdesign.responseMapping=responseMapping;
     else
         %checks for in between runs so that experminter can control run
         %start
-        responseMapping = exptdesign.responseKeyChange;
+%         responseMapping = exptdesign.responseKeyChange;
         drawAndCenterText(w,'Hit Enter to Continue...',1);
         exptdesign.scanStart = GetSecs;
     end
@@ -151,17 +152,17 @@ try
                 waitSecs(exptdesign.responseDuration-responseFinishedTime);
            end
            
-           if stimuliBlock{1,iTrial}(1,:) > 1
+           if length(stimuliBlock{1,iTrial}(1,:)) > 1
                 correctResponse = 1;
            else
                 correctResponse = 0;
            end
            
            % cross compare oddball position
-           if correctResponse ~= metaData{runCounter}.oddballPosition{iBlock}
-               Error = MException('Error:Mismatch','Oddball position mismatch');
-               throw(Error);
-           end
+%            if correctResponse ~= metaData{runCounter}.oddballPosition(iBlock)
+%                Error = MException('Error:Mismatch','Oddball position mismatch');
+%                throw(Error);
+%            end
                
            
            %record parameters for the trial and block
@@ -214,10 +215,10 @@ try
         CMUBox('Close',exptdesign.boxHandle);
     end
     
-    switch error.identifier
-        case 'Error:Mismatch'
-            warning('Mismatch between oddball. Would you like to continue?');
-    end
+%     switch error.identifier
+%         case 'Error:Mismatch'
+%             warning('Mismatch between oddball. Would you like to continue?');
+%     end
     
     % above.  Importantly, it closes the onscreen window if it's open.
     disp('Caught error and closing experiment nicely....');

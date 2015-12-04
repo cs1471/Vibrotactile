@@ -1,8 +1,7 @@
 function oddballPractice(response)
+%     dbstop if error;
     f1=2.^([0:.1:2]+log2(25));
-    nBlocks =3;
-    nTrials =6;
-    
+
     if response == 0
             position = [1 3 5 9 11 13];
             oddChannels = [1 7 13];
@@ -17,12 +16,15 @@ function oddballPractice(response)
                     [frequency(2);position(2)], [frequency(2);position(2)], [frequency(2);position(2)], [repmat(f1(21),1,3); oddChannels],  [frequency(2);position(2)],  [frequency(2);position(2)];...
                     [frequency(1);position(3)], [repmat(f1(21),1,3); oddChannels], [frequency(1);position(3)], [frequency(1);position(3)], [frequency(1);position(3)], [frequency(1);position(3)],};
 
+    nBlocks = size(stimuliBlock,1);
+    nTrials = size(stimuliBlock(1,:),2);
+    
     for iBlock = 1:nBlocks
         if iBlock == 1
-            waitSecs(10);
-            end2
+            waitSecs(5);
+        end
         for iTrial = 1:nTrials
-            constructStimuli(stimuliBlock, iTrial)
+            constructStimuli(stimuliBlock(iBlock,:), iTrial)
             waitSecs(.7);
         end
         waitSecs(10);
@@ -31,7 +33,7 @@ end
 
 function constructStimuli(stimuliBlock, iTrial)
 
-     if size(stimuliBlock{iTrial},2) > 1
+     if size(stimuliBlock{1,iTrial},2) > 1
         constructOddStimuli(stimuliBlock, iTrial)
      else
          

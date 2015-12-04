@@ -1,5 +1,13 @@
 % get subject info
-number = input('\n\nEnter Subject ID:\n\n','s');
+exptdesign.debugmode = 0; % does not work for now. Keep commented out.
+if exptdesign.debugmode
+    number = '0000'
+    WARN = input('YOU ARE IN DEBUG MODE. ARE YOU SURE THIS IS RIGHT?');
+else
+    number = input('\n\nEnter Subject ID:\n\n','s');
+end
+%name = '915';
+%number = name;
 exptdesign.number = number;
 if isempty(number)
     name = [datestr(now,'yyyy-mm-dd-HH-MM') 'MR000'];
@@ -7,7 +15,6 @@ else
     name = [datestr(now,'yyyy-mm-dd-HH-MM') number];
 end
 WaitSecs(0.25);
-
 %check if subject has data on file
 exptdesign.saveDir = ['./data_Trained_Localizer/' number];
 if ~exist(exptdesign.saveDir,'dir')
@@ -28,9 +35,15 @@ exptdesign.fixationImage = 'imgsscaled/fixation.bmp';
 exptdesign.imageDirectory = 'imgsscaled/';   
 
 % Decide which response mapping you are using
-exptdesign.response = input('\n\nEnter response key profile (option 0 or 1):\n\n');
-exptdesign.responseDuration = .7;                % amount of time to allow for a response in seconds
-exptdesign.responseBox = 1;             % Controls whether we are using the keyboard or the response box for subj. responses.
+if exptdesign.debugmode
+    exptdesign.response = 1;
+    exptdesign.responseBox = 0;
+    exptdesign.boxHandle = 2; % we still need this variable in the debug mode. 
+else
+    exptdesign.response = input('\n\nEnter response key profile (option 0 or 1):\n\n');
+    exptdesign.responseBox = 1;             % Controls whether we are using the keyboard or the response box for subj. responses.
+end
+exptdesign.responseDuration = 0.7;                % amount of time to allow for a response in seconds
 exptdesign.usespace=0;                  % use space bar to start each trial?
 
 %open com3 port for button boxes
