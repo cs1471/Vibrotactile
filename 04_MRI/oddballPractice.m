@@ -18,8 +18,12 @@ function oddballPractice(response)
                     [frequency(1);position(3)], [repmat(f1(21),1,3); oddChannels], [frequency(1);position(3)], [frequency(1);position(3)], [frequency(1);position(3)], [frequency(1);position(3)],};
 
     for iBlock = 1:nBlocks
+        if iBlock == 1
+            waitSecs(10);
+        end
         for iTrial = 1:nTrials
             constructStimuli(stimuliBlock, iTrial)
+            waitSecs(.7);
         end
         waitSecs(10);
     end
@@ -38,8 +42,6 @@ function constructStimuli(stimuliBlock, iTrial)
         stim = {...
             {'fixed',f(1),1,300},...
             {'fixchan',p(1)},...
-            {'fixed',f(2),1,300},...
-            {'fixchan',p(2)},...
             };
         
         [t,s]=buildTSM_nomap(stim);
