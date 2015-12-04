@@ -151,17 +151,17 @@ try
                %trouble = evt.trouble;
            end
            
-           if length(stimuliBlock{1,iTrial}(1,:)) > 1
+           if length(stimuliBlock{1,iTrial}(1,:)) > 1 cellfun(@length,stimuliBlock)
                 correctResponse = 1;
            else
                 correctResponse = 0;
            end
            
            % cross compare oddball position
-%            if correctResponse ~= metaData{runCounter}.oddballPosition(iBlock)
-%                Error = MException('Error:Mismatch','Oddball position mismatch');
-%                throw(Error);
-%            end
+           if correctResponse ~= metaData{runCounter}.oddballPosition(iBlock)
+               Error = MException('Error:Mismatch','Oddball position mismatch');
+               throw(Error);
+           end
                
            
            %record parameters for the trial and block

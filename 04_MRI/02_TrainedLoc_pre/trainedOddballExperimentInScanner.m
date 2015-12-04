@@ -1,6 +1,6 @@
 % Automaticity
 function trialOutput = trainedOddballExperimentInScanner(name,exptdesign)
-dbstop if error;
+% dbstop if error;
 try
 %     dbstop if error;
     % following codes should be used when you are getting key presses using
@@ -150,17 +150,17 @@ try
                %trouble = evt.trouble;
            end
            
-           if stimuliBlock{1,iTrial}(1,:) > 1
+           if length(stimuliBlock{1,iTrial}(1,:)) > 1
                 correctResponse = 1;
            else
                 correctResponse = 0;
            end
            
            % cross compare oddball position
-           if correctResponse ~= metaData{runCounter}.oddballPosition{iBlock}
-               Error = MException('Error:Mismatch','Oddball position mismatch');
-               throw(Error);
-           end
+%            if correctResponse ~= metaData{runCounter}.oddballPosition(iBlock)
+%                Error = MException('Error:Mismatch','Oddball position mismatch');
+%                throw(Error);
+%            end
                
            %record parameters for the trial and block           
            trialOutput(iBlock,1).metaData{runCounter} = metaData;
@@ -214,10 +214,10 @@ try
         CMUBox('Close',exptdesign.boxHandle);
     end
         
-    switch error.identifier
-        case 'Error:Mismatch'
-            warning('Mismatch between oddball. Would you like to continue?');
-    end
+%     switch error.identifier
+%         case 'Error:Mismatch'
+%             warning('Mismatch between oddball. Would you like to continue?');
+%     end
     
     % above.  Importantly, it closes the onscreen window if it's open.
     disp('Caught error and closing experiment nicely....');
