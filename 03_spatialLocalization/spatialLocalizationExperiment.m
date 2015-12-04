@@ -193,8 +193,8 @@ function numericalanswer = getResponseMouse(waitTime)
 end
 
 function constructStimuli(stimulus)
-    f = stimulus(2);
-    p = stimulus(1);
+    f = stimulus(1);
+    p = stimulus(2);
 
     stim = {...
         {'fixed',f,1,300},...
