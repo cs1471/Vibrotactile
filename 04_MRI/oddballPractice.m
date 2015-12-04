@@ -1,8 +1,5 @@
 function oddballPractice(response)
 %     dbstop if error;
-    if (nargin < 1)
-        response = 1
-    end
     f1=2.^([0:.1:2]+log2(25));
 
     if response == 0
@@ -24,7 +21,7 @@ function oddballPractice(response)
     
     for iBlock = 1:nBlocks
         if iBlock == 1
-%             waitSecs(10);
+            waitSecs(5);
         end
         for iTrial = 1:nTrials
             constructStimuli(stimuliBlock(iBlock,:), iTrial)
