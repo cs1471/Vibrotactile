@@ -43,9 +43,6 @@ function spatialLocalizationExperiment(name,exptdesign)
                 'LEFT mouse button = "SAME"\n\n'... 
                 'RIGHT = "DIFFERENT".\n\n'...
                 'Please click the mouse to continue\n'],1)
-            
-            %after 300-800 ms, present the vibrotactile stimulus
-            %on odd blocks, lower frequency @top is on left of screen
         else
             drawAndCenterText(w, ['Please review instructions \n Click the mouse to continue\n'...
                 'Please click a mouse button to advance'],1)
@@ -67,7 +64,7 @@ function spatialLocalizationExperiment(name,exptdesign)
                [FixationVBLTimestamp FixationOnsetTime FixationFlipTimestamp FixationMissed] = Screen('Flip',w);
                
            wait1 = ll + (ul-ll).*rand(1);
-           wait2 = .5;
+           wait2 = .4;
            WaitSecs(wait1);
            constructStimuli(stimuli(1:2,iTrial)); % present stim 1
            % copied this wait code from above; 
@@ -75,13 +72,13 @@ function spatialLocalizationExperiment(name,exptdesign)
            constructStimuli(stimuli(3:4,iTrial)); % present stim 2
            
             if isequal(stimuli(1:2, iTrial),stimuli(3:4,iTrial))
-               if mod(iBlock,2) % are stimuli the same?
+               if mod(iBlock,2) % if stimuli same
                    correctResponse=1;
                else 
                    correctResponse=2;
                end
            elseif ~isequal(stimuli(1:2, iTrial),stimuli(3:4,iTrial)) 
-               if mod(iBlock,2) % are stimuli the same?
+               if mod(iBlock,2) % if stimuli different
                    correctResponse=2;
                else 
                    correctResponse=1;
@@ -108,27 +105,22 @@ function spatialLocalizationExperiment(name,exptdesign)
            trialOutput(iBlock).sResp(iTrial)=sResp;
            trialOutput(iBlock).accuracy(iTrial)=accuracy;
            trialOutput(iBlock).correctResponse(iTrial)=correctResponse;
-           trialOutput(iBlock).wait1(iTrial)=wait1;
            trialOutput(iBlock).preOrPostTrain = exptdesign.preOrPostTrain;
            trialOutput(iBlock).FixationVBLTimestamp(iTrial)=FixationVBLTimestamp;
            trialOutput(iBlock).FixationOnsetTime(iTrial)=FixationOnsetTime;
            trialOutput(iBlock).FixationFlipTimestamp(iTrial)=FixationFlipTimestamp;
            trialOutput(iBlock).FixationMissed(iTrial)=FixationMissed;
-%            trialOutput(iBlock).RespVBLTimestamp(iTrial)=RespVBLTimestamp;
-%            trialOutput(iBlock).RespOnsetTime(iTrial)=RespOnsetTime;
-%            trialOutput(iBlock).RespFlipTimestamp(iTrial)=RespFlipTimestamp;
-%            trialOutput(iBlock).RespMissed(iTrial)=RespMissed;
            trialOutput(iBlock).order=order;
            trialOutput(iBlock).stimuli=stimuli;
            
            %tell subject how they did on last block
-           if iTrial==size(stimuli,2) && iBlock < exptdesign.numBlocks
+           if iTrial==exptdesign.numTrialsPerSession && iBlock < exptdesign.numBlocks
                %calculate accuracy
                accuracyForLevel=mean(trialOutput(iBlock).accuracy);
                drawAndCenterText(w, ['Your accuracy was ' num2str(round(accuracyForLevel.*100)) '%\n\n\n'...
                     'Click mouse to continue' ],1)
                %WaitSecs(2);
-           elseif iTrial==size(stimuli,2) && iBlock == exptdesign.numBlocks
+           elseif iTrial==numTrialsPerSession && iBlock == exptdesign.numBlocks
                %calculate accuracy
                accuracyForLevel=mean(trialOutput(iBlock).accuracy);
                drawAndCenterText(w, ['Your accuracy was ' num2str(round(accuracyForLevel.*100)) '%\n\n\n'...
@@ -145,7 +137,7 @@ function spatialLocalizationExperiment(name,exptdesign)
         
         
         %save the session data in the data directory
-        save(['./data/' exptdesign.number '/' datestr(now, 'yyyymmdd_HHMM') '-' exptdesign.subjectName '_block' num2str(iBlock) '.mat'], 'trialOutput', 'exptdesign');
+        save(['./data/' name '/' name '_block' num2str(iBlock) '.' num2str(iTrial) '.mat'], 'trialOutput', 'exptdesign');
         %save the history data (stimuli, last level passed)
         
         
@@ -188,10 +180,10 @@ function numericalanswer = getResponseMouse(waitTime)
            else
                numericalanswer = 0;
            end
-          if numericalanswer ~= -1
+           if numericalanswer ~= -1
               %stop checking for a button press
               mousePressed = 1;
-          end
+           end
        end
 
   end
