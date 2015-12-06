@@ -17,8 +17,8 @@ end
 exptdesign.subjectName = name;
 
 %Trial/Block/Run lengths
-exptdesign.numBlocks = 2;              
-exptdesign.numTrialsPerSession = 120;    
+exptdesign.numBlocks = 1;              
+exptdesign.numTrialsPerSession = 240;    
 exptdesign.refresh = 0.016679454248257;
 exptdesign.numRuns = 6;
 
@@ -47,7 +47,7 @@ stimGenPTB('open')
 %run all 6 runs right after the last 
 for iRuns = 1:exptdesign.numRuns
     exptdesign.iRuns=iRuns;
-    [trialOutput.run] = CategorizationExperimentInScanner(name,exptdesign);
+    [trialOutput.run] = RAinScannerExperiment(name,exptdesign);
 end
 
 %close com3 port

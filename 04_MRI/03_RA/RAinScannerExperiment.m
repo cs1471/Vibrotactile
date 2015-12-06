@@ -114,7 +114,7 @@ try
     load('RAstimuli.mat');
     
     %randomize order of same/different trials
-    stimuli=shakeOriginal(stimuli,2);
+    %stimuli=shakeOriginal(stimuli,2);
     
     trialCounter = 1;
     for iBlock = 1:exptdesign.numBlocks %how many blocks to run this training session 
@@ -138,7 +138,7 @@ try
            stimulusOnset = GetSecs;
            constructStimuli(stimuli(1:4,iTrial)); % present stim 1
            WaitSecs(exptdesign.interStimuliDuration);
-           constructStimuli(stimuli(4:8,iTrial)); % present stim 2
+           constructStimuli(stimuli(5:8,iTrial)); % present stim 2
            stimulusFinished = GetSecs;
            
            %start response window
@@ -168,22 +168,22 @@ try
            end
            
            %code correct response
-           if isequal(stimuli(1:4, iTrial),stimuli(4:8,iTrial))
+           if isequal(stimuli(1:4, iTrial),stimuli(5:8,iTrial))
                correctResponse=1;
-           elseif ~isequal(stimuli(1:4, iTrial),stimuli(4:8,iTrial)) 
+           elseif ~isequal(stimuli(1:4, iTrial),stimuli(5:8,iTrial)) 
                correctResponse=2;
            end
           
            %record parameters for the trial and block           
            trialOutput(iBlock,1).sResp(iTrial)=sResp;
-           trialOutput(iBlock,1).correctResponse(iTrial)=correctReponse;
+           trialOutput(iBlock,1).correctResponse(iTrial)=correctResponse;
            trialOutput(iBlock,1).stimulusOnset(iTrial)=stimulusOnset;
            trialOutput(iBlock,1).stimulusDuration(iTrial)=stimulusFinished-stimulusOnset;
            trialOutput(iBlock,1).stimulusFinished(iTrial)=stimulusFinished;
            trialOutput(iBlock,1).responseStartTime(iTrial)=responseStartTime;
            trialOutput(iBlock,1).responseFinishedTime(iTrial)=responseFinishedTime;
            trialOutput(iBlock,1).RT(iTrial)=responseFinishedTime-responseStartTime;
-           trialOutput(iBlock,1).stimuli(:,iTrial) = stimuli;
+           trialOutput(iBlock,1).stimuli(:,iTrial) = stimuli(:,iTrial);
            trialOutput(iBlock,1).FixationVBLTimestamp(iTrial)=FixationVBLTimestamp;
            trialOutput(iBlock,1).FixationOnsetTime(iTrial)=FixationOnsetTime;
            trialOutput(iBlock,1).FixationFlipTimestamp(iTrial)=FixationFlipTimestamp;
@@ -231,9 +231,6 @@ end
 end
 
 function drawAndCenterText(window,message, wait, time)
-    if nargin < 3
-        wait = 1;
-    end
     
     if nargin <4
         time =0;
@@ -245,9 +242,15 @@ function drawAndCenterText(window,message, wait, time)
     Screen('Flip',window, time);
 end
 
-function constructStimuli(stimuli,iTrial)
-     f = stimuli(:,1:2);
-     p = stimuli(:,3:4);
+function constructStimuli(stimuli)
+%      if oneOrTwo == 0
+        f = stimuli(1:2,:);
+        p = stimuli(3:4,:);
+%      else
+%         f = stimuli(5:6,:);
+%         p = stimuli(7:8,:);
+%      end
+     
         stim = {...
             {'fixed',f(1),1,300},...
             {'fixchan',p(1)},...
