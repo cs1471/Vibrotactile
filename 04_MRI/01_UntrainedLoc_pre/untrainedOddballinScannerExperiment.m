@@ -149,6 +149,7 @@ try
                %record end time of response
                responseFinishedTime=evt.time;
                %trouble = evt.trouble;
+                waitSecs(exptdesign.responseDuration-responseFinishedTime);
            end
            
            if length(stimuliBlock{1,iTrial}(1,:)) > 1
