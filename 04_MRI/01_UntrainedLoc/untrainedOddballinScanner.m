@@ -17,7 +17,7 @@ end
 WaitSecs(0.25);
 
 %check if subject has data on file
-exptdesign.saveDir = ['./data_Untrained_Localizer/' name];
+exptdesign.saveDir = ['./data_Untrained_Localizer/' number];
 if ~exist(exptdesign.saveDir,'dir')
     mkdir(exptdesign.saveDir)
 end

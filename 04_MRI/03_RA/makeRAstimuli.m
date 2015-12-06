@@ -25,6 +25,8 @@ m6 = [repmat(frequency(:,1),1,24) repmat(frequency(:,4),1,24);
       repmat(stimulator,1,4);
       repmat(frequency(:,3),1,24) repmat(frequency(:,2),1,24);
       repmat(stimulator,1,4)];
+ 
+stimuli = [m0, m3w, m3b, m6];
 
 % populate stimuli file
 save ('RAstimuli.mat','stimuli')
