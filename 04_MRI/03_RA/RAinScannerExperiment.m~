@@ -298,7 +298,7 @@ mousePressed =0;
                     elseif buttons(3)
                         sResp = 2;
                     else
-                        sResp = -1;
+                        sResp = 0;
                     end
                     if sResp ~= -1
                         %stop checking for a button press

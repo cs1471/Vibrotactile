@@ -143,30 +143,9 @@ try
            
            %start response window
            responseStartTime=GetSecs;
-           
            sResp = getResponse(exptdesign.responseDuration, exptdesign.responseBox, responseMapping);
-           % wait until response window passed or until there is an event
-           while (GetSecs < (stimulusFinished + exptdesign.responseDuration) && isempty(evt))
-                %if button pressed record response
-                evt = CMUBox('GetEvent', exptdesign.boxHandle);
-           end
-           
-           %set variables == 0 if no response
-           responseFinishedTime = 0;
-           sResp=0;
-           
-           %sResp =1 is same, sResp = 2 if differnt 
-           if ~isempty(evt)
-               if evt == responseMapping.same
-                   sResp = 1;
-               elseif evt == responseMapping.different
-                   sResp = 2;
-               else
-                   sResp = -1;
-               end
-               %record end time of response
-               responseFinishedTime=evt.time;
-           end
+           %record end time of response
+           responseFinishedTime=evt.time;
            
            %code correct response
            if isequal(stimuli(1:4, iTrial),stimuli(4:8,iTrial))
@@ -177,7 +156,7 @@ try
           
            %record parameters for the trial and block           
            trialOutput(iBlock,1).sResp(iTrial)=sResp;
-           trialOutput(iBlock,1).correctResponse(iTrial)=correctReponse;
+           trialOutput(iBlock,1).correctResponse(iTrial)=correctResponse;
            trialOutput(iBlock,1).stimulusOnset(iTrial)=stimulusOnset;
            trialOutput(iBlock,1).stimulusDuration(iTrial)=stimulusFinished-stimulusOnset;
            trialOutput(iBlock,1).stimulusFinished(iTrial)=stimulusFinished;
