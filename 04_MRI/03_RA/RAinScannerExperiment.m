@@ -244,13 +244,8 @@ function drawAndCenterText(window,message, wait, time)
 end
 
 function constructStimuli(stimuli)
-%      if oneOrTwo == 0
         f = stimuli(1:2,:);
         p = stimuli(3:4,:);
-%      else
-%         f = stimuli(5:6,:);
-%         p = stimuli(7:8,:);
-%      end
      
         stim = {...
             {'fixed',f(1),1,300},...

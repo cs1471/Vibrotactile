@@ -114,7 +114,7 @@ try
     load('RAstimuli.mat');
     
     %randomize order of same/different trials
-    stimuli=shakeOriginal(stimuli,2);
+    %stimuli=shakeOriginal(stimuli,2);
     
     trialCounter = 1;
     for iBlock = 1:exptdesign.numBlocks %how many blocks to run this training session 
@@ -138,19 +138,21 @@ try
            stimulusOnset = GetSecs;
            constructStimuli(stimuli(1:4,iTrial)); % present stim 1
            WaitSecs(exptdesign.interStimuliDuration);
-           constructStimuli(stimuli(4:8,iTrial)); % present stim 2
+           constructStimuli(stimuli(5:8,iTrial)); % present stim 2
            stimulusFinished = GetSecs;
            
+           %set variables == 0 if no response
+           responseFinishedTime = 0;
+           sResp=0;
            %start response window
            responseStartTime=GetSecs;
-           sResp = getResponse(exptdesign.responseDuration, exptdesign.responseBox, responseMapping);
-           %record end time of response
-           responseFinishedTime=evt.time;
+           %record subject response for mouse click v button press
+           sResp = getResponse(stimulusFinished, exptdesign.responseDuration, exptdesign.scannerOrlab, responseMapping);
            
            %code correct response
-           if isequal(stimuli(1:4, iTrial),stimuli(4:8,iTrial))
+           if isequal(stimuli(1:4, iTrial),stimuli(5:8,iTrial))
                correctResponse=1;
-           elseif ~isequal(stimuli(1:4, iTrial),stimuli(4:8,iTrial)) 
+           elseif ~isequal(stimuli(1:4, iTrial),stimuli(5:8,iTrial)) 
                correctResponse=2;
            end
           
@@ -163,7 +165,7 @@ try
            trialOutput(iBlock,1).responseStartTime(iTrial)=responseStartTime;
            trialOutput(iBlock,1).responseFinishedTime(iTrial)=responseFinishedTime;
            trialOutput(iBlock,1).RT(iTrial)=responseFinishedTime-responseStartTime;
-           trialOutput(iBlock,1).stimuli(:,iTrial) = stimuli;
+           trialOutput(iBlock,1).stimuli(:,iTrial) = stimuli(:,iTrial);
            trialOutput(iBlock,1).FixationVBLTimestamp(iTrial)=FixationVBLTimestamp;
            trialOutput(iBlock,1).FixationOnsetTime(iTrial)=FixationOnsetTime;
            trialOutput(iBlock,1).FixationFlipTimestamp(iTrial)=FixationFlipTimestamp;
@@ -211,9 +213,6 @@ end
 end
 
 function drawAndCenterText(window,message, wait, time)
-    if nargin < 3
-        wait = 1;
-    end
     
     if nargin <4
         time =0;
@@ -225,9 +224,10 @@ function drawAndCenterText(window,message, wait, time)
     Screen('Flip',window, time);
 end
 
-function constructStimuli(stimuli,iTrial)
-     f = stimuli(:,1:2);
-     p = stimuli(:,3:4);
+function constructStimuli(stimuli)
+        f = stimuli(1:2,:);
+        p = stimuli(3:4,:);
+     
         stim = {...
             {'fixed',f(1),1,300},...
             {'fixchan',p(1)},...
@@ -244,11 +244,11 @@ function constructStimuli(stimuli,iTrial)
         end
 end
 
-function [sResp] = getResponse(waitTime, scannerOrLab, responseMapping)
+function [sResp,responseFinishedTime] = getResponse(stimFinished, waitTime, scannerOrLab, responseMapping)
 % wait until response window passed or until there is an event
 startWaiting = GetSecs;
 mousePressed =0;
-    while (startWaiting < (stimulusFinished + waitTime) && mousePressed==0)
+    while (startWaiting < (stimFinished + waitTime) && mousePressed==0)
         switch scannerOrLab
             case 's'
                 %if button pressed record response
@@ -266,6 +266,7 @@ mousePressed =0;
                         sResp = -1;
                     end
                 end
+                responseFinishedTime = evt.time;
             case'l'
                 %check to see if a button is pressed
                 [x,y,buttons] = GetMouse();
@@ -279,6 +280,7 @@ mousePressed =0;
                     else
                         sResp = -1;
                     end
+                    responseFinishedTime = GetSecs;
                     if sResp ~= -1
                         %stop checking for a button press
                         mousePressed = 1;
