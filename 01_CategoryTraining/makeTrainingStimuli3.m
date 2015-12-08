@@ -101,7 +101,7 @@ function makeTrainingStimuli
     trainingStimuli=repmat(trainingStimuli,[1 4]);
    
     %levelAccuracy gives the accuracy required to pass the level (1-20);
-    levelAccuracy=[repmat(.75,[1 5]) repmat(.8, [1 5]) repmat(.85, [1 5]) repmat(.9, [1 5])];
-    save trainingStimuli3.mat trainingStimuli levelAccuracy
+    levelAccuracy=[repmat(.75,[1 3]) .70 .75 repmat(.8, [1 3]) .75 .80 repmat(.85, [1 3]) .80 .85];
+    save ('trainingStimuli3.mat', 'trainingStimuli', 'levelAccuracy')
 
 end
