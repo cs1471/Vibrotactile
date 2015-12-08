@@ -1,11 +1,10 @@
 % get subject info
-name = input('\n\nEnter Subject ID:\n\n','s');
-number = name;
+number = input('\n\nEnter Subject ID:\n\n','s');
 exptdesign.number = number;
 if isempty(name)
     name = [datestr(now,'yyyy-mm-dd-') 'MR000'];
 else
-    name = [datestr(now,'yyyy-mm-dd-') name];
+    name = [datestr(now,'yyyy-mm-dd-') number];
 end
 WaitSecs(0.25);
 
@@ -20,7 +19,7 @@ exptdesign.subjectName = name;
 exptdesign.numBlocks = 1;              
 exptdesign.numTrialsPerSession = 240;    
 exptdesign.refresh = 0.016679454248257;
-exptdesign.numRuns = 6;
+exptdesign.numRuns = 1;
 
 %fixation location/duration         
 exptdesign.fixationImage = 'imgsscaled/fixation.bmp';  
@@ -35,7 +34,7 @@ exptdesign.usespace=0;                  % use space bar to start each trial?
 exptdesign.scannerOrlab='l';
 
 %open com3 port for button boxes
-if exptdesign.responseBox
+if exptdesign.responseBox == 1
     % Ensure button-box configuration is correct
     disp('Ensure dip switches are set to E-PRIME and 5+');
     input('Hit Enter to Continue...');
@@ -48,11 +47,11 @@ stimGenPTB('open')
 %run all 6 runs right after the last 
 for iRuns = 1:exptdesign.numRuns
     exptdesign.iRuns=iRuns;
-    [trialOutput.run] = RAinScannerExperiment2(name,exptdesign);
+    [trialOutput] = RAinScannerExperiment2(name,exptdesign);
 end
 
 %close com3 port
-if exptdesign.responseBox
+if exptdesign.responseBox ==1
     CMUBox('Close',exptdesign.boxHandle);
     disp('Ensure dip switches are set back to 4');
 end

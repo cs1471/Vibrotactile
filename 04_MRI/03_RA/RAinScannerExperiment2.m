@@ -50,7 +50,7 @@ try
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     %		INTRO EXPERIMENT
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    if exptdesign.responseBox
+    if exptdesign.responseBox == 1
         %flush event queue
         evt=1;
         
@@ -85,12 +85,9 @@ try
         %store start time and response mapping in exptdesign struct
         exptdesign.scanStart = starttime;
         exptdesign.responseMapping=responseMapping;
-    else
-        %checks for in between runs so that experminter can control run
-        %start
-        responseMapping = exptdesign.responseKeyChange;
-        drawAndCenterText(w,'Hit Enter to Continue...',1);
+    else 
         exptdesign.scanStart = GetSecs;
+        responseMapping = exptdesign.response;
     end
     
     %marks the number of runs passed in from exptdesign struct
@@ -121,13 +118,6 @@ try
         
         %iterate over trials
         for iTrial=1:exptdesign.numTrialsPerSession
-            %initialize variable 
-            evt=1;
-            
-            %clear event responses stored in cue
-            while ~isempty(evt)
-                evt = CMUBox('GetEvent', exptdesign.boxHandle);
-            end
            
            %draw fixation/reset timing
            Screen('DrawTexture', w, fixationTexture);
@@ -144,6 +134,7 @@ try
            %set variables == 0 if no response
            responseFinishedTime = 0;
            sResp=0;
+           responseMapping =0;
            %start response window
            responseStartTime=GetSecs;
            %record subject response for mouse click v button press
