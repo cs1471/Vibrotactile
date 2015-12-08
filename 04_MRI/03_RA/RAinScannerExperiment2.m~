@@ -279,7 +279,10 @@ mousePressed =0;
                         sResp = 2;
                     end
                     responseFinishedTime = GetSecs;
-                    mousePressed = 1;    
+                    if sResp ~= 0
+                        %stop checking for a button press
+                        mousePressed = 1;
+                    end
                 end
         end
     end
