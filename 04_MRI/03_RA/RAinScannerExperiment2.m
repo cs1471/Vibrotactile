@@ -111,8 +111,9 @@ try
     load('RAstimuli.mat');
     
     %randomize order of same/different trials
-    %stimuli=shakeOriginal(stimuli,2);
-    
+    ind=randperm(size(stimuli,2));
+    stimuli=stimuli(:,ind);
+
     trialCounter = 1;
     for iBlock = 1:exptdesign.numBlocks %how many blocks to run this training session 
         
