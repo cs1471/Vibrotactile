@@ -127,7 +127,7 @@ function vtCategorizationTrainingExperiment(name, exptdesign)
            else
                accuracy=0;
            end
-            stimulusTracking{end+1}=[stimuli{:,iTrial}' accuracy {responseFinishedTime-responseStartTime}]; 
+%             stimulusTracking{end+1}=[stimuli{:,iTrial}' accuracy {responseFinishedTime-responseStartTime}]; 
            
             %replay stimulus, show correct label, whether correct or
             %incorrect
@@ -152,7 +152,7 @@ function vtCategorizationTrainingExperiment(name, exptdesign)
                 %response to the stimulus was correct (1), incorrect (0) or
                 %feedback (2); and what the response RT was (in ms, or
                 %NaN).
-                stimulusTracking{end+1}=[stimuli{:,iTrial}' 2 NaN];
+%                 stimulusTracking{end+1}=[stimuli{:,iTrial}' 2 NaN];
             end
            
           
