@@ -15,7 +15,7 @@ m0 = [repmat(frequency(:,1),1,36) repmat(frequency(:,2),1,24) repmat(frequency(:
       repmat(stimulator,1,10)];
 m3w = [repmat(frequency(:,1),1,24) repmat(frequency(:,4),1,24);
        repmat(stimulator,1,4)
-       repmat(frequency(:,2),1,24) repmat(frequency(:,1),1,24);
+       repmat(frequency(:,2),1,24) repmat(frequency(:,3),1,24);
        repmat(stimulator,1,4)];
 m3b = [repmat(frequency(:,2),1,24);
        repmat(stimulator,1,2);
