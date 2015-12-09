@@ -1,7 +1,7 @@
 % get subject info
 number = input('\n\nEnter Subject ID:\n\n','s');
 exptdesign.number = number;
-if isempty(name)
+if isempty(number)
     name = [datestr(now,'yyyy-mm-dd-') 'MR000'];
 else
     name = [datestr(now,'yyyy-mm-dd-') number];
