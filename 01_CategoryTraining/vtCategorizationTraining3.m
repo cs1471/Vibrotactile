@@ -1,7 +1,7 @@
 %Wrapper For Categoziation Training
 %June 15 2015
 %CAS cas243@georgetown.edu
-
+% dbstop if error;
 %prompt experimenter to check white noise, ear plubs
 input('\n\nIs white noise playing? Hit Enter when "Yes."\n');
 input('\n\nDoes participant have ear plugs? Hit Enter when "Yes."\n');
@@ -46,7 +46,7 @@ exptdesign.netstationSyncLimit = 2;     % Limit under which to sync the Netstati
 exptdesign.numSessions = 6;              % number of blocks (160 trials each) to complete this training session
 
 % if/else statement to set the number of trials for the level
-if level == 5
+if exptdesign.level == 5
     exptdesign.numTrialsPerSession = 144;    % number of trials per block for level 5
 else 
     exptdesign.numTrialsPerSession = 128;  % numbeer of trials per block for levels 1,2,3 and 4
