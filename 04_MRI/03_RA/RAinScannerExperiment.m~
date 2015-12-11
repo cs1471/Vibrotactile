@@ -167,7 +167,7 @@ try
                end
                %record end time of response
                responseFinishedTime=evt.time;
-               WaitSecs((stimulusFinished + exptdesign.responseDuration)-responseFinishedTime)
+               WaitSecs(exptdesign.responseDuration-responseFinishedTime)
            end
            
            %code correct response
