@@ -1,5 +1,6 @@
 f1=2.^([0:.1:2]+log2(25));
 
+load('/Users/courtney/Desktop/erraruns/forCourtney-1.txt')
 %generate frequency pairs 5,35,65,95% steps along the morph line
 frequency = [f1(2) f1(8) f1(14) f1(20); f1(20) f1(14) f1(8) f1(2)];
 

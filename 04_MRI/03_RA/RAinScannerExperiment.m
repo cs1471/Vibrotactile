@@ -113,6 +113,7 @@ try
     %load stimuli file
     load('RAstimuli.mat');
     
+    
     %randomize order of same/different trials
     order=randperm(size(stimuli,2));
     stimuli=stimuli(:,order);
@@ -145,7 +146,6 @@ try
            %start response window
            responseStartTime=GetSecs;
            
-           sResp = getResponse(exptdesign.responseDuration, exptdesign.responseBox, responseMapping);
            % wait until response window passed or until there is an event
            while (GetSecs < (stimulusFinished + exptdesign.responseDuration) && isempty(evt))
                 %if button pressed record response
@@ -264,48 +264,4 @@ function constructStimuli(stimuli)
         while rtn==-1
             rtn=stimGenPTB('start');
         end
-end
-
-function [sResp] = getResponse(waitTime, scannerOrLab, responseMapping)
-% wait until response window passed or until there is an event
-startWaiting = GetSecs;
-mousePressed =0;
-    while (startWaiting < (stimulusFinished + waitTime) && mousePressed==0)
-        switch scannerOrLab
-            case 's'
-                %if button pressed record response
-                evt = CMUBox('GetEvent', exptdesign.boxHandle);
-                %sResp =1 is same, sResp = 2 if differnt 
-                if ~isempty(evt)
-                    response = evt.state;
-                    if response == responseMapping.same
-                        sResp = 1;
-                        mousePressed = 1;
-                    elseif response == responseMapping.different
-                        sResp = 2;
-                        mousePressed = 1;
-                    else
-                        sResp = -1;
-                    end
-                end
-            case'l'
-                %check to see if a button is pressed
-                [x,y,buttons] = GetMouse();
-                if (~buttons(1) && ~buttons(3))
-                    continue;
-                else
-                    if buttons(1)
-                        sResp = 1;
-                    elseif buttons(3)
-                        sResp = 2;
-                    else
-                        sResp = -1;
-                    end
-                    if sResp ~= -1
-                        %stop checking for a button press
-                        mousePressed = 1;
-                    end
-                end
-        end
-    end
 end

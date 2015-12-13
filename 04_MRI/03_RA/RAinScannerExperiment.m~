@@ -113,6 +113,7 @@ try
     %load stimuli file
     load('RAstimuli.mat');
     
+    
     %randomize order of same/different trials
     order=randperm(size(stimuli,2));
     stimuli=stimuli(:,order);
@@ -145,7 +146,6 @@ try
            %start response window
            responseStartTime=GetSecs;
            
-           sResp = getResponse(exptdesign.responseDuration, exptdesign.responseBox, responseMapping);
            % wait until response window passed or until there is an event
            while (GetSecs < (stimulusFinished + exptdesign.responseDuration) && isempty(evt))
                 %if button pressed record response
@@ -167,7 +167,7 @@ try
                end
                %record end time of response
                responseFinishedTime=evt.time;
-               WaitSecs(exptdesign.responseDuration-responseFinishedTime)
+               WaitSecs((stimulusFinished + exptdesign.responseDuration)-responseFinishedTime)
            end
            
            %code correct response
