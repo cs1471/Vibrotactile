@@ -17,10 +17,10 @@ end
 exptdesign.subjectName = name;
 
 %Trial/Block/Run lengths
-exptdesign.numBlocks = 1;              
-exptdesign.numTrialsPerSession = 240;    
+exptdesign.numBlocks = 4;              
+exptdesign.numTrialsPerSession = 127;    
 exptdesign.refresh = 0.016679454248257;
-exptdesign.numRuns = 6;
+exptdesign.numRuns = 1;
 
 %fixation location/duration         
 exptdesign.fixationImage = 'imgsscaled/fixation.bmp';  
@@ -44,7 +44,7 @@ end
 %open com2 port for stimulator
 stimGenPTB('open')
 
-%run all 6 runs right after the last 
+%run all 1 runs right after the last 
 for iRuns = 1:exptdesign.numRuns
     exptdesign.iRuns=iRuns;
     [trialOutput.run] = RAinScannerExperiment(name,exptdesign);
