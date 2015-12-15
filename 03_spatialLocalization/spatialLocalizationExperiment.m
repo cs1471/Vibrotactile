@@ -1,5 +1,5 @@
 function spatialLocalizationExperiment(name,exptdesign)
-
+% dbstop if error;
     % spatialLocalization
     % Patrick Malone pmalone333@gmail.com, Courtney Sprouse
     % cs1471@georgetown.edu, Levan Bokeria levan.bokeria@georgetown.edu
