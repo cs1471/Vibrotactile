@@ -13,7 +13,7 @@ function spatialLocalizationExperiment(name,exptdesign)
     white = WhiteIndex(w); % pixel value for white
     gray = GrayIndex(w); % pixel value for gray
     black = BlackIndex(w); % pixel value for black
-    HideCursor;
+%     HideCursor;
     %load images
     fixationImage = imread(exptdesign.fixationImage);
     
@@ -120,7 +120,7 @@ function spatialLocalizationExperiment(name,exptdesign)
                drawAndCenterText(w, ['Your accuracy was ' num2str(round(accuracyForLevel.*100)) '%\n\n\n'...
                     'Click mouse to continue' ],1)
                %WaitSecs(2);
-           elseif iTrial==numTrialsPerSession && iBlock == exptdesign.numBlocks
+           elseif iTrial==exptdesign.numTrialsPerSession && iBlock == exptdesign.numBlocks
                %calculate accuracy
                accuracyForLevel=mean(trialOutput(iBlock).accuracy);
                drawAndCenterText(w, ['Your accuracy was ' num2str(round(accuracyForLevel.*100)) '%\n\n\n'...
@@ -193,8 +193,8 @@ function numericalanswer = getResponseMouse(waitTime)
 end
 
 function constructStimuli(stimulus)
-    f = stimulus(1);
-    p = stimulus(2);
+    f = stimulus(2); % LB: changed f = stimulus(1) to f = stimulus(2) and vice-versa for p. Not sure if this is correct. 12/15/2015
+    p = stimulus(1);
 
     stim = {...
         {'fixed',f,1,300},...
