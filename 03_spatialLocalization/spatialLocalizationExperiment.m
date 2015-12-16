@@ -9,7 +9,7 @@ function spatialLocalizationExperiment(name,exptdesign)
     screenNumber=0;
     
     % Open window with default settings:
-    [w windowRect] =Screen('OpenWindow', screenNumber,[128 128 128]);
+    [w windowRect] = Screen('OpenWindow', screenNumber,[128 128 128]);
     white = WhiteIndex(w); % pixel value for white
     gray = GrayIndex(w); % pixel value for gray
     black = BlackIndex(w); % pixel value for black
@@ -137,7 +137,7 @@ function spatialLocalizationExperiment(name,exptdesign)
         
         
         %save the session data in the data directory
-        save(['./data/' name '/' name '_block' num2str(iBlock) '.' num2str(iTrial) '.mat'], 'trialOutput', 'exptdesign');
+        save(['./data/' exptdesign.number '/' name '_block' num2str(iBlock) '.' num2str(iTrial) '.mat'], 'trialOutput', 'exptdesign');
         %save the history data (stimuli, last level passed)
         
         
