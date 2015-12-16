@@ -18,7 +18,7 @@ stimuli = [];
 stimuli(1,:) = 1:14;
 % stimuli(1,:) = 4*ones(1,14);
 stimuli(2,:) = 100*ones(1,14);
-
+for iRep = 1:10
 for iChannel = 1:14
     iChannel
 
@@ -27,8 +27,8 @@ constructStimuli(stimuli(:,iChannel));
 
 end
 
-
-%% Stimulate
+end
+%% Stimulate  
 function constructStimuli(stimulus)
     f = stimulus(2);
     p = stimulus(1);
