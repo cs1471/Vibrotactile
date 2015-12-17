@@ -111,12 +111,17 @@ try
     end
     
     %load stimuli file
-    load('RAstimuli.mat');
+    load('stimuliRA.mat');
     
-    
-    %randomize order of same/different trials
-    order=randperm(size(stimuli,2));
-    stimuli=stimuli(:,order);
+    if iRuns == 1
+        stimuli = stimuliRun1;
+    elseif iRuns == 2
+        stimuli = stimuliRun2;
+    elseif iRuns ==3
+        stimuli = stimuliRun3;
+    else
+        stimuli = stimuliRun4;
+    end
     
     trialCounter = 1;
     for iBlock = 1:exptdesign.numBlocks %how many blocks to run this training session 
@@ -138,43 +143,50 @@ try
            
            %call function that generates stimuli for driver box
            stimulusOnset = GetSecs;
-           constructStimuli(stimuli(1:4,iTrial)); % present stim 1
-           WaitSecs(exptdesign.interStimuliDuration);
-           constructStimuli(stimuli(5:8,iTrial)); % present stim 2
-           stimulusFinished = GetSecs;
+           if stimuli(1:4,iTrial) ~= 0
+                constructStimuli(stimuli(1:4,iTrial)); % present stim 1
+                WaitSecs(exptdesign.interStimuliDuration);
+                constructStimuli(stimuli(5:8,iTrial)); % present stim 2
+                stimulusFinished = GetSecs;
            
-           %start response window
-           responseStartTime=GetSecs;
-           
-           % wait until response window passed or until there is an event
-           while (GetSecs < (stimulusFinished + exptdesign.responseDuration) && isempty(evt))
-                %if button pressed record response
-                evt = CMUBox('GetEvent', exptdesign.boxHandle);
-           end
-           
-           %set variables == 0 if no response
-           responseFinishedTime = 0;
-           sResp=0;
-           
-           %sResp =1 is same, sResp = 2 if differnt 
-           if ~isempty(evt)
-               if evt == responseMapping.same
-                   sResp = 1;
-               elseif evt == responseMapping.different
-                   sResp = 2;
-               else
-                   sResp = -1;
+               %start response window
+               responseStartTime=GetSecs;
+
+               % wait until response window passed or until there is an event
+               while (GetSecs < (stimulusFinished + exptdesign.responseDuration) && isempty(evt))
+                    %if button pressed record response
+                    evt = CMUBox('GetEvent', exptdesign.boxHandle);
                end
-               %record end time of response
-               responseFinishedTime=evt.time;
-               WaitSecs((stimulusFinished + exptdesign.responseDuration)-responseFinishedTime)
-           end
-           
-           %code correct response
-           if isequal(stimuli(1:4, iTrial),stimuli(5:8,iTrial))
-               correctResponse=1;
-           elseif ~isequal(stimuli(1:4, iTrial),stimuli(5:8,iTrial)) 
-               correctResponse=2;
+
+               %set variables == 0 if no response
+               responseFinishedTime = 0;
+               sResp=0;
+
+               %sResp =1 is same, sResp = 2 if differnt 
+               if ~isempty(evt)
+                   if evt == responseMapping.same
+                       sResp = 1;
+                   elseif evt == responseMapping.different
+                       sResp = 2;
+                   else
+                       sResp = -1;
+                   end
+                   %record end time of response
+                   responseFinishedTime=evt.time;
+                   WaitSecs((stimulusFinished + exptdesign.responseDuration)-responseFinishedTime)
+               end
+
+               %code correct response
+               if isequal(stimuli(1:4, iTrial),stimuli(5:8,iTrial))
+                   correctResponse=1;
+               elseif ~isequal(stimuli(1:4, iTrial),stimuli(5:8,iTrial)) 
+                   correctResponse=2;
+               end
+           else
+               WaitSecs(4.08);
+               stimulusFinished = GetSecs;
+               sResp = -1;
+               correctResponse = -1;
            end
           
            %record parameters for the trial and block           
