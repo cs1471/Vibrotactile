@@ -17,19 +17,20 @@ end
 exptdesign.subjectName = name;
 
 %Trial/Block/Run lengths
-exptdesign.numBlocks = 4;              
-exptdesign.numTrialsPerSession = 127;    
+exptdesign.numBlocks = 4; % original = 4             
+exptdesign.numTrialsPerSession = 127;   % original = 127 
 exptdesign.refresh = 0.016679454248257;
-exptdesign.numRuns = 1;
+exptdesign.numRuns = 4;
 
 %fixation location/duration         
 exptdesign.fixationImage = 'imgsscaled/fixation.bmp';  
 exptdesign.imageDirectory = 'imgsscaled/';  
 exptdesign.interStimuliDuration = .4;
+exptdesign.trialDuration = 4.0; % added by LB 12/18/2015
 
 % Decide which response mapping you are using
 exptdesign.response = input('\n\nEnter response key profile (option 0 or 1):\n\n');
-exptdesign.responseDuration = 3.08;                % amount of time to allow for a response in seconds
+exptdesign.responseDuration = 3.0; %change from 4.08 (3.08) to 4 (3.0) seconds;                % amount of time to allow for a response in seconds
 exptdesign.responseBox = 1;             % Controls whether we are using the keyboard or the response box for subj. responses.
 exptdesign.usespace=0;                  % use space bar to start each trial?
 
