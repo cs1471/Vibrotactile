@@ -1,9 +1,13 @@
 f1=2.^([0:.1:2]+log2(25));
 
+response = input('\n\nEnter Response Profile: \n\n','s');
 frequency = [f1(2) f1(8) f1(14) f1(20)];
 
-%channels = [1 3 11 13];
-channels = [2 4 12 14];
+if response == 0
+    channels = [1 3 11 13];
+else
+    channels = [2 4 12 14];
+end
 
 pair1 = [repmat(frequency(1),1,4);
          repmat(channels,1,1)];
@@ -25,6 +29,7 @@ stimuli = [repmat(stimulator,1,6);repmat(stimulator,1,3), pair2, pair3, pair4, p
 stimuli = repmat(stimuli,1,2);
 
 % populate trial structure with 2 instances of the same stimulus
-%save ('frequencyDiscrimStimuli_0.mat','stimuli')
-
-save ('frequencyDiscrimStimuli_1.mat','stimuli')
+if response == 0
+    save ('frequencyDiscrimStimuli_0.mat','stimuli')
+else
+    save ('frequencyDiscrimStimuli_1.mat','stimuli')

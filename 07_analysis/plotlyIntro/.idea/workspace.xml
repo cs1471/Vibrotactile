@@ -2,15 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ef7718a3-41eb-4f53-a620-d252a789b9aa" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../my_range.py" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/.name" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/encodings.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/plotlyIntro.iml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/RAdata.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/plotlyIntro.py" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../06_frequencyDiscrimination/makeFrequencyDiscrimStimuli.m" afterPath="$PROJECT_DIR$/../../06_frequencyDiscrimination/makeFrequencyDiscrimStimuli.m" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -33,6 +24,16 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="BSTnode.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/../../../../../Georgetown/DataStructures/A5project/BSTnode.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.6530612">
+              <caret line="101" column="53" selection-start-line="101" selection-start-column="53" selection-end-line="101" selection-end-column="53" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="CategoryTrainingFigure.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/../CategoryTrainingFigure.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -45,7 +46,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="simple_plot.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="simple_plot.py" pinned="false" current-in-tab="false">
         <entry file="file://$USER_HOME$/Desktop/simple_plot.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
@@ -86,13 +87,14 @@
         <option value="$PROJECT_DIR$/../my_range.py" />
         <option value="$PROJECT_DIR$/../RAdata.py" />
         <option value="$PROJECT_DIR$/../CategoryTrainingFigure.py" />
+        <option value="$PROJECT_DIR$/../../../../../Georgetown/DataStructures/A5project/BSTnode.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="97" />
     <option name="y" value="32" />
-    <option name="width" value="2407" />
+    <option name="width" value="2301" />
     <option name="height" value="1293" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -137,7 +139,7 @@
   <component name="PropertiesComponent">
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../CategoryTrainingFigure.py" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../../Georgetown/DataStructures/A5project/BSTnode.py" />
   </component>
   <component name="RunManager" selected="Python.CategoryTrainingFigure">
     <configuration default="false" name="plotlyIntro" type="PythonConfigurationType" factoryName="Python" temporary="true">
@@ -359,10 +361,10 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="97" y="32" width="2407" height="1293" extended-state="0" />
+    <frame x="97" y="32" width="2301" height="1293" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.117573746" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.122990005" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39772728" sideWeight="0.503125" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33613446" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -552,6 +554,14 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../../../Georgetown/DataStructures/A5project/BSTnode.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6530612">
+          <caret line="101" column="53" selection-start-line="101" selection-start-column="53" selection-end-line="101" selection-end-column="53" />
           <folding />
         </state>
       </provider>
