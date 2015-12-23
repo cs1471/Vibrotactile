@@ -281,10 +281,11 @@ function [timeBuildTSM, timeLoadStimuli, timeGenerateStimuli]...
         timeLoadStimuli=toc(startTime);
         
         rtn=-1;
+        enterWhileLoop = 
         while rtn==-1
             rtn=stimGenPTB('start');
         end
-        timeGenerateStimuli=toc(startTime)-timeLoadStimuli;
+        timeGenerateStimuli=toc(startTime);
 end
 
 function [sResp,responseFinishedTime]...

@@ -1,5 +1,5 @@
 
-function trialOutput = RAinScannerExperimentLab(name,exptdesign)
+function trialOutput = RAinScannerExperiment(name,exptdesign)
 
 try
 %     dbstop if error;
@@ -50,7 +50,7 @@ try
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     %		INTRO EXPERIMENT
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    if exptdesign.responseBox == 1
+    if exptdesign.responseBox
         %flush event queue
         evt=1;
         
@@ -85,9 +85,12 @@ try
         %store start time and response mapping in exptdesign struct
         exptdesign.scanStart = starttime;
         exptdesign.responseMapping=responseMapping;
-    else 
+    else
+        %checks for in between runs so that experminter can control run
+        %start
+        responseMapping = exptdesign.responseKeyChange;
+        drawAndCenterText(w,'Hit Enter to Continue...',1);
         exptdesign.scanStart = GetSecs;
-        responseMapping = exptdesign.response;
     end
     
     %marks the number of runs passed in from exptdesign struct
@@ -95,10 +98,6 @@ try
 
     %passes in response profile from wrapper function
     response = exptdesign.response;
-    responseDuration = exptdesign.responseDuration;
-    trialDuration = exptdesign.trialDuration;
-    
-    sOL = exptdesign.scannerOrlab;
    
     %Display experiment instructions
     if response == 0
@@ -125,90 +124,116 @@ try
     end
     
     trialCounter = 1;
-    for iBlock = 1:exptdesign.numBlocks %how many blocks to run this training session 
+    for iBlock = 2:exptdesign.numBlocks %how many blocks to run this training session 
         
         %iterate over trials
         for iTrial=1:exptdesign.numTrialsPerSession
-           trialOnset = GetSecs;
+            %initialize variable 
+            trialStartTime = GetSecs;
+            evt=1;
+            
+            %clear event responses stored in cue
+            while ~isempty(evt)
+                evt = CMUBox('GetEvent', exptdesign.boxHandle);
+            end
+           
            %draw fixation/reset timing
            Screen('DrawTexture', w, fixationTexture);
            [FixationVBLTimestamp FixationOnsetTime FixationFlipTimestamp FixationMissed] = ...
-               Screen('Flip',w, exptdesign.scanStart + 10*(iBlock) + 4*(trialCounter-1));
+               Screen('Flip',w, exptdesign.scanStart + 10*(iBlock) + exptdesign.trialDuration*(trialCounter-1));  % change from 4.08 to 4 seconds. LB then changed it to exptdesign.trialDuration variable defined in the wrapper.
            
            %call function that generates stimuli for driver box
            stimulusOnset = GetSecs;
-           %set variables == 0 if no response
-           responseFinishedTime = 0;
-           responseStartTime=0;
-           sResp=0;
-           responseMapping =0;
-           
            if stimuli(1:4,iTrial) ~= 0
-               [timeBuildTSMstim1, timeLoadStimulistim1, timeGenerateStimulistim1]...
-                   =constructStimuli(stimuli(1:4,iTrial)); % present stim 1
-               
-               WaitSecs(exptdesign.interStimuliDuration);%wait time between stimuli
-               
-               [timeBuildTSMstim2, timeLoadStimulistim2, timeGenerateStimulistim2]...
-                   =constructStimuli(stimuli(5:8,iTrial)); % present stim 2
-               
-               stimulusFinished = GetSecs;
-               stimulusDuration = stimulusFinished-stimulusOnset;
-               
+                constructStimuli(stimuli(1:4,iTrial)); % present stim 1
+                stimulusOneEnd = GetSecs;
+                WaitSecs(exptdesign.interStimuliDuration);
+                stimulusTwoOnset = GetSecs;
+                constructStimuli(stimuli(5:8,iTrial)); % present stim 2
+                stimulusFinished = GetSecs;
+                stimulusDuration = stimulusFinished-stimulusOnset;
+                
                %start response window
                responseStartTime=GetSecs;
-               %record subject response for mouse click v button press
-               [sResp,responseFinishedTime]...
-                   = getResponse(stimulusFinished, sOL, responseMapping, responseDuration);
 
-               RT = responseFinishedTime - responseStartTime;
-               waitEOT = trialDuration-(RT+stimulusDuration);
-               WaitSecs(waitEOT)
+               % wait until response window passed or until there is an event
+               while (GetSecs < (stimulusFinished + exptdesign.responseDuration) && isempty(evt))
+                    %if button pressed record response
+                    evt = CMUBox('GetEvent', exptdesign.boxHandle);
+               end
+
+               %set variables == 0 if no response
+               responseFinishedTime = 0;
+               sResp=0;
+
+               %sResp =1 is same, sResp = 2 if differnt 
+               if ~isempty(evt)
+                   if evt.state == responseMapping.same
+                       sResp = 1;
+                   elseif evt.state == responseMapping.different
+                       sResp = 2;
+                   else
+                       sResp = -1;
+                   end
+                   %record end time of response
+                   responseFinishedTime=evt.time;
+                   RT = responseFinishedTime - responseStartTime;
+                   WaitSecs(exptDesign.trialDuration - (stimulusDuration + RT))
+               end
+
+               %code correct response
+               if isequal(stimuli(1:4, iTrial),stimuli(5:8,iTrial))
+                   correctResponse=1;
+               elseif ~isequal(stimuli(1:4, iTrial),stimuli(5:8,iTrial)) 
+                   correctResponse=2;
+               end
            else
                WaitSecs(exptdesign.trialDuration); % change from 4.08 to 4. LB then changed it to exptdesign.trialDuration variable defined in the wrapper.
                stimulusFinished = GetSecs;
                sResp = -1;
                correctResponse = -1;
-               waitEOT = 0;
-               RT=0;
            end
            
-           
-           
-           
-           
-          
-           
-           %code correct response
-           if isequal(stimuli(1:4, iTrial),stimuli(5:8,iTrial))
-               correctResponse=1;
-           elseif ~isequal(stimuli(1:4, iTrial),stimuli(5:8,iTrial)) 
-               correctResponse=2;
-           end
-           
-           trialFinished = GetSecs;
+           startSavingTime = GetSecs;
            %record parameters for the trial and block           
            trialOutput(iBlock,1).sResp(iTrial)=sResp;
            trialOutput(iBlock,1).correctResponse(iTrial)=correctResponse;
            trialOutput(iBlock,1).stimulusOnset(iTrial)=stimulusOnset;
-           trialOutput(iBlock,1).stimulusDuration(iTrial)=stimulusFinished-stimulusOnset;
+           trialOutput(iBlock,1).stimulusDuration(iTrial)=stimulusDuration;
            trialOutput(iBlock,1).stimulusFinished(iTrial)=stimulusFinished;
            trialOutput(iBlock,1).responseStartTime(iTrial)=responseStartTime;
            trialOutput(iBlock,1).responseFinishedTime(iTrial)=responseFinishedTime;
-           trialOutput(iBlock,1).RT(iTrial)=responseFinishedTime-responseStartTime;
+           trialOutput(iBlock,1).RT(iTrial)=RT;
            trialOutput(iBlock,1).stimuli(:,iTrial) = stimuli(:,iTrial);
            trialOutput(iBlock,1).FixationVBLTimestamp(iTrial)=FixationVBLTimestamp;
            trialOutput(iBlock,1).FixationOnsetTime(iTrial)=FixationOnsetTime;
            trialOutput(iBlock,1).FixationFlipTimestamp(iTrial)=FixationFlipTimestamp;
            trialOutput(iBlock,1).FixationMissed(iTrial)=FixationMissed;
-           trialOutput(iBlock,1).timeBuildTSMstim1(iTrial) = timeBuildTSMstim1;
-           trialOutput(iBlock,1).timeLoadStimulistim1(iTrial) = timeLoadStimulistim1;
-           trialOutput(iBlock,1).timeGenerateStimulistim1(iTrial) = timeGenerateStimulistim1;
-           trialOutput(iBlock,1).timeBuildTSMstim2(iTrial) = timeBuildTSMstim2;
-           trialOutput(iBlock,1).timeLoadStimulistim2(iTrial) = timeLoadStimulistim2;
-           trialOutput(iBlock,1).timeGenerateStimulistim2(iTrial) = timeGenerateStimulistim2;
-           trialOutput(iBlock,1).trialDuration(iTrial)= trialFinished-trialOnset;
-           trialOutput(iBlock,1).waitEOT(iTrial)=waitEOT;
+%            trialOutput(iBlock,1).order=order;
+
+            % Get trial duration parameters on each trial
+            trialEndTime = GetSecs;
+            trialOutput(iBlock,1).trialStartTime(iTrial) = trialStartTime;
+            trialOutput(iBlock,1).trialEndTime(iTrial)   = trialEndTime;
+            trialOutput(iBlock,1).trialDuration(iTrial)  = trialEndTime - trialStartTime;
+            %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+            
+            
+            % Get other various time stamps
+
+            trialOutput(iBlock,1).stimulusOneEnd(iTrial)   = stimulusOneEnd;
+            trialOutput(iBlock,1).stimulusTwoOnset(iTrial) = stimulusTwoOnset;
+            
+            trialOutput(iBlock,1).flipDuration(iTrial)                  = stimulusOnset - trialStartTime; % First one will be long.
+            trialOutput(iBlock,1).stimulusOneDuration(iTrial)           = stimulusOneEnd - stimulusOnset;
+            trialOutput(iBlock,1).stimulusTwoDuration(iTrial)           = stimulusFinished - stimulusTwoOnset;       
+            trialOutput(iBlock,1).stimulusFinishTillTrialFinish(iTrial) = trialEndTime - stimulusFinished;   
+            
+            % see if saving these parameters takes variable time.
+            endSavingTime = GetSecs;
+            trialOutput(iBlock,1).saveDuration(iTrial) = endSavingTime - startSavingTime;
+            %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+            
            trialCounter = trialCounter + 1;
         end
     end
@@ -227,7 +252,7 @@ try
     %  Write the trial specific data to the output file.
     tic;
      %save the session data in the data directory
-        save(['./data_RAscan/' exptdesign.number '/' exptdesign.subjectName '.run' num2str(iRuns) '.mat'], 'trialOutput', 'exptdesign');
+        save(['./data_RAscan/' exptdesign.number '/' exptdesign.subjectName '_block' num2str(iBlock) '.run' num2str(iRuns) '.mat'], 'trialOutput', 'exptdesign');
     toc;
     
     % End of experiment, close window:
@@ -262,8 +287,8 @@ function drawAndCenterText(window,message, wait, time)
     Screen('Flip',window, time);
 end
 
-function [timeBuildTSM, timeLoadStimuli, timeGenerateStimuli]...
-    =constructStimuli(stimuli)
+function constructStimuli(stimuli)
+
         f = stimuli(1:2,:);
         p = stimuli(3:4,:);
      
@@ -273,60 +298,17 @@ function [timeBuildTSM, timeLoadStimuli, timeGenerateStimuli]...
             {'fixed',f(2),1,300},...
             {'fixchan',p(2)},...
             };
-        startTime = tic;
+        
+        startTime = tic
         [t,s]=buildTSM_nomap(stim);
-        timeBuildTSM=toc(startTime);
+        endMapTime = toc(startTime)
         
         stimGenPTB('load',s,t);
-        timeLoadStimuli=toc(startTime);
+        endStimGenTime = toc(startTime)
         
         rtn=-1;
         while rtn==-1
             rtn=stimGenPTB('start');
         end
-        timeGenerateStimuli=toc(startTime)-timeLoadStimuli;
-end
-
-function [sResp,responseFinishedTime]...
-= getResponse(stimFinished, scannerOrLab,responseMapping, responseDuration)
-% wait until response window passed or until there is an event
-startWaiting = GetSecs;
-mousePressed =0;
-    while (startWaiting < (stimFinished + responseDuration)...
-            && mousePressed==0)
-        switch scannerOrLab
-            case 's'
-                %if button pressed record response
-                evt = CMUBox('GetEvent', exptdesign.boxHandle);
-                %sResp =1 is same, sResp = 2 if differnt 
-                if ~isempty(evt)
-                    response = evt.state;
-                    if response == responseMapping.same
-                        sResp = 1;
-                        mousePressed = 1;
-                    elseif response == responseMapping.different
-                        sResp = 2;
-                        mousePressed = 1;
-                    else
-                        sResp = -1;
-                    end
-                end
-                responseFinishedTime = evt.time;
-            case'l'
-                %check to see if a button is pressed
-                [x,y,buttons] = GetMouse();
-                if (~buttons(1) && ~buttons(3))
-                    continue;
-                else
-                    if buttons(1)
-                        sResp = 1;
-                    elseif buttons(3)
-                        sResp = 2;
-                    end
-                    responseFinishedTime = GetSecs;
-                    mousePressed = 1;    
-                end
-        end
-    end
-     
+        endStimGenStart = toc(startTime)
 end
