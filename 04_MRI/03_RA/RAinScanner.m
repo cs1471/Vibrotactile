@@ -17,7 +17,7 @@ end
 exptdesign.subjectName = name;
 
 %Trial/Block/Run lengths
-exptdesign.numBlocks = 4; % original = 4             
+exptdesign.numBlocks = 1;             
 exptdesign.numTrialsPerSession = 127;   % original = 127 
 exptdesign.refresh = 0.016679454248257;
 exptdesign.numRuns = 4;
