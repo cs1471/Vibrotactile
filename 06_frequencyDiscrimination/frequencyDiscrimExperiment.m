@@ -30,7 +30,7 @@ function frequencyDiscrimExperiment(exptdesign)
     
     for iBlock=1:exptdesign.numBlocks
          if mod(iBlock,2)
-            drawAndCenterText(w, ['Please review instructions \n Click the mouse to continue\n'...
+            drawAndCenterText(w, ['Please review instructions\n\n'...
                 'Please click a mouse button to advance'],1)
             
             drawAndCenterText(w,['\nOn each trial, you will feel 2 vibrations, one after the other. \n'...
@@ -130,7 +130,7 @@ function frequencyDiscrimExperiment(exptdesign)
            trialOutput(iBlock).stimOneDuration(iTrial)        = stimulusOneEnd - stimulusOneOnset;
            trialOutput(iBlock).stimulusTwoOnset(iTrial)       = stimulusTwoOnset;
            trialOutput(iBlock).stimulusTwoEnd(iTrial)         = stimulusTwoEnd;
-           trialOutput(iBlock).stimTwoDuration(iTrial)        = stimulusEnd2 - stimulusTwoOnset;
+           trialOutput(iBlock).stimTwoDuration(iTrial)        = stimulusTwoEnd - stimulusTwoOnset;
            
            %tell subject how they did on last block
            if iTrial==exptdesign.numTrialsPerSession && iBlock < exptdesign.numBlocks
@@ -154,7 +154,7 @@ function frequencyDiscrimExperiment(exptdesign)
         end  
 
         %save the session data in the data directory
-        save(['./data/' exptdesign.number '/' datestr(now, 'yyyymmdd_HHMM') '_' exptdesign.subjectName '_block' num2str(iBlock) '.mat'], 'trialOutput', 'exptdesign');
+        save(['./data/' exptdesign.number '/' datestr(now, 'yyyymmdd_HHMM') '-' exptdesign.subjectName '_block' num2str(iBlock) '.mat'], 'trialOutput', 'exptdesign');
         %save the history data (stimuli, last level passed)
         
         

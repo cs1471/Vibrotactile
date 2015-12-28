@@ -27,6 +27,8 @@ else
 end
 WaitSecs(0.25);
 
+exptdesign.subjectName = name;
+
 %check if the subject has a directory in data.  If not, make it.
 if exist(['./data/' number],'dir')
 else
