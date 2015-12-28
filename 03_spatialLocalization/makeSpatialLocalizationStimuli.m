@@ -4,7 +4,7 @@ frequency = [f1(2) f1(20)];
 
 response = input('\n\nEnter Response Profile: \n\n','s');
 
-if response == 0
+if response == '0'
     channels = [1 1 3 3 3 5 5 5 5 13 13 11 11 11 9 9 9 9; 
                 3 5 5 1 9 1 3 9 11 9 11 9 13 5 13 11 5 3];
 else        
@@ -26,7 +26,7 @@ same = [repmat(frequency,1,18);
 stimuli = [different,same];
 stimuli = repmat(stimuli,1,2); 
 
-if response == 0
+if response == '0'
     % populate trial structure with 2 instances of the same stimulus
     save ('spatialLocalizationStimuli_0.mat','stimuli')
 else

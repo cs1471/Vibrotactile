@@ -8,18 +8,22 @@ input('\n\nIs white noise playing? Hit Enter when "Yes."\n');
 input('\n\nDoes participant have ear plugs? Hit Enter when "Yes."\n')
 
 %get subject info
-name = input('\n\nEnter Subject NUMBER:\n\n','s');
-number=name;
-exptdesign.subjectName=number;
+number = input('\n\nEnter Subject NUMBER:\n\n','s');
 exptdesign.number=number;
+
+%pre/post time point
 preOrPostTrain = input('\n\nIs this pre or post-training? Enter 1 for pre-training, 2 for post-training:\n\n','s');
 exptdesign.preOrPostTrain = preOrPostTrain; % 1 for pre, 2 for post
+
+%response profile
 response = input('\n\nPlease enter the response profile\n\n');
 exptdesign.response = response;
-if isempty(name)
-    name = ['MR000'];
+exptdesign.responseTime = 1.5;
+
+if isempty(number)
+    name = 'MR000';
 else
-    name = ['MR' name];
+    name = ['MR' number];
 end
 WaitSecs(0.25);
 %check if the subject has a directory in data.  If not, make it.
@@ -28,12 +32,12 @@ else
     mkdir(['./data/' number])
 end
 
-exptdesign.numBlocks = 7;              % number of blocks
-exptdesign.numTrialsPerSession = 144;
+exptdesign.subjectName = name;
 
-exptdesign.refresh = 0.016679454248257; 
+exptdesign.numBlocks = 7;              % number of blocks
+exptdesign.numTrialsPerSession = 144; 
 
 exptdesign.fixationImage = 'imgsscaled/fixation.bmp';  % image for the fixation cross
 exptdesign.imageDirectory = 'imgsscaled/';
 
-spatialLocalizationExperiment(name,exptdesign);
+spatialLocalizationExperiment(exptdesign);
