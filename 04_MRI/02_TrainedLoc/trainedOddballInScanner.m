@@ -1,7 +1,7 @@
 % get subject info
 exptdesign.debugmode = 0; % does not work for now. Keep commented out.
 if exptdesign.debugmode
-    number = '0000'
+    number = '0000';
     WARN = input('YOU ARE IN DEBUG MODE. ARE YOU SURE THIS IS RIGHT?');
 else
     number = input('\n\nEnter Subject ID:\n\n','s');
@@ -24,9 +24,8 @@ end
 exptdesign.subjectName = name;
 
 %Trial/Block/Run lengths
-exptdesign.iBlocks = 24;              
+exptdesign.numBlocks = 24;              
 exptdesign.numTrialsPerSession = 6;    
-exptdesign.refresh = 0.016679454248257;
 exptdesign.numRuns = 6;
 
 %fixation location/duration

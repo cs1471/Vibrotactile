@@ -1,17 +1,13 @@
-% Automaticity
+
 function trialOutput = trainedOddballExperimentInScanner(name,exptdesign)
 % dbstop if error;
 try
 %     dbstop if error;
-    % following codes should be used when you are getting key presses using
-    % fast routines like kbcheck.
     KbName('UnifyKeyNames');
     Priority(1)
 
     %settings so that Psychtoolbox doesn't display annoying warnings--DON'T CHANGE
     oldLevel = Screen('Preference', 'VisualDebugLevel', 1);
-    %     oldEnableFlag = Screen('Preference', 'SuppressAllWarnings', 1);
-    %     warning offc
     HideCursor;
 
     WaitSecs(1); % make sure it is loaded into memory;
@@ -28,10 +24,6 @@ try
 %     [w windowRect] = Screen('OpenWindow', screenNumber,[128 128 128], [0 0 800 800]); %for debugging
     white = WhiteIndex(w); % pixel value for white
     black = BlackIndex(w); % pixel value for black
-    
-    %  calculate the slack allowed during a flip interval
-    refresh = Screen('GetFlipInterval',w);
-    slack = refresh/2;
 
     % Select specific text font, style and size, unless we're on Linux
     % where this combo is not available:
@@ -84,7 +76,7 @@ try
     else
         %checks for in between runs so that experminter can control run
         %start
-        responseMapping=exptdesign.responseKeyChange;
+        responseMapping = exptdesign.responseKeyChange;
         drawAndCenterText(w,'Hit Enter to Continue...',1);
         exptdesign.scanStart = GetSecs;
     end
@@ -102,19 +94,18 @@ try
    response = exptdesign.response;
 
     %load training stimuli
-%     [stimuliShuffled, oddball] = makeStimuli(response);
     load(['stimuliAllRunsRP' int2str(response) '.mat']);
     stimuli = stimuliAllRuns{runCounter};
     
     trialCounter = 1;
-    for iBlock=1:size(stimuli,1)%how many blocks to run this training session
+    for iBlock=1:numBlocks %how many blocks to run this training session
         
         for i = 1:size(stimuli,2)
             stimuliBlock{i} = stimuli{iBlock,i};
         end
         
         %iterate over trials
-        for iTrial=1:size(stimuli,2)
+        for iTrial=1:numTrialsPerSession
             %initialize variable 
             evt=1;
             
@@ -125,7 +116,7 @@ try
            
            %draw fixation
            Screen('DrawTexture', w, fixationTexture);
-           [FixationVBLTimestamp FixationOnsetTime FixationFlipTimestamp FixationMissed] = Screen('Flip',w, exptdesign.scanStart + 10*(iBlock) + 1*(trialCounter-1)) 
+           [FixationVBLTimestamp, FixationOnsetTime, FixationFlipTimestamp, FixationMissed] = Screen('Flip',w, exptdesign.scanStart + 10*(iBlock) + 1*(trialCounter-1)); 
            
            %call function that generates stimuli for driver box
            if trialCounter == 1
@@ -163,9 +154,7 @@ try
            WaitSecs(waitTime - stimLoadTime);
            
            % Load stimuli
-           if trialCounter ~= 1
-            [stimLoadTime] = loadStimuli(stimuli(:,iTrial));
-           end
+           [stimLoadTime] = loadStimuli(stimuli(:,iTrial+1));
            
            if length(stimuliBlock{1,iTrial}(1,:)) > 1
                 correctResponse = 1;
@@ -204,13 +193,8 @@ try
     %		END
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     
-    %  Write the trial specific data to the output file.
-    tic;
-     %save the session data in the data directory
-        save([exptdesign.saveDir '/' name '_block' num2str(iBlock) '.run' num2str(exptdesign.iRuns) '.mat'], 'trialOutput', 'exptdesign');
-    toc;
-
-    
+    %save the session data in the data directory
+    save([exptdesign.saveDir '/' name '_block' num2str(iBlock) '.run' num2str(exptdesign.iRuns) '.mat'], 'trialOutput', 'exptdesign');
     
     % End of experiment, close window:
     Screen('CloseAll');
@@ -259,12 +243,11 @@ end
 function [loadTime] = loadStimuli(stimuliBlock, iTrial)
 
      if size(stimuliBlock{iTrial},2) > 1
-        constructOddStimuli(stimuliBlock, iTrial)
+        loadTime = constructOddStimuli(stimuliBlock, iTrial);
      else
          
         f = stimuliBlock{1,iTrial}(1:2,:);
         p = stimuliBlock{1,iTrial}(3:4,:);
-
 
         stim = {...
             {'fixed',f(1),1,300},...
@@ -277,10 +260,11 @@ function [loadTime] = loadStimuli(stimuliBlock, iTrial)
         startTime = tic;
         stimGenPTB('load',s,t);
         loadTime = toc(startTime);
+        
     end
 end
 
-function constructOddStimuli(stimuliBlock, iTrial)
+function [loadTime] = constructOddStimuli(stimuliBlock, iTrial)
     f = stimuliBlock{1,iTrial}(1,:);
     p = stimuliBlock{1,iTrial}(2,:);
     
@@ -295,5 +279,8 @@ function constructOddStimuli(stimuliBlock, iTrial)
 
     [t,s]=buildTSM_nomap(stim);    
        
+    startTime = tic;
     stimGenPTB('load',s,t);
+    loadTime = toc(startTime);
+    
 end

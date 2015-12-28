@@ -197,11 +197,13 @@ try
            
            trialCounter = trialCounter + 1;
            
+           WaitSecs(waitTime-stimLoadTime)
+           
            % Load stimuli
            if trialCounter ~= 1
-            [stimLoadTime] = loadStimuli(stimuli(:,iTrial));
+            [stimLoadTime] = loadStimuli(stimuli(:,iTrial+1));
            end
-           WaitSecs(waitTime-stimLoadTime)
+           
            
            % Record parameters for the trial and block
            trialOutput(iBlock,1).sResp(iTrial)                 = sResp;

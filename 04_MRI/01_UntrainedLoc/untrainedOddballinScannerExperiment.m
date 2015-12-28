@@ -30,10 +30,6 @@ try
 %     [w windowRect] = Screen('OpenWindow', screenNumber,[128 128 128], [0 0 200 200]); %for debugging
     white = WhiteIndex(w); % pixel value for white
     black = BlackIndex(w); % pixel value for black
-    
-    %  calculate the slack allowed during a flip interval
-    refresh = Screen('GetFlipInterval',w);
-    slack = refresh/2;
 
     % Select specific text font, style and size, unless we're on Linux
     % where this combo is not available:
@@ -107,14 +103,14 @@ try
     stimuli = stimuliAllRuns{runCounter};
     
     trialCounter = 1;
-    for iBlock=1:size(stimuli,1)%how many blocks to run this training session
+    for iBlock=1:numBlocks %how many blocks to run this training session
         
         for i = 1:size(stimuli,2)
             stimuliBlock{i} = stimuli{iBlock,i};
         end
         
         %iterate over trials
-        for iTrial=1:size(stimuli,2)
+        for iTrial=1:numTrialsPerSession
             %initialize variable 
             evt=1;
             
@@ -162,7 +158,7 @@ try
            
            % Load stimuli
            if trialCounter ~= 1
-            [stimLoadTime] = loadStimuli(stimuli(:,iTrial));
+            [stimLoadTime] = loadStimuli(stimuli(:,iTrial+1));
            end
            
            if length(stimuliBlock{1,iTrial}(1,:)) > 1
@@ -256,7 +252,7 @@ function [loadTime] = loadStimuli(stimuliBlock,iTrial)
      p = stimuliBlock{1,iTrial}(2,:);
 
     if length(f) > 1 
-        constructOddStimuli(stimuliBlock, iTrial)
+        loadTime = constructOddStimuli(stimuliBlock, iTrial);
     else
         stim = {...
             {'fixed',f,1,300},...
@@ -271,7 +267,7 @@ function [loadTime] = loadStimuli(stimuliBlock,iTrial)
     end
 end
 
-function constructOddStimuli(stimuliBlock, iTrial)
+function [loadTime] = constructOddStimuli(stimuliBlock, iTrial)
     f = stimuliBlock{1,iTrial}(1,:);
     p = stimuliBlock{1,iTrial}(2,:);
     
@@ -285,11 +281,8 @@ function constructOddStimuli(stimuliBlock, iTrial)
            };
 
     [t,s]=buildTSM_nomap(stim);    
-       
-    stimGenPTB('load',s,t);
-    rtn=-1;
-    while rtn==-1
-        rtn = stimGenPTB('start');
-    end
     
+    startTime = tic;
+    stimGenPTB('load',s,t);
+    loadTime = toc(startTime);
 end
