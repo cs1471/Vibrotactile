@@ -133,16 +133,9 @@ function frequencyDiscrimExperiment(exptdesign)
            trialOutput(iBlock).stimTwoDuration(iTrial)        = stimulusTwoEnd - stimulusTwoOnset;
            trialOutput(iBlock).stimOneLoadStart(iTrial)       = stimOneLoadStart;
            trialOutput(iBlock).stimOneLoadEnd(iTrial)         = stimOneLoadEnd;
-           trialOutput(iBlock).stimOneLoadDuration(iTrial)    = stimOneLoadEnd - stimOneLoadStart;
+           trialOutput(iBlock).stimOneLoadDuration(iTrial)    = stimOneLoadEnd - ;
            trialOutput(iBlock).stimOneStartStart(iTrial)      = stimOneStartStart; 
            trialOutput(iBlock).stimOneStartEnd(iTrial)        = stimOneStartEnd;
-           trialOutput(iBlock).stimOneStartDuration(iTrial)   = stimOneStartEnd - stimOneStartStart;
-           trialOutput(iBlock).stimTwoLoadStart(iTrial)       = stimTwoLoadStart;
-           trialOutput(iBlock).stimTwoLoadEnd(iTrial)         = stimTwoLoadEnd;
-           trialOutput(iBlock).stimTwoLoadDuration(iTrial)    = stimTwoLoadEnd - stimTwoLoadStart;
-           trialOutput(iBlock).stimTwoStartStart(iTrial)      = stimTwoStartStart; 
-           trialOutput(iBlock).stimTwoStartEnd(iTrial)        = stimTwoStartEnd;
-           trialOutput(iBlock).stimTwoStartDuration(iTrial)   = stimTwoStartEnd - stimTwoStartStart;
            
            %tell subject how they did on last block
            if iTrial == exptdesign.numTrialsPerSession && iBlock < exptdesign.numBlocks
