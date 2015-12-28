@@ -65,23 +65,20 @@ function frequencyDiscrimExperiment(exptdesign)
         for iTrial=1:exptdesign.numTrialsPerSession
            Screen('DrawTexture', w, fixationTexture);
                [FixationVBLTimestamp, FixationOnsetTime, FixationFlipTimestamp, FixationMissed] = Screen('Flip',w);
+           
+           %pre-load stimulus 
+            [stimLoadTime] = loadStimuli(stimuli(:,iTrial));
                
            %initial wait before stim presentation    
            wait1 = ll + (ul-ll).*rand(1);
            WaitSecs(wait1);
            
-           %stimulus 1 presentation with time parameters
-           stimulusOneOnset = GetSecs;
-           [stimOneLoadStart, stimOneLoadEnd,stimOneStartStart, stimOneStartEnd] = constructStimuli(stimuli(1:2,iTrial)); % present stim 1
-           stimulusOneEnd = GetSecs;
-       
-           %interstimulus interval
-           WaitSecs(interStimulusInterval);
-           
-           %stimulus 2 presentation with time parameters
-           stimulusTwoOnset = GetSecs;
-           [stimTwoLoadStart, stimTwoLoadEnd,stimTwoStartStart, stimTwoStartEnd] = constructStimuli(stimuli(3:4,iTrial)); % present stim 2
-           stimulusTwoEnd = GetSecs;
+           stimOnset = GetSecs;
+           rtn=-1;
+           while rtn==-1
+               rtn=stimGenPTB('start');
+           end
+           stimFinished = GetSecs;
            
            drawAndCenterText(w,'Were the vibrations the same or different? \n', 0);
            
@@ -110,7 +107,7 @@ function frequencyDiscrimExperiment(exptdesign)
            else
                accuracy=0;
            end
-           
+                    
            %record parameters for the trial
            trialOutput(iBlock).FixationVBLTimestamp(iTrial)   = FixationVBLTimestamp;
            trialOutput(iBlock).FixationOnsetTime(iTrial)      = FixationOnsetTime;
@@ -125,24 +122,10 @@ function frequencyDiscrimExperiment(exptdesign)
            trialOutput(iBlock).correctResponse(iTrial)        = correctResponse;
            trialOutput(iBlock).accuracy(iTrial)               = accuracy;
            trialOutput(iBlock).wait1(iTrial)                  = wait1;
-           trialOutput(iBlock).stimulusOneOnset(iTrial)       = stimulusOneOnset;
-           trialOutput(iBlock).stimulusOneEnd(iTrial)         = stimulusOneEnd;
-           trialOutput(iBlock).stimOneDuration(iTrial)        = stimulusOneEnd - stimulusOneOnset;
-           trialOutput(iBlock).stimulusTwoOnset(iTrial)       = stimulusTwoOnset;
-           trialOutput(iBlock).stimulusTwoEnd(iTrial)         = stimulusTwoEnd;
-           trialOutput(iBlock).stimTwoDuration(iTrial)        = stimulusTwoEnd - stimulusTwoOnset;
-           trialOutput(iBlock).stimOneLoadStart(iTrial)       = stimOneLoadStart;
-           trialOutput(iBlock).stimOneLoadEnd(iTrial)         = stimOneLoadEnd;
-           trialOutput(iBlock).stimOneLoadDuration(iTrial)    = stimOneLoadEnd - stimOneLoadStart;
-           trialOutput(iBlock).stimOneStartStart(iTrial)      = stimOneStartStart; 
-           trialOutput(iBlock).stimOneStartEnd(iTrial)        = stimOneStartEnd;
-           trialOutput(iBlock).stimOneStartDuration(iTrial)   = stimOneStartEnd - stimOneStartStart;
-           trialOutput(iBlock).stimTwoLoadStart(iTrial)       = stimTwoLoadStart;
-           trialOutput(iBlock).stimTwoLoadEnd(iTrial)         = stimTwoLoadEnd;
-           trialOutput(iBlock).stimTwoLoadDuration(iTrial)    = stimTwoLoadEnd - stimTwoLoadStart;
-           trialOutput(iBlock).stimTwoStartStart(iTrial)      = stimTwoStartStart; 
-           trialOutput(iBlock).stimTwoStartEnd(iTrial)        = stimTwoStartEnd;
-           trialOutput(iBlock).stimTwoStartDuration(iTrial)   = stimTwoStartEnd - stimTwoStartStart;
+           trialOutput(iBlock).stimulusOnset(iTrial)          = stimOnset;
+           trialOutput(iBlock).stimulusLoadTime(iTrial)       = stimLoadTime;
+           trialOutput(iBlock).stimulusFinished(iTrial)       = stimFinished;
+           trialOutput(iBlock).stimulusDuration(iTrial)       = stimFinished - stimOnset;
            
            %tell subject how they did on last block
            if iTrial == exptdesign.numTrialsPerSession && iBlock < exptdesign.numBlocks
@@ -218,25 +201,20 @@ function numericalanswer = getResponseMouse(waitTime)
   end
 end
 
-function [stimLoadStart, stimLoadEnd,stimStartStart, stimStartEnd] = constructStimuli(stimulus)
-    f = stimulus(1);
-    p = stimulus(2);
+function [stimLoadTime] = loadStimuli(stimuli)
+    f = [stimuli(1), stimuli(3)];
+    p = [stimuli(2), stimuli(4)];
 
     stim = {...
-        {'fixed',f,1,300},...
-        {'fixchan',p},...
+        {'fixed',f(1),1,300},...
+        {'fixchan',p(1)},...
+        {'fixed',f(2),700,1000},...
+        {'fixchan',p(2)},...
         };
 
     [t,s]=buildTSM_nomap(stim);
     
-    stimLoadStart = GetSecs;
+    startTime = tic;
     stimGenPTB('load',s,t);
-    stimLoadEnd = GetSecs;
-    rtn=-1;
-    
-    stimStartStart = GetSecs;
-    while rtn==-1
-        rtn=stimGenPTB('start');
-    end
-    stimStartEnd = GetSecs;
+    stimLoadTime = toc(startTime);
 end
