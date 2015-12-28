@@ -103,7 +103,6 @@ try
    response = exptdesign.response;
 
     %load training stimuli
-%     [stimuliShuffled, oddball] = makeStimuli(response);
     load(['stimuliAllRunsRP' int2str(response) '.mat']);
     stimuli = stimuliAllRuns{runCounter};
     
@@ -126,11 +125,18 @@ try
            
            %draw fixation
            Screen('DrawTexture', w, fixationTexture);
-           [FixationVBLTimestamp FixationOnsetTime FixationFlipTimestamp FixationMissed] = Screen('Flip',w, exptdesign.scanStart + 10*(iBlock) + 1*(trialCounter-1))
+           [FixationVBLTimestamp, FixationOnsetTime, FixationFlipTimestamp, FixationMissed] = Screen('Flip',w, exptdesign.scanStart + 10*(iBlock) + 1*(trialCounter-1));
            
            %call function that generates stimuli for driver box
+           if trialCounter == 1
+               stimLoadTime = loadStimuli(stimuliBlock, iTrial);
+           end
+           
            stimulusOnset = GetSecs;
-           constructStimuli(stimuliBlock, iTrial);
+           rtn=-1;
+           while rtn==-1
+               rtn = stimGenPTB('start');
+           end
            stimulusFinished = GetSecs;
            
            responseStartTime=GetSecs;
@@ -149,27 +155,27 @@ try
                %record end time of response
                responseFinishedTime=evt.time;
                %trouble = evt.trouble;
-                waitSecs(exptdesign.responseDuration-responseFinishedTime);
+                waitTime = exptdesign.responseDuration-responseFinishedTime;
+           end
+           
+            WaitSecs(waitTime - stimLoadTime);
+           
+           % Load stimuli
+           if trialCounter ~= 1
+            [stimLoadTime] = loadStimuli(stimuli(:,iTrial));
            end
            
            if length(stimuliBlock{1,iTrial}(1,:)) > 1
                 correctResponse = 1;
            else
                 correctResponse = 0;
-           end
-           
-           % cross compare oddball position
-%            if correctResponse ~= metaData{runCounter}.oddballPosition(iBlock)
-%                Error = MException('Error:Mismatch','Oddball position mismatch');
-%                throw(Error);
-%            end
-               
+           end 
            
            %record parameters for the trial and block
            trialOutput(iBlock,1).metaData{runCounter} = metaData;
            trialOutput(iBlock,1).sResp(iTrial) = sResp;
            trialOutput(iBlock,1).correctResponse(iTrial) = correctResponse;
-%            trialOutput(iBlock,1).trouble(iTrial)=trouble;
+           trialOutput(iBlock,1).stimulusLoadTime(iTrial)=stimLoadTime;
            trialOutput(iBlock,1).stimulusOnset(iTrial)=stimulusOnset;
            trialOutput(iBlock,1).stimulusDuration(iTrial)=stimulusFinished-stimulusOnset;
            trialOutput(iBlock,1).stimulusFinished(iTrial)=stimulusFinished;
@@ -245,7 +251,7 @@ function drawAndCenterText(window,message, wait, time)
     Screen('Flip',window, time);
 end
 
-function constructStimuli(stimuliBlock,iTrial)
+function [loadTime] = loadStimuli(stimuliBlock,iTrial)
      f = stimuliBlock{1,iTrial}(1,:);
      p = stimuliBlock{1,iTrial}(2,:);
 
@@ -259,11 +265,9 @@ function constructStimuli(stimuliBlock,iTrial)
         
         [t,s]=buildTSM_nomap(stim);
         
+        startTime = tic;
         stimGenPTB('load',s,t);
-        rtn=-1;
-        while rtn==-1
-            rtn=stimGenPTB('start');
-        end
+        loadTime = toc(startTime);
     end
 end
 

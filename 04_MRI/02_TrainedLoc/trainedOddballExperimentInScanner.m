@@ -128,8 +128,15 @@ try
            [FixationVBLTimestamp FixationOnsetTime FixationFlipTimestamp FixationMissed] = Screen('Flip',w, exptdesign.scanStart + 10*(iBlock) + 1*(trialCounter-1)) 
            
            %call function that generates stimuli for driver box
+           if trialCounter == 1
+               stimLoadTime = loadStimuli(stimuliBlock, iTrial);
+           end
+           
            stimulusOnset = GetSecs;
-           constructStimuli(stimuliBlock, iTrial);
+           rtn=-1;
+           while rtn==-1
+               rtn = stimGenPTB('start');
+           end
            stimulusFinished = GetSecs;
            
            responseStartTime=GetSecs;
@@ -142,15 +149,23 @@ try
            responseFinishedTime = 0;
            sResp=0;
            
+           %inter trial time unless there is a response
+           waitTime = exptdesign.responseDuration;
+           
            %sResp ==1 if button pressed
            if ~isempty(evt)
                sResp = 1;
                %record end time of response
                responseFinishedTime=evt.time;
-               %trouble = evt.trouble;
-               waitSecs(exptdesign.responseDuration-responseFinishedTime);
+               waitTime = exptdesign.responseDuration-responseFinishedTime;
            end
-          
+           
+           WaitSecs(waitTime - stimLoadTime);
+           
+           % Load stimuli
+           if trialCounter ~= 1
+            [stimLoadTime] = loadStimuli(stimuli(:,iTrial));
+           end
            
            if length(stimuliBlock{1,iTrial}(1,:)) > 1
                 correctResponse = 1;
@@ -158,28 +173,22 @@ try
                 correctResponse = 0;
            end
            
-           % cross compare oddball position
-%            if correctResponse ~= metaData{runCounter}.oddballPosition(iBlock)
-%                Error = MException('Error:Mismatch','Oddball position mismatch');
-%                throw(Error);
-%            end
-               
            %record parameters for the trial and block           
-           trialOutput(iBlock,1).metaData{runCounter} = metaData;
-           trialOutput(iBlock,1).sResp(iTrial) = sResp;
-           trialOutput(iBlock,1).correctResponse(iTrial) = correctResponse;
-           %trialOutput(iBlock,1).trouble(iTrial)=trouble;
-           trialOutput(iBlock,1).stimulusOnset(iTrial)=stimulusOnset;
-           trialOutput(iBlock,1).stimulusDuration(iTrial)=stimulusFinished-stimulusOnset;
-           trialOutput(iBlock,1).stimulusFinished(iTrial)=stimulusFinished;
-           trialOutput(iBlock,1).responseStartTime(iTrial)=responseStartTime;
-           trialOutput(iBlock,1).responseFinishedTime(iTrial)=responseFinishedTime;
-           trialOutput(iBlock,1).RT(iTrial)=responseFinishedTime-responseStartTime;
-           trialOutput(iBlock,1).stimuli = stimuliBlock;
-           trialOutput(iBlock,1).FixationVBLTimestamp(iTrial)=FixationVBLTimestamp;
-           trialOutput(iBlock,1).FixationOnsetTime(iTrial)=FixationOnsetTime;
-           trialOutput(iBlock,1).FixationFlipTimestamp(iTrial)=FixationFlipTimestamp;
-           trialOutput(iBlock,1).FixationMissed(iTrial)=FixationMissed;
+           trialOutput(iBlock,1).metaData{runCounter}          = metaData;
+           trialOutput(iBlock,1).sResp(iTrial)                 = sResp;
+           trialOutput(iBlock,1).correctResponse(iTrial)       = correctResponse;
+           trialOutput(iBlock,1).stimulusOnset(iTrial)         = stimulusOnset;
+           trialOutput(iBlock,1).stimulusDuration(iTrial)      = stimulusFinished-stimulusOnset;
+           trialOutput(iBlock,1).stimulusFinished(iTrial)      = stimulusFinished;
+           trialOutput(iBlock,1).stimulusLoadTime(iTrial)      = stimLoadTime;
+           trialOutput(iBlock,1).responseStartTime(iTrial)     = responseStartTime;
+           trialOutput(iBlock,1).responseFinishedTime(iTrial)  = responseFinishedTime;
+           trialOutput(iBlock,1).RT(iTrial)                    = responseFinishedTime-responseStartTime;
+           trialOutput(iBlock,1).stimuli                       = stimuliBlock;
+           trialOutput(iBlock,1).FixationVBLTimestamp(iTrial)  = FixationVBLTimestamp;
+           trialOutput(iBlock,1).FixationOnsetTime(iTrial)     = FixationOnsetTime;
+           trialOutput(iBlock,1).FixationFlipTimestamp(iTrial) = FixationFlipTimestamp;
+           trialOutput(iBlock,1).FixationMissed(iTrial)        = FixationMissed;
            
            trialCounter = trialCounter + 1;
         end
@@ -247,7 +256,7 @@ function drawAndCenterText(window,message,wait, time)
 %     if wait, KbWait(); end
 end
 
-function constructStimuli(stimuliBlock, iTrial)
+function [loadTime] = loadStimuli(stimuliBlock, iTrial)
 
      if size(stimuliBlock{iTrial},2) > 1
         constructOddStimuli(stimuliBlock, iTrial)
@@ -265,12 +274,9 @@ function constructStimuli(stimuliBlock, iTrial)
             };
         
         [t,s]=buildTSM_nomap(stim);
-        
+        startTime = tic;
         stimGenPTB('load',s,t);
-        rtn=-1;
-        while rtn==-1
-            rtn=stimGenPTB('start');
-        end
+        loadTime = toc(startTime);
     end
 end
 
@@ -290,9 +296,4 @@ function constructOddStimuli(stimuliBlock, iTrial)
     [t,s]=buildTSM_nomap(stim);    
        
     stimGenPTB('load',s,t);
-    rtn=-1;
-    while rtn==-1
-        rtn = stimGenPTB('start');
-    end
-    
 end
