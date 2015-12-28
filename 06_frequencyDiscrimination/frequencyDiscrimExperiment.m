@@ -117,7 +117,7 @@ function frequencyDiscrimExperiment(exptdesign)
            trialOutput(iBlock).FixationFlipTimestamp(iTrial)  = FixationFlipTimestamp;
            trialOutput(iBlock).FixationMissed(iTrial)         = FixationMissed;
            trialOutput(iBlock).order                          = order;
-           trialOutput(iBlock).stimuli(iTrial)                = stimuli;
+           trialOutput(iBlock).stimuli                        = stimuli;
            trialOutput(iBlock).responseStartTime(iTrial)      = responseStartTime;
            trialOutput(iBlock).responseFinishedTime(iTrial)   = responseFinishedTime;
            trialOutput(iBlock).RT(iTrial)                     = responseFinishedTime-responseStartTime;
