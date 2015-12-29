@@ -118,7 +118,7 @@ try
     
     trialCounter = 1;
     for iBlock = 2:exptdesign.numBlocks % How many blocks to run this training session 
-        
+        blockStart = GetSecs;
         % Iterate over trials
         for iTrial=1:exptdesign.numTrialsPerSession
             % Initialize variable 
@@ -222,6 +222,7 @@ try
            trialOutput(iBlock,1).stimLoadTime(iTrial)          = stimLoadTime;
            trialOutput(iBlock,1).stimStartTime(iTrial)         = stimStartTime;
            trialOutput(iBlock,1).waitTime(iTrial)              = waitTime;
+           trialOutput(iBlock,1).blockStart                    = blockStart;
            
            % Get trial duration parameters on each trial
            trialEndTime = GetSecs;

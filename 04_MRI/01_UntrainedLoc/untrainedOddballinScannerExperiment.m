@@ -104,7 +104,7 @@ try
     
     trialCounter = 1;
     for iBlock=1:numBlocks %how many blocks to run this training session
-        
+        blockStart = GetSecs;
         for i = 1:size(stimuli,2)
             stimuliBlock{i} = stimuli{iBlock,i};
         end
@@ -168,21 +168,22 @@ try
            end 
            
            %record parameters for the trial and block
-           trialOutput(iBlock,1).metaData{runCounter} = metaData;
-           trialOutput(iBlock,1).sResp(iTrial) = sResp;
-           trialOutput(iBlock,1).correctResponse(iTrial) = correctResponse;
-           trialOutput(iBlock,1).stimulusLoadTime(iTrial)=stimLoadTime;
-           trialOutput(iBlock,1).stimulusOnset(iTrial)=stimulusOnset;
-           trialOutput(iBlock,1).stimulusDuration(iTrial)=stimulusFinished-stimulusOnset;
-           trialOutput(iBlock,1).stimulusFinished(iTrial)=stimulusFinished;
-           trialOutput(iBlock,1).responseStartTime(iTrial)=responseStartTime;
-           trialOutput(iBlock,1).responseFinishedTime(iTrial)=responseFinishedTime;
-           trialOutput(iBlock,1).RT(iTrial)=responseFinishedTime-responseStartTime;
-           trialOutput(iBlock,1).stimuli = stimuliBlock;
-           trialOutput(iBlock,1).FixationVBLTimestamp(iTrial)=FixationVBLTimestamp;
-           trialOutput(iBlock,1).FixationOnsetTime(iTrial)=FixationOnsetTime;
-           trialOutput(iBlock,1).FixationFlipTimestamp(iTrial)=FixationFlipTimestamp;
-           trialOutput(iBlock,1).FixationMissed(iTrial)=FixationMissed;
+           trialOutput(iBlock,1).metaData{runCounter}          = metaData;
+           trialOutput(iBlock,1).sResp(iTrial)                 = sResp;
+           trialOutput(iBlock,1).correctResponse(iTrial)       = correctResponse;
+           trialOutput(iBlock,1).stimulusLoadTime(iTrial)      = stimLoadTime;
+           trialOutput(iBlock,1).stimulusOnset(iTrial)         = stimulusOnset;
+           trialOutput(iBlock,1).stimulusDuration(iTrial)      = stimulusFinished-stimulusOnset;
+           trialOutput(iBlock,1).stimulusFinished(iTrial)      = stimulusFinished;
+           trialOutput(iBlock,1).responseStartTime(iTrial)     = responseStartTime;
+           trialOutput(iBlock,1).responseFinishedTime(iTrial)  = responseFinishedTime;
+           trialOutput(iBlock,1).RT(iTrial)                    = responseFinishedTime-responseStartTime;
+           trialOutput(iBlock,1).stimuli                       = stimuliBlock;
+           trialOutput(iBlock,1).FixationVBLTimestamp(iTrial)  = FixationVBLTimestamp;
+           trialOutput(iBlock,1).FixationOnsetTime(iTrial)     = FixationOnsetTime;
+           trialOutput(iBlock,1).FixationFlipTimestamp(iTrial) = FixationFlipTimestamp;
+           trialOutput(iBlock,1).FixationMissed(iTrial)        = FixationMissed;
+           trialOutput(iBlock,1).blockStart                    = blockStart;
            
            trialCounter = trialCounter + 1;
         end

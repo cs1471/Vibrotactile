@@ -99,7 +99,7 @@ try
     
     trialCounter = 1;
     for iBlock=1:numBlocks %how many blocks to run this training session
-        
+        blockStart = GetSecs;
         for i = 1:size(stimuli,2)
             stimuliBlock{i} = stimuli{iBlock,i};
         end
@@ -178,6 +178,7 @@ try
            trialOutput(iBlock,1).FixationOnsetTime(iTrial)     = FixationOnsetTime;
            trialOutput(iBlock,1).FixationFlipTimestamp(iTrial) = FixationFlipTimestamp;
            trialOutput(iBlock,1).FixationMissed(iTrial)        = FixationMissed;
+           trialOutput(iBlock,1).blockStart                    = blockStart;
            
            trialCounter = trialCounter + 1;
         end

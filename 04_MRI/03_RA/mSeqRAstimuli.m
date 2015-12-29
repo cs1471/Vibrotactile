@@ -19,9 +19,9 @@ s2=[9 10 11 12 13 14 10 9 12 11 14 13];
 stimulator=[s1; s2]; 
 
 % define the stimuli
-m0 = [repmat(frequency(:,1),1,41) repmat(frequency(:,2),1,10) repmat(frequency(:,3),1,10) repmat(frequency(:,4),1,40);
+m0 = [repmat(frequency(:,1),1,40) repmat(frequency(:,2),1,10) repmat(frequency(:,3),1,10) repmat(frequency(:,4),1,41);
       repmat(stimulator,1,8), stimulator(:,8:12);
-      repmat(frequency(:,1),1,41) repmat(frequency(:,2),1,10) repmat(frequency(:,3),1,10) repmat(frequency(:,4),1,40);
+      repmat(frequency(:,1),1,40) repmat(frequency(:,2),1,10) repmat(frequency(:,3),1,10) repmat(frequency(:,4),1,41);
       repmat(stimulator,1,8), stimulator(:,8:12)];
 m3w = [repmat(frequency(:,1),1,51) repmat(frequency(:,4),1,51);
        repmat(stimulator,1,8), stimulator(:,2:6), stimulator(:,12);
