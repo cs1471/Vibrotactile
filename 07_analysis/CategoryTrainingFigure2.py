@@ -1,10 +1,8 @@
-import numpy as np
-import scipy.io as sio
-from matplotlib import pyplot as plt
 import statistics as stat
 from math import log2
-import json
-import gviz_data_table as gviz
+import plotly as plt
+import numpy as np
+import scipy.io as sio
 
 page_template = """
 <html>
@@ -122,30 +120,31 @@ for i in range(sResp.size):
     m_catBound_accuracy.append(catBound_accuracy)
     m_middleM_accuracy.append(middleM_accuracy)
 
-# for i in range(RT.size):
-print(m_middleM_accuracy[1][1])
-
 n_groups = 3
 accuracy_mean = ((sum(catProto_accuracy)/len(catProto_accuracy)), (sum(middleM_accuracy)/len(middleM_accuracy)), (sum(catBound_accuracy)/len(catBound_accuracy)))
 SEM = (np.std(catProto_accuracy), np.std(middleM_accuracy), np.std(catBound_accuracy))
-fig = plt.subplot()
-index = np.arange(n_groups)
-bar_width = 0.35
-opacity = 1
 
-plt.bar(index, accuracy_mean, alpha=opacity, width = bar_width, color='b')
+#creating data to load into js data table
+description = {"difficulty": ("string", "Difficulty"),
+               "accuracy": ("number", "Accuracy")}
 
-plt.xlabel('Stimuli')
-plt.ylabel('Accuracy')
-plt.title(subjectName + ' Accuracy by Difficulty of Morphs')
-plt.xticks(index+(bar_width), ('Category Prototype Morphs', 'Middle Morphs', 'Category Boundary Morphs'))
-plt.tight_layout()
-plt.grid(b=None, which='major', axis='y')
-saveName = '/Users/courtney/GoogleDrive/Riesenhuber/05_2015_scripts/Vibrotactile/01_CategoryTraining/data/' + subjectName +'/' + subjectName+'_CategoryTrainingAccuracy'
+data = [ {"difficulty": "Category Prototype Accuracy", "accuracy": (accuracy_mean[0])},
+         {"difficulty": "Middle Morph Accuracy", "accuracy": (accuracy_mean[1])},
+         {"difficulty": "Category Boundary Accuracy", "accuracy": (accuracy_mean[2])}]
 
-print('Saving under...'+ saveName)
-plt.savefig(saveName)
-print('done!')
-# plt.plot(accuracy[0],'r--',  accuracy[1],'g--', accuracy[2],'b--')
-# plt.legend('Category Prototype Morphs', 'Middle Morphs', 'Category Boundary Morphs')
-plt.show()
+#loading into the data table
+data_table = gviz.Table(description)
+data_table.LoadData(data)
+
+#creat a javascript code string
+jscode = data_table.ToJSCode("jscode_data",
+                             columns_order=("difficulty","accuracy"),
+                             order_by="difficulty")
+
+#create a json string
+json = data_table.ToJSon(columns_order = ("difficulty", "accuracy"),
+                         order_by = "difficulty")
+
+#put the jscode and json string into the template
+print("Content-type:text/html" + page_template % vars())
+
