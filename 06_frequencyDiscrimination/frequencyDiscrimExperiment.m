@@ -19,7 +19,6 @@ function frequencyDiscrimExperiment(exptdesign)
     fixationTexture=Screen('MakeTexture', w, double(fixationImage));
     
     responseTime = exptdesign.responseTime;
-    interStimulusInterval = exptdesign.interStimulusInterval;
     
     %load training stimuli
     if exptdesign.response == '0'
@@ -53,7 +52,7 @@ function frequencyDiscrimExperiment(exptdesign)
         
         drawAndCenterText(w,['Block #' num2str(iBlock) ' of ' num2str(exptdesign.numBlocks) '\n\n\n\n'...
             'Click the mouse to continue'],1);
-        %WaitSecs(1);
+        blockStart = GetSecs;
         
         %randomize the stimuli for this level
         order=randperm(size(stimuli,2));
@@ -126,6 +125,7 @@ function frequencyDiscrimExperiment(exptdesign)
            trialOutput(iBlock).stimulusLoadTime(iTrial)       = stimLoadTime;
            trialOutput(iBlock).stimulusFinished(iTrial)       = stimFinished;
            trialOutput(iBlock).stimulusDuration(iTrial)       = stimFinished - stimOnset;
+           trialOutput(iBlock).blockStart                     = blockStart;
            
            %tell subject how they did on last block
            if iTrial == exptdesign.numTrialsPerSession && iBlock < exptdesign.numBlocks
