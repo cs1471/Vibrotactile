@@ -57,7 +57,7 @@ function spatialLocalizationExperiment(exptdesign)
         
         drawAndCenterText(w,['Block #' num2str(iBlock) ' of ' num2str(exptdesign.numBlocks) '\n\n\n\n'...
             'Click the mouse to continue'],1);
-        %WaitSecs(1);
+        blockStart = GetSecs;
         
         for iTrial=1:exptdesign.numTrialsPerSession
            Screen('DrawTexture', w, fixationTexture);
@@ -122,6 +122,7 @@ function spatialLocalizationExperiment(exptdesign)
            trialOutput(iBlock).stimulusLoadTime(iTrial)       = stimLoadTime;
            trialOutput(iBlock).stimulusFinished(iTrial)       = stimFinished;
            trialOutput(iBlock).stimulusDuration(iTrial)       = stimFinished - stimOnset;
+           trialOutput(iBlock).blockStart                     = blockStart;
            
            %tell subject how they did on last block
            if iTrial==exptdesign.numTrialsPerSession && iBlock < exptdesign.numBlocks
