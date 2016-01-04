@@ -1,4 +1,4 @@
-function spatialLocalizationExperiment(name,exptdesign)
+function spatialLocalizationExperiment(exptdesign)
 % dbstop if error;
     % spatialLocalization
     % Patrick Malone pmalone333@gmail.com, Courtney Sprouse
@@ -35,7 +35,7 @@ function spatialLocalizationExperiment(name,exptdesign)
         ul=.8;
         
         if mod(iBlock,2)
-            drawAndCenterText(w, ['Please review instructions \n Click the mouse to continue\n'...
+            drawAndCenterText(w, ['Please review instructions \n\n'...
                 'Please click a mouse button to advance'],1)
             
             drawAndCenterText(w,['\n On each trial, you will feel 2 vibrations, one after the other. \n'...
@@ -57,39 +57,45 @@ function spatialLocalizationExperiment(name,exptdesign)
         
         drawAndCenterText(w,['Block #' num2str(iBlock) ' of ' num2str(exptdesign.numBlocks) '\n\n\n\n'...
             'Click the mouse to continue'],1);
-        %WaitSecs(1);
+        blockStart = GetSecs;
         
         for iTrial=1:exptdesign.numTrialsPerSession
            Screen('DrawTexture', w, fixationTexture);
                [FixationVBLTimestamp FixationOnsetTime FixationFlipTimestamp FixationMissed] = Screen('Flip',w);
                
-           wait1 = ll + (ul-ll).*rand(1);
-           wait2 = .4;
-           WaitSecs(wait1);
-           constructStimuli(stimuli(1:2,iTrial)); % present stim 1
-           % copied this wait code from above; 
-           WaitSecs(wait2);
-           constructStimuli(stimuli(3:4,iTrial)); % present stim 2
-           
-            if isequal(stimuli(1:2, iTrial),stimuli(3:4,iTrial))
-               if mod(iBlock,2) % if stimuli same
-                   correctResponse=1;
-               else 
-                   correctResponse=2;
-               end
-           elseif ~isequal(stimuli(1:2, iTrial),stimuli(3:4,iTrial)) 
-               if mod(iBlock,2) % if stimuli different
-                   correctResponse=2;
-               else 
-                   correctResponse=1;
-               end
-            end
+           %pre-load stimulus 
+           [stimLoadTime] = loadStimuli(stimuli(:,iTrial));
             
+           wait1 = ll + (ul-ll).*rand(1);
+           WaitSecs(wait1);
+           
+           %actual stimulus presentation time 
+           stimOnset = GetSecs;
+           rtn=-1;
+           while rtn==-1
+               rtn=stimGenPTB('start');
+           end
+           stimFinished = GetSecs;  
            
            drawAndCenterText(w,'Were the vibrations the same or different? \n',0)
+           
            responseStartTime=GetSecs;
-           sResp=getResponseMouse(1.5);
+           sResp=getResponseMouse(responseTime);
            responseFinishedTime=GetSecs;
+           
+           if isequal(stimuli(1:2, iTrial),stimuli(3:4,iTrial))
+               if mod(iBlock,2) % if stimuli same
+                   correctResponse=1;
+               else
+                   correctResponse=2;
+               end
+           elseif ~isequal(stimuli(1:2, iTrial),stimuli(3:4,iTrial))
+               if mod(iBlock,2) % if stimuli different
+                   correctResponse=2;
+               else
+                   correctResponse=1;
+               end
+           end
           
            %score the answer -- is sResp(iTrial)==correctResponse?
            if sResp==correctResponse
@@ -112,6 +118,11 @@ function spatialLocalizationExperiment(name,exptdesign)
            trialOutput(iBlock).FixationMissed(iTrial)=FixationMissed;
            trialOutput(iBlock).order=order;
            trialOutput(iBlock).stimuli=stimuli;
+           trialOutput(iBlock).stimulusOnset(iTrial)          = stimOnset;
+           trialOutput(iBlock).stimulusLoadTime(iTrial)       = stimLoadTime;
+           trialOutput(iBlock).stimulusFinished(iTrial)       = stimFinished;
+           trialOutput(iBlock).stimulusDuration(iTrial)       = stimFinished - stimOnset;
+           trialOutput(iBlock).blockStart                     = blockStart;
            
            %tell subject how they did on last block
            if iTrial==exptdesign.numTrialsPerSession && iBlock < exptdesign.numBlocks
@@ -128,16 +139,10 @@ function spatialLocalizationExperiment(name,exptdesign)
                %WaitSecs(2);
                Screen('CloseAll')
            end
-           
-           clear correctResponse correctionTexture;
-        end  
-
-        %record parameters for the block
-        %stimuli, order
-        
+        end 
         
         %save the session data in the data directory
-        save(['./data/' exptdesign.number '/' name '_block' num2str(iBlock) '.' num2str(iTrial) '.mat'], 'trialOutput', 'exptdesign');
+        save(['./data/' exptdesign.number '/' exptdesign.subjectName '_block' num2str(iBlock) '.' num2str(iTrial) '.mat'], 'trialOutput', 'exptdesign');
         %save the history data (stimuli, last level passed)
         
         
@@ -192,20 +197,21 @@ function numericalanswer = getResponseMouse(waitTime)
   end
 end
 
-function constructStimuli(stimulus)
-    f = stimulus(2); % LB: changed f = stimulus(1) to f = stimulus(2) and vice-versa for p. Not sure if this is correct. 12/15/2015
-    p = stimulus(1);
+function [stimLoadTime] = loadStimuli(stimuli)
+    f = [stimuli(1), stimuli(3)];
+    p = [stimuli(2), stimuli(4)];
 
     stim = {...
-        {'fixed',f,1,300},...
-        {'fixchan',p},...
+        {'fixed',f(1),1,300},...
+        {'fixchan',p(1)},...
+        {'fixed',f(2),700,1000},...
+        {'fixchan',p(2)},...
         };
 
+    
     [t,s]=buildTSM_nomap(stim);
-
+    
+    startTime = tic;
     stimGenPTB('load',s,t);
-    rtn=-1;
-    while rtn==-1
-        rtn=stimGenPTB('start');
-    end
+    stimLoadTime = toc(startTime);
 end

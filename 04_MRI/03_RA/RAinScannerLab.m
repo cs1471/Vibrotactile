@@ -17,18 +17,18 @@ exptdesign.subjectName = name;
 
 %Trial/Block/Run lengths
 exptdesign.numBlocks = 1;              
-exptdesign.numTrialsPerSession = 240;    
+exptdesign.numTrialsPerSession = 10;    
 exptdesign.refresh = 0.016679454248257;
-exptdesign.numRuns = 1;
+exptdesign.numRuns = 4;
 
 %fixation location/duration         
 exptdesign.fixationImage = 'imgsscaled/fixation.bmp';  
 exptdesign.imageDirectory = 'imgsscaled/';  
 exptdesign.interStimuliDuration = .4;
-
+exptdesign.trialDuration = 4;
 % Decide which response mapping you are using
 exptdesign.response = input('\n\nEnter response key profile (option 0 or 1):\n\n');
-exptdesign.responseDuration = 3.08;                % amount of time to allow for a response in seconds
+exptdesign.responseDuration = 3;                % amount of time to allow for a response in seconds
 exptdesign.responseBox = 0;             % Controls whether we are using the keyboard or the response box for subj. responses.
 exptdesign.usespace=0;                  % use space bar to start each trial?
 exptdesign.scannerOrlab='l';
@@ -47,7 +47,7 @@ stimGenPTB('open')
 %run all 6 runs right after the last 
 for iRuns = 1:exptdesign.numRuns
     exptdesign.iRuns=iRuns;
-    [trialOutput] = RAinScannerExperiment2(name,exptdesign);
+    [trialOutput] = RAinScannerExperimentLab(name,exptdesign);
 end
 
 %close com3 port

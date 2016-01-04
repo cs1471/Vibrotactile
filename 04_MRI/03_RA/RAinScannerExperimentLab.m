@@ -1,5 +1,5 @@
 
-function trialOutput = OddballinScannerExperiment(name,exptdesign)
+function trialOutput = RAinScannerExperimentLab(name,exptdesign)
 
 try
 %     dbstop if error;
@@ -95,6 +95,10 @@ try
 
     %passes in response profile from wrapper function
     response = exptdesign.response;
+    responseDuration = exptdesign.responseDuration;
+    trialDuration = exptdesign.trialDuration;
+    
+    sOL = exptdesign.scannerOrlab;
    
     %Display experiment instructions
     if response == 0
@@ -108,38 +112,72 @@ try
     end
     
     %load stimuli file
-    load('RAstimuli.mat');
+    load('stimuliRA.mat');
     
-    %randomize order of same/different trials
-    ind=randperm(size(stimuli,2));
-    stimuli=stimuli(:,ind);
-
+    if iRuns == 1
+        stimuli = stimuliRun1;
+    elseif iRuns == 2
+        stimuli = stimuliRun2;
+    elseif iRuns ==3
+        stimuli = stimuliRun3;
+    else
+        stimuli = stimuliRun4;
+    end
+    
     trialCounter = 1;
     for iBlock = 1:exptdesign.numBlocks %how many blocks to run this training session 
         
         %iterate over trials
         for iTrial=1:exptdesign.numTrialsPerSession
-           
+           trialOnset = GetSecs;
            %draw fixation/reset timing
            Screen('DrawTexture', w, fixationTexture);
            [FixationVBLTimestamp FixationOnsetTime FixationFlipTimestamp FixationMissed] = ...
-               Screen('Flip',w, exptdesign.scanStart + 10*(iBlock) + 4.08*(trialCounter-1));
+               Screen('Flip',w, exptdesign.scanStart + 10*(iBlock) + 4*(trialCounter-1));
            
            %call function that generates stimuli for driver box
            stimulusOnset = GetSecs;
-           constructStimuli(stimuli(1:4,iTrial)); % present stim 1
-           WaitSecs(exptdesign.interStimuliDuration);
-           constructStimuli(stimuli(5:8,iTrial)); % present stim 2
-           stimulusFinished = GetSecs;
-           
            %set variables == 0 if no response
            responseFinishedTime = 0;
+           responseStartTime=0;
            sResp=0;
            responseMapping =0;
-           %start response window
-           responseStartTime=GetSecs;
-           %record subject response for mouse click v button press
-           sResp = getResponse(stimulusFinished, exptdesign.responseDuration, exptdesign.scannerOrlab, responseMapping);
+           
+           if stimuli(1:4,iTrial) ~= 0
+               [timeBuildTSMstim1, timeLoadStimulistim1, timeGenerateStimulistim1]...
+                   =constructStimuli(stimuli(1:4,iTrial)); % present stim 1
+               
+               WaitSecs(exptdesign.interStimuliDuration);%wait time between stimuli
+               
+               [timeBuildTSMstim2, timeLoadStimulistim2, timeGenerateStimulistim2]...
+                   =constructStimuli(stimuli(5:8,iTrial)); % present stim 2
+               
+               stimulusFinished = GetSecs;
+               stimulusDuration = stimulusFinished-stimulusOnset;
+               
+               %start response window
+               responseStartTime=GetSecs;
+               %record subject response for mouse click v button press
+               [sResp,responseFinishedTime]...
+                   = getResponse(stimulusFinished, sOL, responseMapping, responseDuration);
+
+               RT = responseFinishedTime - responseStartTime;
+               waitEOT = trialDuration-(RT+stimulusDuration);
+               WaitSecs(waitEOT)
+           else
+               WaitSecs(exptdesign.trialDuration); % change from 4.08 to 4. LB then changed it to exptdesign.trialDuration variable defined in the wrapper.
+               stimulusFinished = GetSecs;
+               sResp = -1;
+               correctResponse = -1;
+               waitEOT = 0;
+               RT=0;
+           end
+           
+           
+           
+           
+           
+          
            
            %code correct response
            if isequal(stimuli(1:4, iTrial),stimuli(5:8,iTrial))
@@ -147,7 +185,8 @@ try
            elseif ~isequal(stimuli(1:4, iTrial),stimuli(5:8,iTrial)) 
                correctResponse=2;
            end
-          
+           
+           trialFinished = GetSecs;
            %record parameters for the trial and block           
            trialOutput(iBlock,1).sResp(iTrial)=sResp;
            trialOutput(iBlock,1).correctResponse(iTrial)=correctResponse;
@@ -162,7 +201,14 @@ try
            trialOutput(iBlock,1).FixationOnsetTime(iTrial)=FixationOnsetTime;
            trialOutput(iBlock,1).FixationFlipTimestamp(iTrial)=FixationFlipTimestamp;
            trialOutput(iBlock,1).FixationMissed(iTrial)=FixationMissed;
-           
+           trialOutput(iBlock,1).timeBuildTSMstim1(iTrial) = timeBuildTSMstim1;
+           trialOutput(iBlock,1).timeLoadStimulistim1(iTrial) = timeLoadStimulistim1;
+           trialOutput(iBlock,1).timeGenerateStimulistim1(iTrial) = timeGenerateStimulistim1;
+           trialOutput(iBlock,1).timeBuildTSMstim2(iTrial) = timeBuildTSMstim2;
+           trialOutput(iBlock,1).timeLoadStimulistim2(iTrial) = timeLoadStimulistim2;
+           trialOutput(iBlock,1).timeGenerateStimulistim2(iTrial) = timeGenerateStimulistim2;
+           trialOutput(iBlock,1).trialDuration(iTrial)= trialFinished-trialOnset;
+           trialOutput(iBlock,1).waitEOT(iTrial)=waitEOT;
            trialCounter = trialCounter + 1;
         end
     end
@@ -181,7 +227,7 @@ try
     %  Write the trial specific data to the output file.
     tic;
      %save the session data in the data directory
-        save(['./data_RAscan/' exptdesign.number '/' exptdesign.subjectName '_block' num2str(iBlock) '.run' num2str(iRuns) '.mat'], 'trialOutput', 'exptdesign');
+        save(['./data_RAscan/' exptdesign.number '/' exptdesign.subjectName '.run' num2str(iRuns) '.mat'], 'trialOutput', 'exptdesign');
     toc;
     
     % End of experiment, close window:
@@ -216,7 +262,8 @@ function drawAndCenterText(window,message, wait, time)
     Screen('Flip',window, time);
 end
 
-function constructStimuli(stimuli)
+function [timeBuildTSM, timeLoadStimuli, timeGenerateStimuli]...
+    =constructStimuli(stimuli)
         f = stimuli(1:2,:);
         p = stimuli(3:4,:);
      
@@ -226,21 +273,27 @@ function constructStimuli(stimuli)
             {'fixed',f(2),1,300},...
             {'fixchan',p(2)},...
             };
-        
+        startTime = tic;
         [t,s]=buildTSM_nomap(stim);
+        timeBuildTSM=toc(startTime);
         
         stimGenPTB('load',s,t);
+        timeLoadStimuli=toc(startTime);
+        
         rtn=-1;
         while rtn==-1
             rtn=stimGenPTB('start');
         end
+        timeGenerateStimuli=toc(startTime)-timeLoadStimuli;
 end
 
-function [sResp,responseFinishedTime] = getResponse(stimFinished, waitTime, scannerOrLab, responseMapping)
+function [sResp,responseFinishedTime]...
+= getResponse(stimFinished, scannerOrLab,responseMapping, responseDuration)
 % wait until response window passed or until there is an event
 startWaiting = GetSecs;
 mousePressed =0;
-    while (startWaiting < (stimFinished + waitTime) && mousePressed==0)
+    while (startWaiting < (stimFinished + responseDuration)...
+            && mousePressed==0)
         switch scannerOrLab
             case 's'
                 %if button pressed record response
@@ -275,4 +328,5 @@ mousePressed =0;
                 end
         end
     end
+     
 end

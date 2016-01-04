@@ -1,12 +1,12 @@
 clear;
 f1=2.^([0:.1:2]+log2(25));
 
-rng('shuffle')
+%rng('shuffle')
 
-order_cond = [load('/Users/courtneysprouse/GoogleDrive/Riesenhuber/05_2015_scripts/Vibrotactile/04_MRI/03_RA/RAtxtFiles/forCourtney-1.txt'),...
-              load('//Users/courtneysprouse/GoogleDrive/Riesenhuber/05_2015_scripts/Vibrotactile/04_MRI/03_RA/RAtxtFiles/forCourtney-2.txt'),...
-              load('/Users/courtneysprouse/GoogleDrive/Riesenhuber/05_2015_scripts/Vibrotactile/04_MRI/03_RA/RAtxtFiles/forCourtney-3.txt'),...
-              load('/Users/courtneysprouse/GoogleDrive/Riesenhuber/05_2015_scripts/Vibrotactile/04_MRI/03_RA/RAtxtFiles/forCourtney-4.txt')];
+order_cond = [load('C:\Users\User\Documents\MATLAB\Vibrotactile\04_MRI\03_RA\RAtxtFiles\forCourtney-1.txt'),...
+              load('C:\Users\User\Documents\MATLAB\Vibrotactile\04_MRI\03_RA\RAtxtFiles\forCourtney-2.txt'),...
+              load('C:\Users\User\Documents\MATLAB\Vibrotactile\04_MRI\03_RA\RAtxtFiles\forCourtney-3.txt'),...
+              load('C:\Users\User\Documents\MATLAB\Vibrotactile\04_MRI\03_RA\RAtxtFiles\forCourtney-1.txt')];
 
 order_condV = vertcat(order_cond(:,1), order_cond(:,2), order_cond(:,3), order_cond(:,4))';
 
@@ -19,9 +19,9 @@ s2=[9 10 11 12 13 14 10 9 12 11 14 13];
 stimulator=[s1; s2]; 
 
 % define the stimuli
-m0 = [repmat(frequency(:,1),1,41) repmat(frequency(:,2),1,10) repmat(frequency(:,3),1,10) repmat(frequency(:,4),1,40);
+m0 = [repmat(frequency(:,1),1,40) repmat(frequency(:,2),1,10) repmat(frequency(:,3),1,10) repmat(frequency(:,4),1,41);
       repmat(stimulator,1,8), stimulator(:,8:12);
-      repmat(frequency(:,1),1,41) repmat(frequency(:,2),1,10) repmat(frequency(:,3),1,10) repmat(frequency(:,4),1,40);
+      repmat(frequency(:,1),1,40) repmat(frequency(:,2),1,10) repmat(frequency(:,3),1,10) repmat(frequency(:,4),1,41);
       repmat(stimulator,1,8), stimulator(:,8:12)];
 m3w = [repmat(frequency(:,1),1,51) repmat(frequency(:,4),1,51);
        repmat(stimulator,1,8), stimulator(:,2:6), stimulator(:,12);

@@ -17,15 +17,13 @@ end
 exptdesign.subjectName = name;
 
 %Trial/Block/Run lengths
-exptdesign.numBlocks = 4; % original = 4             
+exptdesign.numBlocks = 1;             
 exptdesign.numTrialsPerSession = 127;   % original = 127 
-exptdesign.refresh = 0.016679454248257;
 exptdesign.numRuns = 4;
 
 %fixation location/duration         
 exptdesign.fixationImage = 'imgsscaled/fixation.bmp';  
 exptdesign.imageDirectory = 'imgsscaled/';  
-exptdesign.interStimuliDuration = .4;
 exptdesign.trialDuration = 4.0; % added by LB 12/18/2015
 
 % Decide which response mapping you are using
@@ -48,7 +46,7 @@ stimGenPTB('open')
 %run all 1 runs right after the last 
 for iRuns = 1:exptdesign.numRuns
     exptdesign.iRuns=iRuns;
-    [trialOutput.run] = RAinScannerExperiment(name,exptdesign);
+    [trialOutput.run] = RAinScannerExperiment2(name,exptdesign);
 end
 
 %close com3 port

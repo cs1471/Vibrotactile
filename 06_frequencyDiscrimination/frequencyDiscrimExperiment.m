@@ -1,4 +1,4 @@
-function frequencyDiscrimExperiment(name,exptdesign)
+function frequencyDiscrimExperiment(exptdesign)
 
     % frequencyDiscrimination
     % Patrick Malone pmalone333@gmail.com, Courtney Sprouse
@@ -18,8 +18,10 @@ function frequencyDiscrimExperiment(name,exptdesign)
     fixationImage = imread(exptdesign.fixationImage);
     fixationTexture=Screen('MakeTexture', w, double(fixationImage));
     
+    responseTime = exptdesign.responseTime;
+    
     %load training stimuli
-    if exptdesign.response == 0
+    if exptdesign.response == '0'
         load('frequencyDiscrimStimuli_0.mat');
     else
         load('frequencyDiscrimStimuli_1.mat');
@@ -27,7 +29,7 @@ function frequencyDiscrimExperiment(name,exptdesign)
     
     for iBlock=1:exptdesign.numBlocks
          if mod(iBlock,2)
-            drawAndCenterText(w, ['Please review instructions \n Click the mouse to continue\n'...
+            drawAndCenterText(w, ['Please review instructions\n\n'...
                 'Please click a mouse button to advance'],1)
             
             drawAndCenterText(w,['\nOn each trial, you will feel 2 vibrations, one after the other. \n'...
@@ -50,7 +52,7 @@ function frequencyDiscrimExperiment(name,exptdesign)
         
         drawAndCenterText(w,['Block #' num2str(iBlock) ' of ' num2str(exptdesign.numBlocks) '\n\n\n\n'...
             'Click the mouse to continue'],1);
-        %WaitSecs(1);
+        blockStart = GetSecs;
         
         %randomize the stimuli for this level
         order=randperm(size(stimuli,2));
@@ -61,17 +63,27 @@ function frequencyDiscrimExperiment(name,exptdesign)
         
         for iTrial=1:exptdesign.numTrialsPerSession
            Screen('DrawTexture', w, fixationTexture);
-               [FixationVBLTimestamp FixationOnsetTime FixationFlipTimestamp FixationMissed] = Screen('Flip',w);
+               [FixationVBLTimestamp, FixationOnsetTime, FixationFlipTimestamp, FixationMissed] = Screen('Flip',w);
+           
+           %pre-load stimulus 
+            [stimLoadTime] = loadStimuli(stimuli(:,iTrial));
                
+           %initial wait before stim presentation    
            wait1 = ll + (ul-ll).*rand(1);
-           wait2 = .5;
            WaitSecs(wait1);
-           constructStimuli(stimuli(1:2,iTrial)); % present stim 1
-           WaitSecs(wait2);
-           constructStimuli(stimuli(3:4,iTrial)); % present stim 2
+           
+           stimOnset = GetSecs;
+           rtn=-1;
+           while rtn==-1
+               rtn=stimGenPTB('start');
+           end
+           stimFinished = GetSecs;
+           
            drawAndCenterText(w,'Were the vibrations the same or different? \n', 0);
+           
+           %collect Response
            responseStartTime=GetSecs;
-           sResp=getResponseMouse(1.5);
+           sResp=getResponseMouse(responseTime);
            responseFinishedTime=GetSecs;
            
            if isequal(stimuli(1:2, iTrial),stimuli(3:4,iTrial))
@@ -94,35 +106,36 @@ function frequencyDiscrimExperiment(name,exptdesign)
            else
                accuracy=0;
            end
-           
+                    
            %record parameters for the trial
-           trialOutput(iBlock).responseStartTime(iTrial)=responseStartTime;
-           trialOutput(iBlock).responseFinishedTime(iTrial)=responseFinishedTime;
-           trialOutput(iBlock).RT(iTrial)=responseFinishedTime-responseStartTime;
-           trialOutput(iBlock).sResp(iTrial)=sResp;
-           trialOutput(iBlock).accuracy(iTrial)=accuracy;
-           trialOutput(iBlock).correctResponse(iTrial)=correctResponse;
-           trialOutput(iBlock).wait1(iTrial)=wait1;
-           trialOutput(iBlock).preOrPostTrain = exptdesign.preOrPostTrain;
-           trialOutput(iBlock).FixationVBLTimestamp(iTrial)=FixationVBLTimestamp;
-           trialOutput(iBlock).FixationOnsetTime(iTrial)=FixationOnsetTime;
-           trialOutput(iBlock).FixationFlipTimestamp(iTrial)=FixationFlipTimestamp;
-           trialOutput(iBlock).FixationMissed(iTrial)=FixationMissed;
-%            trialOutput(iBlock).RespVBLTimestamp(iTrial)=RespVBLTimestamp;
-%            trialOutput(iBlock).RespOnsetTime(iTrial)=RespOnsetTime;
-%            trialOutput(iBlock).RespFlipTimestamp(iTrial)=RespFlipTimestamp;            trialOutput(iBlock).RespMissed(iTrial)=RespMissed;
-           trialOutput(iBlock).order=order;
-           trialOutput(iBlock).stimuli=stimuli;
+           trialOutput(iBlock).FixationVBLTimestamp(iTrial)   = FixationVBLTimestamp;
+           trialOutput(iBlock).FixationOnsetTime(iTrial)      = FixationOnsetTime;
+           trialOutput(iBlock).FixationFlipTimestamp(iTrial)  = FixationFlipTimestamp;
+           trialOutput(iBlock).FixationMissed(iTrial)         = FixationMissed;
+           trialOutput(iBlock).order                          = order;
+           trialOutput(iBlock).stimuli                        = stimuli;
+           trialOutput(iBlock).responseStartTime(iTrial)      = responseStartTime;
+           trialOutput(iBlock).responseFinishedTime(iTrial)   = responseFinishedTime;
+           trialOutput(iBlock).RT(iTrial)                     = responseFinishedTime-responseStartTime;
+           trialOutput(iBlock).sResp(iTrial)                  = sResp;
+           trialOutput(iBlock).correctResponse(iTrial)        = correctResponse;
+           trialOutput(iBlock).accuracy(iTrial)               = accuracy;
+           trialOutput(iBlock).wait1(iTrial)                  = wait1;
+           trialOutput(iBlock).stimulusOnset(iTrial)          = stimOnset;
+           trialOutput(iBlock).stimulusLoadTime(iTrial)       = stimLoadTime;
+           trialOutput(iBlock).stimulusFinished(iTrial)       = stimFinished;
+           trialOutput(iBlock).stimulusDuration(iTrial)       = stimFinished - stimOnset;
+           trialOutput(iBlock).blockStart                     = blockStart;
            
            %tell subject how they did on last block
-           if iTrial==exptdesign.numTrialsPerSession && iBlock < exptdesign.numBlocks
+           if iTrial == exptdesign.numTrialsPerSession && iBlock < exptdesign.numBlocks
                %calculate accuracy
                accuracyForLevel=mean(trialOutput(iBlock).accuracy);
                drawAndCenterText(w, ['Your accuracy was ' num2str(round(accuracyForLevel.*100)) '%\n\n\n'...
                     'Click mouse to continue' ],1)
                %WaitSecs(2);
                KbWait(1);
-           elseif iTrial==exptdesign.numTrialsPerSession && iBlock == exptdesign.numBlocks
+           elseif iTrial == exptdesign.numTrialsPerSession && iBlock == exptdesign.numBlocks
                %calculate accuracy
                accuracyForLevel=mean(trialOutput(iBlock).accuracy);
                drawAndCenterText(w, ['Your accuracy was ' num2str(round(accuracyForLevel.*100)) '%\n\n\n'...
@@ -135,10 +148,6 @@ function frequencyDiscrimExperiment(name,exptdesign)
            clear correctResponse correctionTexture;
         end  
 
-        %record parameters for the block
-        %stimuli, order
-        
-        
         %save the session data in the data directory
         save(['./data/' exptdesign.number '/' datestr(now, 'yyyymmdd_HHMM') '-' exptdesign.subjectName '_block' num2str(iBlock) '.mat'], 'trialOutput', 'exptdesign');
         %save the history data (stimuli, last level passed)
@@ -192,20 +201,20 @@ function numericalanswer = getResponseMouse(waitTime)
   end
 end
 
-function constructStimuli(stimulus)
-    f = stimulus(1);
-    p = stimulus(2);
+function [stimLoadTime] = loadStimuli(stimuli)
+    f = [stimuli(1), stimuli(3)];
+    p = [stimuli(2), stimuli(4)];
 
     stim = {...
-        {'fixed',f,1,300},...
-        {'fixchan',p},...
+        {'fixed',f(1),1,300},...
+        {'fixchan',p(1)},...
+        {'fixed',f(2),700,1000},...
+        {'fixchan',p(2)},...
         };
 
     [t,s]=buildTSM_nomap(stim);
-
+    
+    startTime = tic;
     stimGenPTB('load',s,t);
-    rtn=-1;
-    while rtn==-1
-        rtn=stimGenPTB('start');
-    end
+    stimLoadTime = toc(startTime);
 end

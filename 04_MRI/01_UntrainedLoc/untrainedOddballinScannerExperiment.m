@@ -30,10 +30,6 @@ try
 %     [w windowRect] = Screen('OpenWindow', screenNumber,[128 128 128], [0 0 200 200]); %for debugging
     white = WhiteIndex(w); % pixel value for white
     black = BlackIndex(w); % pixel value for black
-    
-    %  calculate the slack allowed during a flip interval
-    refresh = Screen('GetFlipInterval',w);
-    slack = refresh/2;
 
     % Select specific text font, style and size, unless we're on Linux
     % where this combo is not available:
@@ -103,19 +99,18 @@ try
    response = exptdesign.response;
 
     %load training stimuli
-%     [stimuliShuffled, oddball] = makeStimuli(response);
     load(['stimuliAllRunsRP' int2str(response) '.mat']);
     stimuli = stimuliAllRuns{runCounter};
     
     trialCounter = 1;
-    for iBlock=1:size(stimuli,1)%how many blocks to run this training session
-        
+    for iBlock=1:numBlocks %how many blocks to run this training session
+        blockStart = GetSecs;
         for i = 1:size(stimuli,2)
             stimuliBlock{i} = stimuli{iBlock,i};
         end
         
         %iterate over trials
-        for iTrial=1:size(stimuli,2)
+        for iTrial=1:numTrialsPerSession
             %initialize variable 
             evt=1;
             
@@ -126,11 +121,18 @@ try
            
            %draw fixation
            Screen('DrawTexture', w, fixationTexture);
-           [FixationVBLTimestamp FixationOnsetTime FixationFlipTimestamp FixationMissed] = Screen('Flip',w, exptdesign.scanStart + 10*(iBlock) + 1*(trialCounter-1))
+           [FixationVBLTimestamp, FixationOnsetTime, FixationFlipTimestamp, FixationMissed] = Screen('Flip',w, exptdesign.scanStart + 10*(iBlock) + 1*(trialCounter-1));
            
            %call function that generates stimuli for driver box
+           if trialCounter == 1
+               stimLoadTime = loadStimuli(stimuliBlock, iTrial);
+           end
+           
            stimulusOnset = GetSecs;
-           constructStimuli(stimuliBlock, iTrial);
+           rtn=-1;
+           while rtn==-1
+               rtn = stimGenPTB('start');
+           end
            stimulusFinished = GetSecs;
            
            responseStartTime=GetSecs;
@@ -149,38 +151,39 @@ try
                %record end time of response
                responseFinishedTime=evt.time;
                %trouble = evt.trouble;
-                waitSecs(exptdesign.responseDuration-responseFinishedTime);
+                waitTime = exptdesign.responseDuration-responseFinishedTime;
+           end
+           
+            WaitSecs(waitTime - stimLoadTime);
+           
+           % Load stimuli
+           if trialCounter ~= 1
+            [stimLoadTime] = loadStimuli(stimuli(:,iTrial+1));
            end
            
            if length(stimuliBlock{1,iTrial}(1,:)) > 1
                 correctResponse = 1;
            else
                 correctResponse = 0;
-           end
-           
-           % cross compare oddball position
-%            if correctResponse ~= metaData{runCounter}.oddballPosition(iBlock)
-%                Error = MException('Error:Mismatch','Oddball position mismatch');
-%                throw(Error);
-%            end
-               
+           end 
            
            %record parameters for the trial and block
-           trialOutput(iBlock,1).metaData{runCounter} = metaData;
-           trialOutput(iBlock,1).sResp(iTrial) = sResp;
-           trialOutput(iBlock,1).correctResponse(iTrial) = correctResponse;
-%            trialOutput(iBlock,1).trouble(iTrial)=trouble;
-           trialOutput(iBlock,1).stimulusOnset(iTrial)=stimulusOnset;
-           trialOutput(iBlock,1).stimulusDuration(iTrial)=stimulusFinished-stimulusOnset;
-           trialOutput(iBlock,1).stimulusFinished(iTrial)=stimulusFinished;
-           trialOutput(iBlock,1).responseStartTime(iTrial)=responseStartTime;
-           trialOutput(iBlock,1).responseFinishedTime(iTrial)=responseFinishedTime;
-           trialOutput(iBlock,1).RT(iTrial)=responseFinishedTime-responseStartTime;
-           trialOutput(iBlock,1).stimuli = stimuliBlock;
-           trialOutput(iBlock,1).FixationVBLTimestamp(iTrial)=FixationVBLTimestamp;
-           trialOutput(iBlock,1).FixationOnsetTime(iTrial)=FixationOnsetTime;
-           trialOutput(iBlock,1).FixationFlipTimestamp(iTrial)=FixationFlipTimestamp;
-           trialOutput(iBlock,1).FixationMissed(iTrial)=FixationMissed;
+           trialOutput(iBlock,1).metaData{runCounter}          = metaData;
+           trialOutput(iBlock,1).sResp(iTrial)                 = sResp;
+           trialOutput(iBlock,1).correctResponse(iTrial)       = correctResponse;
+           trialOutput(iBlock,1).stimulusLoadTime(iTrial)      = stimLoadTime;
+           trialOutput(iBlock,1).stimulusOnset(iTrial)         = stimulusOnset;
+           trialOutput(iBlock,1).stimulusDuration(iTrial)      = stimulusFinished-stimulusOnset;
+           trialOutput(iBlock,1).stimulusFinished(iTrial)      = stimulusFinished;
+           trialOutput(iBlock,1).responseStartTime(iTrial)     = responseStartTime;
+           trialOutput(iBlock,1).responseFinishedTime(iTrial)  = responseFinishedTime;
+           trialOutput(iBlock,1).RT(iTrial)                    = responseFinishedTime-responseStartTime;
+           trialOutput(iBlock,1).stimuli                       = stimuliBlock;
+           trialOutput(iBlock,1).FixationVBLTimestamp(iTrial)  = FixationVBLTimestamp;
+           trialOutput(iBlock,1).FixationOnsetTime(iTrial)     = FixationOnsetTime;
+           trialOutput(iBlock,1).FixationFlipTimestamp(iTrial) = FixationFlipTimestamp;
+           trialOutput(iBlock,1).FixationMissed(iTrial)        = FixationMissed;
+           trialOutput(iBlock,1).blockStart                    = blockStart;
            
            trialCounter = trialCounter + 1;
         end
@@ -245,12 +248,12 @@ function drawAndCenterText(window,message, wait, time)
     Screen('Flip',window, time);
 end
 
-function constructStimuli(stimuliBlock,iTrial)
+function [loadTime] = loadStimuli(stimuliBlock,iTrial)
      f = stimuliBlock{1,iTrial}(1,:);
      p = stimuliBlock{1,iTrial}(2,:);
 
     if length(f) > 1 
-        constructOddStimuli(stimuliBlock, iTrial)
+        loadTime = constructOddStimuli(stimuliBlock, iTrial);
     else
         stim = {...
             {'fixed',f,1,300},...
@@ -259,15 +262,13 @@ function constructStimuli(stimuliBlock,iTrial)
         
         [t,s]=buildTSM_nomap(stim);
         
+        startTime = tic;
         stimGenPTB('load',s,t);
-        rtn=-1;
-        while rtn==-1
-            rtn=stimGenPTB('start');
-        end
+        loadTime = toc(startTime);
     end
 end
 
-function constructOddStimuli(stimuliBlock, iTrial)
+function [loadTime] = constructOddStimuli(stimuliBlock, iTrial)
     f = stimuliBlock{1,iTrial}(1,:);
     p = stimuliBlock{1,iTrial}(2,:);
     
@@ -281,11 +282,8 @@ function constructOddStimuli(stimuliBlock, iTrial)
            };
 
     [t,s]=buildTSM_nomap(stim);    
-       
-    stimGenPTB('load',s,t);
-    rtn=-1;
-    while rtn==-1
-        rtn = stimGenPTB('start');
-    end
     
+    startTime = tic;
+    stimGenPTB('load',s,t);
+    loadTime = toc(startTime);
 end

@@ -8,34 +8,40 @@ input('\n\nIs white noise playing? Hit Enter when "Yes."\n');
 input('\n\nDoes participant have ear plugs? Hit Enter when "Yes."\n')
 
 %get subject info
-name = input('\n\nEnter Subject NUMBER:\n\n','s');
-number=name;
-exptdesign.number=number;
-exptdesign.subjectName=number;
+number = input('\n\nEnter Subject NUMBER:\n\n','s');
+exptdesign.number = number;
+exptdesign.subjectName = number;
+
 preOrPostTrain = input('\n\nIs this pre or post-training? Enter 1 for pre-training, 2 for post-training:\n\n','s');
 exptdesign.preOrPostTrain = preOrPostTrain; % 1 for pre, 2 for post
+
 response = input('\n\nPlease enter the response profile (0 or 1)\n\n');
 exptdesign.response = response;
-if isempty(name)
-    name = ['MR000'];
+exptdesign.responseTime = 1.5;
+exptdesign.interStimulusInterval = .4;
+
+if isempty(number)
+    name = 'MR000';
 else
-    name = ['MR' name];
+    name = ['MR' number];
 end
 WaitSecs(0.25);
+
+exptdesign.subjectName = name;
+
 %check if the subject has a directory in data.  If not, make it.
 if exist(['./data/' number],'dir')
 else
     mkdir(['./data/' number])
 end
 
-exptdesign.numBlocks = 5;              % number of blocks
-exptdesign.numTrialsPerSession = 192;
+exptdesign.numBlocks = 7;              % number of blocks
+exptdesign.numTrialsPerSession = 160;
 
-exptdesign.refresh = 0.016679454248257; 
 
 exptdesign.fixationImage = 'imgsscaled/fixation.bmp';  % image for the fixation cross
 exptdesign.imageDirectory = 'imgsscaled/';
 
 stimGenPTB('open')
-frequencyDiscrimExperiment(name,exptdesign);
+frequencyDiscrimExperiment(exptdesign);
 stimGenPTB('close')
