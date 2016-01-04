@@ -1,8 +1,9 @@
-function makeSpatialLocFigs_dprime(sub,positionType,cfg)
+function makeSpatialLocFigs_dprime(sub,positionType,preOrPost,cfg)
     % patrick malone pmalone333@gmail.com 11/23/15
     % passed args sub must be string (i.e '900' for subj 900), if
     % cfg isn't passed it is created using config_subjects_VT.m 
     % positionType = 1 for odd positions, 2 for even 
+    % preOrPost - 'preTrain' or 'postTrain'
     
     if exist('cfg','var') % if cfg was passed, use it; else, create one
         cfg = config_subjects_VT(cfg);
@@ -11,8 +12,8 @@ function makeSpatialLocFigs_dprime(sub,positionType,cfg)
     end
     
     % change preTrain to post for post training figs
-    data_path = dir(fullfile(cfg.dirs.behav_dir,sub,'preTrain','spatialLoc'));
-    load(fullfile(cfg.dirs.behav_dir,sub,'preTrain','spatialLoc',data_path(4).name));
+    data_path = dir(fullfile(cfg.dirs.behav_dir,sub,preOrPost,'spatialLoc'));
+    load(fullfile(cfg.dirs.behav_dir,sub,preOrPost,'spatialLoc',data_path(3).name));
 
     %% d prime by block
     numBlocks = length(trialOutput);
@@ -26,9 +27,9 @@ function makeSpatialLocFigs_dprime(sub,positionType,cfg)
     plot(dPrime);
     xlabel('Block');
     ylabel('D prime');
-    ylim([0 2.5])
+    ylim([0 3.25])
     title(['Sub ' sub ' spatial localization d prime by block']);
-    print(fullfile(cfg.dirs.behav_dir,sub,'preTrain','spatialLoc',['sub' sub '_spatialLoc_dPrimeByBlock']),'-dpng');
+    print(fullfile(cfg.dirs.behav_dir,sub,preOrPost,'spatialLoc',['sub' sub '_spatialLoc_' preOrPost '_dPrimeByBlock']),'-dpng');
     
     %% d prime by position 
     if positionType==2, pos=[2 4 6 10 12 14]; 
@@ -44,15 +45,17 @@ function makeSpatialLocFigs_dprime(sub,positionType,cfg)
            fa = [fa sum((floor(trialOutput(iBlock).stimuli(1,1:144)) == pos(p) | floor(trialOutput(iBlock).stimuli(3,1:144)) == pos(p)) & trialOutput(iBlock).sResp(1:144) == 2 & trialOutput(iBlock).correctResponse(1:144) == 1) / ... 
                     sum((floor(trialOutput(iBlock).stimuli(1,1:144)) == pos(p) | floor(trialOutput(iBlock).stimuli(3,1:144)) == pos(p)) & trialOutput(iBlock).correctResponse(1:144) == 1)]; 
         end
+        if fa==0, fa=(1/sum(trialOutput(iBlock).stimuli(1,1:144) == pos(p))); end
+        %if h==1, h=1-(1/sum(trialOutput(iBlock).stimuli(2,1:96) == pos(p))); end
         dPrime(p) = calcDprime(h,fa);
     end
     bar(dPrime);
     xlabel('Position');
     ylabel('D prime');
-    ylim([0 2])
+    ylim([0 3.25])
     title(['Sub ' sub ' spatial localization d prime by position']);
     set(gca,'XTickLabel',pos)
-    print(fullfile(cfg.dirs.behav_dir,sub,'preTrain','spatialLoc',['sub' sub '_spatialLoc_dPrimeByPos']),'-dpng');
+    print(fullfile(cfg.dirs.behav_dir,sub,preOrPost,'spatialLoc',['sub' sub '_spatialLoc_' preOrPost '_dPrimeByPos']),'-dpng');
     
     %% d prime by freq
     freq = [26 93];
@@ -71,9 +74,9 @@ function makeSpatialLocFigs_dprime(sub,positionType,cfg)
     bar(dPrime);
     xlabel('Frequency');
     ylabel('D prime');
-    ylim([0 2])
+    ylim([0 3.25])
     title(['Sub ' sub ' spatial localization d prime by frequency']);
     set(gca,'XTickLabel',freq)
-    print(fullfile(cfg.dirs.behav_dir,sub,'preTrain','spatialLoc',['sub' sub '_spatialLoc_dPrimeByFreq']),'-dpng');
+    print(fullfile(cfg.dirs.behav_dir,sub,preOrPost,'spatialLoc',['sub' sub '_spatialLoc_' preOrPost '_dPrimeByFreq']),'-dpng');
     
 end
