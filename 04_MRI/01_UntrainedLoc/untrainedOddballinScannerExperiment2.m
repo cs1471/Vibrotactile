@@ -1,6 +1,5 @@
 
 function trialOutput = untrainedOddballinScannerExperiment2(name,exptdesign)
-dbstop if error;
 try
 %     dbstop if error;
     % following codes should be used when you are getting key presses using
@@ -12,9 +11,9 @@ try
     oldLevel = Screen('Preference', 'VisualDebugLevel', 1);
     %     oldEnableFlag = Screen('Preference', 'SuppressAllWarnings', 1);
     %     warning offc
-    if ~exptdesign.debugmode
-        HideCursor;
-    end
+%     if ~exptdesign.debugmode
+%         HideCursor;
+%     end
 
     WaitSecs(1); % make sure it is loaded into memory;
 
@@ -103,34 +102,35 @@ try
     load(['stimuliAllRunsRP' int2str(response) '.mat']);
     stimuli = stimuliAllRuns{runCounter};
     
+    %initialize variable
+    evt=1;
     
+    %clear event responses stored in queue
+    while ~isempty(evt)
+        evt = CMUBox('GetEvent', exptdesign.boxHandle);
+    end
+    
+    
+    totalTrialCounter = 1;
     for iBlock=1:numBlocks %how many blocks to run this training session
         blockStart = GetSecs;
         for i = 1:size(stimuli,2)
             stimuliBlock{i} = stimuli{iBlock,i};
         end
         
-        %initialize variable
-        evt=1;
-        
-        %clear event responses stored in queue
-        while ~isempty(evt)
-            evt = CMUBox('GetEvent', exptdesign.boxHandle);
-        end
-        
-        trialCounter = 1;
+        withinTrialCounter = 1;
         
         %iterate over trials
         for iTrial = 1:numTrialsPerSession
            
            %call function that generates stimuli for driver box
-           if trialCounter == 1
+           if withinTrialCounter == 1
                stimLoadTime = loadStimuli(stimuliBlock, iTrial);
            end
            
            %draw fixation
            Screen('DrawTexture', w, fixationTexture);
-           [FixationVBLTimestamp, FixationOnsetTime, FixationFlipTimestamp, FixationMissed] = Screen('Flip',w, exptdesign.scanStart + 10*(iBlock) + 1*(trialCounter-1));
+           [FixationVBLTimestamp, FixationOnsetTime, FixationFlipTimestamp, FixationMissed] = Screen('Flip',w, exptdesign.scanStart + 10*(iBlock) + 1*(totalTrialCounter-1));
            
            stimulusOnset = GetSecs;
            rtn = -1;
@@ -143,7 +143,7 @@ try
            
            
            % Load stimuli
-           if trialCounter ~= 1 && trialCounter ~= 6
+           if withinTrialCounter ~= 1 && withinTrialCounter ~= 6
                 [stimLoadTime] = loadStimuli(stimuliBlock ,iTrial+1);
            end
            
@@ -172,18 +172,14 @@ try
            trialOutput(iBlock,1).waitTimeEnd(iTrial)           = waitTimeEnd;
            trialOutput(iBlock,1).waitTime(iTrial)              = waitTime;
            
-           trialCounter = trialCounter + 1;
+           withinTrialCounter = withinTrialCounter + 1;
+           totalTrialCounter = totalTrialCounter + 1;
         end
         
         %set variables == 0 if no response
         responseFinishedTime = 0;
         sResp=0;
         
-%         while GetSecs < (stimulusFinished + exptdesign.responseDuration) && isempty(evt)
-%             %if button pressed record response
-%             evt = CMUBox('GetEvent', exptdesign.boxHandle);
-%         end
-
         %sResp ==1 if button pressed
         if ~isempty(evt)
             evt = CMUBox('GetEvent', exptdesign.boxHandle);
