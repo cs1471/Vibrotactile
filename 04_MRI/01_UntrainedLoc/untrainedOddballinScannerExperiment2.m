@@ -102,15 +102,6 @@ try
     load(['stimuliAllRunsRP' int2str(response) '.mat']);
     stimuli = stimuliAllRuns{runCounter};
     
-    %initialize variable
-    evt=1;
-    
-    %clear event responses stored in queue
-    while ~isempty(evt)
-        evt = CMUBox('GetEvent', exptdesign.boxHandle);
-    end
-    
-    
     totalTrialCounter = 1;
     for iBlock=1:numBlocks %how many blocks to run this training session
         blockStart = GetSecs;
@@ -119,6 +110,11 @@ try
         end
         
         withinTrialCounter = 1;
+        
+        %clear event responses stored in queue
+        while ~isempty(evt)
+            evt = CMUBox('GetEvent', exptdesign.boxHandle);
+        end
         
         %iterate over trials
         for iTrial = 1:numTrialsPerSession
@@ -180,12 +176,19 @@ try
         responseFinishedTime = 0;
         sResp=0;
         
-        %sResp ==1 if button pressed
-        if ~isempty(evt)
-            evt = CMUBox('GetEvent', exptdesign.boxHandle);
-            sResp = 1;
+        %collect event queue
+        eventCount=0;
+        evt = CMUBox('GetEvent', exptdesign.boxHandle);
+        
+        while ~isempty(evt)
+            eventCount=eventCount+1;
+            %sResp ==1 if button pressed
+            sResp(eventCount) = 1;
             %record end time of response
-            responseFinishedTime=evt.time;
+            responseFinishedTime(eventCount)=evt.time;
+            
+            %load next event in the queue
+            evt = CMUBox('GetEvent', exptdesign.boxHandle);
         end
         
         blockFinished = GetSecs;

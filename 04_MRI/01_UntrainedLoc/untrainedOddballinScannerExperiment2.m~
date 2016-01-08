@@ -1,6 +1,5 @@
 
 function trialOutput = untrainedOddballinScannerExperiment2(name,exptdesign)
-dbstop if error;
 try
 %     dbstop if error;
     % following codes should be used when you are getting key presses using
@@ -12,9 +11,9 @@ try
     oldLevel = Screen('Preference', 'VisualDebugLevel', 1);
     %     oldEnableFlag = Screen('Preference', 'SuppressAllWarnings', 1);
     %     warning offc
-    if ~exptdesign.debugmode
-        HideCursor;
-    end
+%     if ~exptdesign.debugmode
+%         HideCursor;
+%     end
 
     WaitSecs(1); % make sure it is loaded into memory;
 
@@ -110,15 +109,12 @@ try
             stimuliBlock{i} = stimuli{iBlock,i};
         end
         
-        %initialize variable
-        evt=1;
+        withinTrialCounter = 1;
         
         %clear event responses stored in queue
         while ~isempty(evt)
             evt = CMUBox('GetEvent', exptdesign.boxHandle);
         end
-        
-        withinTrialCounter = 1;
         
         %iterate over trials
         for iTrial = 1:numTrialsPerSession
@@ -180,12 +176,16 @@ try
         responseFinishedTime = 0;
         sResp=0;
         
-        %sResp ==1 if button pressed
-        if ~isempty(evt)
+        %collect event queue
+        eventCount=0;
+        evt = CMUBox('GetEvent', exptdesign.boxHandle);
+        while ~isempty(evt)
+            eventCount=eventCount+1;
+            %sResp ==1 if button pressed
+            sResp(eventCount) = 1;
             evt = CMUBox('GetEvent', exptdesign.boxHandle);
-            sResp = 1;
             %record end time of response
-            responseFinishedTime=evt.time;
+            responseFinishedTime(eventCount)=evt.time;
         end
         
         blockFinished = GetSecs;
@@ -210,7 +210,7 @@ try
     %  Write the trial specific data to the output file.
     tic;
      %save the session data in the data directory
-      save([exptdesign.saveDir '/' '_' name '_block' num2str(iBlock) '.run' num2str(exptdesign.iRuns) '.mat'], 'trialOutput', 'exptdesign');
+      save([exptdesign.saveDir '/' name '_block' num2str(iBlock) '.run' num2str(exptdesign.iRuns) '.mat'], 'trialOutput', 'exptdesign');
     toc;
     
     % End of experiment, close window:
