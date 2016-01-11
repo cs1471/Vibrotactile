@@ -225,7 +225,7 @@ try
            trialOutput(iBlock,1).stimLoadTime(iTrial)          = stimLoadTime;
            trialOutput(iBlock,1).waitTime(iTrial)              = waitTime;
            trialOutput(iBlock,1).blockStart                    = blockStart;
-           trialOutput(iBlock,1).endOfTrialWaitTime(iTrial)    = endOfTrialWaitTime;
+           trialOutput(iBlock,1).endOfTrialWaitTime            = endOfTrialWaitTime;
            
            % Get trial duration parameters on each trial
            trialEndTime = GetSecs;

@@ -173,7 +173,7 @@ function drawAndCenterText(window,message,wait)
     WaitSecs(0.2); %this is necessary on the windows XP machine to wait for mouse response -- DOES delay timing!
 end
 
-function numericalanswer = getResponseMouse(waitTime)
+function [numericalanswer] = getResponseMouse(waitTime)
 
   %Wait for a response
   numericalanswer = -1;
@@ -181,7 +181,7 @@ function numericalanswer = getResponseMouse(waitTime)
   startWaiting=clock;
   while etime(clock,startWaiting) < waitTime && mousePressed == 0
       %check to see if a button is pressed
-       [x,y,buttons] = GetMouse();
+       [~,~,buttons] = GetMouse();
        if (~buttons(1) && ~buttons(3))
            continue;
        else
@@ -192,10 +192,10 @@ function numericalanswer = getResponseMouse(waitTime)
            else
                numericalanswer = 0;
            end
-          if numericalanswer ~= -1
-              %stop checking for a button press
-              mousePressed = 1;
-          end
+           if numericalanswer ~= -1
+               %stop checking for a button press
+               mousePressed = 1;
+           end
        end
 
   end
