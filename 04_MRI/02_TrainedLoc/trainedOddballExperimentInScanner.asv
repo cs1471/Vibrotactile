@@ -1,19 +1,14 @@
 
-function trialOutput = untrainedOddballinScannerExperiment2(name,exptdesign)
+function trialOutput = trainedOddballExperimentInScanner(name,exptdesign)
+% dbstop if error;
 try
 %     dbstop if error;
-    % following codes should be used when you are getting key presses using
-    % fast routines like kbcheck.
     KbName('UnifyKeyNames');
     Priority(1)
 
     %settings so that Psychtoolbox doesn't display annoying warnings--DON'T CHANGE
     oldLevel = Screen('Preference', 'VisualDebugLevel', 1);
-    %     oldEnableFlag = Screen('Preference', 'SuppressAllWarnings', 1);
-    %     warning offc
-%     if ~exptdesign.debugmode
-%         HideCursor;
-%     end
+    HideCursor;
 
     WaitSecs(1); % make sure it is loaded into memory;
 
@@ -26,7 +21,7 @@ try
 
     % Open window with default settings:
     [w windowRect] = Screen('OpenWindow', screenNumber,[128 128 128]);
-%     [w windowRect] = Screen('OpenWindow', screenNumber,[128 128 128], [0 0 200 200]); %for debugging
+%     [w windowRect] = Screen('OpenWindow', screenNumber,[128 128 128], [0 0 800 800]); %for debugging
     white = WhiteIndex(w); % pixel value for white
     black = BlackIndex(w); % pixel value for black
 
@@ -81,13 +76,13 @@ try
     else
         %checks for in between runs so that experminter can control run
         %start
-%         responseMapping = exptdesign.responseKeyChange;
+        %responseMapping = exptdesign.responseKeyChange;
         drawAndCenterText(w,'Hit Enter to Continue...',1);
         exptdesign.scanStart = GetSecs;
     end
     
     %marks the number of runs passed in from exptdesign struct
-    runCounter = exptdesign.iRuns;
+    runCounter=exptdesign.iRuns;
     numBlocks  = exptdesign.numBlocks;
     numTrialsPerSession = exptdesign.numTrialsPerSession;
 
@@ -110,7 +105,7 @@ try
             stimuliBlock{i} = stimuli{iBlock,i};
         end
         
-        withinTrialCounter = 1;
+         withinTrialCounter = 1;
         
         %clear event responses stored in queue
         while ~isempty(evt)
@@ -118,8 +113,8 @@ try
         end
         
         %iterate over trials
-        for iTrial = 1:numTrialsPerSession
-           
+        for iTrial=1:numTrialsPerSession
+            
            %call function that generates stimuli for driver box
            if withinTrialCounter == 1
                stimLoadTime = loadStimuli(stimuliBlock, iTrial);
@@ -127,10 +122,15 @@ try
            
            %draw fixation
            Screen('DrawTexture', w, fixationTexture);
-           [FixationVBLTimestamp, FixationOnsetTime, FixationFlipTimestamp, FixationMissed] = Screen('Flip',w, exptdesign.scanStart + 10*(iBlock) + 1*(totalTrialCounter-1));
+           [FixationVBLTimestamp, FixationOnsetTime, FixationFlipTimestamp, FixationMissed] = Screen('Flip',w, exptdesign.scanStart + 10*(iBlock) + 1*(totalTrialCounter-1)); 
+           
+           %call function that generates stimuli for driver box
+           if trialCounter == 1
+               stimLoadTime = loadStimuli(stimuliBlock, iTrial);
+           end
            
            stimulusOnset = GetSecs;
-           rtn = -1;
+           rtn=-1;
            while rtn==-1
                rtn = stimGenPTB('start');
            end
@@ -153,70 +153,59 @@ try
                 correctResponse = 0;
            end 
            
-           %record parameters for the trial and block
+           %sResp ==1 if button pressed
+           if ~isempty(evt)
+               sResp = 1;
+               %record end time of response
+               responseFinishedTime=evt.time;
+               waitTime = exptdesign.responseDuration-responseFinishedTime;
+           end
+           
+           WaitSecs(waitTime - stimLoadTime);
+           
+           % Load stimuli
+           [stimLoadTime] = loadStimuli(stimuli(:,iTrial+1));
+           
+           if length(stimuliBlock{1,iTrial}(1,:)) > 1
+                correctResponse = 1;
+           else
+                correctResponse = 0;
+           end
+           
+           %record parameters for the trial and block           
+           trialOutput(iBlock,1).metaData{runCounter}          = metaData;
+           trialOutput(iBlock,1).sResp(iTrial)                 = sResp;
            trialOutput(iBlock,1).correctResponse(iTrial)       = correctResponse;
-           trialOutput(iBlock,1).stimulusLoadTime(iTrial)      = stimLoadTime;
            trialOutput(iBlock,1).stimulusOnset(iTrial)         = stimulusOnset;
            trialOutput(iBlock,1).stimulusDuration(iTrial)      = stimulusFinished-stimulusOnset;
            trialOutput(iBlock,1).stimulusFinished(iTrial)      = stimulusFinished;
+           trialOutput(iBlock,1).stimulusLoadTime(iTrial)      = stimLoadTime;
            trialOutput(iBlock,1).responseStartTime(iTrial)     = responseStartTime;
+           trialOutput(iBlock,1).responseFinishedTime(iTrial)  = responseFinishedTime;
+           trialOutput(iBlock,1).RT(iTrial)                    = responseFinishedTime-responseStartTime;
+           trialOutput(iBlock,1).stimuli                       = stimuliBlock;
            trialOutput(iBlock,1).FixationVBLTimestamp(iTrial)  = FixationVBLTimestamp;
            trialOutput(iBlock,1).FixationOnsetTime(iTrial)     = FixationOnsetTime;
            trialOutput(iBlock,1).FixationFlipTimestamp(iTrial) = FixationFlipTimestamp;
            trialOutput(iBlock,1).FixationMissed(iTrial)        = FixationMissed;
-           trialOutput(iBlock,1).waitTimeEnd(iTrial)           = waitTimeEnd;
-           trialOutput(iBlock,1).waitTime(iTrial)              = waitTime;
+           trialOutput(iBlock,1).blockStart                    = blockStart;
            
-           withinTrialCounter = withinTrialCounter + 1;
-           totalTrialCounter = totalTrialCounter + 1;
-        end %end of trial
-        
-        %set variables == 0 if no response
-        responseFinishedTime = 0;
-        sResp=0;
-        
-        %collect event queue
-        eventCount=0;
-        evt = CMUBox('GetEvent', exptdesign.boxHandle);
-        
-        while ~isempty(evt)
-            eventCount=eventCount+1;
-            %sResp ==1 if button pressed
-            sResp(eventCount) = 1;
-            %record end time of response
-            responseFinishedTime(eventCount)=evt.time;
-            
-            %load next event in the queue
-            evt = CMUBox('GetEvent', exptdesign.boxHandle);
+           trialCounter = trialCounter + 1;
         end
-        
-        blockFinished = GetSecs;
-        
-         trialOutput(iBlock,1).sResp                 = sResp;
-         trialOutput(iBlock,1).responseFinishedTime  = responseFinishedTime;
-         trialOutput(iBlock,1).stimuli               = stimuliBlock;
-         trialOutput(iBlock,1).blockStart            = blockStart;
-         trialOutput(iBlock,1).blockFinished         = blockFinished;
-         trialOutput(iBlock,1).conditionIndex        = metaData{runCounter}.conditionIndices(iBlock,1);
-         trialOutput(iBlock,1).oddball               = metaData{runCounter}.oddballPosition(iBlock,1);
-         trialOutput(iBlock,1).conditionKey          = metaData{runCounter}.dataKey;
-    end %iBlock
+    end
     
     Screen('DrawTexture', w, fixationTexture);
     Screen('Flip',w)
     WaitSecs(10);
-    
+     
     ShowCursor;
   
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     %		END
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     
-    %  Write the trial specific data to the output file.
-    tic;
-     %save the session data in the data directory
-      save([exptdesign.saveDir '/' name '_block' num2str(iBlock) '.run' num2str(exptdesign.iRuns) '.mat'], 'trialOutput', 'exptdesign');
-    toc;
+    %save the session data in the data directory
+    save([exptdesign.saveDir '/' name '_block' num2str(iBlock) '.run' num2str(exptdesign.iRuns) '.mat'], 'trialOutput', 'exptdesign');
     
     % End of experiment, close window:
     Screen('CloseAll');
@@ -230,6 +219,11 @@ try
     if exptdesign.responseBox
         CMUBox('Close',exptdesign.boxHandle);
     end
+        
+%     switch error.identifier
+%         case 'Error:Mismatch'
+%             warning('Mismatch between oddball. Would you like to continue?');
+%     end
     
     % above.  Importantly, it closes the onscreen window if it's open.
     disp('Caught error and closing experiment nicely....');
@@ -241,7 +235,7 @@ try
 end
 end
 
-function drawAndCenterText(window,message, wait, time)
+function drawAndCenterText(window,message,wait, time)
     if nargin < 3
         wait = 1;
     end
@@ -254,25 +248,30 @@ function drawAndCenterText(window,message, wait, time)
     [nx, ny, bbox] = DrawFormattedText(window, message, 'center', 'center', 0);
     black = BlackIndex(window); % pixel value for black               
     Screen('Flip',window, time);
+%     if wait, KbWait(); end
 end
 
-function [loadTime] = loadStimuli(stimuliBlock,iTrial)
-     f = stimuliBlock{1,iTrial}(1,:);
-     p = stimuliBlock{1,iTrial}(2,:);
+function [loadTime] = loadStimuli(stimuliBlock, iTrial)
 
-    if length(f) > 1 
+     if size(stimuliBlock{iTrial},2) > 1
         loadTime = constructOddStimuli(stimuliBlock, iTrial);
-    else
+     else
+         
+        f = stimuliBlock{1,iTrial}(1:2,:);
+        p = stimuliBlock{1,iTrial}(3:4,:);
+
         stim = {...
-            {'fixed',f,1,300},...
-            {'fixchan',p},...
+            {'fixed',f(1),1,300},...
+            {'fixchan',p(1)},...
+            {'fixed',f(2),1,300},...
+            {'fixchan',p(2)},...
             };
         
         [t,s]=buildTSM_nomap(stim);
-        
         startTime = tic;
         stimGenPTB('load',s,t);
         loadTime = toc(startTime);
+        
     end
 end
 
@@ -290,8 +289,9 @@ function [loadTime] = constructOddStimuli(stimuliBlock, iTrial)
            };
 
     [t,s]=buildTSM_nomap(stim);    
-    
+       
     startTime = tic;
     stimGenPTB('load',s,t);
     loadTime = toc(startTime);
+    
 end

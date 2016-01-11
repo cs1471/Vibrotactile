@@ -18,8 +18,8 @@ exptdesign.subjectName = name;
 
 %Trial/Block/Run lengths
 exptdesign.numBlocks = 1;             
-exptdesign.numTrialsPerSession = 127;   % original = 127 
-exptdesign.numRuns = 4;
+exptdesign.numTrialsPerSession = 10;   % original = 127 
+exptdesign.numRuns = 1;
 
 %fixation location/duration         
 exptdesign.fixationImage = 'imgsscaled/fixation.bmp';  
@@ -28,9 +28,10 @@ exptdesign.trialDuration = 4.0; % added by LB 12/18/2015
 
 % Decide which response mapping you are using
 exptdesign.response = input('\n\nEnter response key profile (option 0 or 1):\n\n');
-exptdesign.responseDuration = 3.0; %change from 4.08 (3.08) to 4 (3.0) seconds;                % amount of time to allow for a response in seconds
+exptdesign.responseDuration = 2; %change from 4.08 (3.08) to 4 (3.0) seconds;                % amount of time to allow for a response in seconds
 exptdesign.responseBox = 1;             % Controls whether we are using the keyboard or the response box for subj. responses.
 exptdesign.usespace=0;                  % use space bar to start each trial?
+exptdesign.stimulusLoadWindow = .5;
 
 %open com3 port for button boxes
 if exptdesign.responseBox
@@ -52,7 +53,8 @@ end
 %close com3 port
 if exptdesign.responseBox
     CMUBox('Close',exptdesign.boxHandle);
-    disp('Ensure dip switches are set back to 4');
+    handle = errordlg('Please ensure the dip switches are set back to 4 and A');
+    disp(handle);
 end
 
 %close com2 port 

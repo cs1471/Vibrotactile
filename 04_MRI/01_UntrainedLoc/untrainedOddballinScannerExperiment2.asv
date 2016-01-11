@@ -199,7 +199,7 @@ try
          trialOutput(iBlock,1).blockFinished         = blockFinished;
          trialOutput(iBlock,1).conditionIndex        = metaData{runCounter}.conditionIndices(iBlock,1);
          trialOutput(iBlock,1).oddball               = metaData{runCounter}.oddballPosition(iBlock,1);
-         trialOutput(iBlock,1).conditionKey          = metaData{runCounter}.dataKey;
+         trialOutput(iBlock,1).conditionKey          = metaData{runCounter}.dataKey(iBlock,:);
     end %iBlock
     
     Screen('DrawTexture', w, fixationTexture);
