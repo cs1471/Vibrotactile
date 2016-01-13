@@ -33,7 +33,7 @@ else
     mkdir(['./data/' number])
 end
 
-exptdesign.numBlocks = 1;              % number of blocks
+exptdesign.numBlocks = 7;              % number of blocks
 exptdesign.numTrialsPerSession = 144;
 
 
