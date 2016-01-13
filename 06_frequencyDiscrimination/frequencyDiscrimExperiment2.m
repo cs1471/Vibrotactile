@@ -81,13 +81,13 @@ function frequencyDiscrimExperiment2(exptdesign)
            sResp=getResponseMouse(responseTime);
            responseFinishedTime=GetSecs;
            
-           if isequal(stimuli(1:2, iTrial),stimuli(3:4,iTrial))
+           if isequal(stimuli(1:4, iTrial),stimuli(5:8,iTrial))
                if mod(iBlock,2) % are stimuli the same?
                    correctResponse=1;
                else 
                    correctResponse=2;
                end
-           elseif ~isequal(stimuli(1:2, iTrial),stimuli(3:4,iTrial)) 
+           elseif ~isequal(stimuli(1:4, iTrial),stimuli(5:8,iTrial)) 
                if mod(iBlock,2) % are stimuli the same?
                    correctResponse=2;
                else 
@@ -176,7 +176,7 @@ function [numericalanswer] = getResponseMouse(waitTime)
   startWaiting=clock;
   while etime(clock,startWaiting) < waitTime && mousePressed == 0
       %check to see if a button is pressed
-       [~,~,buttons] = GetMouse();
+       [x,y,buttons] = GetMouse();
        if (~buttons(1) && ~buttons(3))
            continue;
        else

@@ -23,6 +23,6 @@ stimuliDifferent = [repmat(proto2,1,3),       repmat(proto3,1,3),       repmat(p
 stimuli = [repmat(stimuliSame,1,3), stimuliDifferent]; 
 % repmat stimuliSame but not stimuliDifferent to ensure that there are the same 
 % number of same and diff stimuli 
-stimuli = repmat(stimuli,1,6);
+stimuli = repmat(stimuli,1,2);
 
 save ('frequencyDiscrimStimuli2.mat','stimuli')
