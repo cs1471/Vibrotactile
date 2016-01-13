@@ -26,7 +26,7 @@ end
 
 %Trial/Block/Run lengths
 exptdesign.subjectName = name;
-exptdesign.numBlocks = 5;              
+exptdesign.numBlocks = 24;              
 exptdesign.numTrialsPerSession = 6;    
 exptdesign.numRuns = 1;
 
