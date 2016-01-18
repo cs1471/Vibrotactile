@@ -200,11 +200,11 @@ try
                correctResponse = -1;
            end
            
-           endOfTrialWaitTime = waitTime-stimLoadTime;
-           WaitSecs(endOfTrialWaitTime)
-           
            withinTrialCounter = withinTrialCounter + 1;
            totalTrialCounter = totalTrialCounter + 1;
+           
+           endOfTrialWaitTime = waitTime-stimLoadTime;
+           WaitSecs(endOfTrialWaitTime)
            
            % Load stimuli
            if withinTrialCounter ~= 1 && withinTrialCounter ~= 127
@@ -240,7 +240,6 @@ try
         end
         blockEndTime = GetSecs;
         trialOutput(iBlock,1).blockEndTime                     = blockEndTime;
-        trialOutput(iBlock,1).blockDuration                    = blockEndTime - blockStart;
     end
     
     % Draw fixation cross for last 10 seconds

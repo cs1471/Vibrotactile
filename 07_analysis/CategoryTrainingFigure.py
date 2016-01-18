@@ -4,39 +4,33 @@ import numpy as np
 import scipy.io as sio
 import plotly.plotly as py
 import statistics as stat
-from math import log2
+import math as m
 import plotly.graph_objs as go
 import plotly.tools as tls
 
+#################################################################################
 def my_range(start, end, step):
     while start <= end:
         yield start
         start += step
 
 def makeFrequency():
-    frequencyList=[]
-    for i in my_range(0, 2, 0.1):
-        frequencyList.append(i)
+    frequencyList = [i for i in my_range(0, 2, 0.1)]
 
     for index,obj in enumerate(frequencyList):
-        obj += log2(25)
+        obj += m.log2(25)
         frequencyList[index] = round(2**obj)
     return frequencyList
 
 #################################MAIN##########################################
 # filename = input('Enter a filename: \n')
 # fileDirectory = input('Enter the directory where you want your figure saved: /n')
-# dprimeCalc = input('Do you want to calculate dprime? (y/n): \n')
-# multipleSession = input('Do you want to graph multiple sessions? (y/n): \n')
-# if multipleSession == 'y':
-#     numFiles = input('How many files would you like to read in? \n')
-# else:
-#     numFiles=1
 
-filename = ('20151208_1505-MR1000_block6')
+filename = ('20151209_1728-MR1000_block6')
 fileDirectory = '/Users/courtney/GoogleDrive/Riesenhuber/05_2015_scripts/Vibrotactile/01_CategoryTraining/data/1000/'
 multipleSession = 'y'
-dprimeCalc = 'n'
+session = '1'
+dprimeCalc = 'y'
 
 #load matfile
 data = sio.loadmat(fileDirectory + filename, struct_as_record=True)
@@ -58,25 +52,39 @@ nBlocks = data['exptdesign']['numSessions'][0,0][0]
 subjectNumber = data['exptdesign']['number'][0,0][0]
 subjectName = data['exptdesign']['subjectName'][0,0][0]
 
-#calculate dprime
-if dprimeCalc == 'y':
-    hit = generalMiss = false_alarm = correct_rejection = correctResponseDiff = correctResponseSame = miss = 0
-    for i in range(sResp.size):
-        for counter in range(sResp[0,i].size):
-            if sResp[0,i][0,counter]==2 and correctResponse[0,i][0,counter]==2:
-                hit += 1
-                correctResponseDiff += 1
-            elif sResp[0,i][0,counter]==1 and correctResponse[0,i][0,counter]==1:
-                correct_rejection += 1
-                correctResponseSame += 1
-            elif sResp[0,i][0,counter]==2 and correctResponse[0,i][0,counter]==1:
-                false_alarm += 1
-            elif sResp[0,i][0,counter]==1 and correctResponse[0,i][0,counter]==2:
-                miss += 1
-            else:
-                generalMiss += 1
+b_categoryA = []
+b_categoryB = []
 
-    dprime = (sum(hit))/len(hit) - (sum(false_alarm))/len(false_alarm)/(stat.stdev(hit)-stat.stdev(false_alarm))
+i = counter = 0
+
+for i in range(sResp.size):
+    categoryA = []
+    categoryB = []
+    for counter in range(sResp[0,i].size):
+        stimulus = round(stimuli[0,i][0,counter])
+        if accuracy[0,i][0,counter]==1:
+            if stimulus in frequencyList and stimulus < 47:
+                categoryA.append(1)
+            else:
+                categoryB.append(1)
+        else:
+            if stimulus in frequencyList and stimulus < 47:
+                categoryA.append(0)
+            else:
+                categoryB.append(0)
+    b_categoryA.append(categoryA)
+    b_categoryB.append(categoryB)
+
+i = 0
+mAcc_categoryA = []
+
+for i in range(len(b_categoryA)):
+    mAcc_categoryA.append(stat.mean(b_categoryA[i]))
+
+i = 0
+mAcc_categoryB = []
+for i in range(len(b_categoryB)):
+    mAcc_categoryB.append(stat.mean(b_categoryB[i]))
 
 #calculate the accuracy by difficulty
 i=j=counter=0
@@ -180,10 +188,15 @@ trace1 = make_trace_bar(cp_mean, "Category Prototype Accuracy")
 trace2 = make_trace_bar(mm_mean, "Middle Morph Accuracy")
 trace3 = make_trace_bar(cb_mean, "Category Boundary Accuracy")
 trace4 = make_trace_line(y, "Overall Accuracy")
+trace5 = make_trace_bar(mAcc_categoryA, 'Category A Acc (LF prox to wrist)')
+trace6 = make_trace_bar(mAcc_categoryB, 'Category B Acc (HF prox to wrist)')
 
-dataFile = open(fileDirectory+ filename + '.py', 'w')
-dataFile.write(x,y,cp_mean, mm_mean, cb_mean,)
-dataFile.close()
+# matFileName = fileDirectory + filename
+# dataFile = sio.savemat(matFileName, {'x':x, 'y':y, 'cp_mean': cp_mean, 'mm_mean': mm_mean, 'cb_mean': cb_mean)
+# dataFile.write(x,y,cp_mean, mm_mean, cb_mean,)
+# dataFile.close()
+
+
 # Generate Figure object with 2 axes on 2 rows, print axis grid to stdout
 fig = tls.make_subplots(
     rows=1,
@@ -191,8 +204,15 @@ fig = tls.make_subplots(
     shared_xaxes=True
 )
 
+fig2 = tls.make_subplots(
+    rows=1,
+    cols=1,
+    shared_xaxes=True
+)
+
 #concatenate data you want plotted
 fig['data'] = go.Data([trace1, trace2, trace3, trace4])
+fig2['data'] = go.Data([trace4, trace5, trace6])
 
 #set figure layout to hold mutlitple bars
 fig['layout'].update(
@@ -201,15 +221,28 @@ fig['layout'].update(
     bargap=0.25
 )
 
+fig2['layout'].update(
+    barmode='group',
+    bargroupgap=0,
+    bargap=0.25
+)
+
 #set title of figure data
 fig['layout'].update(
-    title = subjectName + "Accuracy by difficulty - Session5"
+    title = subjectName + " Accuracy by difficulty, Session: " + session
+)
+fig2['layout'].update(
+    title = subjectName + " Accuracy by Category Type, Session: " + session
 )
 
 #get the url of your figure to embed in html later
-first_plot_url = py.plot(fig, filename= subjectName + "subjectData", auto_open=False,)
+first_plot_url = py.plot(fig, filename= subjectName + "subjectData" + session, auto_open=False,)
 tls.get_embed(first_plot_url)
+second_plot_url = py.plot(fig2, filename= subjectName + "subjectData2" + session, auto_open=False,)
+tls.get_embed(second_plot_url)
 
+print("Your graph will be saved in this directory: " + fileDirectory + "\n")
+print("Your graph will be saved under: " + filename + "\n")
 #embed figure data in html
 html_string = '''
 <html>
@@ -218,9 +251,12 @@ html_string = '''
         <style>body{ margin:0 100; background:whitesmoke; }</style>
     </head>
     <body>
-        <!-- *** Session 1 *** --->
+        <!-- *** Accuracy by Morph *** --->
         <iframe width="1000" height="550" frameborder="0" seamless="seamless" scrolling="no" \
 src="'''+ first_plot_url + '''.embed?width=800&height=550"></iframe>
+        <!-- *** Accuracy by Category *** --->
+        <iframe width="1000" height="550" frameborder="0" seamless="seamless" scrolling="no" \
+src="'''+ second_plot_url + '''.embed?width=800&height=550"></iframe>
     </body>
 </html>'''
 
@@ -228,5 +264,10 @@ src="'''+ first_plot_url + '''.embed?width=800&height=550"></iframe>
 f = open(fileDirectory + filename + '.html','w')
 f.write(html_string)
 
+py.image.save_as(fig, fileDirectory + filename + "CategoryTrainingAccMorph.png")
+py.image.save_as(fig2, fileDirectory + filename + "CategoryTrainingAccCategory.png")
+
 #close all open files
 f.close()
+
+print("Done!")
