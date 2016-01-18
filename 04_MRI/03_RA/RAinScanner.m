@@ -3,9 +3,9 @@ name = input('\n\nEnter Subject ID:\n\n','s');
 number = name;
 exptdesign.number = number;
 if isempty(name)
-    name = [datestr(now,'yyyy-mm-dd-') 'MR000'];
+    name = [datestr(now,'yyyy-mm-dd-HH-MM-') 'MR000'];
 else
-    name = [datestr(now,'yyyy-mm-dd-') name];
+    name = [datestr(now,'yyyy-mm-dd-HH-MM-') name];
 end
 WaitSecs(0.25);
 
@@ -32,6 +32,7 @@ exptdesign.responseDuration = 2; %change from 4.08 (3.08) to 4 (3.0) seconds;   
 exptdesign.responseBox = 1;             % Controls whether we are using the keyboard or the response box for subj. responses.
 exptdesign.usespace=0;                  % use space bar to start each trial?
 exptdesign.stimulusLoadWindow = .5;
+exptdesign.stimulusPresentationTime = 1;
 
 %open com3 port for button boxes
 if exptdesign.responseBox

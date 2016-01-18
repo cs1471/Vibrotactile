@@ -93,16 +93,19 @@ try
     response = exptdesign.response;
     responseDuration = exptdesign.responseDuration;
     trialDuration = exptdesign.trialDuration;
+    stimulusPresentationTime = exptdesign.stimulusPresentationTime;
    
     % Display experiment instructions
     if response == 0
         drawAndCenterText(w,['\nOn each trial, you will feel 2 vibrations \n'...
-             'You will indicate whether the vibrations felt different by pressing the button with your index finger\n'...
-             'or the same by pushing the button with your middle finger.'  ],1)
+                             'You will indicate whether the vibrations felt different by pressing \n'...
+                             'the button with your index finger\n'...
+                             'or the same by pushing the button with your middle finger.'  ],1)
     else
         drawAndCenterText(w,['\nOn each trial, you will feel 2 vibrations \n'...
-             'You will indicate whether the vibrations felt different by pressing the button with your middle finger\n'...
-             'or the same by pushing the button with your index finger.'  ],1)
+                             'You will indicate whether the vibrations felt different by pressing \n'...
+                             'the button with your middle finger\n'...
+                             'or the same by pushing the button with your index finger.'  ],1)
     end
     
     % Load stimuli file
@@ -150,10 +153,12 @@ try
                stimulusOnset = GetSecs;
                rtn=-1;
                while rtn==-1
-                   rtn=stimGenPTB('start');
+                    rtn=stimGenPTB('start');
                end
                stimulusFinished = GetSecs;
                stimulusDuration = stimulusFinished-stimulusOnset;
+               stimDurationOffset = stimulusPresentationTime - stimulusDuration;
+               WaitSecs(stimDurationOffset)
                
                % Start response window
                responseStartTime=GetSecs;
@@ -167,7 +172,7 @@ try
                % set variables == 0 if no response
                responseFinishedTime = 0;
                sResp=0;
-               RT = exptdesign.responseDuration; %codes RT for no response (max response window)
+               RT = responseDuration; %codes RT for no response (max response window)
                
                % sResp =1 is same, sResp = 2 if differnt
                if ~isempty(evt)
@@ -183,7 +188,7 @@ try
                    RT = responseFinishedTime - responseStartTime;
                end
                
-               waitTime = exptdesign.trialDuration - (stimulusDuration + (responseDuration - RT));
+               waitTime = exptdesign.trialDuration - (stimulusDuration + RT);
                
                % Code correct response
                if isequal(stimuli(1:4, iTrial),stimuli(5:8,iTrial))
@@ -200,9 +205,6 @@ try
                correctResponse = -1;
            end
            
-           endOfTrialWaitTime = waitTime-stimLoadTime;
-           WaitSecs(endOfTrialWaitTime)
-           
            withinTrialCounter = withinTrialCounter + 1;
            totalTrialCounter = totalTrialCounter + 1;
            
@@ -211,6 +213,8 @@ try
             [stimLoadTime] = loadStimuli(stimuli(:,iTrial+1));
            end
            
+           endOfTrialWaitTime = waitTime-stimLoadTime;
+           WaitSecs(endOfTrialWaitTime)           
            
            % Record parameters for the trial and block
            trialOutput(iBlock,1).sResp(iTrial)                 = sResp;
@@ -228,6 +232,7 @@ try
            trialOutput(iBlock,1).FixationMissed(iTrial)        = FixationMissed;
            trialOutput(iBlock,1).stimLoadTime(iTrial)          = stimLoadTime;
            trialOutput(iBlock,1).waitTime(iTrial)              = waitTime;
+           trialOutput(iBlock,1).stimDurationOffset(iTrial)    = stimDurationOffset;
            trialOutput(iBlock,1).blockStart                    = blockStart;
            trialOutput(iBlock,1).endOfTrialWaitTime(iTrial)    = endOfTrialWaitTime;
            
