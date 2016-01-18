@@ -1,5 +1,5 @@
 
-function trialOutput = trainedOddballExperimentInScanner(name,exptdesign)
+function trialOutput = trainedOddballExperimentInScanner2(name,exptdesign)
 % dbstop if error;
 try
 %     dbstop if error;
@@ -91,8 +91,8 @@ try
              'You will indicate the vibration that felt different from the other 5 vibrations\n'...
              'by pushing the button.'  ],1)
    
-   %passes in response profile from wrapper function
-   response = exptdesign.response;
+    %passes in response profile from wrapper function
+    response = exptdesign.response;
 
     %load training stimuli
     load(['stimuliAllRunsRP' int2str(response) '.mat']);
@@ -134,7 +134,7 @@ try
            responseStartTime=GetSecs;
            
            % Load stimuli
-           if withinTrialCounter ~= 1 && withinTrialCounter ~= 6
+           if withinTrialCounter ~= 1 && withinTrialCounter ~= length(numTrialsPerSession)
                 [stimLoadTime] = loadStimuli(stimuliBlock ,iTrial+1);
            end
            
@@ -148,8 +148,7 @@ try
                 correctResponse = 0;
            end
            
-            %record parameters for the trial and block
-           trialOutput(iBlock,1).metaData{runCounter}          = metaData;        
+            %record parameters for the trial and block       
            trialOutput(iBlock,1).correctResponse(iTrial)       = correctResponse;
            trialOutput(iBlock,1).stimulusLoadTime(iTrial)      = stimLoadTime;
            trialOutput(iBlock,1).stimulusOnset(iTrial)         = stimulusOnset;
@@ -192,6 +191,9 @@ try
         trialOutput(iBlock,1).stimuli               = stimuliBlock;
         trialOutput(iBlock,1).blockStart            = blockStart;
         trialOutput(iBlock,1).blockFinished         = blockFinished;
+        trialOutput(iBlock,1).conditionIndex        = metaData{runCounter}.conditionIndices(iBlock,1);
+        trialOutput(iBlock,1).oddball               = metaData{runCounter}.oddballPosition(iBlock,1);
+        trialOutput(iBlock,1).conditionKey          = metaData{runCounter}.dataKey;
     end
     
     Screen('DrawTexture', w, fixationTexture);
@@ -247,14 +249,14 @@ function drawAndCenterText(window,message,wait, time)
 end
 
 function [loadTime] = loadStimuli(stimuliBlock, iTrial)
-
+    
      if size(stimuliBlock{iTrial},2) > 1
         loadTime = constructOddStimuli(stimuliBlock, iTrial);
      else
          
         f = stimuliBlock{1,iTrial}(1:2,:);
         p = stimuliBlock{1,iTrial}(3:4,:);
-
+         
         stim = {...
             {'fixed',f(1),1,300},...
             {'fixchan',p(1)},...
@@ -263,10 +265,10 @@ function [loadTime] = loadStimuli(stimuliBlock, iTrial)
             };
         
         [t,s]=buildTSM_nomap(stim);
+        
         startTime = tic;
         stimGenPTB('load',s,t);
         loadTime = toc(startTime);
-        
     end
 end
 

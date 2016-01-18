@@ -134,7 +134,7 @@ try
            responseStartTime=GetSecs;
            
            % Load stimuli
-           if withinTrialCounter ~= 1 && withinTrialCounter ~= 6
+           if withinTrialCounter ~= 1 && withinTrialCounter ~= length(numTrialsPerSession)
                 [stimLoadTime] = loadStimuli(stimuliBlock ,iTrial+1);
            end
            

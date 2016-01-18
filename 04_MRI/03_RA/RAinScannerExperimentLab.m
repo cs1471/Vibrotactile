@@ -97,6 +97,7 @@ try
     response = exptdesign.response;
     responseDuration = exptdesign.responseDuration;
     trialDuration = exptdesign.trialDuration;
+    numTrialsPerSession = exptdesign.numTrialsPerSession;
     
     sOL = exptdesign.scannerOrlab;
    
@@ -124,45 +125,54 @@ try
         stimuli = stimuliRun4;
     end
     
-    trialCounter = 1;
+    totalTrialCounter = 1;
     for iBlock = 1:exptdesign.numBlocks %how many blocks to run this training session 
+        blockStartTime = GetSecs;
         
+        withinTrialCounter = 1;
         %iterate over trials
         for iTrial=1:exptdesign.numTrialsPerSession
-           trialOnset = GetSecs;
+           trialStartTime = GetSecs;
+           
+           if withinTrialCounter == 1
+               stimLoadTime = loadStimuli(stimuli(1:8,iTrial));
+           end
+           
            %draw fixation/reset timing
            Screen('DrawTexture', w, fixationTexture);
            [FixationVBLTimestamp FixationOnsetTime FixationFlipTimestamp FixationMissed] = ...
-               Screen('Flip',w, exptdesign.scanStart + 10*(iBlock) + 4*(trialCounter-1));
+               Screen('Flip',w, exptdesign.scanStart + 10*(iBlock) + 4*(totalTrialCounter-1));
            
            %call function that generates stimuli for driver box
            stimulusOnset = GetSecs;
            %set variables == 0 if no response
            responseFinishedTime = 0;
-           responseStartTime=0;
-           sResp=0;
-           responseMapping =0;
+           responseStartTime    = 0;
+           sResp                = 0;
+           responseMapping      = 0;
            
            if stimuli(1:4,iTrial) ~= 0
-               [timeBuildTSMstim1, timeLoadStimulistim1, timeGenerateStimulistim1]...
-                   =constructStimuli(stimuli(1:4,iTrial)); % present stim 1
                
-               WaitSecs(exptdesign.interStimuliDuration);%wait time between stimuli
-               
-               [timeBuildTSMstim2, timeLoadStimulistim2, timeGenerateStimulistim2]...
-                   =constructStimuli(stimuli(5:8,iTrial)); % present stim 2
-               
+               %cue stimulus presentation 
+               rtn=-1;
+               while rtn==-1
+                   rtn=stimGenPTB('start');
+               end
                stimulusFinished = GetSecs;
                stimulusDuration = stimulusFinished-stimulusOnset;
                
-               %start response window
-               responseStartTime=GetSecs;
-               %record subject response for mouse click v button press
-               [sResp,responseFinishedTime]...
-                   = getResponse(stimulusFinished, sOL, responseMapping, responseDuration);
-
-               RT = responseFinishedTime - responseStartTime;
-               waitEOT = trialDuration-(RT+stimulusDuration);
+%                %start response window
+%                responseStartTime=GetSecs;
+%                %record subject response for mouse click v button press
+%                [sResp,responseFinishedTime]...
+%                    = getResponse(stimulusFinished, sOL, responseMapping, responseDuration);
+               
+               %load stimulus for next trial
+               if withinTrialCounter ~= 1 && withinTrialCounter ~= length(numTrialsPerSession)
+                [stimLoadTime] = loadStimuli(stimuli(1:8,iTrial));
+               end
+               
+               waitEOT = trialDuration-(responseDuration + stimulusDuration + stimLoadTime);
                WaitSecs(waitEOT)
            else
                WaitSecs(exptdesign.trialDuration); % change from 4.08 to 4. LB then changed it to exptdesign.trialDuration variable defined in the wrapper.
@@ -173,12 +183,6 @@ try
                RT=0;
            end
            
-           
-           
-           
-           
-          
-           
            %code correct response
            if isequal(stimuli(1:4, iTrial),stimuli(5:8,iTrial))
                correctResponse=1;
@@ -186,31 +190,37 @@ try
                correctResponse=2;
            end
            
-           trialFinished = GetSecs;
+           withinTrialCounter = withinTrialCounter + 1;
+           totalTrialCounter = totalTrialCounter + 1;
+           trialEndTime = GetSecs;
+           
+           
            %record parameters for the trial and block           
-           trialOutput(iBlock,1).sResp(iTrial)=sResp;
-           trialOutput(iBlock,1).correctResponse(iTrial)=correctResponse;
-           trialOutput(iBlock,1).stimulusOnset(iTrial)=stimulusOnset;
-           trialOutput(iBlock,1).stimulusDuration(iTrial)=stimulusFinished-stimulusOnset;
-           trialOutput(iBlock,1).stimulusFinished(iTrial)=stimulusFinished;
-           trialOutput(iBlock,1).responseStartTime(iTrial)=responseStartTime;
-           trialOutput(iBlock,1).responseFinishedTime(iTrial)=responseFinishedTime;
-           trialOutput(iBlock,1).RT(iTrial)=responseFinishedTime-responseStartTime;
-           trialOutput(iBlock,1).stimuli(:,iTrial) = stimuli(:,iTrial);
-           trialOutput(iBlock,1).FixationVBLTimestamp(iTrial)=FixationVBLTimestamp;
-           trialOutput(iBlock,1).FixationOnsetTime(iTrial)=FixationOnsetTime;
-           trialOutput(iBlock,1).FixationFlipTimestamp(iTrial)=FixationFlipTimestamp;
-           trialOutput(iBlock,1).FixationMissed(iTrial)=FixationMissed;
-           trialOutput(iBlock,1).timeBuildTSMstim1(iTrial) = timeBuildTSMstim1;
-           trialOutput(iBlock,1).timeLoadStimulistim1(iTrial) = timeLoadStimulistim1;
-           trialOutput(iBlock,1).timeGenerateStimulistim1(iTrial) = timeGenerateStimulistim1;
-           trialOutput(iBlock,1).timeBuildTSMstim2(iTrial) = timeBuildTSMstim2;
-           trialOutput(iBlock,1).timeLoadStimulistim2(iTrial) = timeLoadStimulistim2;
-           trialOutput(iBlock,1).timeGenerateStimulistim2(iTrial) = timeGenerateStimulistim2;
-           trialOutput(iBlock,1).trialDuration(iTrial)= trialFinished-trialOnset;
-           trialOutput(iBlock,1).waitEOT(iTrial)=waitEOT;
-           trialCounter = trialCounter + 1;
+           trialOutput(iBlock,1).sResp(iTrial)                 = sResp;
+           trialOutput(iBlock,1).correctResponse(iTrial)       = correctResponse;
+           trialOutput(iBlock,1).stimulusOnset(iTrial)         = stimulusOnset;
+           trialOutput(iBlock,1).stimulusDuration(iTrial)      = stimulusFinished-stimulusOnset;
+           trialOutput(iBlock,1).stimulusFinished(iTrial)      = stimulusFinished;
+           trialOutput(iBlock,1).responseStartTime(iTrial)     = responseStartTime;
+           trialOutput(iBlock,1).responseFinishedTime(iTrial)  = responseFinishedTime;
+           trialOutput(iBlock,1).RT(iTrial)                    = responseFinishedTime-responseStartTime;
+           trialOutput(iBlock,1).stimuli(:,iTrial)             = stimuli(:,iTrial);
+           trialOutput(iBlock,1).FixationVBLTimestamp(iTrial)  = FixationVBLTimestamp;
+           trialOutput(iBlock,1).FixationOnsetTime(iTrial)     = FixationOnsetTime;
+           trialOutput(iBlock,1).FixationFlipTimestamp(iTrial) = FixationFlipTimestamp;
+           trialOutput(iBlock,1).FixationMissed(iTrial)        = FixationMissed;
+           trialOutput(iBlock,1).stimLoadTime(iTrial)          = stimLoadTime;
+           trialOutput(iBlock,1).trialStartTime(iTrial)        = trialStartTime;
+           trialOutput(iBlock,1).trialEndTime(iTrial)          = trialEndTime;
+           trialOutput(iBlock,1).trialDuration(iTrial)         = trialEndTime-trialStartTime;
+           trialOutput(iBlock,1).waitEOT(iTrial)               = waitEOT;
+           
         end
+        blockEndTime = GetSecs;
+        trialOutput(iBlock,1).blockStartTime                   = blockStartTime;
+        trialOutput(iBlock,1).blockEndTime                     = blockEndTime;
+        trialOutput(iBlock,1).blockDuration                    = blockEndTime - blockStartTime;
+        
     end
     
     %draw fixation cross for last 10 seconds
@@ -262,29 +272,26 @@ function drawAndCenterText(window,message, wait, time)
     Screen('Flip',window, time);
 end
 
-function [timeBuildTSM, timeLoadStimuli, timeGenerateStimuli]...
-    =constructStimuli(stimuli)
-        f = stimuli(1:2,:);
-        p = stimuli(3:4,:);
+function [loadTime] = loadStimuli(stimuli)
+        f = [stimuli(1:2,:), stimuli(5:6,:)];
+        p = [stimuli(3:4,:), stimuli(7:8,:)];
      
         stim = {...
             {'fixed',f(1),1,300},...
             {'fixchan',p(1)},...
             {'fixed',f(2),1,300},...
             {'fixchan',p(2)},...
+            {'fixed',f(3),700,1000},...
+            {'fixchan',p(3)},...
+            {'fixed',f(4),700,1000},...
+            {'fixchan',p(4)},...
             };
-        startTime = tic;
+   
         [t,s]=buildTSM_nomap(stim);
-        timeBuildTSM=toc(startTime);
         
+        startTime = tic;
         stimGenPTB('load',s,t);
-        timeLoadStimuli=toc(startTime);
-        
-        rtn=-1;
-        while rtn==-1
-            rtn=stimGenPTB('start');
-        end
-        timeGenerateStimuli=toc(startTime)-timeLoadStimuli;
+        loadTime=toc(startTime);
 end
 
 function [sResp,responseFinishedTime]...

@@ -1,10 +1,11 @@
 % get subject info
-number = input('\n\nEnter Subject ID:\n\n','s');
+%number = input('\n\nEnter Subject ID:\n\n','s');
+number = '915';
 exptdesign.number = number;
 if isempty(number)
-    name = [datestr(now,'yyyy-mm-dd-') 'MR000'];
+    name = [datestr(now,'yyyy-mm-dd-HH-MM-') 'MR000'];
 else
-    name = [datestr(now,'yyyy-mm-dd-') number];
+    name = [datestr(now,'yyyy-mm-dd-HH-MM-') number];
 end
 WaitSecs(0.25);
 
@@ -17,20 +18,18 @@ exptdesign.subjectName = name;
 
 %Trial/Block/Run lengths
 exptdesign.numBlocks = 1;              
-exptdesign.numTrialsPerSession = 10;    
-exptdesign.refresh = 0.016679454248257;
-exptdesign.numRuns = 4;
+exptdesign.numTrialsPerSession = 30;    
+exptdesign.numRuns = 1;
 
 %fixation location/duration         
 exptdesign.fixationImage = 'imgsscaled/fixation.bmp';  
 exptdesign.imageDirectory = 'imgsscaled/';  
-exptdesign.interStimuliDuration = .4;
 exptdesign.trialDuration = 4;
 % Decide which response mapping you are using
-exptdesign.response = input('\n\nEnter response key profile (option 0 or 1):\n\n');
-exptdesign.responseDuration = 3;                % amount of time to allow for a response in seconds
+%exptdesign.response = input('\n\nEnter response key profile (option 0 or 1):\n\n');
+exptdesign.response = 0;
+exptdesign.responseDuration = 2;                % amount of time to allow for a response in seconds
 exptdesign.responseBox = 0;             % Controls whether we are using the keyboard or the response box for subj. responses.
-exptdesign.usespace=0;                  % use space bar to start each trial?
 exptdesign.scannerOrlab='l';
 
 %open com3 port for button boxes
