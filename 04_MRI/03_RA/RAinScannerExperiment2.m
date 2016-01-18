@@ -1,17 +1,12 @@
 
-function trialOutput = OddballinScannerExperiment(name,exptdesign)
+function trialOutput = RAinScannerExperiment2(name,exptdesign)
 
 try
-%     dbstop if error;
-    % following codes should be used when you are getting key presses using
-    % fast routines like kbcheck.
     KbName('UnifyKeyNames');
     Priority(1)
 
     %settings so that Psychtoolbox doesn't display annoying warnings--DON'T CHANGE
     oldLevel = Screen('Preference', 'VisualDebugLevel', 1);
-    %     oldEnableFlag = Screen('Preference', 'SuppressAllWarnings', 1);
-    %     warning offc
     HideCursor;
 
     WaitSecs(1); % make sure it is loaded into memory;
@@ -29,7 +24,7 @@ try
     white = WhiteIndex(w); % pixel value for white
     black = BlackIndex(w); % pixel value for black
     
-    %  calculate the slack allowed during a flip interval
+    % Calculate the slack allowed during a flip interval
     refresh = Screen('GetFlipInterval',w);
     slack = refresh/2;
 
@@ -50,8 +45,8 @@ try
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     %		INTRO EXPERIMENT
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    if exptdesign.responseBox == 1
-        %flush event queue
+    if exptdesign.responseBox
+        %initialize event queue
         evt=1;
         
         %%while there is no event continue to flush queue
@@ -74,29 +69,30 @@ try
         triggername=4; %4 == button press on box 3
         trigger=0; %set equal to a different value 
         
-        %while loop that continues to iterate until trigger is pressed at
-        %which point triggername == trigger
+        % While loop that continues to iterate until trigger is pressed at
         while ~isequal(triggername,trigger)
             evt = CMUBox('GetEvent', exptdesign.boxHandle, 1);
             trigger = evt.state;
             starttime = evt.time;
         end
         
-        %store start time and response mapping in exptdesign struct
+        % Store start time and response mapping in exptdesign struct
         exptdesign.scanStart = starttime;
         exptdesign.responseMapping=responseMapping;
-    else 
+    else
+        % Checks for in between runs so that experminter can control run start
+        responseMapping = exptdesign.responseKeyChange;
+        drawAndCenterText(w,'Hit Enter to Continue...',1);
         exptdesign.scanStart = GetSecs;
-        responseMapping = exptdesign.response;
     end
     
-    %marks the number of runs passed in from exptdesign struct
+    % Marks the number of runs passed in from exptdesign struct
     iRuns=exptdesign.iRuns;
 
-    %passes in response profile from wrapper function
+    % Passes in response profile from wrapper function
     response = exptdesign.response;
    
-    %Display experiment instructions
+    % Display experiment instructions
     if response == 0
         drawAndCenterText(w,['\nOn each trial, you will feel 2 vibrations \n'...
              'You will indicate whether the vibrations felt different by pressing the button with your index finger\n'...
@@ -107,86 +103,159 @@ try
              'or the same by pushing the button with your index finger.'  ],1)
     end
     
-    %load stimuli file
-    load('RAstimuli.mat');
+    % Load stimuli file
+    load('stimuliRA.mat');
     
-    %randomize order of same/different trials
-    ind=randperm(size(stimuli,2));
-    stimuli=stimuli(:,ind);
-
-    trialCounter = 1;
-    for iBlock = 1:exptdesign.numBlocks %how many blocks to run this training session 
-        
-        %iterate over trials
-        for iTrial=1:exptdesign.numTrialsPerSession
-           
-           %draw fixation/reset timing
-           Screen('DrawTexture', w, fixationTexture);
-           [FixationVBLTimestamp FixationOnsetTime FixationFlipTimestamp FixationMissed] = ...
-               Screen('Flip',w, exptdesign.scanStart + 10*(iBlock) + 4.08*(trialCounter-1));
-           
-           %call function that generates stimuli for driver box
-           stimulusOnset = GetSecs;
-           constructStimuli(stimuli(1:4,iTrial)); % present stim 1
-           WaitSecs(exptdesign.interStimuliDuration);
-           constructStimuli(stimuli(5:8,iTrial)); % present stim 2
-           stimulusFinished = GetSecs;
-           
-           %set variables == 0 if no response
-           responseFinishedTime = 0;
-           sResp=0;
-           responseMapping =0;
-           %start response window
-           responseStartTime=GetSecs;
-           %record subject response for mouse click v button press
-           sResp = getResponse(stimulusFinished, exptdesign.responseDuration, exptdesign.scannerOrlab, responseMapping);
-           
-           %code correct response
-           if isequal(stimuli(1:4, iTrial),stimuli(5:8,iTrial))
-               correctResponse=1;
-           elseif ~isequal(stimuli(1:4, iTrial),stimuli(5:8,iTrial)) 
-               correctResponse=2;
-           end
-          
-           %record parameters for the trial and block           
-           trialOutput(iBlock,1).sResp(iTrial)=sResp;
-           trialOutput(iBlock,1).correctResponse(iTrial)=correctResponse;
-           trialOutput(iBlock,1).stimulusOnset(iTrial)=stimulusOnset;
-           trialOutput(iBlock,1).stimulusDuration(iTrial)=stimulusFinished-stimulusOnset;
-           trialOutput(iBlock,1).stimulusFinished(iTrial)=stimulusFinished;
-           trialOutput(iBlock,1).responseStartTime(iTrial)=responseStartTime;
-           trialOutput(iBlock,1).responseFinishedTime(iTrial)=responseFinishedTime;
-           trialOutput(iBlock,1).RT(iTrial)=responseFinishedTime-responseStartTime;
-           trialOutput(iBlock,1).stimuli(:,iTrial) = stimuli(:,iTrial);
-           trialOutput(iBlock,1).FixationVBLTimestamp(iTrial)=FixationVBLTimestamp;
-           trialOutput(iBlock,1).FixationOnsetTime(iTrial)=FixationOnsetTime;
-           trialOutput(iBlock,1).FixationFlipTimestamp(iTrial)=FixationFlipTimestamp;
-           trialOutput(iBlock,1).FixationMissed(iTrial)=FixationMissed;
-           
-           trialCounter = trialCounter + 1;
-        end
+    if iRuns == 1
+        stimuli = stimuliRun1;
+    elseif iRuns == 2
+        stimuli = stimuliRun2;
+    elseif iRuns ==3
+        stimuli = stimuliRun3;
+    else
+        stimuli = stimuliRun4;
     end
     
-    %draw fixation cross for last 10 seconds
+    trialCounter = 1;
+    for iBlock = 1:exptdesign.numBlocks % How many blocks to run this training session 
+        blockStart = GetSecs;
+        % Iterate over trials
+        for iTrial=1:exptdesign.numTrialsPerSession
+            % Initialize variable 
+            trialStartTime = GetSecs;
+            evt=1;
+            
+            % Clear event responses stored in cue
+            while ~isempty(evt)
+                evt = CMUBox('GetEvent', exptdesign.boxHandle);
+            end
+            
+            %pre cue first stimulus 
+            if trialCounter == 1
+                [stimLoadTime] = loadStimuli(stimuli(:,iTrial));
+            end
+           
+           % Draw fixation/reset timing
+           Screen('DrawTexture', w, fixationTexture);
+           [FixationVBLTimestamp, FixationOnsetTime, FixationFlipTimestamp, FixationMissed] = ...
+               Screen('Flip',w, exptdesign.scanStart + 10*(iBlock) + exptdesign.trialDuration*(trialCounter-1)); 
+           
+           % Call function that generates stimuli for driver box
+           if stimuli(1:4,iTrial) ~= 0
+               
+               % Cue stimuli in driver box
+               stimulusOnset = GetSecs;
+               rtn=-1;
+               while rtn==-1
+                   rtn=stimGenPTB('start');
+               end
+               stimulusFinished = GetSecs;
+               stimulusDuration = stimulusFinished-stimulusOnset;
+               
+               % Start response window
+               responseStartTime=GetSecs;
+               
+               % Wait until response window passed or until there is an event
+               while (GetSecs < (stimulusFinished + exptdesign.responseDuration) && isempty(evt))
+                   % If button pressed record response
+                   evt = CMUBox('GetEvent', exptdesign.boxHandle);
+               end
+               
+               % set variables == 0 if no response
+               responseFinishedTime = 0;
+               sResp=0;
+               RT = exptdesign.responseDuration; %codes RT for no response (max response window)
+               
+               % sResp =1 is same, sResp = 2 if differnt
+               if ~isempty(evt)
+                   if evt.state == responseMapping.same
+                       sResp = 1;
+                   elseif evt.state == responseMapping.different
+                       sResp = 2;
+                   else
+                       sResp = -1;
+                   end
+                   % Record end time of response
+                   responseFinishedTime=evt.time;
+                   RT = responseFinishedTime - responseStartTime;
+               end
+               
+               waitTime = exptdesign.trialDuration - (stimulusDuration + RT);
+               
+               % Code correct response
+               if isequal(stimuli(1:4, iTrial),stimuli(5:8,iTrial))
+                   correctResponse=1;
+               elseif ~isequal(stimuli(1:4, iTrial),stimuli(5:8,iTrial))
+                   correctResponse=2;
+               end
+               
+           else
+               stimulusOnset = GetSecs;
+               waitTime = exptdesign.trialDuration; 
+               stimulusFinished = GetSecs;
+               sResp = -1;
+               correctResponse = -1;
+           end
+           
+           trialCounter = trialCounter + 1;
+           
+           endOfTrialWaitTime = waitTime-stimLoadTime;
+           WaitSecs(endOfTrialWaitTime)
+           
+           % Load stimuli
+           if trialCounter ~= 1 && trialCounter ~= 127
+            [stimLoadTime] = loadStimuli(stimuli(:,iTrial+1));
+           end
+           
+           
+           % Record parameters for the trial and block
+           trialOutput(iBlock,1).sResp(iTrial)                 = sResp;
+           trialOutput(iBlock,1).correctResponse(iTrial)       = correctResponse;
+           trialOutput(iBlock,1).stimulusOnset(iTrial)         = stimulusOnset;
+           trialOutput(iBlock,1).stimulusDuration(iTrial)      = stimulusDuration;
+           trialOutput(iBlock,1).stimulusFinished(iTrial)      = stimulusFinished;
+           trialOutput(iBlock,1).responseStartTime(iTrial)     = responseStartTime;
+           trialOutput(iBlock,1).responseFinishedTime(iTrial)  = responseFinishedTime;
+           trialOutput(iBlock,1).RT(iTrial)                    = RT;
+           trialOutput(iBlock,1).stimuli(:,iTrial)             = stimuli(:,iTrial);
+           trialOutput(iBlock,1).FixationVBLTimestamp(iTrial)  = FixationVBLTimestamp;
+           trialOutput(iBlock,1).FixationOnsetTime(iTrial)     = FixationOnsetTime;
+           trialOutput(iBlock,1).FixationFlipTimestamp(iTrial) = FixationFlipTimestamp;
+           trialOutput(iBlock,1).FixationMissed(iTrial)        = FixationMissed;
+           trialOutput(iBlock,1).stimLoadTime(iTrial)          = stimLoadTime;
+           trialOutput(iBlock,1).waitTime(iTrial)              = waitTime;
+           trialOutput(iBlock,1).blockStart                    = blockStart;
+           trialOutput(iBlock,1).endOfTrialWaitTime(iTrial)    = endOfTrialWaitTime;
+           
+           % Get trial duration parameters on each trial
+           trialEndTime = GetSecs;
+           trialOutput(iBlock,1).trialStartTime(iTrial)        = trialStartTime;
+           trialOutput(iBlock,1).trialEndTime(iTrial)          = trialEndTime;
+           trialOutput(iBlock,1).trialDuration(iTrial)         = trialEndTime - trialStartTime;
+            
+        end
+        blockEndTime = GetSecs;
+        trialOutput(iBlock,1).blockEndTime                     = blockEndTime;
+    end
+    
+    % Draw fixation cross for last 10 seconds
     Screen('DrawTexture', w, fixationTexture);
     Screen('Flip',w)
     WaitSecs(10);
     
     ShowCursor;
   
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    %		END
-    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    
-    %  Write the trial specific data to the output file.
-    tic;
-     %save the session data in the data directory
-        save(['./data_RAscan/' exptdesign.number '/' exptdesign.subjectName '_block' num2str(iBlock) '.run' num2str(iRuns) '.mat'], 'trialOutput', 'exptdesign');
-    toc;
+    % Save the session data in the data directory
+    save(['./data_RAscan/' exptdesign.number '/' exptdesign.subjectName '_block' num2str(iBlock) '.run' num2str(iRuns) '.mat'], 'trialOutput', 'exptdesign');
     
     % End of experiment, close window:
     Screen('CloseAll');
     Priority(0);
+    
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %		                   END
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    
     
     catch
     % This "catch" section executes in case of an error in the "try"
@@ -216,63 +285,24 @@ function drawAndCenterText(window,message, wait, time)
     Screen('Flip',window, time);
 end
 
-function constructStimuli(stimuli)
-        f = stimuli(1:2,:);
-        p = stimuli(3:4,:);
-     
-        stim = {...
-            {'fixed',f(1),1,300},...
-            {'fixchan',p(1)},...
-            {'fixed',f(2),1,300},...
-            {'fixchan',p(2)},...
-            };
-        
-        [t,s]=buildTSM_nomap(stim);
-        
-        stimGenPTB('load',s,t);
-        rtn=-1;
-        while rtn==-1
-            rtn=stimGenPTB('start');
-        end
-end
+function [stimLoadTime] = loadStimuli(stimuli)
+    f = [stimuli(1:2), stimuli(5:6)];
+    p = [stimuli(3:4), stimuli(7:8)];
 
-function [sResp,responseFinishedTime] = getResponse(stimFinished, waitTime, scannerOrLab, responseMapping)
-% wait until response window passed or until there is an event
-startWaiting = GetSecs;
-mousePressed =0;
-    while (startWaiting < (stimFinished + waitTime) && mousePressed==0)
-        switch scannerOrLab
-            case 's'
-                %if button pressed record response
-                evt = CMUBox('GetEvent', exptdesign.boxHandle);
-                %sResp =1 is same, sResp = 2 if differnt 
-                if ~isempty(evt)
-                    response = evt.state;
-                    if response == responseMapping.same
-                        sResp = 1;
-                        mousePressed = 1;
-                    elseif response == responseMapping.different
-                        sResp = 2;
-                        mousePressed = 1;
-                    else
-                        sResp = -1;
-                    end
-                end
-                responseFinishedTime = evt.time;
-            case'l'
-                %check to see if a button is pressed
-                [x,y,buttons] = GetMouse();
-                if (~buttons(1) && ~buttons(3))
-                    continue;
-                else
-                    if buttons(1)
-                        sResp = 1;
-                    elseif buttons(3)
-                        sResp = 2;
-                    end
-                    responseFinishedTime = GetSecs;
-                    mousePressed = 1;    
-                end
-        end
-    end
+    stim = {...
+        {'fixed',f(1),1,300},...
+        {'fixchan',p(1)},...
+        {'fixed',f(2),1,300},...
+        {'fixchan',p(2)},...
+        {'fixed',f(3),700,1000},...
+        {'fixchan',p(3)},...
+        {'fixed',f(4),700,1000},...
+        {'fixchan',p(4)},...
+        };
+
+    startTime = tic;
+    [t,s]=buildTSM_nomap(stim);
+
+    stimGenPTB('load',s,t);
+    stimLoadTime = toc(startTime);
 end
