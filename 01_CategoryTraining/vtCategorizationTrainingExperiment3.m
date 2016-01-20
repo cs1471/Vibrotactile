@@ -62,7 +62,7 @@ function vtCategorizationTrainingExperiment(name, exptdesign)
   
     %load training stimuli
     load('trainingStimuli3.mat');
-    level=exptdesign.level;
+    level=15;
     
     for iBlock=1:exptdesign.numSessions %how many blocks to run this training session
         stimulusTracking=[];
@@ -233,8 +233,8 @@ function vtCategorizationTrainingExperiment(name, exptdesign)
             level=level+1;
         end
         
-        if level>20
-            drawAndCenterText(w, ['Great Job! You have completed training!' ],1)
+        if level>15
+            drawAndCenterText(w, 'Great Job! You have completed training!',1)
             Screen('CloseAll')
         end
         
