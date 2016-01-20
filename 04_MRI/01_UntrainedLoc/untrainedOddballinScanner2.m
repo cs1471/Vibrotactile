@@ -28,7 +28,7 @@ end
 exptdesign.subjectName = name;
 exptdesign.numBlocks = 24;              
 exptdesign.numTrialsPerSession = 6;    
-exptdesign.numRuns = 1;
+exptdesign.numRuns = 6;
 
 %fixation location/duration
 exptdesign.fixationDuration = 0.700;   

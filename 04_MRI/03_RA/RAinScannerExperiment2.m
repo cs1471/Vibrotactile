@@ -177,9 +177,17 @@ try
                % sResp =1 is same, sResp = 2 if differnt
                if ~isempty(evt)
                    if evt.state == responseMapping.same
-                       sResp = 1;
+                       if response == 0
+                            sResp = 2;
+                       elseif response == 1 
+                           sResp = 1;
+                       end
                    elseif evt.state == responseMapping.different
-                       sResp = 2;
+                        if response == 0
+                            sResp = 1;
+                       elseif response == 1 
+                           sResp = 2;
+                       end
                    else
                        sResp = -1;
                    end
@@ -191,10 +199,18 @@ try
                waitTime = exptdesign.trialDuration - (stimulusDuration + RT);
                
                % Code correct response
-               if isequal(stimuli(1:4, iTrial),stimuli(5:8,iTrial))
-                   correctResponse=1;
-               elseif ~isequal(stimuli(1:4, iTrial),stimuli(5:8,iTrial))
-                   correctResponse=2;
+               if response == 0
+                   if isequal(stimuli(1:4, iTrial),stimuli(5:8,iTrial))
+                       correctResponse=2;
+                   elseif ~isequal(stimuli(1:4, iTrial),stimuli(5:8,iTrial))
+                       correctResponse=1;
+                   end
+               else
+                   if isequal(stimuli(1:4, iTrial),stimuli(5:8,iTrial))
+                       correctResponse=1;
+                   elseif ~isequal(stimuli(1:4, iTrial),stimuli(5:8,iTrial))
+                       correctResponse=2;
+                   end
                end
                
            else
