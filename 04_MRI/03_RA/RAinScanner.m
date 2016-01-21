@@ -1,11 +1,10 @@
 % get subject info
-name = input('\n\nEnter Subject ID:\n\n','s');
-number = name;
+number = input('\n\nEnter Subject ID:\n\n','s');
 exptdesign.number = number;
-if isempty(name)
+if isempty(number)
     name = [datestr(now,'yyyy-mm-dd-HH-MM-') 'MR000'];
 else
-    name = [datestr(now,'yyyy-mm-dd-HH-MM-') name];
+    name = [datestr(now,'yyyy-mm-dd-HH-MM-') number];
 end
 WaitSecs(0.25);
 
@@ -28,10 +27,10 @@ exptdesign.trialDuration = 4.0; % added by LB 12/18/2015
 
 % Decide which response mapping you are using
 exptdesign.response = input('\n\nEnter response key profile (option 0 or 1):\n\n');
-exptdesign.responseDuration = 2; %change from 4.08 (3.08) to 4 (3.0) seconds;                % amount of time to allow for a response in seconds
+exptdesign.responseDuration = 2;        % amount of time to allow for a response in seconds
 exptdesign.responseBox = 1;             % Controls whether we are using the keyboard or the response box for subj. responses.
 exptdesign.usespace=0;                  % use space bar to start each trial?
-exptdesign.stimulusLoadWindow = .5;
+exptdesign.stimulusLoadWindow = 1;
 exptdesign.stimulusPresentationTime = 1;
 
 %open com3 port for button boxes

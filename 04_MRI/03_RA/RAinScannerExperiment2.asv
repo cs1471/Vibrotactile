@@ -127,7 +127,8 @@ try
         blockStart = GetSecs;
         % Iterate over trials
         withinTrialCounter = 1;
-        for iTrial = 1:exptdesign.numTrialsPerSession
+        %for iTrial=1:exptdesign.numTrialsPerSession;
+        for iTrial = 1:27
             % Initialize variable 
             trialStartTime = GetSecs;
             evt=1;
