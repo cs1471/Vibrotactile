@@ -46,7 +46,6 @@ RT = data['trialOutput']['RT']
 sResp = data['trialOutput']['sResp']
 correctResponse = data['trialOutput']['correctResponse']
 accuracy = data['trialOutput']['accuracy']
-level = data['trialOutput']['level']
 stimuli = data['trialOutput']['stimuli']
 nTrials = data['exptdesign']['numTrialsPerSession'][0,0][0]
 nBlocks = data['exptdesign']['numSessions'][0,0][0]
@@ -58,16 +57,16 @@ subjectName = data['exptdesign']['subjectName'][0,0][0]
 #Calculations by category type
 #############################################################################
 
-#calculate accuracy by category type
+#calculate accuracy by frequency
 b_categoryA = []
 b_categoryB = []
-i = counter = 0
-for i in range(sResp.size):
+iTrial = iBlock = 0
+for iBlock in range(sResp.size):
     categoryA = []
     categoryB = []
-    for counter in range(sResp[0,i].size):
-        stimulus = round(stimuli[0,i][0,counter])
-        if accuracy[0,i][0,counter]==1:
+    for iTrial in range(sResp[0,iBlock].size):
+        stimulus = round(stimuli[0,iBlock][0,iTrial])
+        if accuracy[0,iBlock][0,iTrial]==1:
             if stimulus in frequencyList and stimulus < 47:
                 categoryA.append(1)
             else:
@@ -124,15 +123,21 @@ for iBlock, time in enumerate(b_categoryB_RT):
 #Calculations by morph
 #############################################################################
 
-#calculate the accuracy by morph
+#calculate the accuracy by position
 iBlock = iTrial = 0
-b_catProto_accuracy = []
-b_middleM_accuracy = []
-b_catBound_accuracy = []
+b_pos1_accuracy = []
+b_pos3or4_accuracy = []
+b_pos5or6_accuracy = []
+b_pos9or10_accuracy = []
+b_pos11or12_accuracy = []
+b_pos13or14_accuracy = []
 for iBlock in range(sResp.size):
-    catProto_accuracy = []
-    middleM_accuracy = []
-    catBound_accuracy = []
+    pos1or2_accuracy = []
+    pos3or4_accuracy = []
+    pos5or6_accuracy = []
+    pos9or10_accuracy = []
+    pos11or12_accuracy = []
+    pos13or14_accuracy = []
     for iTrial in range(sResp[0,iBlock].size):
         stimulus = round(stimuli[0,iBlock][0,iTrial])
         if accuracy[0,iBlock][0,iTrial]==1:
@@ -342,29 +347,25 @@ fig4 = tls.make_subplots(
 fig['layout'].update(
     barmode='group',
     bargroupgap=0,
-    bargap=0.25,
-    title = "Accuracy By Morph"
+    bargap=0.25
 )
 
 fig2['layout'].update(
     barmode='group',
     bargroupgap=0,
-    bargap=0.25,
-    title = "RT By Morph"
+    bargap=0.25
 )
 
 fig3['layout'].update(
     barmode='group',
     bargroupgap=0,
-    bargap=0.25,
-    title = "Accuracy By Category"
+    bargap=0.25
 )
 
 fig4['layout'].update(
     barmode='group',
     bargroupgap=0,
-    bargap=0.25,
-    title = "RT By Category"
+    bargap=0.25
 )
 
 fig['data']  = [trace1, trace2, trace3, trace7]
