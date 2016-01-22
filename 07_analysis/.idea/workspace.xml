@@ -2,303 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0794c37e-0125-4d6f-89ef-6834103a2107" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/CategoryTrainingAnalysis/.bowerrc" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/CategoryTrainingAnalysis/Gruntfile.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/CategoryTrainingAnalysis/bower.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/CategoryTrainingAnalysis/gulpfile.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/CategoryTrainingAnalysis/nbproject/project.properties" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/CategoryTrainingAnalysis/nbproject/project.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/CategoryTrainingAnalysis/package.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/CategoryTrainingAnalysis/public_html/test2.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/.editorconfig" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/.gitattributes" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/.gitignore" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/.idea/.name" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/.idea/03_javaScript.iml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/.idea/encodings.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/.idea/jsLibraryMappings.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/.idea/misc.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/.idea/modules.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/.idea/vcs.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/.idea/workspace.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/.jscsrc" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/.jshintrc" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/.travis.yml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/CHANGELOG.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/CONTRIBUTING.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/LICENSE.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/README.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/dist/.editorconfig" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/dist/.gitattributes" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/dist/.gitignore" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/dist/.htaccess" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/dist/404.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/dist/LICENSE.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/dist/apple-touch-icon.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/dist/browserconfig.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/dist/crossdomain.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/dist/css/main.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/dist/css/normalize.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/dist/doc/TOC.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/dist/doc/css.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/dist/doc/extend.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/dist/doc/faq.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/dist/doc/html.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/dist/doc/js.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/dist/doc/misc.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/dist/doc/usage.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/dist/favicon.ico" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/dist/humans.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/dist/img/.gitignore" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/dist/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/dist/js/main.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/dist/js/plugins.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/dist/js/vendor/jquery-1.11.3.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/dist/js/vendor/modernizr-2.8.3.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/dist/robots.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/dist/tile-wide.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/dist/tile.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/gulpfile.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/package.json" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/src/.editorconfig" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/src/.gitattributes" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/src/.gitignore" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/src/404.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/src/apple-touch-icon.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/src/browserconfig.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/src/crossdomain.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/src/css/main.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/src/doc/TOC.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/src/doc/css.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/src/doc/extend.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/src/doc/faq.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/src/doc/html.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/src/doc/js.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/src/doc/misc.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/src/doc/usage.md" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/src/favicon.ico" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/src/humans.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/src/img/.gitignore" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/src/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/src/js/main.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/src/js/plugins.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/src/js/vendor/modernizr-2.8.3.min.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/src/robots.txt" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/src/tile-wide.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/src/tile.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/test/categoryTraining.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/test/categoryTrainingHTML.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/test/file_content.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/03_javaScript/test/file_existence.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/CategoryTrainingFigureMultSession.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/plotlyIntro/.idea/workspace.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/plotlyIntro/categoryTrainingSession.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/plotlyIntro/spatialLocalizationAnalysis.py" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/000/20150805_1538-2015-08-05-15-24MR000_block1.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/000/20150805_1538-2015-08-05-15-24MR000_block1.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/000/20150806_1522-2015-08-06-14-15MR000_block4.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/000/20150806_1522-2015-08-06-14-15MR000_block4.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/000/SUBJ000training.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/000/SUBJ000training.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/Mean/20150810_MR915.mat_mean.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/Mean/20150810_MR915.mat_mean.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/Mean/20150812_MR915.mat_mean.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/Mean/20150812_MR915.mat_mean.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/Mean/20150817_MR915.mat_mean.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/Mean/20150817_MR915.mat_mean.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/Mean/20150819_MR915.mat_mean.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/Mean/20150819_MR915.mat_mean.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/Mean/20150824_MR915.mat_mean.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/Mean/20150824_MR915.mat_mean.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/Mean/20150826_MR915.mat_mean.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/Mean/20150826_MR915.mat_mean.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/Mean/20150828_MR915.mat_mean.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/Mean/20150828_MR915.mat_mean.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/Mean/20150831_MR915.mat_mean.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/Mean/20150831_MR915.mat_mean.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/Mean/20151017_MR915.mat_mean.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/Mean/20151017_MR915.mat_mean.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/Mean/20151018_MR915.mat_mean.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/Mean/20151018_MR915.mat_mean.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/PositionLevel/915s1_pL.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/PositionLevel/915s1_pL.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/PositionLevel/915s4_pL.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/PositionLevel/915s4_pL.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/PositionLevel/915s5_pL.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/PositionLevel/915s5_pL.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/PositionLevel/915s6_pL.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/PositionLevel/915s6_pL.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/PositionLevel/915s7_pL.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/PositionLevel/915s7_pL.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/PositionLevel/915s8_pL.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/PositionLevel/915s8_pL.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/RT_ACC_allSessions/20150810_MR915.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/RT_ACC_allSessions/20150810_MR915.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/RT_ACC_allSessions/20150812_MR915.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/RT_ACC_allSessions/20150812_MR915.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/RT_ACC_allSessions/20150817_MR915.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/RT_ACC_allSessions/20150817_MR915.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/RT_ACC_allSessions/20150819_MR915.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/RT_ACC_allSessions/20150819_MR915.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/RT_ACC_allSessions/20150824_MR915.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/RT_ACC_allSessions/20150824_MR915.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/RT_ACC_allSessions/20150826_MR915.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/RT_ACC_allSessions/20150826_MR915.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/RT_ACC_allSessions/20150828_MR915.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/RT_ACC_allSessions/20150828_MR915.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/RT_ACC_allSessions/20150831_MR915.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/RT_ACC_allSessions/20150831_MR915.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/RT_ACC_allSessions/20151017_MR915.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/RT_ACC_allSessions/20151017_MR915.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/RT_ACC_allSessions/20151018_MR915.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/RT_ACC_allSessions/20151018_MR915.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/111/111_s1.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/111/111_s1.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/111/111_s2.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/111/111_s2.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/111/111_s3.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/111/111_s3.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/111/111_s4.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/111/111_s4.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/111/111_s5.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/111/111_s5.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/111/20150811_1711-2015-08-11-16-03MR111_block3.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/111/20150811_1711-2015-08-11-16-03MR111_block3.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/111/20150814_0901-MR111_block4.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/111/20150814_0901-MR111_block4.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/111/20150817_1550-MR111_block3.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/111/20150817_1550-MR111_block3.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/111/20150820_1510-MR111_block4.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/111/20150820_1510-MR111_block4.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/111/20150826_1513-MR111_block4.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/111/20150826_1513-MR111_block4.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/111/AccCatBoundMorphs.jpg" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/111/AccCatBoundMorphs.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/111/AccCatProtoMorphs.jpg" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/111/AccCatProtoMorphs.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/111/AccMiddleMorphs.jpg" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/111/AccMiddleMorphs.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/111/SUBJ111training.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/111/SUBJ111training.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/915/20150810_1620-2015-08-10-15-25MR915_block6.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/915/20150810_1620-2015-08-10-15-25MR915_block6.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/915/20150812_1840-MR915_block6.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/915/20150812_1840-MR915_block6.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/915/20150817_1236-MR915_block6.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/915/20150817_1236-MR915_block6.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/915/20150819_1124-MR915_block6.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/915/20150819_1124-MR915_block6.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/915/20150824_1216-MR915_block6.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/915/20150824_1216-MR915_block6.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/915/20150826_1802-MR915_block6.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/915/20150826_1802-MR915_block6.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/915/20150828_1655-MR915_block6.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/915/20150828_1655-MR915_block6.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/915/20150831_1359-MR915_block6.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/915/20150831_1359-MR915_block6.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/915/20151017_1850-MR915_block6.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/915/20151017_1850-MR915_block6.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/915/20151018_1935-MR915_block6.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/915/20151018_1935-MR915_block6.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/915/SUBJ915training.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/915/SUBJ915training.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/915/Screwed_upTraining/20150804_1239-2015-08-04-11-20MR915_block7.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/915/Screwed_upTraining/20150804_1239-2015-08-04-11-20MR915_block7.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/915/Screwed_upTraining/20150805_1140-2015-08-05-10-19MR915_block7.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/915/Screwed_upTraining/20150805_1140-2015-08-05-10-19MR915_block7.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/915/Screwed_upTraining/20150805_1851-2015-08-05-17-19MR915_block8.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/915/Screwed_upTraining/20150805_1851-2015-08-05-17-19MR915_block8.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/trainingStimuli2.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/trainingStimuli2.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../02_2ptDiscrim/imgsscaled/blank.bmp" afterPath="$PROJECT_DIR$/../02_2ptDiscrim/imgsscaled/blank.bmp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../02_2ptDiscrim/imgsscaled/fixation.bmp" afterPath="$PROJECT_DIR$/../02_2ptDiscrim/imgsscaled/fixation.bmp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../02_2ptDiscrim/imgsscaled/forearmBlueRed.png" afterPath="$PROJECT_DIR$/../02_2ptDiscrim/imgsscaled/forearmBlueRed.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../02_2ptDiscrim/imgsscaled/forearmBlueRed_correctFeedback.png" afterPath="$PROJECT_DIR$/../02_2ptDiscrim/imgsscaled/forearmBlueRed_correctFeedback.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../02_2ptDiscrim/imgsscaled/forearmBlueRed_wrongFeedback.png" afterPath="$PROJECT_DIR$/../02_2ptDiscrim/imgsscaled/forearmBlueRed_wrongFeedback.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../02_2ptDiscrim/imgsscaled/forearmRedBlue.png" afterPath="$PROJECT_DIR$/../02_2ptDiscrim/imgsscaled/forearmRedBlue.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../02_2ptDiscrim/imgsscaled/forearmRedBlue_correctFeedback.png" afterPath="$PROJECT_DIR$/../02_2ptDiscrim/imgsscaled/forearmRedBlue_correctFeedback.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../02_2ptDiscrim/imgsscaled/forearmRedBlue_wrongFeedback.png" afterPath="$PROJECT_DIR$/../02_2ptDiscrim/imgsscaled/forearmRedBlue_wrongFeedback.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../02_2ptDiscrim/imgsscaled/labels1.png" afterPath="$PROJECT_DIR$/../02_2ptDiscrim/imgsscaled/labels1.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../02_2ptDiscrim/imgsscaled/labels2.png" afterPath="$PROJECT_DIR$/../02_2ptDiscrim/imgsscaled/labels2.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../02_2ptDiscrim/imgsscaled/labelsBlueRed.png" afterPath="$PROJECT_DIR$/../02_2ptDiscrim/imgsscaled/labelsBlueRed.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../02_2ptDiscrim/imgsscaled/labelsRedBlue.png" afterPath="$PROJECT_DIR$/../02_2ptDiscrim/imgsscaled/labelsRedBlue.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../02_2ptDiscrim/imgsscaled/labelsSet1_wrong1.png" afterPath="$PROJECT_DIR$/../02_2ptDiscrim/imgsscaled/labelsSet1_wrong1.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../02_2ptDiscrim/imgsscaled/labelsSet1_wrong2.png" afterPath="$PROJECT_DIR$/../02_2ptDiscrim/imgsscaled/labelsSet1_wrong2.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../02_2ptDiscrim/imgsscaled/labelsSet2_wrong1.png" afterPath="$PROJECT_DIR$/../02_2ptDiscrim/imgsscaled/labelsSet2_wrong1.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../02_2ptDiscrim/imgsscaled/labelsSet2_wrong2.png" afterPath="$PROJECT_DIR$/../02_2ptDiscrim/imgsscaled/labelsSet2_wrong2.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../02_2ptDiscrim/imgsscaled/replayBlue.png" afterPath="$PROJECT_DIR$/../02_2ptDiscrim/imgsscaled/replayBlue.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../02_2ptDiscrim/imgsscaled/replayRed.png" afterPath="$PROJECT_DIR$/../02_2ptDiscrim/imgsscaled/replayRed.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../03_spatialLocalization/data/915/20151116_1152-915_block1.mat" afterPath="$PROJECT_DIR$/../03_spatialLocalization/data/915/20151116_1152-915_block1.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../03_spatialLocalization/imgsscaled/blank.bmp" afterPath="$PROJECT_DIR$/../03_spatialLocalization/imgsscaled/blank.bmp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../03_spatialLocalization/imgsscaled/fixation.bmp" afterPath="$PROJECT_DIR$/../03_spatialLocalization/imgsscaled/fixation.bmp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../03_spatialLocalization/imgsscaled/forearmBlueRed.png" afterPath="$PROJECT_DIR$/../03_spatialLocalization/imgsscaled/forearmBlueRed.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../03_spatialLocalization/imgsscaled/forearmBlueRed_correctFeedback.png" afterPath="$PROJECT_DIR$/../03_spatialLocalization/imgsscaled/forearmBlueRed_correctFeedback.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../03_spatialLocalization/imgsscaled/forearmBlueRed_wrongFeedback.png" afterPath="$PROJECT_DIR$/../03_spatialLocalization/imgsscaled/forearmBlueRed_wrongFeedback.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../03_spatialLocalization/imgsscaled/forearmRedBlue.png" afterPath="$PROJECT_DIR$/../03_spatialLocalization/imgsscaled/forearmRedBlue.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../03_spatialLocalization/imgsscaled/forearmRedBlue_correctFeedback.png" afterPath="$PROJECT_DIR$/../03_spatialLocalization/imgsscaled/forearmRedBlue_correctFeedback.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../03_spatialLocalization/imgsscaled/forearmRedBlue_wrongFeedback.png" afterPath="$PROJECT_DIR$/../03_spatialLocalization/imgsscaled/forearmRedBlue_wrongFeedback.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../03_spatialLocalization/imgsscaled/labels1.png" afterPath="$PROJECT_DIR$/../03_spatialLocalization/imgsscaled/labels1.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../03_spatialLocalization/imgsscaled/labels2.png" afterPath="$PROJECT_DIR$/../03_spatialLocalization/imgsscaled/labels2.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../03_spatialLocalization/imgsscaled/labelsBlueRed.png" afterPath="$PROJECT_DIR$/../03_spatialLocalization/imgsscaled/labelsBlueRed.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../03_spatialLocalization/imgsscaled/labelsRedBlue.png" afterPath="$PROJECT_DIR$/../03_spatialLocalization/imgsscaled/labelsRedBlue.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../03_spatialLocalization/imgsscaled/labelsSet1_wrong1.png" afterPath="$PROJECT_DIR$/../03_spatialLocalization/imgsscaled/labelsSet1_wrong1.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../03_spatialLocalization/imgsscaled/labelsSet1_wrong2.png" afterPath="$PROJECT_DIR$/../03_spatialLocalization/imgsscaled/labelsSet1_wrong2.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../03_spatialLocalization/imgsscaled/labelsSet2_wrong1.png" afterPath="$PROJECT_DIR$/../03_spatialLocalization/imgsscaled/labelsSet2_wrong1.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../03_spatialLocalization/imgsscaled/labelsSet2_wrong2.png" afterPath="$PROJECT_DIR$/../03_spatialLocalization/imgsscaled/labelsSet2_wrong2.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../03_spatialLocalization/imgsscaled/replayBlue.png" afterPath="$PROJECT_DIR$/../03_spatialLocalization/imgsscaled/replayBlue.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../03_spatialLocalization/imgsscaled/replayRed.png" afterPath="$PROJECT_DIR$/../03_spatialLocalization/imgsscaled/replayRed.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../05_FunctionsForStimulator/imgsscaled/blank.bmp" afterPath="$PROJECT_DIR$/../05_FunctionsForStimulator/imgsscaled/blank.bmp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../05_FunctionsForStimulator/imgsscaled/fixation.bmp" afterPath="$PROJECT_DIR$/../05_FunctionsForStimulator/imgsscaled/fixation.bmp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../05_FunctionsForStimulator/imgsscaled/forearmBlueRed.png" afterPath="$PROJECT_DIR$/../05_FunctionsForStimulator/imgsscaled/forearmBlueRed.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../05_FunctionsForStimulator/imgsscaled/forearmBlueRed_correctFeedback.png" afterPath="$PROJECT_DIR$/../05_FunctionsForStimulator/imgsscaled/forearmBlueRed_correctFeedback.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../05_FunctionsForStimulator/imgsscaled/forearmBlueRed_wrongFeedback.png" afterPath="$PROJECT_DIR$/../05_FunctionsForStimulator/imgsscaled/forearmBlueRed_wrongFeedback.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../05_FunctionsForStimulator/imgsscaled/forearmRedBlue.png" afterPath="$PROJECT_DIR$/../05_FunctionsForStimulator/imgsscaled/forearmRedBlue.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../05_FunctionsForStimulator/imgsscaled/forearmRedBlue_correctFeedback.png" afterPath="$PROJECT_DIR$/../05_FunctionsForStimulator/imgsscaled/forearmRedBlue_correctFeedback.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../05_FunctionsForStimulator/imgsscaled/forearmRedBlue_wrongFeedback.png" afterPath="$PROJECT_DIR$/../05_FunctionsForStimulator/imgsscaled/forearmRedBlue_wrongFeedback.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../05_FunctionsForStimulator/imgsscaled/labels1.png" afterPath="$PROJECT_DIR$/../05_FunctionsForStimulator/imgsscaled/labels1.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../05_FunctionsForStimulator/imgsscaled/labels2.png" afterPath="$PROJECT_DIR$/../05_FunctionsForStimulator/imgsscaled/labels2.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../05_FunctionsForStimulator/imgsscaled/labelsBlueRed.png" afterPath="$PROJECT_DIR$/../05_FunctionsForStimulator/imgsscaled/labelsBlueRed.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../05_FunctionsForStimulator/imgsscaled/labelsRedBlue.png" afterPath="$PROJECT_DIR$/../05_FunctionsForStimulator/imgsscaled/labelsRedBlue.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../05_FunctionsForStimulator/imgsscaled/labelsSet1_wrong1.png" afterPath="$PROJECT_DIR$/../05_FunctionsForStimulator/imgsscaled/labelsSet1_wrong1.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../05_FunctionsForStimulator/imgsscaled/labelsSet1_wrong2.png" afterPath="$PROJECT_DIR$/../05_FunctionsForStimulator/imgsscaled/labelsSet1_wrong2.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../05_FunctionsForStimulator/imgsscaled/labelsSet2_wrong1.png" afterPath="$PROJECT_DIR$/../05_FunctionsForStimulator/imgsscaled/labelsSet2_wrong1.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../05_FunctionsForStimulator/imgsscaled/labelsSet2_wrong2.png" afterPath="$PROJECT_DIR$/../05_FunctionsForStimulator/imgsscaled/labelsSet2_wrong2.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../05_FunctionsForStimulator/imgsscaled/replayBlue.png" afterPath="$PROJECT_DIR$/../05_FunctionsForStimulator/imgsscaled/replayBlue.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../05_FunctionsForStimulator/imgsscaled/replayRed.png" afterPath="$PROJECT_DIR$/../05_FunctionsForStimulator/imgsscaled/replayRed.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../06_frequencyDiscrimination/data/915/20151115_2047-915_block1.mat" afterPath="$PROJECT_DIR$/../06_frequencyDiscrimination/data/915/20151115_2047-915_block1.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../06_frequencyDiscrimination/data/915/20151115_2105-915_block1.mat" afterPath="$PROJECT_DIR$/../06_frequencyDiscrimination/data/915/20151115_2105-915_block1.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../06_frequencyDiscrimination/data/915/20151115_2135-915_block1.mat" afterPath="$PROJECT_DIR$/../06_frequencyDiscrimination/data/915/20151115_2135-915_block1.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../06_frequencyDiscrimination/data/915/20151115_2145-915_block1.mat" afterPath="$PROJECT_DIR$/../06_frequencyDiscrimination/data/915/20151115_2145-915_block1.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../06_frequencyDiscrimination/data/915/20151115_2149-915_block1.mat" afterPath="$PROJECT_DIR$/../06_frequencyDiscrimination/data/915/20151115_2149-915_block1.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../06_frequencyDiscrimination/data/915/20151115_2151-915_block1.mat" afterPath="$PROJECT_DIR$/../06_frequencyDiscrimination/data/915/20151115_2151-915_block1.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../06_frequencyDiscrimination/data/915/20151115_2154-915_block1.mat" afterPath="$PROJECT_DIR$/../06_frequencyDiscrimination/data/915/20151115_2154-915_block1.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../06_frequencyDiscrimination/data/915/20151115_2156-915_block1.mat" afterPath="$PROJECT_DIR$/../06_frequencyDiscrimination/data/915/20151115_2156-915_block1.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../06_frequencyDiscrimination/data/915/20151115_2158-915_block1.mat" afterPath="$PROJECT_DIR$/../06_frequencyDiscrimination/data/915/20151115_2158-915_block1.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../06_frequencyDiscrimination/data/915/20151115_2203-915_block1.mat" afterPath="$PROJECT_DIR$/../06_frequencyDiscrimination/data/915/20151115_2203-915_block1.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../06_frequencyDiscrimination/data/915/20151115_2218-915_block1.mat" afterPath="$PROJECT_DIR$/../06_frequencyDiscrimination/data/915/20151115_2218-915_block1.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../06_frequencyDiscrimination/data/915/20151116_1115-915_block1.mat" afterPath="$PROJECT_DIR$/../06_frequencyDiscrimination/data/915/20151116_1115-915_block1.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../06_frequencyDiscrimination/data/915/20151116_1125-915_block1.mat" afterPath="$PROJECT_DIR$/../06_frequencyDiscrimination/data/915/20151116_1125-915_block1.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../06_frequencyDiscrimination/data/915/20151116_1128-915_block1.mat" afterPath="$PROJECT_DIR$/../06_frequencyDiscrimination/data/915/20151116_1128-915_block1.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../06_frequencyDiscrimination/data/915/20151116_1129-915_block2.mat" afterPath="$PROJECT_DIR$/../06_frequencyDiscrimination/data/915/20151116_1129-915_block2.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../06_frequencyDiscrimination/data/915/20151116_1133-915_block1.mat" afterPath="$PROJECT_DIR$/../06_frequencyDiscrimination/data/915/20151116_1133-915_block1.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../06_frequencyDiscrimination/data/915/20151116_1134-915_block2.mat" afterPath="$PROJECT_DIR$/../06_frequencyDiscrimination/data/915/20151116_1134-915_block2.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../06_frequencyDiscrimination/data/915/20151116_1140-915_block1.mat" afterPath="$PROJECT_DIR$/../06_frequencyDiscrimination/data/915/20151116_1140-915_block1.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../06_frequencyDiscrimination/imgsscaled/blank.bmp" afterPath="$PROJECT_DIR$/../06_frequencyDiscrimination/imgsscaled/blank.bmp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../06_frequencyDiscrimination/imgsscaled/fixation.bmp" afterPath="$PROJECT_DIR$/../06_frequencyDiscrimination/imgsscaled/fixation.bmp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../06_frequencyDiscrimination/imgsscaled/forearmBlueRed.png" afterPath="$PROJECT_DIR$/../06_frequencyDiscrimination/imgsscaled/forearmBlueRed.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../06_frequencyDiscrimination/imgsscaled/forearmBlueRed_correctFeedback.png" afterPath="$PROJECT_DIR$/../06_frequencyDiscrimination/imgsscaled/forearmBlueRed_correctFeedback.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../06_frequencyDiscrimination/imgsscaled/forearmBlueRed_wrongFeedback.png" afterPath="$PROJECT_DIR$/../06_frequencyDiscrimination/imgsscaled/forearmBlueRed_wrongFeedback.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../06_frequencyDiscrimination/imgsscaled/forearmRedBlue.png" afterPath="$PROJECT_DIR$/../06_frequencyDiscrimination/imgsscaled/forearmRedBlue.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../06_frequencyDiscrimination/imgsscaled/forearmRedBlue_correctFeedback.png" afterPath="$PROJECT_DIR$/../06_frequencyDiscrimination/imgsscaled/forearmRedBlue_correctFeedback.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../06_frequencyDiscrimination/imgsscaled/forearmRedBlue_wrongFeedback.png" afterPath="$PROJECT_DIR$/../06_frequencyDiscrimination/imgsscaled/forearmRedBlue_wrongFeedback.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../06_frequencyDiscrimination/imgsscaled/instruction.bmp" afterPath="$PROJECT_DIR$/../06_frequencyDiscrimination/imgsscaled/instruction.bmp" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../06_frequencyDiscrimination/imgsscaled/labels1.png" afterPath="$PROJECT_DIR$/../06_frequencyDiscrimination/imgsscaled/labels1.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../06_frequencyDiscrimination/imgsscaled/labels2.png" afterPath="$PROJECT_DIR$/../06_frequencyDiscrimination/imgsscaled/labels2.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../06_frequencyDiscrimination/imgsscaled/labelsBlueRed.png" afterPath="$PROJECT_DIR$/../06_frequencyDiscrimination/imgsscaled/labelsBlueRed.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../06_frequencyDiscrimination/imgsscaled/labelsRedBlue.png" afterPath="$PROJECT_DIR$/../06_frequencyDiscrimination/imgsscaled/labelsRedBlue.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../06_frequencyDiscrimination/imgsscaled/labelsSet1_wrong1.png" afterPath="$PROJECT_DIR$/../06_frequencyDiscrimination/imgsscaled/labelsSet1_wrong1.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../06_frequencyDiscrimination/imgsscaled/labelsSet1_wrong2.png" afterPath="$PROJECT_DIR$/../06_frequencyDiscrimination/imgsscaled/labelsSet1_wrong2.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../06_frequencyDiscrimination/imgsscaled/labelsSet2_wrong1.png" afterPath="$PROJECT_DIR$/../06_frequencyDiscrimination/imgsscaled/labelsSet2_wrong1.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../06_frequencyDiscrimination/imgsscaled/labelsSet2_wrong2.png" afterPath="$PROJECT_DIR$/../06_frequencyDiscrimination/imgsscaled/labelsSet2_wrong2.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../06_frequencyDiscrimination/imgsscaled/replayBlue.png" afterPath="$PROJECT_DIR$/../06_frequencyDiscrimination/imgsscaled/replayBlue.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../06_frequencyDiscrimination/imgsscaled/replayRed.png" afterPath="$PROJECT_DIR$/../06_frequencyDiscrimination/imgsscaled/replayRed.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/CategoryDiscrim.m" afterPath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/CategoryDiscrim.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/CategoryDiscrimFreq.m" afterPath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/CategoryDiscrimFreq.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/FigureFreqVT.m" afterPath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/FigureFreqVT.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/FigurePos.m" afterPath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/FigurePos.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/FigurePosDiff.m" afterPath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/FigurePosDiff.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/FigurePosLevel.m" afterPath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/FigurePosLevel.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/FigureSummaryData.m" afterPath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/FigureSummaryData.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/FigureVTdiff.m" afterPath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/FigureVTdiff.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/meanCalc.m" afterPath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/meanCalc.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/plotTrainingProgressDiff.m" afterPath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/plotTrainingProgressDiff.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/plotTrainingProgressFreq.m" afterPath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/plotTrainingProgressFreq.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/plotTrainingProgressLevel.m" afterPath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/plotTrainingProgressLevel.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/plotTrainingProgressLevel2.m" afterPath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/plotTrainingProgressLevel2.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/plotTrainingProgressLevel3.m" afterPath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/plotTrainingProgressLevel3.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/plotTrainingProgressPos.m" afterPath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/plotTrainingProgressPos.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/plotTrainingProgressPosDiff.m" afterPath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/plotTrainingProgressPosDiff.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/plotTrainingProgressPosLevel.m" afterPath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/plotTrainingProgressPosLevel.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/plotTrainingProgressVT.m" afterPath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/plotTrainingProgressVT.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/makeTrainingStimuli2.m" afterPath="$PROJECT_DIR$/../01_CategoryTraining/makeTrainingStimuli2.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/makeTrainingStimuli3.m" afterPath="$PROJECT_DIR$/../01_CategoryTraining/makeTrainingStimuli3.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/stimGenPTB.m" afterPath="$PROJECT_DIR$/../01_CategoryTraining/stimGenPTB.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/testcontin.m" afterPath="$PROJECT_DIR$/../01_CategoryTraining/testcontin.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/vtCategorizationTraining2.m" afterPath="$PROJECT_DIR$/../01_CategoryTraining/vtCategorizationTraining2.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/vtCategorizationTraining3.m" afterPath="$PROJECT_DIR$/../01_CategoryTraining/vtCategorizationTraining3.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/vtCategorizationTrainingExperiment2.m" afterPath="$PROJECT_DIR$/../01_CategoryTraining/vtCategorizationTrainingExperiment2.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/vtCategorizationTrainingExperiment3.m" afterPath="$PROJECT_DIR$/../01_CategoryTraining/vtCategorizationTrainingExperiment3.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../02_2ptDiscrim/constructCategoryTrainingStimulus.m" afterPath="$PROJECT_DIR$/../02_2ptDiscrim/constructCategoryTrainingStimulus.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../02_2ptDiscrim/twoPtDiscrimBuildSameStimuli.m" afterPath="$PROJECT_DIR$/../02_2ptDiscrim/twoPtDiscrimBuildSameStimuli.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../02_2ptDiscrim/twoPtDiscrimExper.m" afterPath="$PROJECT_DIR$/../02_2ptDiscrim/twoPtDiscrimExper.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../02_2ptDiscrim/twoPtDiscrimTraining.m" afterPath="$PROJECT_DIR$/../02_2ptDiscrim/twoPtDiscrimTraining.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../03_spatialLocalization/makeSpatialLocalizationStimuli.m" afterPath="$PROJECT_DIR$/../03_spatialLocalization/makeSpatialLocalizationStimuli.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../03_spatialLocalization/spatialLocalizationExperiment.m" afterPath="$PROJECT_DIR$/../03_spatialLocalization/spatialLocalizationExperiment.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../03_spatialLocalization/spatialLocalizationTesting.m" afterPath="$PROJECT_DIR$/../03_spatialLocalization/spatialLocalizationTesting.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../04_MRI/03_RA/RAtxtFiles/forCourtney-1.txt" afterPath="$PROJECT_DIR$/../04_MRI/03_RA/RAtxtFiles/forCourtney-1.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../04_MRI/03_RA/RAtxtFiles/forCourtney-2.txt" afterPath="$PROJECT_DIR$/../04_MRI/03_RA/RAtxtFiles/forCourtney-2.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../04_MRI/03_RA/RAtxtFiles/forCourtney-3.txt" afterPath="$PROJECT_DIR$/../04_MRI/03_RA/RAtxtFiles/forCourtney-3.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../04_MRI/03_RA/RAtxtFiles/forCourtney-4.txt" afterPath="$PROJECT_DIR$/../04_MRI/03_RA/RAtxtFiles/forCourtney-4.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../05_FunctionsForStimulator/Bvect2dec.m" afterPath="$PROJECT_DIR$/../05_FunctionsForStimulator/Bvect2dec.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../05_FunctionsForStimulator/buildTSM_nomap.m" afterPath="$PROJECT_DIR$/../05_FunctionsForStimulator/buildTSM_nomap.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../05_FunctionsForStimulator/fixchannel.m" afterPath="$PROJECT_DIR$/../05_FunctionsForStimulator/fixchannel.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../05_FunctionsForStimulator/fixedfreq.m" afterPath="$PROJECT_DIR$/../05_FunctionsForStimulator/fixedfreq.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../05_FunctionsForStimulator/mat2stim.m" afterPath="$PROJECT_DIR$/../05_FunctionsForStimulator/mat2stim.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../05_FunctionsForStimulator/remap2device.m" afterPath="$PROJECT_DIR$/../05_FunctionsForStimulator/remap2device.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../05_FunctionsForStimulator/stimGenPTB.m" afterPath="$PROJECT_DIR$/../05_FunctionsForStimulator/stimGenPTB.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../05_FunctionsForStimulator/testcontin.m" afterPath="$PROJECT_DIR$/../05_FunctionsForStimulator/testcontin.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../06_frequencyDiscrimination/frequencyDiscrimExperiment.m" afterPath="$PROJECT_DIR$/../06_frequencyDiscrimination/frequencyDiscrimExperiment.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../06_frequencyDiscrimination/frequencyDiscrimTesting.m" afterPath="$PROJECT_DIR$/../06_frequencyDiscrimination/frequencyDiscrimTesting.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../06_frequencyDiscrimination/makeFrequencyDiscrimStimuli.m" afterPath="$PROJECT_DIR$/../06_frequencyDiscrimination/makeFrequencyDiscrimStimuli.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/07_analysis.iml" afterPath="$PROJECT_DIR$/.idea/07_analysis.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CategoryTrainingFigure.py" afterPath="$PROJECT_DIR$/CategoryTrainingFigure.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/behavAnalysis/makeSpatialLocalizationStimuli.m" afterPath="$PROJECT_DIR$/behavAnalysis/makeSpatialLocalizationStimuli.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../08_notebooks/.ipynb_checkpoints/test-checkpoint.ipynb" afterPath="$PROJECT_DIR$/../08_notebooks/.ipynb_checkpoints/test-checkpoint.ipynb" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../08_notebooks/test.ipynb" afterPath="$PROJECT_DIR$/../08_notebooks/test.ipynb" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spatialLocalizationAnalysis.py" afterPath="$PROJECT_DIR$/spatialLocalizationAnalysis.py" />
     </list>
     <ignored path="07_analysis.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -322,8 +26,8 @@
       <file leaf-file-name="CategoryTrainingFigure.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CategoryTrainingFigure.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-12.777778">
-              <caret line="365" column="16" selection-start-line="365" selection-start-column="16" selection-end-line="365" selection-end-column="16" />
+            <state vertical-scroll-proportion="-98.333336">
+              <caret line="321" column="11" selection-start-line="321" selection-start-column="11" selection-end-line="321" selection-end-column="11" />
               <folding>
                 <element signature="e#20#38#0" expanded="true" />
               </folding>
@@ -334,8 +38,8 @@
       <file leaf-file-name="spatialLocalizationAnalysis.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/spatialLocalizationAnalysis.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.37313432">
-              <caret line="127" column="0" selection-start-line="127" selection-start-column="0" selection-end-line="127" selection-end-column="0" />
+            <state vertical-scroll-proportion="1.4320652">
+              <caret line="168" column="0" selection-start-line="168" selection-start-column="0" selection-end-line="168" selection-end-column="0" />
               <folding>
                 <element signature="e#20#38#0" expanded="true" />
               </folding>
@@ -432,7 +136,7 @@
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.CategoryTrainingFigure">
+  <component name="RunManager" selected="Python.spatialLocalizationAnalysis">
     <configuration default="false" name="CategoryTrainingFigure" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -497,6 +201,23 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="07_analysis" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/plotlyIntro/categoryTrainingSession.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="spatialLocalizationAnalysis" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="07_analysis" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/spatialLocalizationAnalysis.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -623,18 +344,20 @@
       <option name="USE_KEYWORD" value="false" />
       <method />
     </configuration>
-    <list size="4">
+    <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Python.CategoryTrainingFigure" />
       <item index="1" class="java.lang.String" itemvalue="Python.CategoryTrainingFigure2" />
       <item index="2" class="java.lang.String" itemvalue="Python.CategoryTrainingFigureMultSession" />
       <item index="3" class="java.lang.String" itemvalue="Python.categoryTrainingSession" />
+      <item index="4" class="java.lang.String" itemvalue="Python.spatialLocalizationAnalysis" />
     </list>
     <recent_temporary>
-      <list size="4">
-        <item index="0" class="java.lang.String" itemvalue="Python.CategoryTrainingFigure" />
-        <item index="1" class="java.lang.String" itemvalue="Python.categoryTrainingSession" />
-        <item index="2" class="java.lang.String" itemvalue="Python.CategoryTrainingFigureMultSession" />
-        <item index="3" class="java.lang.String" itemvalue="Python.CategoryTrainingFigure2" />
+      <list size="5">
+        <item index="0" class="java.lang.String" itemvalue="Python.spatialLocalizationAnalysis" />
+        <item index="1" class="java.lang.String" itemvalue="Python.CategoryTrainingFigure" />
+        <item index="2" class="java.lang.String" itemvalue="Python.categoryTrainingSession" />
+        <item index="3" class="java.lang.String" itemvalue="Python.CategoryTrainingFigureMultSession" />
+        <item index="4" class="java.lang.String" itemvalue="Python.CategoryTrainingFigure2" />
       </list>
     </recent_temporary>
   </component>
@@ -653,14 +376,14 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="773" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2652899" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39983305" sideWeight="0.5018067" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297162" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32892805" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32892805" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -687,7 +410,19 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="77" />
+      <breakpoints>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/spatialLocalizationAnalysis.py</url>
+          <line>414</line>
+          <option name="timeStamp" value="78" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/spatialLocalizationAnalysis.py</url>
+          <line>168</line>
+          <option name="timeStamp" value="80" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="81" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -768,13 +503,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/pydevd.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33285093">
-          <caret line="1636" column="0" selection-start-line="1636" selection-start-column="0" selection-end-line="1636" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/re.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -793,20 +521,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.86975396">
           <caret line="113" column="10" selection-start-line="113" selection-start-column="10" selection-end-line="113" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/statistics.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="226" column="0" selection-start-line="226" selection-start-column="0" selection-end-line="226" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/pydevd_frame.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33285093">
-          <caret line="46" column="0" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -834,10 +548,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/pydevd_frame.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33164558">
+          <caret line="553" column="0" selection-start-line="553" selection-start-column="0" selection-end-line="553" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/statistics.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33164558">
+          <caret line="291" column="0" selection-start-line="291" selection-start-column="0" selection-end-line="291" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/pydevd.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33164558">
+          <caret line="1547" column="0" selection-start-line="1547" selection-start-column="0" selection-end-line="1547" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/CategoryTrainingFigure.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-12.777778">
-          <caret line="365" column="16" selection-start-line="365" selection-start-column="16" selection-end-line="365" selection-end-column="16" />
+        <state vertical-scroll-proportion="-98.333336">
+          <caret line="321" column="11" selection-start-line="321" selection-start-column="11" selection-end-line="321" selection-end-column="11" />
           <folding>
             <element signature="e#20#38#0" expanded="true" />
           </folding>
@@ -846,8 +584,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/spatialLocalizationAnalysis.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.37313432">
-          <caret line="127" column="0" selection-start-line="127" selection-start-column="0" selection-end-line="127" selection-end-column="0" />
+        <state vertical-scroll-proportion="1.4320652">
+          <caret line="168" column="0" selection-start-line="168" selection-start-column="0" selection-end-line="168" selection-end-column="0" />
           <folding>
             <element signature="e#20#38#0" expanded="true" />
           </folding>
