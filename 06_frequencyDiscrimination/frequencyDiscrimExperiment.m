@@ -173,7 +173,7 @@ function [numericalanswer] = getResponseMouse(waitTime, nBlock)
   startWaiting=clock;
   while etime(clock,startWaiting) < waitTime && mousePressed == 0
       %check to see if a button is pressed
-       [~,~,buttons] = GetMouse();
+       [x,y,buttons] = GetMouse();
        if (~buttons(1) && ~buttons(3))
            continue;
        else

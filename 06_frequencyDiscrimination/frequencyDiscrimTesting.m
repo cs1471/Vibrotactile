@@ -10,7 +10,6 @@ input('\n\nDoes participant have ear plugs? Hit Enter when "Yes."\n')
 %get subject info
 number = input('\n\nEnter Subject NUMBER:\n\n','s');
 exptdesign.number = number;
-exptdesign.subjectName = number;
 
 preOrPostTrain = input('\n\nIs this pre or post-training? Enter 1 for pre-training, 2 for post-training:\n\n','s');
 exptdesign.preOrPostTrain = preOrPostTrain; % 1 for pre, 2 for post
