@@ -83,21 +83,13 @@ function frequencyDiscrimExperiment(exptdesign)
            
            %collect Response
            responseStartTime=GetSecs;
-           sResp=getResponseMouse(responseTime);
+           sResp=getResponseMouse(responseTime, iBlock);
            responseFinishedTime=GetSecs;
            
            if isequal(stimuli(1:2, iTrial),stimuli(3:4,iTrial))
-               if mod(iBlock,2) % are stimuli the same?
-                   correctResponse=1;
-               else 
-                   correctResponse=2;
-               end
-           elseif ~isequal(stimuli(1:2, iTrial),stimuli(3:4,iTrial)) 
-               if mod(iBlock,2) % are stimuli the same?
-                   correctResponse=2;
-               else 
-                   correctResponse=1;
-               end
+               correctResponse=1;
+           elseif ~isequal(stimuli(1:2, iTrial),stimuli(3:4,iTrial))
+               correctResponse=2;
            end
 
            %score the answer -- is sResp(iTrial)==correctResponse?
@@ -173,7 +165,7 @@ function drawAndCenterText(window,message,wait)
     WaitSecs(0.2); %this is necessary on the windows XP machine to wait for mouse response -- DOES delay timing!
 end
 
-function [numericalanswer] = getResponseMouse(waitTime)
+function [numericalanswer] = getResponseMouse(waitTime, nBlock)
 
   %Wait for a response
   numericalanswer = -1;
@@ -186,9 +178,17 @@ function [numericalanswer] = getResponseMouse(waitTime)
            continue;
        else
            if buttons(1)
-               numericalanswer = 1;
+               if (mod(nBlock,2))
+                   numericalanswer = 1;
+               else
+                   numericalanswer = 2;
+               end
            elseif buttons(3)
-               numericalanswer = 2;
+                if (mod(nBlock,2))
+                   numericalanswer = 2;
+               else
+                   numericalanswer = 1;
+               end
            else
                numericalanswer = 0;
            end
