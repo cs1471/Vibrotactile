@@ -26,6 +26,8 @@ function spatialLocalizationExperiment(exptdesign)
         load('spatialLocalizationStimuli_1.mat');
     end
     
+    responseTime = exptdesign.responseTime;
+    
     for iBlock=1:exptdesign.numBlocks
         %randomize the stimuli for this level
         order=randperm(size(stimuli,2));
