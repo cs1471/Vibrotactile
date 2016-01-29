@@ -31,8 +31,8 @@ def makeFrequency():
 # session = input('Enter the session number: \n')
 
 #Use when debugging or manually editing
-filename = ('20151120_1522-998_block5')
-fileDirectory = '/Users/courtneysprouse/GoogleDrive/Riesenhuber/05_2015_scripts/Vibrotactile/06_frequencyDiscrimination/data/998/'
+filename = ('20160127_1651-MR888_block7')
+fileDirectory = '/Users/courtney/GoogleDrive/Riesenhuber/05_2015_scripts/Vibrotactile/06_frequencyDiscrimination/data/888/'
 
 
 #load matfile
@@ -52,7 +52,7 @@ nBlocks = data['exptdesign']['numBlocks'][0,0][0]
 subjectNumber = data['exptdesign']['number'][0,0][0]
 subjectName = data['exptdesign']['subjectName'][0,0][0]
 
-if int(data['trialOutput']['preOrPostTrain'][0,0][0]) == 1:
+if int(data['exptdesign']['preOrPostTrain'][0,0][0]) == 1:
     session = "Pre"
 else:
     session = "post"
@@ -66,7 +66,6 @@ b_m0Acc = []
 b_m3wAcc = []
 b_m3bAcc = []
 b_m6Acc = []
-b_m10Acc = []
 
 FL = [frequencyList[1], frequencyList[7], frequencyList[13], frequencyList[19]]
 
@@ -76,15 +75,12 @@ for iBlock in range(sResp.size):
     m3wAcc = []
     m3bAcc = []
     m6Acc = []
-    m10Acc = []
     for iTrial in range(sResp[0,iBlock].size):
         stim1 = int(round(stimuli[0,iBlock][0,iTrial]))
         stim2 = int(round(stimuli[0,iBlock][2,iTrial]))
 
         if stim1 == stim2:
             m0Acc.append(accuracy[0,iBlock][0,iTrial])
-        elif (stim1 == FL[0] and stim2 == FL[3]) or (stim1 == FL[3] and stim2 == FL[0]):
-            m10Acc.append(accuracy[0,iBlock][0,iTrial])
         elif (stim1 == FL[0] and stim2 == FL[2]) or (stim1 == FL[2] and stim2 == FL[0]) or\
                 (stim1 == FL[3] and stim2 == FL[1]) or (stim1 == FL[1] and stim2 == FL[3]):
             m6Acc.append(accuracy[0,iBlock][0,iTrial])
@@ -98,7 +94,6 @@ for iBlock in range(sResp.size):
     b_m3wAcc.append(m3wAcc)
     b_m3bAcc.append(m3bAcc)
     b_m6Acc.append(m6Acc)
-    b_m10Acc.append(m10Acc)
 
 #calculate accuracy for m0 condition
 i = 0
@@ -123,12 +118,6 @@ i = 0
 mAcc_m6 = []
 for i in range(len(b_m6Acc)):
     mAcc_m6.append(stat.mean(b_m6Acc[i]))
-
-#calculate accuracy by m10 condition
-i = 0
-mAcc_m10 = []
-for i in range(len(b_m10Acc)):
-    mAcc_m10.append(stat.mean(b_m10Acc[i]))
 
 ############################################################################
 #Calculations by Acc category RT

@@ -2,97 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0794c37e-0125-4d6f-89ef-6834103a2107" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/frequencyDiscriminationAnalysis.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/slByFrequency.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/000/20150805_1538-2015-08-05-15-24MR000_block1.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/000/20150805_1538-2015-08-05-15-24MR000_block1.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/000/20150806_1522-2015-08-06-14-15MR000_block4.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/000/20150806_1522-2015-08-06-14-15MR000_block4.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/000/SUBJ000training.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/000/SUBJ000training.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/Mean/20150810_MR915.mat_mean.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/Mean/20150810_MR915.mat_mean.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/Mean/20150812_MR915.mat_mean.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/Mean/20150812_MR915.mat_mean.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/Mean/20150817_MR915.mat_mean.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/Mean/20150817_MR915.mat_mean.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/Mean/20150819_MR915.mat_mean.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/Mean/20150819_MR915.mat_mean.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/Mean/20150824_MR915.mat_mean.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/Mean/20150824_MR915.mat_mean.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/Mean/20150826_MR915.mat_mean.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/Mean/20150826_MR915.mat_mean.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/Mean/20150828_MR915.mat_mean.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/Mean/20150828_MR915.mat_mean.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/Mean/20150831_MR915.mat_mean.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/Mean/20150831_MR915.mat_mean.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/Mean/20151017_MR915.mat_mean.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/Mean/20151017_MR915.mat_mean.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/Mean/20151018_MR915.mat_mean.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/Mean/20151018_MR915.mat_mean.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/PositionLevel/915s1_pL.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/PositionLevel/915s1_pL.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/PositionLevel/915s4_pL.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/PositionLevel/915s4_pL.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/PositionLevel/915s5_pL.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/PositionLevel/915s5_pL.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/PositionLevel/915s6_pL.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/PositionLevel/915s6_pL.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/PositionLevel/915s7_pL.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/PositionLevel/915s7_pL.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/PositionLevel/915s8_pL.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/PositionLevel/915s8_pL.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/RT_ACC_allSessions/20150810_MR915.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/RT_ACC_allSessions/20150810_MR915.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/RT_ACC_allSessions/20150812_MR915.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/RT_ACC_allSessions/20150812_MR915.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/RT_ACC_allSessions/20150817_MR915.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/RT_ACC_allSessions/20150817_MR915.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/RT_ACC_allSessions/20150819_MR915.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/RT_ACC_allSessions/20150819_MR915.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/RT_ACC_allSessions/20150824_MR915.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/RT_ACC_allSessions/20150824_MR915.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/RT_ACC_allSessions/20150826_MR915.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/RT_ACC_allSessions/20150826_MR915.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/RT_ACC_allSessions/20150828_MR915.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/RT_ACC_allSessions/20150828_MR915.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/RT_ACC_allSessions/20150831_MR915.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/RT_ACC_allSessions/20150831_MR915.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/RT_ACC_allSessions/20151017_MR915.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/RT_ACC_allSessions/20151017_MR915.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/RT_ACC_allSessions/20151018_MR915.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/001_processedData/RT_ACC_allSessions/20151018_MR915.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/111/111_s1.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/111/111_s1.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/111/111_s2.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/111/111_s2.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/111/111_s3.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/111/111_s3.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/111/111_s4.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/111/111_s4.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/111/111_s5.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/111/111_s5.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/111/20150811_1711-2015-08-11-16-03MR111_block3.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/111/20150811_1711-2015-08-11-16-03MR111_block3.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/111/20150814_0901-MR111_block4.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/111/20150814_0901-MR111_block4.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/111/20150817_1550-MR111_block3.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/111/20150817_1550-MR111_block3.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/111/20150820_1510-MR111_block4.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/111/20150820_1510-MR111_block4.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/111/20150826_1513-MR111_block4.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/111/20150826_1513-MR111_block4.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/111/AccCatBoundMorphs.jpg" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/111/AccCatBoundMorphs.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/111/AccCatProtoMorphs.jpg" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/111/AccCatProtoMorphs.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/111/AccMiddleMorphs.jpg" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/111/AccMiddleMorphs.jpg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/111/SUBJ111training.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/111/SUBJ111training.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/915/20150810_1620-2015-08-10-15-25MR915_block6.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/915/20150810_1620-2015-08-10-15-25MR915_block6.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/915/20150812_1840-MR915_block6.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/915/20150812_1840-MR915_block6.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/915/20150817_1236-MR915_block6.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/915/20150817_1236-MR915_block6.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/915/20150819_1124-MR915_block6.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/915/20150819_1124-MR915_block6.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/915/20150824_1216-MR915_block6.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/915/20150824_1216-MR915_block6.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/915/20150826_1802-MR915_block6.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/915/20150826_1802-MR915_block6.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/915/20150828_1655-MR915_block6.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/915/20150828_1655-MR915_block6.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/915/20150831_1359-MR915_block6.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/915/20150831_1359-MR915_block6.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/915/20151017_1850-MR915_block6.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/915/20151017_1850-MR915_block6.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/915/20151018_1935-MR915_block6.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/915/20151018_1935-MR915_block6.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/915/SUBJ915training.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/915/SUBJ915training.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/915/Screwed_upTraining/20150804_1239-2015-08-04-11-20MR915_block7.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/915/Screwed_upTraining/20150804_1239-2015-08-04-11-20MR915_block7.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/915/Screwed_upTraining/20150805_1140-2015-08-05-10-19MR915_block7.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/915/Screwed_upTraining/20150805_1140-2015-08-05-10-19MR915_block7.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/915/Screwed_upTraining/20150805_1851-2015-08-05-17-19MR915_block8.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/02_Data/915/Screwed_upTraining/20150805_1851-2015-08-05-17-19MR915_block8.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/trainingStimuli2.mat" afterPath="$PROJECT_DIR$/../01_CategoryTraining/trainingStimuli2.mat" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/CategoryDiscrim.m" afterPath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/CategoryDiscrim.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/CategoryDiscrimFreq.m" afterPath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/CategoryDiscrimFreq.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/FigureFreqVT.m" afterPath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/FigureFreqVT.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/FigurePos.m" afterPath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/FigurePos.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/FigurePosDiff.m" afterPath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/FigurePosDiff.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/FigurePosLevel.m" afterPath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/FigurePosLevel.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/FigureSummaryData.m" afterPath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/FigureSummaryData.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/FigureVTdiff.m" afterPath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/FigureVTdiff.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/meanCalc.m" afterPath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/meanCalc.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/plotTrainingProgressDiff.m" afterPath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/plotTrainingProgressDiff.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/plotTrainingProgressFreq.m" afterPath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/plotTrainingProgressFreq.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/plotTrainingProgressLevel.m" afterPath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/plotTrainingProgressLevel.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/plotTrainingProgressLevel2.m" afterPath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/plotTrainingProgressLevel2.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/plotTrainingProgressLevel3.m" afterPath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/plotTrainingProgressLevel3.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/plotTrainingProgressPos.m" afterPath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/plotTrainingProgressPos.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/plotTrainingProgressPosDiff.m" afterPath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/plotTrainingProgressPosDiff.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/plotTrainingProgressPosLevel.m" afterPath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/plotTrainingProgressPosLevel.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/plotTrainingProgressVT.m" afterPath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/plotTrainingProgressVT.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/data/1000/20151210_1347-MR1000_block6.html" afterPath="$PROJECT_DIR$/../01_CategoryTraining/data/1000/20151210_1347-MR1000_block6.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/makeTrainingStimuli2.m" afterPath="$PROJECT_DIR$/../01_CategoryTraining/makeTrainingStimuli2.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/makeTrainingStimuli3.m" afterPath="$PROJECT_DIR$/../01_CategoryTraining/makeTrainingStimuli3.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/stimGenPTB.m" afterPath="$PROJECT_DIR$/../01_CategoryTraining/stimGenPTB.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/testcontin.m" afterPath="$PROJECT_DIR$/../01_CategoryTraining/testcontin.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/vtCategorizationTraining2.m" afterPath="$PROJECT_DIR$/../01_CategoryTraining/vtCategorizationTraining2.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/vtCategorizationTraining3.m" afterPath="$PROJECT_DIR$/../01_CategoryTraining/vtCategorizationTraining3.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/vtCategorizationTrainingExperiment2.m" afterPath="$PROJECT_DIR$/../01_CategoryTraining/vtCategorizationTrainingExperiment2.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/vtCategorizationTrainingExperiment3.m" afterPath="$PROJECT_DIR$/../01_CategoryTraining/vtCategorizationTrainingExperiment3.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../04_MRI/03_RA/RAinScannerExperiment2.m" afterPath="$PROJECT_DIR$/../04_MRI/03_RA/RAinScannerExperiment2.m" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/frequencyDiscriminationAnalysis2.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/07_analysis.iml" afterPath="$PROJECT_DIR$/.idea/07_analysis.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/behavAnalysis/makeSpatialLocalizationStimuli.m" afterPath="$PROJECT_DIR$/behavAnalysis/makeSpatialLocalizationStimuli.m" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spatialLocalizationAnalysis.py" afterPath="$PROJECT_DIR$/spatialLocalizationAnalysis.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frequencyDiscriminationAnalysis.py" afterPath="$PROJECT_DIR$/frequencyDiscriminationAnalysis.py" />
     </list>
     <ignored path="07_analysis.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -113,32 +27,34 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="CategoryTrainingFigure.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="CategoryTrainingFigure.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CategoryTrainingFigure.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="1.506008">
+            <state vertical-scroll-proportion="-205.0">
               <caret line="375" column="0" selection-start-line="375" selection-start-column="0" selection-end-line="375" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="_pydev_execfile.py" pinned="false" current-in-tab="false">
-        <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_execfile.py">
+      <file leaf-file-name="frequencyDiscriminationAnalysis.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/frequencyDiscriminationAnalysis.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+              <caret line="119" column="41" selection-start-line="119" selection-start-column="41" selection-end-line="119" selection-end-column="41" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="graph_objs.py" pinned="false" current-in-tab="false">
-        <entry file="file:///Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/site-packages/plotly/graph_objs/graph_objs.py">
+      <file leaf-file-name="frequencyDiscriminationAnalysis2.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/frequencyDiscriminationAnalysis2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="933" column="0" selection-start-line="933" selection-start-column="0" selection-end-line="933" selection-end-column="0" />
-              <folding />
+            <state vertical-scroll-proportion="0.35228848">
+              <caret line="28" column="26" selection-start-line="28" selection-start-column="26" selection-end-line="28" selection-end-column="26" />
+              <folding>
+                <element signature="e#20#38#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -163,6 +79,8 @@
         <option value="$PROJECT_DIR$/plotlyIntro/spatialLocalizationAnalysis.py" />
         <option value="$PROJECT_DIR$/plotlyIntro/categoryTrainingSession.py" />
         <option value="$PROJECT_DIR$/CategoryTrainingFigure.py" />
+        <option value="$PROJECT_DIR$/frequencyDiscriminationAnalysis.py" />
+        <option value="$PROJECT_DIR$/frequencyDiscriminationAnalysis2.py" />
       </list>
     </option>
   </component>
@@ -197,8 +115,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -219,6 +135,8 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -228,11 +146,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="/usr/local/bin" />
       <recent name="$PROJECT_DIR$" />
+      <recent name="/usr/local/bin" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.CategoryTrainingFigure">
+  <component name="RunManager" selected="Python.frequencyDiscriminationAnalysis2">
     <configuration default="false" name="CategoryTrainingFigure" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -246,23 +164,6 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="07_analysis" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CategoryTrainingFigure.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
-    <configuration default="false" name="CategoryTrainingFigure2" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="07_analysis" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CategoryTrainingFigure2.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -297,6 +198,40 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="07_analysis" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/plotlyIntro/categoryTrainingSession.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="frequencyDiscriminationAnalysis" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="07_analysis" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/frequencyDiscriminationAnalysis.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="frequencyDiscriminationAnalysis2" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="07_analysis" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/frequencyDiscriminationAnalysis2.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -423,18 +358,20 @@
       <option name="USE_KEYWORD" value="false" />
       <method />
     </configuration>
-    <list size="4">
+    <list size="5">
       <item index="0" class="java.lang.String" itemvalue="Python.CategoryTrainingFigure" />
-      <item index="1" class="java.lang.String" itemvalue="Python.CategoryTrainingFigure2" />
-      <item index="2" class="java.lang.String" itemvalue="Python.CategoryTrainingFigureMultSession" />
-      <item index="3" class="java.lang.String" itemvalue="Python.categoryTrainingSession" />
+      <item index="1" class="java.lang.String" itemvalue="Python.CategoryTrainingFigureMultSession" />
+      <item index="2" class="java.lang.String" itemvalue="Python.categoryTrainingSession" />
+      <item index="3" class="java.lang.String" itemvalue="Python.frequencyDiscriminationAnalysis" />
+      <item index="4" class="java.lang.String" itemvalue="Python.frequencyDiscriminationAnalysis2" />
     </list>
     <recent_temporary>
-      <list size="4">
-        <item index="0" class="java.lang.String" itemvalue="Python.CategoryTrainingFigure" />
-        <item index="1" class="java.lang.String" itemvalue="Python.categoryTrainingSession" />
-        <item index="2" class="java.lang.String" itemvalue="Python.CategoryTrainingFigureMultSession" />
-        <item index="3" class="java.lang.String" itemvalue="Python.CategoryTrainingFigure2" />
+      <list size="5">
+        <item index="0" class="java.lang.String" itemvalue="Python.frequencyDiscriminationAnalysis2" />
+        <item index="1" class="java.lang.String" itemvalue="Python.frequencyDiscriminationAnalysis" />
+        <item index="2" class="java.lang.String" itemvalue="Python.CategoryTrainingFigure" />
+        <item index="3" class="java.lang.String" itemvalue="Python.categoryTrainingSession" />
+        <item index="4" class="java.lang.String" itemvalue="Python.CategoryTrainingFigureMultSession" />
       </list>
     </recent_temporary>
   </component>
@@ -460,11 +397,11 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39983305" sideWeight="0.5018067" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297162" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297162" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3297162" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.28380635" sideWeight="0.49819332" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28380635" sideWeight="0.49819332" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -499,13 +436,34 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/CategoryTrainingFigure.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_execfile.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/site-packages/plotly/graph_objs/graph_objs.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="933" column="0" selection-start-line="933" selection-start-column="0" selection-end-line="933" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/RAdata.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#18#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -513,9 +471,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="113" column="10" selection-start-line="113" selection-start-column="10" selection-end-line="113" selection-end-column="10" />
-          <folding>
-            <element signature="e#0#18#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -531,9 +486,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="113" column="10" selection-start-line="113" selection-start-column="10" selection-end-line="113" selection-end-column="10" />
-          <folding>
-            <element signature="e#0#18#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -549,7 +501,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="33" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -557,7 +508,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="411" column="0" selection-start-line="411" selection-start-column="0" selection-end-line="411" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -572,7 +522,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33285093">
           <caret line="1636" column="0" selection-start-line="1636" selection-start-column="0" selection-end-line="1636" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -594,7 +543,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.7670044">
           <caret line="402" column="0" selection-start-line="402" selection-start-column="0" selection-end-line="402" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -602,7 +550,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="64" column="0" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -610,9 +557,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.86975396">
           <caret line="113" column="10" selection-start-line="113" selection-start-column="10" selection-end-line="113" selection-end-column="10" />
-          <folding>
-            <element signature="e#0#18#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -628,7 +572,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="524" column="0" selection-start-line="524" selection-start-column="0" selection-end-line="524" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -636,7 +579,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33285093">
           <caret line="46" column="0" selection-start-line="46" selection-start-column="0" selection-end-line="46" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -648,19 +590,37 @@
         </state>
       </provider>
     </entry>
-    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/site-packages/plotly/graph_objs/graph_objs.py">
+    <entry file="file://$PROJECT_DIR$/CategoryTrainingFigure.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-205.0">
+          <caret line="375" column="0" selection-start-line="375" selection-start-column="0" selection-end-line="375" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frequencyDiscriminationAnalysis.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
+          <caret line="119" column="41" selection-start-line="119" selection-start-column="41" selection-end-line="119" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/site-packages/plotly/graph_objs/graph_objs.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.019354839">
           <caret line="933" column="0" selection-start-line="933" selection-start-column="0" selection-end-line="933" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CategoryTrainingFigure.py">
+    <entry file="file://$PROJECT_DIR$/frequencyDiscriminationAnalysis2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="1.506008">
-          <caret line="375" column="0" selection-start-line="375" selection-start-column="0" selection-end-line="375" selection-end-column="0" />
-          <folding />
+        <state vertical-scroll-proportion="0.35228848">
+          <caret line="28" column="26" selection-start-line="28" selection-start-column="26" selection-end-line="28" selection-end-column="26" />
+          <folding>
+            <element signature="e#20#38#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
