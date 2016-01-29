@@ -5,9 +5,9 @@ frequency = [f1(2) f1(8) f1(14) f1(20)];
 
 %generate positions based on response profile 
 if response == '0'
-    channels = [1 3 11 13];
+    channels = [3 5 9 11];
 else
-    channels = [2 4 12 14];
+    channels = [4 6 10 12];
 end
 
 %generate frequencies to be compared with all possible positions
