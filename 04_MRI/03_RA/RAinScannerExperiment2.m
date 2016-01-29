@@ -187,7 +187,7 @@ try
                    RT = responseFinishedTime - responseStartTime;
                end
                
-               waitTime = exptdesign.trialDuration - (stimulusDuration + RT);
+               waitTime = exptdesign.trialDuration - (stimulusDuration + abs(RT));
                
                % Code correct response
                if isequal(stimuli(1:4, iTrial),stimuli(5:8,iTrial))
