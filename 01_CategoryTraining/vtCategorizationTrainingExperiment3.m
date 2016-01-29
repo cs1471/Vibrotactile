@@ -62,7 +62,7 @@ function vtCategorizationTrainingExperiment(name, exptdesign)
   
     %load training stimuli
     load('trainingStimuli3.mat');
-    level=15;
+    level=exptdesign.level;
     
     for iBlock=1:exptdesign.numSessions %how many blocks to run this training session
         stimulusTracking=[];
@@ -207,7 +207,7 @@ function vtCategorizationTrainingExperiment(name, exptdesign)
                     'Click mouse to continue' ],1)
                %WaitSecs(2);
                KbWait(1);
-           elseif (iTrial==exptdesign.numTrialsPerSession && iBlock == exptdesign.numSessions) || level
+           elseif (iTrial==exptdesign.numTrialsPerSession && iBlock == exptdesign.numSessions) || level==15
                %calculate accuracy
                accuracyForLevel=mean(trialOutput(iBlock).accuracy);
                drawAndCenterText(w, ['Your accuracy was ' num2str(round(accuracyForLevel.*100)) '%\n\n\n'...
