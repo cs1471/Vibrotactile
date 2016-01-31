@@ -31,8 +31,8 @@ def makeFrequency():
 # session = input('Enter the session number: \n')
 
 #Use when debugging or manually editing
-filename = ('20160127_1651-MR888_block7')
-fileDirectory = '/Users/courtney/GoogleDrive/Riesenhuber/05_2015_scripts/Vibrotactile/06_frequencyDiscrimination/data/888/'
+filename = ('20151120_1522-998_block5')
+fileDirectory = '/Users/courtney/GoogleDrive/Riesenhuber/05_2015_scripts/Vibrotactile/06_frequencyDiscrimination/data/998/'
 
 
 #load matfile
@@ -62,50 +62,69 @@ else:
 #############################################################################
 
 #calculate accuracy by frequency
-b_m0Acc = []
-b_m3wAcc = []
+b_sameAcc = []
+b_m3w5Acc = []
+b_m3w95Acc = []
 b_m3bAcc = []
-b_m6Acc = []
+b_m6_5Acc = []
+b_m6_95Acc = []
+b_m10Acc = []
 
 FL = [frequencyList[1], frequencyList[7], frequencyList[13], frequencyList[19]]
 
 iTrial = iBlock = 0
 for iBlock in range(sResp.size):
-    m0Acc = []
-    m3wAcc = []
+    sameAcc = []
+    m3w5Acc = []
+    m3w95Acc = []
     m3bAcc = []
-    m6Acc = []
+    m6_5Acc = []
+    m6_95Acc = []
+    m10Acc = []
     for iTrial in range(sResp[0,iBlock].size):
         stim1 = int(round(stimuli[0,iBlock][0,iTrial]))
         stim2 = int(round(stimuli[0,iBlock][2,iTrial]))
 
         if stim1 == stim2:
-            m0Acc.append(accuracy[0,iBlock][0,iTrial])
-        elif (stim1 == FL[0] and stim2 == FL[2]) or (stim1 == FL[2] and stim2 == FL[0]) or\
-                (stim1 == FL[3] and stim2 == FL[1]) or (stim1 == FL[1] and stim2 == FL[3]):
-            m6Acc.append(accuracy[0,iBlock][0,iTrial])
-        elif (stim1 == FL[0] and stim2 == FL[1]) or (stim1 == FL[1] and stim2 == FL[0]) or\
-                (stim1 == FL[3] and stim2 == FL[2]) or (stim1 == FL[2] and stim2 == FL[3]):
-            m3wAcc.append(accuracy[0,iBlock][0,iTrial])
+            sameAcc.append(accuracy[0,iBlock][0,iTrial])
+        elif (stim1 == FL[0] and stim2 == FL[2]) or (stim1 == FL[2] and stim2 == FL[0]):
+            m6_5Acc.append(accuracy[0,iBlock][0,iTrial])
+        elif (stim1 == FL[3] and stim2 == FL[1]) or (stim1 == FL[1] and stim2 == FL[3]):
+            m6_95Acc.append(accuracy[0,iBlock][0,iTrial])
+        elif (stim1 == FL[0] and stim2 == FL[1]) or (stim1 == FL[1] and stim2 == FL[0]):
+            m3w5Acc.append(accuracy[0,iBlock][0,iTrial])
+        elif (stim1 == FL[3] and stim2 == FL[2]) or (stim1 == FL[2] and stim2 == FL[3]):
+            m3w95Acc.append(accuracy[0,iBlock][0,iTrial])
         elif (stim1 == FL[1] and stim2 == FL[2]) or (stim1 == FL[2] and stim2 == FL[1]):
             m3bAcc.append(accuracy[0,iBlock][0,iTrial])
+        elif (stim1 == FL[0] and stim2 == FL[3]) or (stim1 == FL[3] and stim2 == FL[0]):
+            m10Acc.append(accuracy[0,iBlock][0,iTrial])
 
-    b_m0Acc.append(m0Acc)
-    b_m3wAcc.append(m3wAcc)
+    b_sameAcc.append(sameAcc)
+    b_m3w5Acc.append(m3w5Acc)
+    b_m3w95Acc.append(m3w95Acc)
     b_m3bAcc.append(m3bAcc)
-    b_m6Acc.append(m6Acc)
+    b_m6_5Acc.append(m6_5Acc)
+    b_m6_95Acc.append(m6_95Acc)
+    b_m10Acc.append(m10Acc)
 
-#calculate accuracy for m0 condition
+#calculate accuracy for same condition
 i = 0
-mAcc_m0 = []
-for i in range(len(b_m0Acc)):
-    mAcc_m0.append(stat.mean(b_m0Acc[i]))
+mAcc_same = []
+for i in range(len(b_sameAcc)):
+    mAcc_same.append(stat.mean(b_sameAcc[i]))
 
-#calculate accuracy by m3w condition
+#calculate accuracy by m3w5 condition
 i = 0
-mAcc_m3w = []
-for i in range(len(b_m3wAcc)):
-    mAcc_m3w.append(stat.mean(b_m3wAcc[i]))
+mAcc_m3w5 = []
+for i in range(len(b_m3w5Acc)):
+    mAcc_m3w5.append(stat.mean(b_m3w5Acc[i]))
+
+#calculate accuracy by m3w95 condition
+i = 0
+mAcc_m3w95 = []
+for i in range(len(b_m3w95Acc)):
+    mAcc_m3w95.append(stat.mean(b_m3w95Acc[i]))
 
 #calculate accuracy by m3b condition
 i = 0
@@ -113,75 +132,108 @@ mAcc_m3b = []
 for i in range(len(b_m3bAcc)):
     mAcc_m3b.append(stat.mean(b_m3bAcc[i]))
 
+#calculate accuracy by m6_5 condition
+i = 0
+mAcc_m6_5 = []
+for i in range(len(b_m6_5Acc)):
+    mAcc_m6_5.append(stat.mean(b_m6_5Acc[i]))
+
+#calculate accuracy by m6_95 condition
+i = 0
+mAcc_m6_95 = []
+for i in range(len(b_m6_95Acc)):
+    mAcc_m6_95.append(stat.mean(b_m6_95Acc[i]))
+
 #calculate accuracy by m6 condition
 i = 0
-mAcc_m6 = []
-for i in range(len(b_m6Acc)):
-    mAcc_m6.append(stat.mean(b_m6Acc[i]))
+mAcc_m10 = []
+for i in range(len(b_m10Acc)):
+    mAcc_m10.append(stat.mean(b_m10Acc[i]))
 
 ############################################################################
-#Calculations by Acc category RT
+#Calculations category RT
 #############################################################################
-#calculate accuracy by frequency
-b_m0RT = []
-b_m3wRT = []
+#calculate RT by frequency
+b_sameRT = []
+b_m3w5RT = []
+b_m3w95RT = []
 b_m3bRT = []
-b_m6RT = []
+b_m6_5RT = []
+b_m6_95RT = []
 b_m10RT = []
+
 
 iTrial = iBlock = 0
 for iBlock in range(sResp.size):
-    m0RT = []
-    m3wRT = []
+    sameRT = []
+    m3w5RT = []
+    m3w95RT = []
     m3bRT = []
-    m6RT = []
+    m6_5RT = []
+    m6_95RT = []
     m10RT = []
     for iTrial in range(sResp[0,iBlock].size):
         stim1 = int(round(stimuli[0,iBlock][0,iTrial]))
         stim2 = int(round(stimuli[0,iBlock][2,iTrial]))
 
         if stim1 == stim2:
-            m0RT.append(RT[0,iBlock][0,iTrial])
+            sameRT.append(RT[0,iBlock][0,iTrial])
         elif (stim1 == FL[0] and stim2 == FL[3]) or (stim1 == FL[3] and stim2 == FL[0]):
             m10RT.append(RT[0,iBlock][0,iTrial])
-        elif (stim1 == FL[0] and stim2 == FL[2]) or (stim1 == FL[2] and stim2 == FL[0]) or\
-                (stim1 == FL[3] and stim2 == FL[1]) or (stim1 == FL[1] and stim2 == FL[3]):
-            m6RT.append(RT[0,iBlock][0,iTrial])
-        elif (stim1 == FL[0] and stim2 == FL[1]) or (stim1 == FL[1] and stim2 == FL[0]) or\
-                (stim1 == FL[3] and stim2 == FL[2]) or (stim1 == FL[2] and stim2 == FL[3]):
-            m3wRT.append(RT[0,iBlock][0,iTrial])
+        elif (stim1 == FL[0] and stim2 == FL[2]) or (stim1 == FL[2] and stim2 == FL[0]):
+            m6_5RT.append(RT[0,iBlock][0,iTrial])
+        elif (stim1 == FL[3] and stim2 == FL[1]) or (stim1 == FL[1] and stim2 == FL[3]):
+            m6_95RT.append(RT[0,iBlock][0,iTrial])
+        elif (stim1 == FL[0] and stim2 == FL[1]) or (stim1 == FL[1] and stim2 == FL[0]):
+            m3w5RT.append(RT[0,iBlock][0,iTrial])
+        elif (stim1 == FL[3] and stim2 == FL[2]) or (stim1 == FL[2] and stim2 == FL[3]):
+            m3w95RT.append(RT[0,iBlock][0,iTrial])
         elif (stim1 == FL[1] and stim2 == FL[2]) or (stim1 == FL[2] and stim2 == FL[1]):
             m3bRT.append(RT[0,iBlock][0,iTrial])
 
-    b_m0RT.append(m0RT)
-    b_m3wRT.append(m3wRT)
+    b_sameRT.append(sameRT)
+    b_m3w5RT.append(m3w5RT)
+    b_m3w95RT.append(m3w95RT)
     b_m3bRT.append(m3bRT)
-    b_m6RT.append(m6RT)
+    b_m6_5RT.append(m6_5RT)
+    b_m6_95RT.append(m6_95RT)
     b_m10RT.append(m10RT)
 
-#calculate accuracy for m0 condition
+#calculate accuracy for same condition
 i = 0
-mRT_m0 = []
-for i in range(len(b_m0RT)):
-    mRT_m0.append(stat.mean(b_m0RT[i]))
+mRT_same = []
+for i in range(len(b_sameRT)):
+    mRT_same.append(stat.mean(b_sameRT[i]))
 
-#calculate accuracy by m3w condition
+#calculate accuracy by m3w5 condition
 i = 0
-mRT_m3w = []
-for i in range(len(b_m3wRT)):
-    mRT_m3w.append(stat.mean(b_m3wRT[i]))
+mRT_m3w5 = []
+for i in range(len(b_m3w5RT)):
+    mRT_m3w5.append(stat.mean(b_m3w5RT[i]))
 
-#calculate accuracy by m3w condition
+#calculate accuracy by m3w95 condition
+i = 0
+mRT_m3w95 = []
+for i in range(len(b_m3w95RT)):
+    mRT_m3w95.append(stat.mean(b_m3w95RT[i]))
+
+#calculate accuracy by m3b condition
 i = 0
 mRT_m3b = []
 for i in range(len(b_m3bRT)):
     mRT_m3b.append(stat.mean(b_m3bRT[i]))
 
-#calculate accuracy by m3w condition
+#calculate accuracy by m6_5 condition
 i = 0
-mRT_m6 = []
-for i in range(len(b_m6RT)):
-    mRT_m6.append(stat.mean(b_m6RT[i]))
+mRT_m6_5 = []
+for i in range(len(b_m6_5RT)):
+    mRT_m6_5.append(stat.mean(b_m6_5RT[i]))
+
+#calculate accuracy by m6_5 condition
+i = 0
+mRT_m6_95 = []
+for i in range(len(b_m6_95RT)):
+    mRT_m6_95.append(stat.mean(b_m6_95RT[i]))
 
 #calculate accuracy by m3w condition
 i = 0
@@ -352,7 +404,7 @@ for iBlock in range(RT.size):
 # for i in range(nBlocks):
 #             x.append("Block: " + str(i+1)),
 x = ["Different", "Same"]
-x2 = ["M0", "M3B", "M3W", "M6", "M10"]
+x2 = ["Same", "35% v 65%", "5% v 35%", "65% v 95%", "5% v 65%", "95% v 35%", "5% v 95%"]
 
 #############################################################################
 #Generating figures
@@ -386,10 +438,10 @@ trace3 = make_trace_line(x, [stat.mean(D_wristPos_meanRT),stat.mean(S_wristPos_m
 trace4 = make_trace_line(x, [stat.mean(D_elbowPos_meanRT), stat.mean(S_elbowPos_meanRT)], "Elbow RT")
 
 #make trace containing acc by frequency for Same and different Condition
-trace5  = make_trace_bar(x2, [stat.mean(mAcc_m0), stat.mean(mAcc_m3b), stat.mean(mAcc_m3w),
-                              stat.mean(mAcc_m6), stat.mean(mAcc_m10)], ["M0","M3B", "M3W", "M6", "M10"])
-trace6 = make_trace_line(x2, [stat.mean(mRT_m0), stat.mean(mRT_m3b), stat.mean(mRT_m3w),
-                             stat.mean(mRT_m6), stat.mean(mRT_m10)], ["M0","M3B", "M3W", "M6", "M10"])
+trace5  = make_trace_bar(x2, [stat.mean(mAcc_same), stat.mean(mAcc_m3b), stat.mean(mAcc_m3w5),stat.mean(mAcc_m3w95),
+                              stat.mean(mAcc_m6_5), stat.mean(mAcc_m6_95), stat.mean(mAcc_m10)], ["Acc"])
+trace6 = make_trace_line(x2, [stat.mean(mRT_same), stat.mean(mRT_m3b), stat.mean(mRT_m3w5), stat.mean(mRT_m3w95),
+                             stat.mean(mRT_m6_5), stat.mean(mRT_m6_95), stat.mean(mRT_m10)], ["RT"])
 # matFileName = fileDirectory + filename
 # dataFile = sio.savemat(matFileName, {'x':x, 'y':y, 'cp_mean': cp_mean, 'mm_mean': mm_mean, 'cb_mean': cb_mean)
 # dataFile.write(x,y,cp_mean, mm_mean, cb_mean,)
