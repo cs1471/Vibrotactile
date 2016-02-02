@@ -1,7 +1,7 @@
 % FrequencyDiscrimWrapper
 % Wrapper, calls frequencyDiscrimExperiment.m
-% Patrick Malone pmalone333@gmail.com && Courtney Sprouse
-% cs1471@georgetown.edu && Levan Bokeria levan.bokeria@georgetown.edu
+% Courtney Sprouse cs1471@georgetown.edu && Patrick Malone pmalone333@gmail.com 
+% && Levan Bokeria levan.bokeria@georgetown.edu
 
 %prompt experimenter to check white noise, ear plugs
 input('\n\nIs white noise playing? Hit Enter when "Yes."\n');
