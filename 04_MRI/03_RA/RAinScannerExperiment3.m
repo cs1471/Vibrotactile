@@ -1,5 +1,5 @@
 
-function trialOutput = RAinScannerExperiment2(name,exptdesign)
+function trialOutput = RAinScannerExperiment3(name,exptdesign)
 
 try
     KbName('UnifyKeyNames');
@@ -178,19 +178,11 @@ try
                % sResp =1 is same, sResp = 2 if differnt
                if ~isempty(evt)
                    if evt.state == responseMapping.same
-                       if response == 0
-                           sResp = 2;
-                       elseif response == 1
-                           sResp = 1;
-                       end
+                       sResp = 2;
                    elseif evt.state == responseMapping.different
-                       if response == 0
-                           sResp = 1;
-                       elseif response == 1
-                           sResp = 2;
-                       end
+                       sResp = 1;
                    else
-                       sResp = -1;
+                       sResp = -2;
                    end
                    % Record end time of response
                    responseFinishedTime=evt.time;
@@ -222,8 +214,7 @@ try
             [stimLoadTime] = loadStimuli(stimuli(:,iTrial+1));
            end
            
-           endOfTrialWaitTime = waitTime-stimLoadTime;
-           WaitSecs(endOfTrialWaitTime)           
+           endOfTrialWaitTime = waitTime-stimLoadTime;    
            
            % Record parameters for the trial and block
            trialOutput(iBlock,1).sResp(iTrial)                 = sResp;
