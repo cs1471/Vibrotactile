@@ -20,13 +20,12 @@ end
 exptdesign.subjectName = name;
 
 %Trial/Block/Run lengths
-exptdesign.numBlocks = 24;              
+exptdesign.numBlocks = 3;              
 exptdesign.numTrialsPerSession = 6;    
-exptdesign.numRuns = 6;
+exptdesign.numRuns = 2;
 
 %fixation location/duration
 exptdesign.fixationDuration =0.700;
-exptdesign.trialDuration = 16;
 exptdesign.fixationImage = 'imgsscaled/fixation.bmp';  
 exptdesign.imageDirectory = 'imgsscaled/';   
 
@@ -40,8 +39,10 @@ exptdesign.imageDirectory = 'imgsscaled/';
 %     exptdesign.responseBox = 1;             % Controls whether we are using the keyboard or the response box for subj. responses.
 % end
 
+
+exptdesign.response = input('\n\nEnter response key profile (option 0 or 1):\n\n');
+exptdesign.responseBox = 1; 
 exptdesign.interTrialInterval = 0.7;                % amount of time between trials
-exptdesign.usespace=0;                  % use space bar to start each trial?
 
 %open com3 port for button boxes
 if exptdesign.responseBox
@@ -57,13 +58,14 @@ stimGenPTB('open')
 %run all 6 runs right after the last 
 for iRuns = 1:exptdesign.numRuns
     exptdesign.iRuns=iRuns;
-    [trialOutput.run] = trainedOddballExperimentInScanner(name,exptdesign);
+    [trialOutput.run] = trainedOddballExperimentInScanner2(name,exptdesign);
 end
 
 %close com3 port
 if exptdesign.responseBox
     CMUBox('Close',exptdesign.boxHandle);
-    disp('Ensure dip switches are set back to 4');
+    handle = ERRORDLG('Please ensure dip switches are set back to 4 and A');
+    disp(handle)
 end
 
 %close com2 port 

@@ -47,7 +47,7 @@ try
     stimulusPresentationTime = exptdesign.stimulusPresentationTime;
     
     % Display experiment instructions
-    if response == 0
+    if response == '0'
         drawAndCenterText(w,['\nOn each trial, you will feel 2 vibrations \n'...
                              'You will indicate whether the vibrations were different categories by pressing \n'...
                              'the button with your index finger\n'...
@@ -118,7 +118,7 @@ try
            totalTrialCounter = totalTrialCounter + 1;
            
            % Load stimuli
-           if withinTrialCounter ~= 1 && withinTrialCounter ~= 128 
+           if withinTrialCounter ~= 1 && withinTrialCounter ~= 15 
             [stimLoadTime] = loadStimuli(stimuli(:,iTrial+1));
            end
            
@@ -181,15 +181,10 @@ try
 end
 end
 
-function drawAndCenterText(window,message, wait, time)
-    
-    if nargin <4
-        time =0;
-    end
+function drawAndCenterText(window,message, time)
     
     % Now horizontally and vertically centered:
-    [nx, ny, bbox] = DrawFormattedText(window, message, 'center', 'center', 0);
-    black = BlackIndex(window); % pixel value for black               
+    [nx, ny, bbox] = DrawFormattedText(window, message, 'center', 'center', 0);             
     Screen('Flip',window, time);
 end
 
@@ -228,13 +223,13 @@ while (startWaiting < (stimFinished + responseDuration)...
         continue;
     else
         if buttons(1)
-            if response == 0
+            if response == '0'
                 sResp = 2;
             else
                 sResp = 1;
             end
         elseif buttons(3)
-            if response == 0
+            if response == '0'
                 sResp = 1;
             else
                 sResp = 2;

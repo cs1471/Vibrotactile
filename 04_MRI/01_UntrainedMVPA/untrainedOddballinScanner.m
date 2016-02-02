@@ -1,18 +1,20 @@
 % get subject info
-exptdesign.debugmode = 0; % Does not work for now. keep this commented.
-if exptdesign.debugmode
-    number = '0000';
-    WARN = input('YOU ARE IN DEBUG MODE. ARE YOU SURE THIS IS RIGHT?');
-else
-    number = input('\n\nEnter Subject ID:\n\n','s');
-end
+% exptdesign.debugmode = 0; % Does not work for now. keep this commented.
+% if exptdesign.debugmode
+%     number = '0000';
+%     WARN = input('YOU ARE IN DEBUG MODE. ARE YOU SURE THIS IS RIGHT?');
+% else
+%     
+% end
 %name = '915';
 %number = name;
+
+number = input('\n\nEnter Subject ID:\n\n','s');
 exptdesign.number = number;
 if isempty(number)
-    name = [datestr(now,'yyyy-mm-dd-HH-MM') 'MR000'];
+    name = [datestr(now,'yyyy-mm-dd-HH-MM_') 'MR000'];
 else
-    name = [datestr(now,'yyyy-mm-dd-HH-MM') number];
+    name = [datestr(now,'yyyy-mm-dd-HH-MM_') number];
 end
 WaitSecs(0.25);
 
@@ -29,22 +31,23 @@ exptdesign.numTrialsPerSession = 6;
 exptdesign.numRuns = 6;
 
 %fixation location/duration
-exptdesign.fixationDuration =0.700;             
+exptdesign.fixationDuration = 0.700;   
 exptdesign.fixationImage = 'imgsscaled/fixation.bmp'; 
 exptdesign.imageDirectory = 'imgsscaled/';   
 
 % Decide which response mapping you are using
-if exptdesign.debugmode
-    exptdesign.response = 1;
-    exptdesign.responseBox = 0;
-    exptdesign.boxHandle = 2; % we still need this variable in the debug mode. 
-else
-    exptdesign.response = input('\n\nEnter response key profile (option 0 or 1):\n\n');
-    exptdesign.responseBox = 1;             % Controls whether we are using the keyboard or the response box for subj. responses.
-end
+% if exptdesign.debugmode
+%     exptdesign.response = 1;
+%     exptdesign.responseBox = 0;
+%     exptdesign.boxHandle = 2; % we still need this variable in the debug mode. 
+% else
+               % Controls whether we are using the keyboard or the response box for subj. responses.
+% end
 
-exptdesign.responseDuration = 0.7;                % amount of time to allow for a response in seconds
-exptdesign.usespace=0;                  % use space bar to start each trial?
+exptdesign.response = input('\n\nEnter response key profile (option 0 or 1):\n\n');
+exptdesign.responseBox = 1;  
+
+exptdesign.interTrialInterval = 0.7;                % amount of time between trials
 
 %open com3 port for button boxes
 if exptdesign.responseBox
@@ -59,13 +62,14 @@ stimGenPTB('open')
 
 for iRuns = 1:exptdesign.numRuns
     exptdesign.iRuns=iRuns;
-    [trialOutput.runs] = untrainedOddballinScannerExperiment(name,exptdesign);
+    [trialOutput.runs] = untrainedOddballinScannerExperiment2(name,exptdesign);
 end
 
 %close com3 port
 if exptdesign.responseBox
     CMUBox('Close',exptdesign.boxHandle);
-    disp('Ensure dip switches are set back to 4');
+    handle = ERRORDLG('Please ensure dip switches are set back to 4 and A');
+    disp(handle);
 end
 
 %close com2 port 

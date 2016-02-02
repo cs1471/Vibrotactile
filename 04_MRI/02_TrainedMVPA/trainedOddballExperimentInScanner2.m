@@ -22,8 +22,6 @@ try
     % Open window with default settings:
     [w windowRect] = Screen('OpenWindow', screenNumber,[128 128 128]);
 %     [w windowRect] = Screen('OpenWindow', screenNumber,[128 128 128], [0 0 800 800]); %for debugging
-    white = WhiteIndex(w); % pixel value for white
-    black = BlackIndex(w); % pixel value for black
 
     % Select specific text font, style and size, unless we're on Linux
     % where this combo is not available:
