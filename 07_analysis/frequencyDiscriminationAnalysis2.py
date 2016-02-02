@@ -31,8 +31,8 @@ def makeFrequency():
 # session = input('Enter the session number: \n')
 
 #Use when debugging or manually editing
-filename = ('20160127_1651-MR888_block7')
-fileDirectory = '/Users/courtney/GoogleDrive/Riesenhuber/05_2015_scripts/Vibrotactile/06_frequencyDiscrimination/data/888/'
+filename = ('20151119_1059-983_block7')
+fileDirectory = '/Users/courtney/GoogleDrive/Riesenhuber/05_2015_scripts/Vibrotactile/06_frequencyDiscrimination/data/983/'
 
 
 #load matfile
@@ -225,141 +225,264 @@ for i in range(len(b_m6_95RT)):
 
 #calculate the reaction time by position
 iBlock = iTrial = 0
-bD_wristPos_RT = []
-bD_elbowPos_RT = []
-bS_wristPos_RT = []
-bS_elbowPos_RT = []
+bD_pos3or4_RT = []
+bD_pos5or6_RT = []
+bD_pos9or10_RT = []
+bD_pos11or12_RT = []
+bS_pos3or4_RT = []
+bS_pos5or6_RT = []
+bS_pos9or10_RT = []
+bS_pos11or12_RT = []
 
 for iBlock in range(sResp.size):
-    D_wristPos_RT = []
-    D_elbowPos_RT = []
-    S_wristPos_RT = []
-    S_elbowPos_RT = []
+    D_pos3or4_RT = []
+    D_pos5or6_RT = []
+    D_pos9or10_RT = []
+    D_pos11or12_RT = []
+    S_pos3or4_RT = []
+    S_pos5or6_RT = []
+    S_pos9or10_RT = []
+    S_pos11or12_RT = []
     for iTrial in range(sResp[0,iBlock].size):
         pos1 = int(stimuli[0,iBlock][1,iTrial])
         pos2 = int(stimuli[0,iBlock][3,iTrial])
         stim1 = stimuli[0,iBlock][0,iTrial]
         stim2 = stimuli[0,iBlock][2,iTrial]
         if stim1 != stim2:
-            if (pos1 == 1 or pos1 == 2 or pos1 == 3 or pos1 == 4):
-                D_wristPos_RT.append(RT[0,iBlock][0,iTrial])
+            if (pos1 == 3 or pos1 == 4):
+                D_pos3or4_RT.append(RT[0,iBlock][0,iTrial])
+            elif (pos1 == 5 or pos1 == 6):
+                D_pos5or6_RT.append(RT[0,iBlock][0,iTrial])
+            elif (pos1 == 9 or pos1 == 10):
+                D_pos9or10_RT.append(RT[0,iBlock][0,iTrial])
+            elif (pos1 == 11 or pos1 == 12):
+                D_pos11or12_RT.append(RT[0,iBlock][0,iTrial])
             else:
-                 D_elbowPos_RT.append(RT[0,iBlock][0,iTrial])
+                print("Your script is broked and stimuli are not meeting criteria for position of different stimuli")
         else:
-            if pos1 == 1 or pos1 == 2 or pos1 == 3 or pos1 == 4:
-                S_wristPos_RT.append(RT[0,iBlock][0,iTrial])
+            if (pos1 == 3 or pos1 == 4):
+                S_pos3or4_RT.append(RT[0,iBlock][0,iTrial])
+            elif (pos1 == 5 or pos1 == 6):
+                S_pos5or6_RT.append(RT[0,iBlock][0,iTrial])
+            elif (pos1 == 9 or pos1 == 10):
+                S_pos9or10_RT.append(RT[0,iBlock][0,iTrial])
+            elif (pos1 == 11 or pos1 == 12):
+                S_pos11or12_RT.append(RT[0,iBlock][0,iTrial])
             else:
-                S_elbowPos_RT.append(RT[0,iBlock][0,iTrial])
+                print("Your script is broked and stimuli are not meeting criteria for position of same stimuli")
 
-    bD_wristPos_RT.append(D_wristPos_RT)
-    bD_elbowPos_RT.append(D_elbowPos_RT)
-    bS_wristPos_RT.append(S_wristPos_RT)
-    bS_elbowPos_RT.append(S_elbowPos_RT)
+    bD_pos3or4_RT.append(D_pos3or4_RT)
+    bD_pos5or6_RT.append(D_pos5or6_RT)
+    bD_pos9or10_RT.append(D_pos9or10_RT)
+    bD_pos11or12_RT.append(D_pos11or12_RT)
+    bS_pos3or4_RT.append(S_pos3or4_RT)
+    bS_pos5or6_RT.append(S_pos5or6_RT)
+    bS_pos9or10_RT.append(S_pos9or10_RT)
+    bS_pos11or12_RT.append(S_pos11or12_RT)
 
-#calculate the mean RT by morph
-D_wristPos_meanRT = []
-iBlock = 0
-for iBlock, rtDWP in enumerate(bD_wristPos_RT):
-    if rtDWP != []:
-        D_wristPos_meanRT.append(stat.mean(rtDWP))
-    else:
-        D_wristPos_meanRT.append(0)
 
 #calculate the mean RT by morph
-D_elbowPos_meanRT = []
+D_pos3or4_meanRT = []
 iBlock = 0
-for iBlock, rtDEP in enumerate(bD_elbowPos_RT):
-    if rtDEP != []:
-        D_elbowPos_meanRT.append(stat.mean(rtDEP))
+for iBlock, accD3o4 in enumerate(bD_pos3or4_RT):
+    if accD3o4 != []:
+        D_pos3or4_meanRT.append(stat.mean(accD3o4))
     else:
-        D_elbowPos_meanRT.append(0)
+        D_pos3or4_meanRT.append(0)
 
 #calculate the mean RT by morph
-S_wristPos_meanRT = []
+D_pos5or6_meanRT = []
 iBlock = 0
-for iBlock, rtSWP in enumerate(bS_wristPos_RT):
-    if rtSWP != []:
-        S_wristPos_meanRT.append(stat.mean(rtSWP))
+for iBlock, accD5o6 in enumerate(bD_pos5or6_RT):
+    if accD5o6 != []:
+        D_pos5or6_meanRT.append(stat.mean(accD5o6))
     else:
-        S_wristPos_meanRT.append(0)
+        D_pos5or6_meanRT.append(0)
 
 #calculate the mean RT by morph
-S_elbowPos_meanRT = []
+D_pos9or10_meanRT = []
 iBlock = 0
-for iBlock, rtSEP in enumerate(bS_elbowPos_RT):
-    if rtSEP != []:
-        S_elbowPos_meanRT.append(stat.mean(rtSEP))
+for iBlock, accD9o10 in enumerate(bD_pos9or10_RT):
+    if accD9o10 != []:
+        D_pos9or10_meanRT.append(stat.mean(accD9o10))
     else:
-        S_elbowPos_meanRT.append(0)
+        D_pos9or10_meanRT.append(0)
+
+#calculate the mean RT by morph
+D_pos11or12_meanRT = []
+iBlock = 0
+for iBlock, accD11o12 in enumerate(bD_pos11or12_RT):
+    if accD11o12 != []:
+        D_pos11or12_meanRT.append(stat.mean(accD11o12))
+    else:
+        D_pos11or12_meanRT.append(0)
+
+#calculate the mean RT by morph
+S_pos3or4_meanRT = []
+iBlock = 0
+for iBlock, accS3o4 in enumerate(bS_pos3or4_RT):
+    if accS3o4 != []:
+        S_pos3or4_meanRT.append(stat.mean(accS3o4))
+    else:
+        S_pos3or4_meanRT.append(0)
+
+#calculate the mean RT by morph
+S_pos5or6_meanRT = []
+iBlock = 0
+for iBlock, accS5o6 in enumerate(bS_pos5or6_RT):
+    if accS5o6 != []:
+        S_pos5or6_meanRT.append(stat.mean(accS5o6))
+    else:
+        S_pos5or6_meanRT.append(0)
+
+#calculate the mean RT by morph
+S_pos9or10_meanRT = []
+iBlock = 0
+for iBlock, accS9o10 in enumerate(bS_pos9or10_RT):
+    if accS9o10 != []:
+        S_pos9or10_meanRT.append(stat.mean(accS9o10))
+    else:
+        S_pos9or10_meanRT.append(0)
+
+#calculate the mean RT by morph
+S_pos11or12_meanRT = []
+iBlock = 0
+for iBlock, accS11o12 in enumerate(bS_pos11or12_RT):
+    if accS11o12 != []:
+        S_pos11or12_meanRT.append(stat.mean(accS11o12))
+    else:
+        S_pos11or12_meanRT.append(0)
+
 
 #calculate the accuracy by position
 iBlock = iTrial = 0
-bD_wristPos_accuracy = []
-bD_elbowPos_accuracy = []
-bS_wristPos_accuracy = []
-bS_elbowPos_accuracy = []
+bD_pos3or4_accuracy = []
+bD_pos5or6_accuracy = []
+bD_pos9or10_accuracy = []
+bD_pos11or12_accuracy = []
+bS_pos3or4_accuracy = []
+bS_pos5or6_accuracy = []
+bS_pos9or10_accuracy = []
+bS_pos11or12_accuracy = []
 
 for iBlock in range(sResp.size):
-    D_wristPos_accuracy = []
-    D_elbowPos_accuracy = []
-    S_wristPos_accuracy = []
-    S_elbowPos_accuracy = []
+    D_pos3or4_accuracy = []
+    D_pos5or6_accuracy = []
+    D_pos9or10_accuracy = []
+    D_pos11or12_accuracy = []
+    S_pos3or4_accuracy = []
+    S_pos5or6_accuracy = []
+    S_pos9or10_accuracy = []
+    S_pos11or12_accuracy = []
     for iTrial in range(sResp[0,iBlock].size):
         pos1 = int(stimuli[0,iBlock][1,iTrial])
         pos2 = int(stimuli[0,iBlock][3,iTrial])
         stim1 = stimuli[0,iBlock][0,iTrial]
         stim2 = stimuli[0,iBlock][2,iTrial]
         if stim1 != stim2:
-            if (pos1 == 1 or pos1 == 2 or pos1 == 3 or pos1 == 4):
-                D_wristPos_accuracy.append(accuracy[0,iBlock][0,iTrial])
+            if (pos1 == 3 or pos1 == 4):
+                D_pos3or4_accuracy.append(accuracy[0,iBlock][0,iTrial])
+            elif (pos1 == 5 or pos1 == 6):
+                D_pos5or6_accuracy.append(accuracy[0,iBlock][0,iTrial])
+            elif (pos1 == 9 or pos1 == 10):
+                D_pos9or10_accuracy.append(accuracy[0,iBlock][0,iTrial])
+            elif (pos1 == 11 or pos1 == 12):
+                D_pos11or12_accuracy.append(accuracy[0,iBlock][0,iTrial])
             else:
-                D_elbowPos_accuracy.append(accuracy[0,iBlock][0,iTrial])
+                print("Your script is broked and stimuli are not meeting criteria for position of different stimuli")
         else:
-            if (pos1 == 1 or pos1 == 2 or pos1 == 3 or pos1 == 4):
-                S_wristPos_accuracy.append(accuracy[0,iBlock][0,iTrial])
+            if (pos1 == 3 or pos1 == 4):
+                S_pos3or4_accuracy.append(accuracy[0,iBlock][0,iTrial])
+            elif (pos1 == 5 or pos1 == 6):
+                S_pos5or6_accuracy.append(accuracy[0,iBlock][0,iTrial])
+            elif (pos1 == 9 or pos1 == 10):
+                S_pos9or10_accuracy.append(accuracy[0,iBlock][0,iTrial])
+            elif (pos1 == 11 or pos1 == 12):
+                S_pos11or12_accuracy.append(accuracy[0,iBlock][0,iTrial])
             else:
-                S_elbowPos_accuracy.append(accuracy[0,iBlock][0,iTrial])
+                print("Your script is broked and stimuli are not meeting criteria for position of same stimuli")
 
-    bD_wristPos_accuracy.append(D_wristPos_accuracy)
-    bD_elbowPos_accuracy.append(D_elbowPos_accuracy)
-    bS_wristPos_accuracy.append(S_wristPos_accuracy)
-    bS_elbowPos_accuracy.append(S_elbowPos_accuracy)
+    bD_pos3or4_accuracy.append(D_pos3or4_accuracy)
+    bD_pos5or6_accuracy.append(D_pos5or6_accuracy)
+    bD_pos9or10_accuracy.append(D_pos9or10_accuracy)
+    bD_pos11or12_accuracy.append(D_pos11or12_accuracy)
+    bS_pos3or4_accuracy.append(S_pos3or4_accuracy)
+    bS_pos5or6_accuracy.append(S_pos5or6_accuracy)
+    bS_pos9or10_accuracy.append(S_pos9or10_accuracy)
+    bS_pos11or12_accuracy.append(S_pos11or12_accuracy)
 
-#calculate the mean accuracy by morph
-D_wristPos_meanAcc = []
-iBlock = 0
-for iBlock, accDWP in enumerate(bD_wristPos_accuracy):
-    if accDWP != []:
-        D_wristPos_meanAcc.append(stat.mean(accDWP))
-    else:
-        D_wristPos_meanAcc.append(0)
 
 #calculate the mean accuracy by morph
-D_elbowPos_meanAcc = []
+D_pos3or4_meanAcc = []
 iBlock = 0
-for iBlock, accDEP in enumerate(bD_elbowPos_accuracy):
-    if accDEP != []:
-        D_elbowPos_meanAcc.append(stat.mean(accDEP))
+for iBlock, accD3o4 in enumerate(bD_pos3or4_accuracy):
+    if accD3o4 != []:
+        D_pos3or4_meanAcc.append(stat.mean(accD3o4))
     else:
-        D_elbowPos_meanAcc.append(0)
+        D_pos3or4_meanAcc.append(0)
 
 #calculate the mean accuracy by morph
-S_wristPos_meanAcc = []
+D_pos5or6_meanAcc = []
 iBlock = 0
-for iBlock, accSWP in enumerate(bS_wristPos_accuracy):
-    if accSWP != []:
-        S_wristPos_meanAcc.append(stat.mean(accSWP))
+for iBlock, accD5o6 in enumerate(bD_pos5or6_accuracy):
+    if accD5o6 != []:
+        D_pos5or6_meanAcc.append(stat.mean(accD5o6))
     else:
-        S_wristPos_meanAcc.append(0)
+        D_pos5or6_meanAcc.append(0)
 
 #calculate the mean accuracy by morph
-S_elbowPos_meanAcc = []
+D_pos9or10_meanAcc = []
 iBlock = 0
-for iBlock, accSEP in enumerate(bS_elbowPos_accuracy):
-    if accSEP != []:
-        S_elbowPos_meanAcc.append(stat.mean(accSEP))
+for iBlock, accD9o10 in enumerate(bD_pos9or10_accuracy):
+    if accD9o10 != []:
+        D_pos9or10_meanAcc.append(stat.mean(accD9o10))
     else:
-        S_elbowPos_meanAcc.append(0)
+        D_pos9or10_meanAcc.append(0)
+
+#calculate the mean accuracy by morph
+D_pos11or12_meanAcc = []
+iBlock = 0
+for iBlock, accD11o12 in enumerate(bD_pos11or12_accuracy):
+    if accD11o12 != []:
+        D_pos11or12_meanAcc.append(stat.mean(accD11o12))
+    else:
+        D_pos11or12_meanAcc.append(0)
+
+#calculate the mean accuracy by morph
+S_pos3or4_meanAcc = []
+iBlock = 0
+for iBlock, accS3o4 in enumerate(bS_pos3or4_accuracy):
+    if accS3o4 != []:
+        S_pos3or4_meanAcc.append(stat.mean(accS3o4))
+    else:
+        S_pos3or4_meanAcc.append(0)
+
+#calculate the mean accuracy by morph
+S_pos5or6_meanAcc = []
+iBlock = 0
+for iBlock, accS5o6 in enumerate(bS_pos5or6_accuracy):
+    if accS5o6 != []:
+        S_pos5or6_meanAcc.append(stat.mean(accS5o6))
+    else:
+        S_pos5or6_meanAcc.append(0)
+
+#calculate the mean accuracy by morph
+S_pos9or10_meanAcc = []
+iBlock = 0
+for iBlock, accS9o10 in enumerate(bS_pos9or10_accuracy):
+    if accS9o10 != []:
+        S_pos9or10_meanAcc.append(stat.mean(accS9o10))
+    else:
+        S_pos9or10_meanAcc.append(0)
+
+#calculate the mean accuracy by morph
+S_pos11or12_meanAcc = []
+iBlock = 0
+for iBlock, accS11o12 in enumerate(bS_pos11or12_accuracy):
+    if accS11o12 != []:
+        S_pos11or12_meanAcc.append(stat.mean(accS11o12))
+    else:
+        S_pos11or12_meanAcc.append(0)
 
 #############################################################################
 #Calculating mean acc and RT overall
@@ -410,15 +533,19 @@ def make_trace_line(x, y, name):
 
 
 #make trace containing acc and RT by position for Different Condition
-trace1 = make_trace_bar(x, [stat.mean(D_wristPos_meanAcc),stat.mean(S_wristPos_meanAcc)],"Wrist Accuracy" )
-trace2 = make_trace_bar(x, [stat.mean(D_elbowPos_meanAcc),stat.mean(S_elbowPos_meanAcc)], "Elbow Accuracy")
-trace3 = make_trace_line(x, [stat.mean(D_wristPos_meanRT),stat.mean(S_wristPos_meanRT)],"Wrist RT")
-trace4 = make_trace_line(x, [stat.mean(D_elbowPos_meanRT), stat.mean(S_elbowPos_meanRT)], "Elbow RT")
+trace1 = make_trace_bar(x, [stat.mean(D_pos3or4_meanAcc),stat.mean(S_pos3or4_meanAcc)],"Position 3 or 4 Acc" )
+trace2 = make_trace_bar(x, [stat.mean(D_pos5or6_meanAcc),stat.mean(S_pos5or6_meanAcc)], "Position 5 or 6 Acc")
+trace3 = make_trace_bar(x, [stat.mean(D_pos9or10_meanAcc),stat.mean(S_pos9or10_meanAcc)],"Position 9 or 10 Acc" )
+trace4 = make_trace_bar(x, [stat.mean(D_pos11or12_meanAcc),stat.mean(S_pos11or12_meanAcc)], "Position 11 or 12 Acc")
+trace5 = make_trace_line(x, [stat.mean(D_pos3or4_meanRT),stat.mean(S_pos3or4_meanRT)],"Position 3 or 4 RT")
+trace6 = make_trace_line(x, [stat.mean(D_pos5or6_meanRT), stat.mean(S_pos5or6_meanRT)], "Position 5 or 6 RT")
+trace7 = make_trace_line(x, [stat.mean(D_pos9or10_meanRT),stat.mean(S_pos9or10_meanRT)],"Position 9 or 10 RT")
+trace8 = make_trace_line(x, [stat.mean(D_pos11or12_meanRT), stat.mean(S_pos11or12_meanRT)], "Position 11 or 12 RT")
 
 #make trace containing acc by frequency for Same and different Condition
-trace5  = make_trace_bar(x2, [stat.mean(mAcc_same), stat.mean(mAcc_m3b), stat.mean(mAcc_m3w5),
+trace9  = make_trace_bar(x2, [stat.mean(mAcc_same), stat.mean(mAcc_m3b), stat.mean(mAcc_m3w5),
                               stat.mean(mAcc_m3w95), stat.mean(mAcc_m6_5), stat.mean(mAcc_m6_95)], ["Acc"])
-trace6 = make_trace_line(x2, [stat.mean(mRT_same), stat.mean(mRT_m3b), stat.mean(mRT_m3w5),
+trace10 = make_trace_line(x2, [stat.mean(mRT_same), stat.mean(mRT_m3b), stat.mean(mRT_m3w5),
                               stat.mean(mRT_m3w95), stat.mean(mRT_m6_5), stat.mean(mRT_m6_95)], ["RT"])
 # matFileName = fileDirectory + filename
 # dataFile = sio.savemat(matFileName, {'x':x, 'y':y, 'cp_mean': cp_mean, 'mm_mean': mm_mean, 'cb_mean': cb_mean)
@@ -444,18 +571,18 @@ fig['layout'].update(
     barmode='group',
     bargroupgap=0,
     bargap=0.25,
-    title = subjectNumber + " Accuracy by Frequency across conditions " + session
+    title = subjectNumber + " Accuracy by Position across conditions " + session
 )
 
 fig2['layout'].update(
     barmode='group',
     bargroupgap=0,
     bargap=0.25,
-    title = subjectNumber + " Accuracy by Position across conditions " + session
+    title = subjectNumber + " Accuracy by Frequency across conditions " + session
 )
 
-fig['data']  = [trace1, trace2, trace3, trace4]
-fig2['data'] = [trace5, trace6]
+fig['data']  = [trace1, trace2, trace3, trace4, trace5, trace6, trace7, trace8]
+fig2['data'] = [trace9, trace10]
 
 #get the url of your figure to embed in html later
 # first_plot_url = py.plot(fig, filename= subjectName + "AccByMorph" + session, auto_open=False,)
