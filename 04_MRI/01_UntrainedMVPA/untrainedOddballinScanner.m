@@ -1,3 +1,4 @@
+try
 % get subject info
 % exptdesign.debugmode = 0; % Does not work for now. keep this commented.
 % if exptdesign.debugmode
@@ -26,7 +27,7 @@ end
 
 %Trial/Block/Run lengths
 exptdesign.subjectName = name;
-exptdesign.numBlocks = 24;              
+exptdesign.numBlocks = 24;    
 exptdesign.numTrialsPerSession = 6;    
 exptdesign.numRuns = 6;
 
@@ -62,7 +63,16 @@ stimGenPTB('open')
 
 for iRuns = 1:exptdesign.numRuns
     exptdesign.iRuns=iRuns;
-    [trialOutput.runs] = untrainedOddballinScannerExperiment2(name,exptdesign);
+    if iRuns == 1
+        startOrNot = 'y';
+    else
+        startOrNot = input('Start the next run? y or n\n');
+    end
+    if strcmp(startOrNot,'y')==1
+        [trialOutput.runs] = untrainedOddballinScannerExperiment3(name,exptdesign);
+    else
+        input('What are you doing??');
+    end
 end
 
 %close com3 port
@@ -74,3 +84,9 @@ end
 
 %close com2 port 
 stimGenPTB('close')
+
+catch
+    display('You just quit the script, so Im closing the COM ports');
+    exptdesign.boxHandle = 1; % not sure if this is right :(
+    CMUBox('Close',exptdesign.boxHandle);
+end

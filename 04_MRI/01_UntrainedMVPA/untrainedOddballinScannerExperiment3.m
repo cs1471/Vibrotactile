@@ -1,5 +1,5 @@
 
-function trialOutput = untrainedOddballinScannerExperiment2(name,exptdesign)
+function trialOutput = untrainedOddballinScannerExperiment3(name,exptdesign)
 try
 %     dbstop if error;
     % following codes should be used when you are getting key presses using
@@ -12,7 +12,7 @@ try
     %     oldEnableFlag = Screen('Preference', 'SuppressAllWarnings', 1);
     %     warning offc
 %     if ~exptdesign.debugmode
-%         HideCursor;
+        HideCursor;
 %     end
 
     WaitSecs(1); % make sure it is loaded into memory;
@@ -25,8 +25,8 @@ try
     screenNumber = min(screens);
 
     % Open window with default settings:
-%     [w windowRect] = Screen('OpenWindow', screenNumber,[128 128 128]);
-    [w windowRect] = Screen('OpenWindow', screenNumber,[128 128 128], [0 0 200 200]); %for debugging
+    [w windowRect] = Screen('OpenWindow', screenNumber,[128 128 128]);
+%     [w windowRect] = Screen('OpenWindow', screenNumber,[128 128 128], [0 0 200 200]); %for debugging
     white = WhiteIndex(w); % pixel value for white
     black = BlackIndex(w); % pixel value for black
 
@@ -117,17 +117,22 @@ try
             evt = CMUBox('GetEvent', exptdesign.boxHandle);
         end
         
+       % call function that generates stimuli for driver box
+%         stimLoadTimeTrial1 = loadStimuli(stimuliBlock, withinTrialCounter);
         %iterate over trials
         for iTrial = 1:numTrialsPerSession
            trialStart = GetSecs;
-           %call function that generates stimuli for driver box
-           if withinTrialCounter == 1 
-               stimLoadTime = loadStimuli(stimuliBlock, iTrial);
-           end
            
+           % call function that generates stimuli for driver box
+           if withinTrialCounter == 1 
+               stimLoadTimeTrial1 = loadStimuli(stimuliBlock, iTrial);
+           else
+               stimLoadTimeTrial1 = 0;
+           end
            %draw fixation
            Screen('DrawTexture', w, fixationTexture);
-           [FixationVBLTimestamp, FixationOnsetTime, FixationFlipTimestamp, FixationMissed] = Screen('Flip',w, exptdesign.scanStart + 10*(iBlock) + 1*(totalTrialCounter-1));
+           [FixationVBLTimestamp, FixationOnsetTime, FixationFlipTimestamp, FixationMissed] = ...
+               Screen('Flip',w, exptdesign.scanStart + 10*(iBlock) + 1*(totalTrialCounter-1));
            
            stimulusOnset = GetSecs;
            rtn = -1;
@@ -139,12 +144,17 @@ try
            responseStartTime = GetSecs;
            
            % Load stimuli
-           if withinTrialCounter ~= 1 && withinTrialCounter ~= 6
-                [stimLoadTime] = loadStimuli(stimuliBlock ,iTrial+1);
+           nextTrial = iTrial + 1;
+           if withinTrialCounter ~= 6
+                [stimLoadTime] = loadStimuli(stimuliBlock,nextTrial);
+           else
+                stimLoadTime = 0;
            end
+
+           stimLoadTimeTotal = stimLoadTimeTrial1 + stimLoadTime;
            
-           waitTime = exptdesign.interTrialInterval- stimLoadTime;
-           WaitSecs(waitTime)
+           waitTime = exptdesign.interTrialInterval - stimLoadTimeTotal;
+           WaitSecs(waitTime);
            waitTimeEnd = GetSecs;
            
            if length(stimuliBlock{1,iTrial}(1,:)) > 1
@@ -152,21 +162,22 @@ try
            else
                 correctResponse = 0;
            end 
-           
-           %record parameters for the trial and block
-           trialOutput(iBlock,1).correctResponse(iTrial)       = correctResponse;
-           trialOutput(iBlock,1).stimulusLoadTime(iTrial)      = stimLoadTime;
-           trialOutput(iBlock,1).stimulusOnset(iTrial)         = stimulusOnset;
-           trialOutput(iBlock,1).stimulusDuration(iTrial)      = stimulusFinished-stimulusOnset;
-           trialOutput(iBlock,1).stimulusFinished(iTrial)      = stimulusFinished;
-           trialOutput(iBlock,1).responseStartTime(iTrial)     = responseStartTime;
-           trialOutput(iBlock,1).FixationVBLTimestamp(iTrial)  = FixationVBLTimestamp;
-           trialOutput(iBlock,1).FixationOnsetTime(iTrial)     = FixationOnsetTime;
-           trialOutput(iBlock,1).FixationFlipTimestamp(iTrial) = FixationFlipTimestamp;
-           trialOutput(iBlock,1).FixationMissed(iTrial)        = FixationMissed;
-           trialOutput(iBlock,1).waitTimeEnd(iTrial)           = waitTimeEnd;
-           trialOutput(iBlock,1).waitTime(iTrial)              = waitTime;
            trialEnd = GetSecs;
+           %record parameters for the trial and block
+           trialOutput(iBlock,1).correctResponse(iTrial)         = correctResponse;
+           trialOutput(iBlock,1).stimulusLoadTimeTrial1(iTrial)  = stimLoadTimeTrial1;
+           trialOutput(iBlock,1).stimulusLoadTime(iTrial)        = stimLoadTime;           
+           trialOutput(iBlock,1).stimulusLoadTimeTotal(iTrial)   = stimLoadTimeTotal;
+           trialOutput(iBlock,1).stimulusOnset(iTrial)           = stimulusOnset;
+           trialOutput(iBlock,1).stimulusDuration(iTrial)        = stimulusFinished-stimulusOnset;
+           trialOutput(iBlock,1).stimulusFinished(iTrial)        = stimulusFinished;
+           trialOutput(iBlock,1).responseStartTime(iTrial)       = responseStartTime;
+           trialOutput(iBlock,1).FixationVBLTimestamp(iTrial)    = FixationVBLTimestamp;
+           trialOutput(iBlock,1).FixationOnsetTime(iTrial)       = FixationOnsetTime;
+           trialOutput(iBlock,1).FixationFlipTimestamp(iTrial)   = FixationFlipTimestamp;
+           trialOutput(iBlock,1).FixationMissed(iTrial)          = FixationMissed;
+           trialOutput(iBlock,1).waitTimeEnd(iTrial)             = waitTimeEnd;
+           trialOutput(iBlock,1).waitTime(iTrial)                = waitTime;
            trialOutput(iBlock,1).trialDuration(iTrial)         = trialEnd-trialStart;
            
            withinTrialCounter = withinTrialCounter + 1;
