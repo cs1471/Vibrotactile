@@ -2,19 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0794c37e-0125-4d6f-89ef-6834103a2107" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../03_spatialLocalization/data/000/20151116_1604-000_block1.mat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../03_spatialLocalization/data/000/20151116_1604-000_block2.mat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../03_spatialLocalization/data/000/20151116_1813-000_block1.mat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../03_spatialLocalization/data/000/20151116_1813-000_block2.mat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../03_spatialLocalization/data/000/20151116_1814-000_block3.mat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../03_spatialLocalization/data/000/20151116_1814-000_block4.mat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../03_spatialLocalization/data/000/20151116_1815-000_block5.mat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../03_spatialLocalization/data/0000/MR0000_block1.5.mat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../03_spatialLocalization/data/0000000/MR0000000_block1.5.mat" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../01_CategoryTraining/01_analysis/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../04_MRI/03_RA/RAinScanner.m" afterPath="$PROJECT_DIR$/../04_MRI/03_RA/RAinScanner.m" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CategoryTrainingFigure.py" afterPath="$PROJECT_DIR$/CategoryTrainingFigure.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frequencyDiscriminationAnalysis2.py" afterPath="$PROJECT_DIR$/frequencyDiscriminationAnalysis2.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spatialLocalizationAnalysis.py" afterPath="$PROJECT_DIR$/spatialLocalizationAnalysis.py" />
     </list>
@@ -51,7 +39,7 @@
         <entry file="file://$PROJECT_DIR$/spatialLocalizationAnalysis.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="34" column="32" selection-start-line="34" selection-start-column="32" selection-end-line="34" selection-end-column="32" />
+              <caret line="76" column="22" selection-start-line="76" selection-start-column="22" selection-end-line="76" selection-end-column="22" />
               <folding />
             </state>
           </provider>
@@ -60,8 +48,8 @@
       <file leaf-file-name="frequencyDiscriminationAnalysis2.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/frequencyDiscriminationAnalysis2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.12328767">
-              <caret line="569" column="21" selection-start-line="569" selection-start-column="21" selection-end-line="569" selection-end-column="21" />
+            <state vertical-scroll-proportion="0.38189533">
+              <caret line="69" column="14" selection-start-line="69" selection-start-column="14" selection-end-line="69" selection-end-column="14" />
               <folding>
                 <element signature="e#20#38#0" expanded="true" />
               </folding>
@@ -89,8 +77,8 @@
         <option value="$PROJECT_DIR$/plotlyIntro/spatialLocalizationAnalysis.py" />
         <option value="$PROJECT_DIR$/plotlyIntro/categoryTrainingSession.py" />
         <option value="$PROJECT_DIR$/frequencyDiscriminationAnalysis.py" />
-        <option value="$PROJECT_DIR$/spatialLocalizationAnalysis.py" />
         <option value="$PROJECT_DIR$/CategoryTrainingFigure.py" />
+        <option value="$PROJECT_DIR$/spatialLocalizationAnalysis.py" />
         <option value="$PROJECT_DIR$/frequencyDiscriminationAnalysis2.py" />
       </list>
     </option>
@@ -408,18 +396,18 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39983305" sideWeight="0.5018067" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297162" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32965165" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28380635" sideWeight="0.49819332" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297162" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.28380635" sideWeight="0.49819332" order="3" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -698,15 +686,15 @@
     <entry file="file://$PROJECT_DIR$/spatialLocalizationAnalysis.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="34" column="32" selection-start-line="34" selection-start-column="32" selection-end-line="34" selection-end-column="32" />
+          <caret line="76" column="22" selection-start-line="76" selection-start-column="22" selection-end-line="76" selection-end-column="22" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/frequencyDiscriminationAnalysis2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.12328767">
-          <caret line="569" column="21" selection-start-line="569" selection-start-column="21" selection-end-line="569" selection-end-column="21" />
+        <state vertical-scroll-proportion="0.38189533">
+          <caret line="69" column="14" selection-start-line="69" selection-start-column="14" selection-end-line="69" selection-end-column="14" />
           <folding>
             <element signature="e#20#38#0" expanded="true" />
           </folding>
