@@ -1,6 +1,6 @@
 function oddballPractice(response)
 %     dbstop if error;
-    if (nargin < 1) response = 1; end
+    if (nargin < 1) response = 0; end
     
     f1=2.^([0:.1:2]+log2(25));
 
@@ -16,7 +16,7 @@ function oddballPractice(response)
         
     stimuliBlock = {[repmat(f1(21),1,3);  oddChannels], [frequency(1);position(1)], [frequency(1);position(1)], [frequency(1);position(1)], [frequency(1);position(1)], [frequency(1);position(1)];
                     [frequency(2);position(2)], [frequency(2);position(2)], [frequency(2);position(2)], [repmat(f1(21),1,3); oddChannels],  [frequency(2);position(2)],  [frequency(2);position(2)];...
-                    [frequency(1);position(1)], [repmat(f1(21),1,3); oddChannels], [frequency(1);position(1)], [frequency(1);position(1)], [frequency(1);position(1)], [frequency(1);position(1)],};
+                    [frequency(1);position(3)], [repmat(f1(21),1,3); oddChannels], [frequency(1);position(3)], [frequency(1);position(3)], [frequency(1);position(3)], [frequency(1);position(3)],};
 
     nBlocks = size(stimuliBlock,1);
     nTrials = size(stimuliBlock(1,:),2);

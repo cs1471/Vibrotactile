@@ -12,7 +12,7 @@ try
     %     oldEnableFlag = Screen('Preference', 'SuppressAllWarnings', 1);
     %     warning offc
 %     if ~exptdesign.debugmode
-%         HideCursor;
+        HideCursor;
 %     end
 
     WaitSecs(1); % make sure it is loaded into memory;
@@ -119,7 +119,7 @@ try
         
         %iterate over trials
         for iTrial = 1:numTrialsPerSession
-           
+           trialStart = GetSecs;
            %call function that generates stimuli for driver box
            if withinTrialCounter == 1
                stimLoadTime = loadStimuli(stimuliBlock, iTrial);
@@ -166,9 +166,12 @@ try
            trialOutput(iBlock,1).FixationMissed(iTrial)        = FixationMissed;
            trialOutput(iBlock,1).waitTimeEnd(iTrial)           = waitTimeEnd;
            trialOutput(iBlock,1).waitTime(iTrial)              = waitTime;
+           trialEnd = GetSecs;
+           trialOutput(iBlock,1).trialDuration(iTrial)         = trialEnd-trialStart;
            
            withinTrialCounter = withinTrialCounter + 1;
            totalTrialCounter = totalTrialCounter + 1;
+          
         end %end of trial
         
         %set variables == 0 if no response
