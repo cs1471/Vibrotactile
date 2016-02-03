@@ -12,7 +12,7 @@ try
     %     oldEnableFlag = Screen('Preference', 'SuppressAllWarnings', 1);
     %     warning offc
 %     if ~exptdesign.debugmode
-%         HideCursor;
+        HideCursor;
 %     end
 
     WaitSecs(1); % make sure it is loaded into memory;
@@ -25,8 +25,8 @@ try
     screenNumber = min(screens);
 
     % Open window with default settings:
-%     [w windowRect] = Screen('OpenWindow', screenNumber,[128 128 128]);
-    [w windowRect] = Screen('OpenWindow', screenNumber,[128 128 128], [0 0 200 200]); %for debugging
+    [w windowRect] = Screen('OpenWindow', screenNumber,[128 128 128]);
+%     [w windowRect] = Screen('OpenWindow', screenNumber,[128 128 128], [0 0 200 200]); %for debugging
     white = WhiteIndex(w); % pixel value for white
     black = BlackIndex(w); % pixel value for black
 
@@ -136,9 +136,9 @@ try
                rtn = stimGenPTB('start');
            end
            stimulusFinished = GetSecs;
-           stimulusDuration = stimulusFinished - StimulusOnset;
+           stimulusDuration = stimulusFinished - stimulusOnset;
            stimulusOffset = stimulusPresentation - stimulusDuration;
-           waitSecs(StimulusOffset)
+           waitSecs(stimulusOffset)
            
            responseStartTime = GetSecs;
            
@@ -166,7 +166,6 @@ try
            trialOutput(iBlock,1).FixationOnsetTime(iTrial)     = FixationOnsetTime;
            trialOutput(iBlock,1).FixationFlipTimestamp(iTrial) = FixationFlipTimestamp;
            trialOutput(iBlock,1).FixationMissed(iTrial)        = FixationMissed;
-           trialOutput(iBlock,1).waitTimeEnd(iTrial)           = waitTimeEnd;
            trialOutput(iBlock,1).waitTime(iTrial)              = waitTime;
            trialEnd = GetSecs;
            trialOutput(iBlock,1).trialDuration(iTrial)         = trialEnd-trialStart;

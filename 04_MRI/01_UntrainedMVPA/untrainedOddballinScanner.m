@@ -1,4 +1,4 @@
-try
+% try
 % get subject info
 % exptdesign.debugmode = 0; % Does not work for now. keep this commented.
 % if exptdesign.debugmode
@@ -70,7 +70,7 @@ for iRuns = 1:exptdesign.numRuns
         startOrNot = input('Start the next run? y or n\n');
     end
     if strcmp(startOrNot,'y')==1
-        [trialOutput.runs] = untrainedOddballinScannerExperiment3(name,exptdesign);
+        [trialOutput.runs] = untrainedOddballinScannerExperiment2(name,exptdesign);
     else
         input('What are you doing??');
     end
@@ -86,8 +86,8 @@ end
 %close com2 port 
 stimGenPTB('close')
 
-catch
-    display('You just quit the script, so Im closing the COM ports');
-    exptdesign.boxHandle = 1; % not sure if this is right :(
-    CMUBox('Close',exptdesign.boxHandle);
-end
+% catch
+%     display('You just quit the script, so Im closing the COM ports');
+%     exptdesign.boxHandle = 1; % not sure if this is right :(
+%     CMUBox('Close',exptdesign.boxHandle);
+% end
