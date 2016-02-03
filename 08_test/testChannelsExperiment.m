@@ -32,14 +32,14 @@ function testChannelsExperiment(exptdesign)
     
     %load training stimuli
     if practiceType == '0'
-        stimuli = load('testStimuliCateg.mat');
+        load('testStimuliCateg.mat');
     else
-        stimuli = load('testStimuli.mat');
+        load('testStimuli.mat');
     end
     
     for iBlock=1:exptdesign.numBlocks
-        drawAndCenterText(w, ['You will feel three pulses of a vibration at a particular channel./n/n/n'...
-            'You may repeat the vibration as many times as you would like until you feel the vibration/n/n/n '...
+        drawAndCenterText(w, ['You will feel three pulses of a vibration at a particular channel.\n\n\n'...
+            'You may repeat the vibration as many times as you would like until you feel the vibration\n\n\n '...
             'Please click the mouse when you are ready to advance'],1)
         
         for iTrial=1:exptdesign.numTrialsPerSession
@@ -85,8 +85,9 @@ function testChannelsExperiment(exptdesign)
                stimOffset = stimPresentation - stimDuration;
                WaitSecs(stimOffset)
                
-               drawAndCenterText(w,['Did you feel the vibration? \n\n If yes click the left mouse button '...
-               'If no click the right mouse button to replay the vibration'], 0)
+               drawAndCenterText(w,['Did you feel the vibration at the specified channel? \n\n\n'...
+               'If YES click the LEFT mouse button '...
+               'If NO click the RIGHT mouse button to replay the vibration'], 0)
            
                [sResp] = getResponseMouse();
            end
@@ -114,7 +115,7 @@ function drawAndCenterText(window, message, wait)
     Screen('Flip',window);
     
     %KbWait(1) waits for a MOUSE click to continue
-    if wait, KbWait(1); end %note on CAS computer = 4
+    if wait, KbWait(4); end %note on CAS computer = 1
     WaitSecs(0.2); %this is necessary on the windows XP machine to wait for mouse response -- DOES delay timing!
 end
 
@@ -130,7 +131,7 @@ function [numericalAnswer] = getResponseMouse()
        if buttons(1)
            numericalAnswer = 1;
            mousePressed = 1;
-       elseif buttons(3) %note on cas computer = 2
+       elseif buttons(2) %note on cas computer = 3
            numericalAnswer = 0;
            mousePressed = 1;
        end
