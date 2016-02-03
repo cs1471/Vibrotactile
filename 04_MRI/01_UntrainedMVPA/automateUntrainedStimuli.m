@@ -12,13 +12,14 @@ end
 
 sessionMatrix = zeros(nCond,nRuns);
 sessionMatrix(:,1:4) = 1;
-sessionMatrix(1:4,5) = 1;
+% sessionMatrix(1:4,5) = 1;
 
 % Randomize the whole matrix
 allRandomized = [];
 while isempty(allRandomized)
     for iRow = 1:nCond
-        if isequal(sum(sessionMatrix,1),ones(1,6)*6)
+        if length(find(sum(sessionMatrix,1) == 5)) == 4 && ...
+           length(find(sum(sessionMatrix,1) == 6)) == 2
             allRandomized = 1;
             fprintf('Randomized the whole matrix\n');
             break
@@ -31,11 +32,8 @@ while isempty(allRandomized)
 end
 
 % Do a final check
-assert(isequal(sum(sessionMatrix,1),[6 6 6 6 6 6]) &&...
-        isequal(sum(sessionMatrix,2),[5;5;5;5;4;4;4;4]),...
+assert(isequal(sum(sessionMatrix,2),[4;4;4;4;4;4;4;4]),...
         'Did not pass final check!')
-
-
 
 %% Generate the raw matrix of stimuli for each run and a raw metadata struct.
 [stimuliAllRuns,allFreq,~,oddChannels] = makeUntrainedOddballStimuli(nRuns,response);
@@ -94,9 +92,9 @@ for iRun = 1:nRuns
     % sumLength2 is sum of lengths of each cell within one column of 8
     % rows, where none of the cells are the oddball.
     while isempty(blocksSpread)
-       if numel(find(sum(cellfun(@length,stimuliAllRuns{iRun}(1:8,  2:6)),1) > sumLength2)) == 2 && ...
-          numel(find(sum(cellfun(@length,stimuliAllRuns{iRun}(9:16, 2:6)),1) > sumLength2)) == 2 && ...
-          numel(find(sum(cellfun(@length,stimuliAllRuns{iRun}(17:24,2:6)),1) > sumLength2)) == 2
+       if numel(find(sum(cellfun(@length,stimuliAllRuns{iRun}(1:8,  2:6)),1) > sumLength2)) >= 1 && ...
+          numel(find(sum(cellfun(@length,stimuliAllRuns{iRun}(9:16, 2:6)),1) > sumLength2)) >= 1 && ...
+          numel(find(sum(cellfun(@length,stimuliAllRuns{iRun}(17:24,2:6)),1) > sumLength2)) >= 1
                
            blockSpread = 1;
            display('Blocks have been spread too!')
@@ -111,14 +109,14 @@ for iRun = 1:nRuns
 end
 
 %% Do final check that everything looks alright.
-for iRun = 1:nRuns
-    % Does each run have 6 oddballs?
-    if length(find(cellfun(@length,stimuliAllRuns{iRun}) == 3)) ~= 6
-        error = input(['something is wrong with run ' int2str(iRun) ' oddballs']);
-    else
-        display('oddball numbers are correct')
-    end
-end
+% for iRun = 1:nRuns
+%     % Does each run have 6 oddballs?
+%     if length(find(cellfun(@length,stimuliAllRuns{iRun}) == 3)) ~= 6 
+%         error = input(['something is wrong with run ' int2str(iRun) ' oddballs']);
+%     else
+%         display('oddball numbers are correct')
+%     end
+% end
 %% Save the matrix and metadata
 save(['./stimuliAllRunsRP' int2str(response) '.mat'],'stimuliAllRuns','metaData');
 
