@@ -3,7 +3,7 @@ function automateUntrainedStimuli(nRuns,response)
 nCond = 8;
 if (nargin < 1) 
     nRuns = 6; 
-    response = 0;
+    response = 1;
 end
 
 %% Define the session master matrix.
@@ -67,9 +67,10 @@ for iRun = 1:nRuns
     % repeated twice only on one trial positions.
     oddballSpread = [];
     sumLength = sum(cellfun(@length,stimuliAllRuns{iRun}(:,6)),1); 
-    % sumLength is the sum of the lengths of each cell in column 6 as long
+    % sumLength is the sum of the lengths of each cell in column 6. As long
     % as that sum is 48 that means there is no oddball in that column. The
-    % while loop below loops until no column sumLength is 48.
+    % while loop below loops until no column sumLength is 48, so every
+    % column has an oddball!
                                                                    
     while isempty(oddballSpread)
         for iOddIdx = 1:length(oddIdx)
