@@ -161,11 +161,11 @@ try
                stimulusFinished = GetSecs;
                stimulusDuration = stimulusFinished-stimulusOnset;
                
-%                %start response window
-%                responseStartTime=GetSecs;
-%                %record subject response for mouse click v button press
-%                [sResp,responseFinishedTime]...
-%                    = getResponse(stimulusFinished, sOL, responseMapping, responseDuration);
+               %start response window
+               responseStartTime=GetSecs;
+               %record subject response for mouse click v button press
+               [sResp,responseFinishedTime]...
+                   = getResponse(stimulusFinished, sOL, responseMapping, responseDuration);
                
                %load stimulus for next trial
                if withinTrialCounter ~= 1 && withinTrialCounter ~= length(numTrialsPerSession)
@@ -175,7 +175,7 @@ try
                waitEOT = trialDuration-(responseDuration + stimulusDuration + stimLoadTime);
                WaitSecs(waitEOT)
            else
-               WaitSecs(exptdesign.trialDuration); % change from 4.08 to 4. LB then changed it to exptdesign.trialDuration variable defined in the wrapper.
+               WaitSecs(exptdesign.trialDuration); 
                stimulusFinished = GetSecs;
                sResp = -1;
                correctResponse = -1;

@@ -21,12 +21,6 @@ try
     % Open window with default settings:
     [w windowRect] = Screen('OpenWindow', screenNumber,[128 128 128]);
 %     [w windowRect] = Screen('OpenWindow', screenNumber,[128 128 128], [0 0 800 800]); %for debugging
-    white = WhiteIndex(w); % pixel value for white
-    black = BlackIndex(w); % pixel value for black
-    
-    % Calculate the slack allowed during a flip interval
-    refresh = Screen('GetFlipInterval',w);
-    slack = refresh/2;
 
     % Select specific text font, style and size, unless we're on Linux
     % where this combo is not available:
@@ -96,7 +90,7 @@ try
     stimulusPresentationTime = exptdesign.stimulusPresentationTime;
    
     % Display experiment instructions
-    if response == 0
+    if response == '0'
         drawAndCenterText(w,['\nOn each trial, you will feel 2 vibrations \n'...
                              'You will indicate whether the vibrations were different categories by pressing \n'...
                              'the button with your index finger\n'...
@@ -283,15 +277,10 @@ try
 end
 end
 
-function drawAndCenterText(window,message, wait, time)
-    
-    if nargin <4
-        time =0;
-    end
-    
+function drawAndCenterText(window,message, time)
+
     % Now horizontally and vertically centered:
-    [nx, ny, bbox] = DrawFormattedText(window, message, 'center', 'center', 0);
-    black = BlackIndex(window); % pixel value for black               
+    [nx, ny, bbox] = DrawFormattedText(window, message, 'center', 'center', 0);          
     Screen('Flip',window, time);
 end
 

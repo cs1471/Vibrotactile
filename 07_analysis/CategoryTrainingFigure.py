@@ -31,9 +31,9 @@ def makeFrequency():
 # session = input('Enter the session number: \n')
 
 #Use when debugging or manually editing
-filename = ('20151210_1347-MR1000_block6')
-fileDirectory = '/Users/courtneysprouse/GoogleDrive/Riesenhuber/05_2015_scripts/Vibrotactile/01_CategoryTraining/data/1000/'
-session = '2'
+filename = ('20160131_1455-MR983_block6')
+fileDirectory = '/Users/courtney/GoogleDrive/Riesenhuber/05_2015_scripts/Vibrotactile/01_CategoryTraining/data/983/'
+session = '3'
 
 #load matfile
 data = sio.loadmat(fileDirectory + filename, struct_as_record=True)
@@ -253,7 +253,7 @@ for iBlock, timeCB in enumerate(b_catBound_RT):
 O_accuracy = []
 iBlock = 0
 for iBlock in range(accuracy.size):
-    O_accuracy.append([np.mean([accuracy[0,iBlock]])])
+    O_accuracy.append(np.mean([accuracy[0,iBlock]]))
 
 #calculate the mean RT overall by block
 O_reactionTime = []
@@ -282,33 +282,45 @@ def make_trace_bar(y, name):
     )
 
 # (1.1) Define a trace-generating function (returns a line object)
-def make_trace_line(y, name):
-    return go.Scatter(
-        x     = x,
-        y     = y,            # take in the y-coords
-        name  = name,      # label for hover
-        xaxis = 'x1',                    # (!) both subplots on same x-axis
-        yaxis = 'y1'
+def make_trace_line(y, name, dash):
+     if dash == 'y':
+        return go.Scatter(
+            x     = x,
+            y     = y,            # take in the y-coords
+            name  = name,      # label for hover
+            xaxis = 'x1',                    # (!) both subplots on same x-axis
+            yaxis = 'y1',
+                line = dict(
+                    dash  = 'dash'
+                )
+        )
+     else:
+         return go.Scatter(
+            x     = x,
+            y     = y,            # take in the y-coords
+            name  = name,      # label for hover
+            xaxis = 'x1',                    # (!) both subplots on same x-axis
+            yaxis = 'y1',
     )
 
 
 #make trace containing acc and RT for morph
-trace1 = make_trace_bar(cp_meanAcc, "Category Prototype Accuracy")
-trace2 = make_trace_bar(mm_meanAcc, "Middle Morph Accuracy")
-trace3 = make_trace_bar(cb_meanAcc, "Category Boundary Accuracy")
-trace4 = make_trace_bar(cp_meanRT, "Category Prototype RT")
-trace5 = make_trace_bar(mm_meanRT, "Middle Morph RT")
-trace6 = make_trace_bar(cb_meanRT, "Category Boundary RT")
+trace1 = make_trace_bar(cp_meanAcc,  "Category Prototype Acc")
+trace2 = make_trace_bar(mm_meanAcc, "Middle Morph Acc")
+trace3 = make_trace_bar(cb_meanAcc, "Category Boundary Acc")
+trace4 = make_trace_line(cp_meanRT, "Category Prototype RT", 'n')
+trace5 = make_trace_line(mm_meanRT, "Middle Morph RT", 'n')
+trace6 = make_trace_line(cb_meanRT, "Category Boundary RT", 'n')
 
 #make trace containing overall acc and rt
-trace7 = make_trace_line(O_accuracy, "Overall Accuracy")
-trace8 = make_trace_line(O_reactionTime, "Overall RT")
+trace7 = make_trace_line(O_accuracy, "Overall Accuracy", 'y')
+trace8 = make_trace_line(O_reactionTime, "Overall RT", 'y')
 
 #make trace containing acc and RT for category type
 trace9 = make_trace_bar(mAcc_categoryA, 'Category A Acc (LF prox to wrist)')
 trace10 = make_trace_bar(mAcc_categoryB, 'Category B Acc (HF prox to wrist)')
-trace11 = make_trace_bar(mRT_categoryA, 'Category A RT (LF prox to wrist)')
-trace12 = make_trace_bar(mRT_categoryB, 'Category B RT (HF prox to wrist)')
+trace11 = make_trace_line(mRT_categoryA, 'Category A RT (LF prox to wrist)', 'n')
+trace12 = make_trace_line(mRT_categoryB, 'Category B RT (HF prox to wrist)', 'n')
 
 # matFileName = fileDirectory + filename
 # dataFile = sio.savemat(matFileName, {'x':x, 'y':y, 'cp_mean': cp_mean, 'mm_mean': mm_mean, 'cb_mean': cb_mean)
@@ -327,60 +339,31 @@ fig2 = tls.make_subplots(
     cols=1,
     shared_xaxes=True,
 )
-fig3 = tls.make_subplots(
-    rows=1,
-    cols=1,
-    shared_xaxes=True,
-)
-fig4 = tls.make_subplots(
-    rows=1,
-    cols=1,
-    shared_xaxes=True,
-)
 
 #set figure layout to hold mutlitple bars
 fig['layout'].update(
     barmode='group',
     bargroupgap=0,
     bargap=0.25,
-    title = "Accuracy By Morph"
+    title = subjectNumber + "Accuracy and RT By Morph_Session" + session
 )
 
 fig2['layout'].update(
     barmode='group',
     bargroupgap=0,
     bargap=0.25,
-    title = "RT By Morph"
+    title = subjectNumber + "Accuracy and RT By Category_Session" + session
 )
 
-fig3['layout'].update(
-    barmode='group',
-    bargroupgap=0,
-    bargap=0.25,
-    title = "Accuracy By Category"
-)
 
-fig4['layout'].update(
-    barmode='group',
-    bargroupgap=0,
-    bargap=0.25,
-    title = "RT By Category"
-)
-
-fig['data']  = [trace1, trace2, trace3, trace7]
-fig2['data'] = [trace4, trace5, trace6, trace8]
-fig3['data'] = [trace9, trace10, trace7]
-fig4['data'] = [trace11, trace12, trace8]
+fig['data']  = [trace1, trace2, trace3, trace7, trace4, trace5, trace6, trace8]
+fig2['data'] = [trace9, trace10, trace7, trace11, trace12, trace8]
 
 #get the url of your figure to embed in html later
-first_plot_url = py.plot(fig, filename= subjectName + "AccByMorph" + session, auto_open=False,)
-tls.get_embed(first_plot_url)
-second_plot_url = py.plot(fig2, filename= subjectName + "RTbyMorph" + session, auto_open=False,)
-tls.get_embed(second_plot_url)
-third_plot_url = py.plot(fig3, filename= subjectName + "AccByCatgeory" + session, auto_open=False,)
-tls.get_embed(third_plot_url)
-fourth_plot_url = py.plot(fig4, filename= subjectName + "RTbyCategory" + session, auto_open=False,)
-tls.get_embed(fourth_plot_url)
+# first_plot_url = py.plot(fig, filename= subjectName + "AccByMorph" + session, auto_open=False,)
+# tls.get_embed(first_plot_url)
+# second_plot_url = py.plot(fig2, filename= subjectName + "RTbyMorph" + session, auto_open=False,)
+# tls.get_embed(second_plot_url)
 
 #bread crumbs to make sure entered the correct information
 print("Your graph will be saved in this directory: " + fileDirectory + "\n")
@@ -389,36 +372,37 @@ print("The session number you have indicated is: " + session + "\n")
 
 
 #embed figure data in html
-html_string = '''
-<html>
-    <head>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-        <style>body{ margin:0 100; background:whitesmoke; }</style>
-    </head>
-    <body>
-        <!-- *** Accuracy by Morph *** --->
-        <iframe width="1000" height="550" frameborder="0" seamless="seamless" scrolling="no" \
-src="'''+ first_plot_url + '''.embed?width=800&height=550"></iframe>
-        <!-- *** Accuracy by Morph *** --->
-        <iframe width="1000" height="550" frameborder="0" seamless="seamless" scrolling="no" \
-src="'''+ second_plot_url + '''.embed?width=800&height=550"></iframe>
-        <!-- *** Accuracy by Morph *** --->
-        <iframe width="1000" height="550" frameborder="0" seamless="seamless" scrolling="no" \
-src="'''+ third_plot_url + '''.embed?width=800&height=550"></iframe>
-        <!-- *** Accuracy by Morph *** --->
-        <iframe width="1000" height="550" frameborder="0" seamless="seamless" scrolling="no" \
-src="'''+ fourth_plot_url + '''.embed?width=800&height=550"></iframe>
-    </body>
-</html>'''
-
-#save figure data in location specific previously
-f = open(fileDirectory + filename + '.html','w')
-f.write(html_string)
+# html_string = '''
+# <html>
+#     <head>
+#         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+#         <style>body{ margin:0 100; background:whitesmoke; }</style>
+#     </head>
+#     <body>
+#         <!-- *** Accuracy by Morph *** --->
+#         <iframe width="1000" height="550" frameborder="0" seamless="seamless" scrolling="no" \
+# src="'''+ first_plot_url + '''.embed?width=800&height=550"></iframe>
+#         <!-- *** Accuracy by Morph *** --->
+#         <iframe width="1000" height="550" frameborder="0" seamless="seamless" scrolling="no" \
+# src="'''+ second_plot_url + '''.embed?width=800&height=550"></iframe>
+#         <!-- *** Accuracy by Morph *** --->
+#         <iframe width="1000" height="550" frameborder="0" seamless="seamless" scrolling="no" \
+# src="'''+ third_plot_url + '''.embed?width=800&height=550"></iframe>
+#         <!-- *** Accuracy by Morph *** --->
+#         <iframe width="1000" height="550" frameborder="0" seamless="seamless" scrolling="no" \
+# src="'''+ fourth_plot_url + '''.embed?width=800&height=550"></iframe>
+#     </body>
+# </html>'''
+#
+# #save figure data in location specific previously
+# f = open(fileDirectory + filename + '.html','w')
+# f.write(html_string)
 
 #save images as png in case prefer compared to html
-# py.image.save_as(first_plot_url, "/Users/courtneysprouse/Desktop" + filename + "CategoryTraining" + session + ".png")
+py.image.save_as(fig, fileDirectory + filename + "_CategTrainingMorphAccSession" + session + ".jpeg")
+py.image.save_as(fig2, fileDirectory + filename + "_CategTrainingSession" + session + ".jpeg")
 
 #close all open files
-f.close()
+# f.close()
 
 print("Done!")

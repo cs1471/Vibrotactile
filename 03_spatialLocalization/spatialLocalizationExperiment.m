@@ -5,22 +5,19 @@ function spatialLocalizationExperiment(exptdesign)
     % cs1471@georgetown.edu, Levan Bokeria levan.bokeria@georgetown.edu
     
     % Open a screen and display instructions
-    screens=Screen('Screens');
     screenNumber=0;
     
     % Open window with default settings:
     [w windowRect] = Screen('OpenWindow', screenNumber,[128 128 128]);
-    white = WhiteIndex(w); % pixel value for white
-    gray = GrayIndex(w); % pixel value for gray
-    black = BlackIndex(w); % pixel value for black
-%     HideCursor;
+    HideCursor;
+    
     %load images
     fixationImage = imread(exptdesign.fixationImage);
     
     fixationTexture=Screen('MakeTexture', w, double(fixationImage));
     
     %load training stimuli
-    if exptdesign.response == 0
+    if exptdesign.response == '0'
         load('spatialLocalizationStimuli_0.mat');
     else
         load('spatialLocalizationStimuli_1.mat');
