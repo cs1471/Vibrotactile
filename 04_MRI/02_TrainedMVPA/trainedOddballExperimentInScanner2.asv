@@ -83,7 +83,7 @@ try
     runCounter=exptdesign.iRuns;
     numBlocks  = exptdesign.numBlocks;
     numTrialsPerSession = exptdesign.numTrialsPerSession;
-    stimulusPresentation = exptdesign.stimulusPresentation;
+    stimulusPresentaion = exptdesign.stimulusPresentation;
 
     %Display experiment instructions
     drawAndCenterText(w,['\nOn each trial, you will feel 6 vibrations \n'...
@@ -136,7 +136,7 @@ try
            responseStartTime=GetSecs;
            
            % Load stimuli
-           if withinTrialCounter ~= numTrialsPerSession
+           if withinTrialCounter ~= length(numTrialsPerSession)
                 [stimLoadTime] = loadStimuli(stimuliBlock ,iTrial+1);
            end
            
