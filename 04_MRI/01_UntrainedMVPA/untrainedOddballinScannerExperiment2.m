@@ -90,6 +90,7 @@ try
     runCounter = exptdesign.iRuns;
     numBlocks  = exptdesign.numBlocks;
     numTrialsPerSession = exptdesign.numTrialsPerSession;
+    stimulusPresentation = exptdesign.stimulusPresentation;
 
     %Display experiment instructions
     drawAndCenterText(w,['\nOn each trial, you will feel 6 vibrations \n'...
@@ -135,17 +136,18 @@ try
                rtn = stimGenPTB('start');
            end
            stimulusFinished = GetSecs;
+           stimulusDuration = stimulusFinished - StimulusOnset;
+           stimulusOffset = stimulusPresentation - stimulusDuration;
+           waitSecs(StimulusOffset)
            
            responseStartTime = GetSecs;
            
            % Load stimuli
-           if withinTrialCounter ~= 1 && withinTrialCounter ~= 6
+           if withinTrialCounter ~= 6
                 [stimLoadTime] = loadStimuli(stimuliBlock ,iTrial+1);
            end
            
            waitTime = exptdesign.interTrialInterval- stimLoadTime;
-           WaitSecs(waitTime)
-           waitTimeEnd = GetSecs;
            
            if length(stimuliBlock{1,iTrial}(1,:)) > 1
                 correctResponse = 1;

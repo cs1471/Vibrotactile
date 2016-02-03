@@ -32,7 +32,8 @@ exptdesign.numTrialsPerSession = 6;
 exptdesign.numRuns = 6;
 
 %fixation location/duration
-exptdesign.fixationDuration = 0.700;   
+exptdesign.fixationDuration = 0.700;
+exptdesign.stimulusPresentation = 0.300;
 exptdesign.fixationImage = 'imgsscaled/fixation.bmp'; 
 exptdesign.imageDirectory = 'imgsscaled/';   
 
