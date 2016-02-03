@@ -1,4 +1,4 @@
-response = input(['\n\nGenerating stimuli for channel testing (enter 0)?'...
+response = input(['\n\nGenerating stimuli for channel testing (enter 0)\n\n'...
     'Generating stimuli for categ practice (enter 1):\n\n'],'s');
 
 f1=2.^((0:.1:2)+log2(25));
@@ -18,7 +18,7 @@ stimulator = [1 2 5 6 1 2 5 6;
     
 %generate frequencies to be compared with all possible positions
 if response == '0'
-    stimuli = [repmat(f1(1),1,12); channels];
+    stimuli = [repmat(frequency,1,12); channels];
 else
     stimuli = [repmat(frequencyCateg, 1, 2);
                repmat(stimulator, 1, 2)];
