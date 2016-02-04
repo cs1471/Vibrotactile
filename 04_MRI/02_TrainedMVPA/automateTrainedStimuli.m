@@ -3,7 +3,7 @@ function stimuliAllRuns = automateTrainedStimuli(nRuns,response)
 nCond = 12;
 if (nargin < 1) 
     nRuns = 6; 
-    response = 0;
+    response = 1;
 end
 
 %% Define the session master matrix.
