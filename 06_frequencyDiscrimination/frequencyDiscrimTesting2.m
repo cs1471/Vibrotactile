@@ -40,6 +40,12 @@ exptdesign.numTrialsPerSession = 144;
 exptdesign.fixationImage = 'imgsscaled/fixation.bmp';  % image for the fixation cross
 exptdesign.imageDirectory = 'imgsscaled/';
 
-stimGenPTB('open')
+% open COM port1
+try
+stimGenPTB('close');
+catch
+end
+stimGenPTB('open','COM1')
+
 frequencyDiscrimExperiment2(exptdesign);
 stimGenPTB('close')

@@ -75,4 +75,11 @@ exptdesign.correct2='imgsscaled/replayRed.png';
 
 exptdesign.imageDirectory = 'imgsscaled/';
 
+%open COM1 port
+try
+stimGenPTB('CloseAll');
+catch
+end
+stimGenPTB('open','COM1')
+
 vtCategorizationTrainingExperiment3(name,exptdesign);

@@ -40,4 +40,11 @@ exptdesign.numTrialsPerSession = 144;
 exptdesign.fixationImage = 'imgsscaled/fixation.bmp';  % image for the fixation cross
 exptdesign.imageDirectory = 'imgsscaled/';
 
+% open COM port 1
+try
+stimGenPTB('close');
+catch
+end
+stimGenPTB('open','COM1')
+
 spatialLocalizationExperiment(exptdesign);
