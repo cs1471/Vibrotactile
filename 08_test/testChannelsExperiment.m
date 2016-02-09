@@ -6,12 +6,12 @@ function testChannelsExperiment(exptdesign)
     % Levan Bokeria levan.bokeria@georgetown.edu
     
     % Open a screen and display instructions
-    screenNumber = 1;
+    screenNumber = 0;
     
     % Open window with default settings:
     Screen('Preference', 'SkipSyncTests', 1)
-    %[w windowRect] = Screen('OpenWindow', screenNumber,[128 128 128]);
-    [w windowRect] = Screen('OpenWindow', screenNumber,[128 128 128], [0 0 1000 1000]); 
+    [w windowRect] = Screen('OpenWindow', screenNumber,[128 128 128]);
+    %[w windowRect] = Screen('OpenWindow', screenNumber,[128 128 128], [0 0 1000 1000]); 
    
     %HideCursor;
     %load images and textures
@@ -115,7 +115,7 @@ function drawAndCenterText(window, message, wait)
     Screen('Flip',window);
     
     %KbWait(1) waits for a MOUSE click to continue
-    if wait, KbWait(4); end %note on CAS computer = 1
+    if wait, KbWait(1); end %note on CAS computer = 4
     WaitSecs(0.2); %this is necessary on the windows XP machine to wait for mouse response -- DOES delay timing!
 end
 
@@ -131,7 +131,7 @@ function [numericalAnswer] = getResponseMouse()
        if buttons(1)
            numericalAnswer = 1;
            mousePressed = 1;
-       elseif buttons(2) %note on cas computer = 3
+       elseif buttons(3) %note on cas computer = 2
            numericalAnswer = 0;
            mousePressed = 1;
        end
