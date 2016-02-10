@@ -18,7 +18,7 @@ def my_range(start, end, step):
 
 #generates a list of frequencies that we test
 def makeFrequency():
-    frequencyList = [i for i in my_range(0, 2, 0.1)]
+    frequencyList = [i for i in my_range(0, 2.05, 0.1)]
 
     for index,obj in enumerate(frequencyList):
         obj += m.log2(25)
@@ -31,8 +31,8 @@ def makeFrequency():
 # session = input('Enter the session number: \n')
 
 #Use when debugging or manually editing
-filename = ('20160202_1521-MR946_block7')
-fileDirectory = '/Users/courtney/GoogleDrive/Riesenhuber/05_2015_scripts/Vibrotactile/03_spatialLocalization/data/946/'
+filename = ('20151118_1239-1000_block7')
+fileDirectory = '/Users/courtney/GoogleDrive/Riesenhuber/05_2015_scripts/Vibrotactile/03_spatialLocalization/data/1000/'
 
 
 #load matfile
@@ -61,102 +61,6 @@ else:
 #Calculations by position
 #############################################################################
 
-#calculate the reaction time by position
-iBlock = iTrial = 0
-bD_wristPos_RT = []
-bD_elbowPos_RT = []
-bD_crossMidline_RT = []
-bS_wristPos_RT = []
-bS_elbowPos_RT = []
-bS_midline_RT = []
-for iBlock in range(sResp.size):
-    D_wristPos_RT = []
-    D_elbowPos_RT = []
-    D_crossMidline_RT = []
-    S_wristPos_RT = []
-    S_elbowPos_RT = []
-    S_midline_RT = []
-    for iTrial in range(sResp[0,iBlock].size):
-        pos1 = int(stimuli[0,iBlock][1,iTrial])
-        pos2 = int(stimuli[0,iBlock][3,iTrial])
-        if pos1 != pos2:
-            if (pos1 == 1 or pos1 == 2 or pos1 == 3 or pos1 == 4 or pos1 == 5 or pos1 == 6)\
-                    and (pos2 == 1 or pos2 == 2 or pos2 == 3 or pos2 == 4 or pos2 == 5 or pos2 == 6):
-                D_wristPos_RT.append(RT[0,iBlock][0,iTrial])
-            elif (pos1 == 9 or pos1 == 10 or pos1 == 11 or pos1 == 12 or pos1 == 13 or pos1 == 14)\
-                    and (pos2 == 9 or pos2 == 10 or pos2 == 11 or pos2 == 12 or pos2 == 13 or pos2 == 14):
-                 D_elbowPos_RT.append(RT[0,iBlock][0,iTrial])
-            else:
-                D_crossMidline_RT.append(RT[0,iBlock][0,iTrial])
-        else:
-            if pos1 == 1 or pos1 == 2 or pos1 == 3 or pos1 == 4:
-                S_wristPos_RT.append(RT[0,iBlock][0,iTrial])
-            elif pos1 == 5 or pos1 == 5 or pos1 == 9 or pos1 == 10:
-                S_midline_RT.append(RT[0,iBlock][0,iTrial])
-            else:
-                S_elbowPos_RT.append(RT[0,iBlock][0,iTrial])
-
-    bD_wristPos_RT.append(D_wristPos_RT)
-    bD_elbowPos_RT.append(D_elbowPos_RT)
-    bD_crossMidline_RT.append(D_crossMidline_RT)
-    bS_wristPos_RT.append(S_wristPos_RT)
-    bS_elbowPos_RT.append(S_elbowPos_RT)
-    bS_midline_RT.append(S_midline_RT)
-
-#calculate the mean RT by morph
-D_wristPos_meanRT = []
-iBlock = 0
-for iBlock, rtDWP in enumerate(bD_wristPos_RT):
-    if rtDWP != []:
-        D_wristPos_meanRT.append(stat.mean(rtDWP))
-    else:
-        D_wristPos_meanRT.append(0)
-
-#calculate the mean RT by morph
-D_crossMidline_meanRT = []
-iBlock = 0
-for iBlock, rtDCM in enumerate(bD_crossMidline_RT):
-    if rtDCM != []:
-        D_crossMidline_meanRT.append(stat.mean(rtDCM))
-    else:
-        D_crossMidline_meanRT.append(0)
-
-#calculate the mean RT by morph
-D_elbowPos_meanRT = []
-iBlock = 0
-for iBlock, rtDEP in enumerate(bD_elbowPos_RT):
-    if rtDEP != []:
-        D_elbowPos_meanRT.append(stat.mean(rtDEP))
-    else:
-        D_elbowPos_meanRT.append(0)
-
-#calculate the mean RT by morph
-S_wristPos_meanRT = []
-iBlock = 0
-for iBlock, rtSWP in enumerate(bS_wristPos_RT):
-    if rtSWP != []:
-        S_wristPos_meanRT.append(stat.mean(rtSWP))
-    else:
-        S_wristPos_meanRT.append(0)
-
-#calculate the mean RT by morph
-S_midline_meanRT = []
-iBlock = 0
-for iBlock, rtSM in enumerate(bS_midline_RT):
-    if rtSM != []:
-        S_midline_meanRT.append(stat.mean(rtSM))
-    else:
-        S_midline_meanRT.append(0)
-
-#calculate the mean RT by morph
-S_elbowPos_meanRT = []
-iBlock = 0
-for iBlock, rtSEP in enumerate(bS_elbowPos_RT):
-    if rtSEP != []:
-        S_elbowPos_meanRT.append(stat.mean(rtSEP))
-    else:
-        S_elbowPos_meanRT.append(0)
-
 #calculate the accuracy by position
 iBlock = iTrial = 0
 bD_wristPos_accuracy = []
@@ -165,6 +69,12 @@ bD_crossMidline_accuracy = []
 bS_wristPos_accuracy = []
 bS_elbowPos_accuracy = []
 bS_midline_accuracy = []
+bD_wristPos_RT = []
+bD_elbowPos_RT = []
+bD_crossMidline_RT = []
+bS_wristPos_RT = []
+bS_elbowPos_RT = []
+bS_midline_RT = []
 for iBlock in range(sResp.size):
     D_wristPos_accuracy = []
     D_elbowPos_accuracy = []
@@ -172,86 +82,141 @@ for iBlock in range(sResp.size):
     S_wristPos_accuracy = []
     S_elbowPos_accuracy = []
     S_midline_accuracy = []
+    D_wristPos_RT = []
+    D_elbowPos_RT = []
+    D_crossMidline_RT = []
+    S_wristPos_RT = []
+    S_elbowPos_RT = []
+    S_midline_RT = []
     for iTrial in range(sResp[0,iBlock].size):
-        pos1 = int(stimuli[0,iBlock][1,iTrial])
-        pos2 = int(stimuli[0,iBlock][3,iTrial])
+        pos1 = int(stimuli[0,iBlock][0,iTrial])
+        pos2 = int(stimuli[0,iBlock][2,iTrial])
         if pos1 != pos2:
             if (pos1 == 1 or pos1 == 2 or pos1 == 3 or pos1 == 4 or pos1 == 5 or pos1 == 6)\
                     and (pos2 == 1 or pos2 == 2 or pos2 == 3 or pos2 == 4 or pos2 == 5 or pos2 == 6):
                 D_wristPos_accuracy.append(accuracy[0,iBlock][0,iTrial])
+                D_wristPos_RT.append(RT[0,iBlock][0,iTrial])
             elif (pos1 == 9 or pos1 == 10 or pos1 == 11 or pos1 == 12 or pos1 == 13 or pos1 == 14)\
                     and (pos2 == 9 or pos2 == 10 or pos2 == 11 or pos2 == 12 or pos2 == 13 or pos2 == 14):
                 D_elbowPos_accuracy.append(accuracy[0,iBlock][0,iTrial])
+                D_elbowPos_RT.append(RT[0,iBlock][0,iTrial])
             else:
                 D_crossMidline_accuracy.append(accuracy[0,iBlock][0,iTrial])
+                D_crossMidline_RT.append(RT[0,iBlock][0,iTrial])
         else:
             if pos1 == 1 or pos1 == 2 or pos1 == 3 or pos1 == 4:
                 S_wristPos_accuracy.append(accuracy[0,iBlock][0,iTrial])
+                S_wristPos_RT.append(RT[0,iBlock][0,iTrial])
             elif pos1 == 5 or pos1 == 6 or pos1 == 9 or pos1 == 10:
                 S_midline_accuracy.append(accuracy[0,iBlock][0,iTrial])
+                S_midline_RT.append(RT[0,iBlock][0,iTrial])
             else:
                 S_elbowPos_accuracy.append(accuracy[0,iBlock][0,iTrial])
+                S_elbowPos_RT.append(RT[0,iBlock][0,iTrial])
 
-    bD_wristPos_accuracy.append(D_wristPos_accuracy)
-    bD_elbowPos_accuracy.append(D_elbowPos_accuracy)
-    bD_crossMidline_accuracy.append(D_crossMidline_accuracy)
-    bS_wristPos_accuracy.append(S_wristPos_accuracy)
-    bS_elbowPos_accuracy.append(S_elbowPos_accuracy)
-    bS_midline_accuracy.append(S_midline_accuracy)
+    bD_wristPos_accuracy.append(stat.mean(D_wristPos_accuracy))
+    bD_elbowPos_accuracy.append(stat.mean(D_elbowPos_accuracy))
+    bD_crossMidline_accuracy.append(stat.mean(D_crossMidline_accuracy))
+    bS_wristPos_accuracy.append(stat.mean(S_wristPos_accuracy))
+    bS_elbowPos_accuracy.append(stat.mean(S_elbowPos_accuracy))
+    bS_midline_accuracy.append(stat.mean(S_midline_accuracy))
+    bD_wristPos_RT.append(stat.mean(D_wristPos_RT))
+    bD_elbowPos_RT.append(stat.mean(D_elbowPos_RT))
+    bD_crossMidline_RT.append(stat.mean(D_crossMidline_RT))
+    bS_wristPos_RT.append(stat.mean(S_wristPos_RT))
+    bS_elbowPos_RT.append(stat.mean(S_elbowPos_RT))
+    bS_midline_RT.append(stat.mean(S_midline_RT))
 
-#calculate the mean accuracy by morph
-D_wristPos_meanAcc = []
-iBlock = 0
-for iBlock, accDWP in enumerate(bD_wristPos_accuracy):
-    if accDWP != []:
-        D_wristPos_meanAcc.append(stat.mean(accDWP))
-    else:
-        D_wristPos_meanAcc.append(0)
+#############################################################################
+#Calculations for stimuli around Boundary
+#############################################################################
 
-#calculate the mean accuracy by morph
-D_crossMidline_meanAcc = []
-iBlock = 0
-for iBlock, accDCM in enumerate(bD_crossMidline_accuracy):
-    if accDCM != []:
-        D_crossMidline_meanAcc.append(stat.mean(accDCM))
-    else:
-        D_crossMidline_meanAcc.append(0)
+#calculate the accuracy by position
+iBlock = iTrial = 0
+bD_pos5v1_ACC = []
+bD_pos5v3_ACC = []
+bD_pos5v9_ACC = []
+bD_pos5v11_ACC = []
+bD_pos9v3_ACC = []
+bD_pos9v5_ACC = []
+bD_pos9v11_ACC = []
+bD_pos9v13_ACC = []
+bD_pos5v1_RT = []
+bD_pos5v3_RT = []
+bD_pos5v9_RT = []
+bD_pos5v11_RT = []
+bD_pos9v3_RT = []
+bD_pos9v5_RT = []
+bD_pos9v11_RT = []
+bD_pos9v13_RT = []
 
-#calculate the mean accuracy by morph
-D_elbowPos_meanAcc = []
-iBlock = 0
-for iBlock, accDEP in enumerate(bD_elbowPos_accuracy):
-    if accDEP != []:
-        D_elbowPos_meanAcc.append(stat.mean(accDEP))
-    else:
-        D_elbowPos_meanAcc.append(0)
+for iBlock in range(sResp.size):
+    D_pos5v1_ACC = []
+    D_pos5v3_ACC = []
+    D_pos5v9_ACC = []
+    D_pos5v11_ACC = []
+    D_pos9v3_ACC = []
+    D_pos9v5_ACC = []
+    D_pos9v11_ACC = []
+    D_pos9v13_ACC = []
+    D_pos5v1_RT = []
+    D_pos5v3_RT = []
+    D_pos5v9_RT = []
+    D_pos5v11_RT = []
+    D_pos9v3_RT = []
+    D_pos9v5_RT = []
+    D_pos9v11_RT = []
+    D_pos9v13_RT = []
+    for iTrial in range(sResp[0,iBlock].size):
+        pos1 = int(stimuli[0,iBlock][0,iTrial])
+        pos2 = int(stimuli[0,iBlock][2,iTrial])
+        if ((pos1 == 5 or pos1 == 6) and (pos2 == 1 or pos2 == 2)) \
+                or ((pos1 == 1 or pos1 == 2) and (pos2 == 5 or pos2 == 6)):
+            D_pos5v1_ACC.append(accuracy[0,iBlock][0,iTrial])
+            D_pos5v1_RT.append(RT[0,iBlock][0,iTrial])
+        elif ((pos1 == 5 or pos1 == 6) and (pos2 == 3 or pos2 == 4))\
+                    or ((pos1 == 3 or pos1 == 4) and (pos2 == 5 or pos2 == 6)):
+            D_pos5v3_ACC.append(accuracy[0,iBlock][0,iTrial])
+            D_pos5v3_RT.append(RT[0,iBlock][0,iTrial])
+        elif ((pos1 == 5 or pos1 == 6) and (pos2 == 9 or pos2 == 10)):
+            D_pos5v9_ACC.append(accuracy[0,iBlock][0,iTrial])
+            D_pos5v9_RT.append(RT[0,iBlock][0,iTrial])
+        elif ((pos1 == 5 or pos1 == 6) and (pos2 == 11 or pos2 ==12))\
+                or ((pos1 == 11 or pos1 ==12) and (pos2 == 5 or pos2 ==6)):
+            D_pos5v11_ACC.append(accuracy[0,iBlock][0,iTrial])
+            D_pos5v11_RT.append(RT[0,iBlock][0,iTrial])
+        elif ((pos1 == 9 or pos1 == 10) and (pos2 == 3 or pos2 == 4))\
+               or ((pos1 == 3 or pos1 == 4) and (pos2 == 9 or pos2 == 10)):
+            D_pos9v3_ACC.append(accuracy[0,iBlock][0,iTrial])
+            D_pos9v3_RT.append(RT[0,iBlock][0,iTrial])
+        elif ((pos1 == 9 or pos1 == 10) and (pos2 == 5 or pos2 == 6)):
+            D_pos9v5_ACC.append(accuracy[0,iBlock][0,iTrial])
+            D_pos9v5_RT.append(RT[0,iBlock][0,iTrial])
+        elif ((pos1 == 9 or pos1 == 10) and (pos2 == 11 or pos2 == 12))\
+                or ((pos1 == 11 or pos1 == 12) and (pos2 == 9 or pos2 ==10)):
+            D_pos9v11_ACC.append(accuracy[0,iBlock][0,iTrial])
+            D_pos9v11_RT.append(RT[0,iBlock][0,iTrial])
+        elif ((pos1 == 9 or pos1 == 10) and (pos2 == 13 or pos2 == 14))\
+                or ((pos1 == 13 or pos1 == 14) and (pos2 == 9 or pos2 == 10)):
+            D_pos9v13_ACC.append(accuracy[0,iBlock][0,iTrial])
+            D_pos9v13_RT.append(RT[0,iBlock][0,iTrial])
 
-#calculate the mean accuracy by morph
-S_wristPos_meanAcc = []
-iBlock = 0
-for iBlock, accSWP in enumerate(bS_wristPos_accuracy):
-    if accSWP != []:
-        S_wristPos_meanAcc.append(stat.mean(accSWP))
-    else:
-        S_wristPos_meanAcc.append(0)
-
-#calculate the mean accuracy by morph
-S_midline_meanAcc = []
-iBlock = 0
-for iBlock, accSM in enumerate(bS_midline_accuracy):
-    if accSM != []:
-        S_midline_meanAcc.append(stat.mean(accSM))
-    else:
-        S_midline_meanAcc.append(0)
-
-#calculate the mean accuracy by morph
-S_elbowPos_meanAcc = []
-iBlock = 0
-for iBlock, accSEP in enumerate(bS_elbowPos_accuracy):
-    if accSEP != []:
-        S_elbowPos_meanAcc.append(stat.mean(accSEP))
-    else:
-        S_elbowPos_meanAcc.append(0)
+    bD_pos5v1_ACC.append(stat.mean(D_pos5v1_ACC))
+    bD_pos5v1_RT.append(stat.mean(D_pos5v1_RT))
+    bD_pos5v3_ACC.append(stat.mean(D_pos5v3_ACC))
+    bD_pos5v3_RT.append(stat.mean(D_pos5v3_RT))
+    bD_pos5v9_ACC.append(stat.mean(D_pos5v9_ACC))
+    bD_pos5v9_RT.append(stat.mean(D_pos5v9_RT))
+    bD_pos5v11_ACC.append(stat.mean(D_pos5v11_ACC))
+    bD_pos5v11_RT.append(stat.mean(D_pos5v11_RT))
+    bD_pos9v3_ACC.append(stat.mean(D_pos9v3_ACC))
+    bD_pos9v3_RT.append(stat.mean(D_pos9v3_RT))
+    bD_pos9v5_ACC.append(stat.mean(D_pos9v5_ACC))
+    bD_pos9v5_RT.append(stat.mean(D_pos9v5_RT))
+    bD_pos9v11_ACC.append(stat.mean(D_pos9v11_ACC))
+    bD_pos9v11_RT.append(stat.mean(D_pos9v11_RT))
+    bD_pos9v13_ACC.append(stat.mean(D_pos9v13_ACC))
+    bD_pos9v13_RT.append(stat.mean(D_pos9v13_RT))
 
 #############################################################################
 #Calculating mean acc and RT overall
@@ -274,13 +239,13 @@ for iBlock in range(RT.size):
 # for i in range(nBlocks):
 #             x.append("Block: " + str(i+1)),
 x = ["Different", "Same"]
-
+x2 = ["(5,1) vs (9,13)", "(5,3) vs (9,11)", "(5,9) vs (9,5)", "(5,11) vs (9,3)"]
 #############################################################################
 #Generating figures
 #############################################################################
 
 # (1.1) Define a trace-generating function (returns a Bar object)
-def make_trace_bar(y, name):
+def make_trace_bar(x, y, name):
     return go.Bar(
         x     = x,
         y     = y,            # take in the y-coords
@@ -290,7 +255,7 @@ def make_trace_bar(y, name):
     )
 
 # (1.1) Define a trace-generating function (returns a line object)
-def make_trace_line(y, name):
+def make_trace_line(x, y, name):
     return go.Scatter(
         x     = x,
         y     = y,            # take in the y-coords
@@ -301,14 +266,18 @@ def make_trace_line(y, name):
 
 
 #make trace containing acc and RT by position for Different Condition
-trace1 = make_trace_bar([stat.mean(D_wristPos_meanAcc),stat.mean(S_wristPos_meanAcc)],"Wrist Accuracy" )
-trace2 = make_trace_bar([stat.mean(D_crossMidline_meanAcc), stat.mean(S_midline_meanAcc)],"Across Mid Accuracy")
-trace3 = make_trace_bar([stat.mean(D_elbowPos_meanAcc),stat.mean(S_elbowPos_meanAcc)], "Elbow Accuracy")
-trace4 = make_trace_line([stat.mean(D_wristPos_meanRT),stat.mean(S_wristPos_meanRT)],"Wrist RT")
-trace5 = make_trace_line([stat.mean(D_crossMidline_meanRT), stat.mean(S_midline_meanRT)], "Across Mid RT")
-trace6 = make_trace_line([stat.mean(D_elbowPos_meanRT), stat.mean(S_elbowPos_meanRT)], "Elbow RT")
+trace1 = make_trace_bar( x, [stat.mean(bD_wristPos_accuracy), stat.mean(bS_wristPos_accuracy)], "Wrist Accuracy" )
+trace2 = make_trace_bar( x, [stat.mean(bD_crossMidline_accuracy), stat.mean(bS_midline_accuracy)], "Across Mid Accuracy" )
+trace3 = make_trace_bar( x, [stat.mean(bD_elbowPos_accuracy), stat.mean(S_elbowPos_accuracy)], "Elbow Accuracy" )
+trace4 = make_trace_line( x, [stat.mean(bD_wristPos_RT), stat.mean(bS_wristPos_RT)], "Wrist RT" )
+trace5 = make_trace_line( x, [stat.mean(bD_crossMidline_RT), stat.mean(bS_midline_RT)], "Across Mid RT" )
+trace6 = make_trace_line( x, [stat.mean(bD_elbowPos_RT), stat.mean(bS_elbowPos_RT)], "Elbow RT" )
 
-
+#make trace parsing out positions 5 and 9
+trace7 = make_trace_bar(x2, [stat.mean(bD_pos5v1_ACC), stat.mean(bD_pos5v3_ACC), stat.mean(bD_pos5v9_ACC), stat.mean(bD_pos5v11_ACC)], "Pos 5 Comparisons Acc")
+trace8 = make_trace_bar(x2, [stat.mean(bD_pos9v13_ACC), stat.mean(bD_pos9v11_ACC), stat.mean(bD_pos9v5_ACC), stat.mean(bD_pos9v3_ACC)], "Pos 9 Comparisons Acc")
+trace9 = make_trace_line(x2, [stat.mean(bD_pos5v1_RT), stat.mean(bD_pos5v3_RT), stat.mean(bD_pos5v9_RT), stat.mean(bD_pos5v11_RT)], "Pos 5 Comparisons RT")
+trace10 = make_trace_line(x2, [stat.mean(bD_pos9v13_RT), stat.mean(bD_pos9v11_RT), stat.mean(bD_pos9v5_RT), stat.mean(bD_pos9v3_RT)], "Pos 5 Comparisons RT")
 
 # matFileName = fileDirectory + filename
 # dataFile = sio.savemat(matFileName, {'x':x, 'y':y, 'cp_mean': cp_mean, 'mm_mean': mm_mean, 'cb_mean': cb_mean)
@@ -317,21 +286,18 @@ trace6 = make_trace_line([stat.mean(D_elbowPos_meanRT), stat.mean(S_elbowPos_mea
 
 
 # Generate Figure object with 2 axes on 2 rows, print axis grid to stdout
-fig = tls.make_subplots(
-    rows=1,
-    cols=1,
-    shared_xaxes=True,
-)
+fig = tls.make_subplots( rows=1, cols=1, shared_xaxes=True,)
+fig2 = tls.make_subplots( rows=1, cols=1, shared_xaxes=True,)
 
 #set figure layout to hold mutlitple bars
-fig['layout'].update(
-    barmode='group',
-    bargroupgap=0,
-    bargap=0.25,
-    title = subjectNumber + " Accuracy by Position Same v Different " + session
-)
+fig['layout'].update(barmode='group', bargroupgap=0, bargap=0.25,
+    title = subjectNumber + " Accuracy and RT by Position Same v Different " + session)
+
+fig2['layout'].update(barmode='group', bargroupgap=0, bargap=0.25,
+    title = subjectNumber + " Accuracy and RT at Position 5 and 9 " + session)
 
 fig['data']  = [trace1, trace2, trace3, trace4, trace5, trace6]
+fig2['data'] = [trace7, trace8, trace9, trace10]
 
 #get the url of your figure to embed in html later
 first_plot_url = py.plot(fig, filename= subjectName + "AccByMorph" + session, auto_open=False,)
@@ -362,7 +328,7 @@ print("The session number you have indicated is: " + session + "\n")
 
 # save images as png in case prefer compared to html
 py.image.save_as(fig, fileDirectory + filename + "spatialLoc" + session + ".png")
-
+py.image.save_as(fig2, fileDirectory + filename + "spatialLoc5v9" + session + ".png")
 #close all open files
 # f.close()
 

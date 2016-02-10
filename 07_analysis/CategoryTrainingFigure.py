@@ -18,7 +18,7 @@ def my_range(start, end, step):
 
 #generates a list of frequencies that we test
 def makeFrequency():
-    frequencyList = [i for i in my_range(0, 2, 0.1)]
+    frequencyList = [i for i in my_range(0, 2.05, 0.1)]
 
     for index,obj in enumerate(frequencyList):
         obj += m.log2(25)
@@ -31,9 +31,9 @@ def makeFrequency():
 # session = input('Enter the session number: \n')
 
 #Use when debugging or manually editing
-filename = ('20160131_1455-MR983_block6')
-fileDirectory = '/Users/courtney/GoogleDrive/Riesenhuber/05_2015_scripts/Vibrotactile/01_CategoryTraining/data/983/'
-session = '3'
+filename = ('20160119_1621-MR1000_block5.mat')
+fileDirectory = '/Users/courtney/GoogleDrive/Riesenhuber/05_2015_scripts/Vibrotactile/01_CategoryTraining/data/1000/'
+session = '7'
 
 #load matfile
 data = sio.loadmat(fileDirectory + filename, struct_as_record=True)
@@ -48,8 +48,9 @@ correctResponse = data['trialOutput']['correctResponse']
 accuracy = data['trialOutput']['accuracy']
 level = data['trialOutput']['level']
 stimuli = data['trialOutput']['stimuli']
-nTrials = data['exptdesign']['numTrialsPerSession'][0,0][0]
-nBlocks = data['exptdesign']['numSessions'][0,0][0]
+#nTrials = data['exptdesign']['numTrialsPerSession'][0,0][0]
+#nBlocks = data['exptdesign']['numSessions'][0,0][0]
+nBlocks = 5
 subjectNumber = data['exptdesign']['number'][0,0][0]
 subjectName = data['exptdesign']['subjectName'][0,0][0]
 
@@ -61,64 +62,31 @@ subjectName = data['exptdesign']['subjectName'][0,0][0]
 #calculate accuracy by category type
 b_categoryA = []
 b_categoryB = []
-i = counter = 0
-for i in range(sResp.size):
-    categoryA = []
-    categoryB = []
-    for counter in range(sResp[0,i].size):
-        stimulus = round(stimuli[0,i][0,counter])
-        if accuracy[0,i][0,counter]==1:
-            if stimulus in frequencyList and stimulus < 47:
-                categoryA.append(1)
-            else:
-                categoryB.append(1)
-        else:
-            if stimulus in frequencyList and stimulus < 47:
-                categoryA.append(0)
-            else:
-                categoryB.append(0)
-    b_categoryA.append(categoryA)
-    b_categoryB.append(categoryB)
-
-#calculate accuracy by block for category A
-i = 0
-mAcc_categoryA = []
-for i in range(len(b_categoryA)):
-    mAcc_categoryA.append(stat.mean(b_categoryA[i]))
-
-#calculate accuracy by block for category B
-i = 0
-mAcc_categoryB = []
-for i in range(len(b_categoryB)):
-    mAcc_categoryB.append(stat.mean(b_categoryB[i]))
-
-#calculate reaction time by category type
 b_categoryA_RT = []
 b_categoryB_RT = []
-iTrial = iBLock = 0
+iBlock = iTrial = 0
 for iBlock in range(sResp.size):
+    categoryA = []
+    categoryB = []
     categoryA_RT = []
     categoryB_RT = []
-    for iTrial in range(len(RT[0,iBlock][0])):
+    for iTrial in range(sResp[0,iBlock].size):
         stimulus = round(stimuli[0,iBlock][0,iTrial])
-        if stimulus in frequencyList and stimulus < 47:
+        if stimulus < 47:
+            categoryA.append(accuracy[0,iBlock][0,iTrial])
             categoryA_RT.append(RT[0,iBlock][0,iTrial])
-        else:
+        elif stimulus > 47:
+            categoryB.append(accuracy[0,iBlock][0,iTrial])
             categoryB_RT.append(RT[0,iBlock][0,iTrial])
-    b_categoryA_RT.append(categoryA_RT)
-    b_categoryB_RT.append(categoryB_RT)
+        else:
+            print("Sorry there is an error in your category parsing function and some stimuli are not being classified")
+            print("This stimulus was not put into a category: ")
+            print(stimulus)
 
-#calculate RT by block for category A
-iBlock = 0
-mRT_categoryA = []
-for iBlock, time in enumerate(b_categoryA_RT):
-        mRT_categoryA.append(stat.mean(time))
-
-#calculate RT by block for category B
-iBlock = 0
-mRT_categoryB = []
-for iBlock, time in enumerate(b_categoryB_RT):
-    mRT_categoryB.append(stat.mean(time))
+    b_categoryA.append(stat.mean(categoryA))
+    b_categoryB.append(stat.mean(categoryB))
+    b_categoryA_RT.append(stat.mean(categoryA_RT))
+    b_categoryB_RT.append(stat.mean(categoryB_RT))
 
 #############################################################################
 #Calculations by morph
@@ -129,122 +97,92 @@ iBlock = iTrial = 0
 b_catProto_accuracy = []
 b_middleM_accuracy = []
 b_catBound_accuracy = []
-for iBlock in range(sResp.size):
-    catProto_accuracy = []
-    middleM_accuracy = []
-    catBound_accuracy = []
-    for iTrial in range(sResp[0,iBlock].size):
-        stimulus = round(stimuli[0,iBlock][0,iTrial])
-        if accuracy[0,iBlock][0,iTrial]==1:
-            if stimulus == frequencyList[0] or stimulus == frequencyList[1] or stimulus == frequencyList[2]:
-                catProto_accuracy.append(1)
-            elif stimulus == frequencyList[19] or stimulus == frequencyList[18] or stimulus == frequencyList[17]:
-                catProto_accuracy.append(1)
-            elif stimulus == frequencyList[3] or stimulus == frequencyList[4] or stimulus == frequencyList[5]:
-                middleM_accuracy.append(1)
-            elif stimulus == frequencyList[16] or stimulus == frequencyList[15] or stimulus == frequencyList[14]:
-                middleM_accuracy.append(1)
-            elif stimulus == frequencyList[6] or stimulus == frequencyList[7] or stimulus == frequencyList[8]:
-                catBound_accuracy.append(1)
-            elif stimulus == frequencyList[13] or stimulus == frequencyList[12] or stimulus == frequencyList[11]:
-                catBound_accuracy.append(1)
-        else:
-            if stimulus == frequencyList[0] or stimulus == frequencyList[1] or stimulus == frequencyList[2]:
-                catProto_accuracy.append(0)
-            elif stimulus == frequencyList[19] or stimulus == frequencyList[18] or stimulus == frequencyList[17]:
-                catProto_accuracy.append(0)
-            elif stimulus == frequencyList[3] or stimulus == frequencyList[4] or stimulus == frequencyList[5]:
-                middleM_accuracy.append(0)
-            elif stimulus == frequencyList[16] or stimulus == frequencyList[15] or stimulus == frequencyList[14]:
-                middleM_accuracy.append(0)
-            elif stimulus == frequencyList[6] or stimulus == frequencyList[7] or stimulus == frequencyList[8]:
-                catBound_accuracy.append(0)
-            elif stimulus == frequencyList[13] or stimulus == frequencyList[12] or stimulus == frequencyList[11]:
-                catBound_accuracy.append(0)
-    b_catProto_accuracy.append(catProto_accuracy)
-    b_catBound_accuracy.append(catBound_accuracy)
-    b_middleM_accuracy.append(middleM_accuracy)
-
-#calculate the mean accuracy by morph
-cp_meanAcc = []
-iBlock = 0
-for iBlock, accCP in enumerate(b_catProto_accuracy):
-    if accCP != []:
-        cp_meanAcc.append(stat.mean(accCP))
-    else:
-        cp_meanAcc.append(0)
-
-#calculate the mean accuracy by morph
-mm_meanAcc = []
-iBlock = 0
-for iBlock, accMM in enumerate(b_middleM_accuracy):
-    if accMM != []:
-        mm_meanAcc.append(stat.mean(accMM))
-    else:
-        mm_meanAcc.append(0)
-
-#calculate the mean accuracy by morph
-cb_meanAcc = []
-iBlock = 0
-for iBlock, accCB in enumerate(b_catBound_accuracy):
-    if accCB != []:
-        cb_meanAcc.append(stat.mean(accCB))
-    else:
-        cb_meanAcc.append(0)
-
-#calculate the reaction time by morph
-iBlock = iTrial = 0
 b_catProto_RT = []
 b_middleM_RT = []
 b_catBound_RT = []
 for iBlock in range(sResp.size):
+    catProto_accuracy = []
+    middleM_accuracy = []
+    catBound_accuracy = []
     catProto_RT = []
     middleM_RT = []
     catBound_RT = []
-    for iTrial in range(len(RT[0,iBlock][0])):
+    for iTrial in range(sResp[0,iBlock].size):
         stimulus = round(stimuli[0,iBlock][0,iTrial])
         if stimulus == frequencyList[0] or stimulus == frequencyList[1] or stimulus == frequencyList[2]:
+            catProto_accuracy.append(accuracy[0,iBlock][0,iTrial])
             catProto_RT.append(RT[0,iBlock][0,iTrial])
-        elif stimulus == frequencyList[19] or stimulus == frequencyList[18] or stimulus == frequencyList[17]:
+        elif stimulus == frequencyList[20] or stimulus == frequencyList[19] or stimulus == frequencyList[18]:
+            catProto_accuracy.append(accuracy[0,iBlock][0,iTrial])
             catProto_RT.append(RT[0,iBlock][0,iTrial])
         elif stimulus == frequencyList[3] or stimulus == frequencyList[4] or stimulus == frequencyList[5]:
+            middleM_accuracy.append(accuracy[0,iBlock][0,iTrial])
             middleM_RT.append(RT[0,iBlock][0,iTrial])
-        elif stimulus == frequencyList[16] or stimulus == frequencyList[15] or stimulus == frequencyList[14]:
+        elif stimulus == frequencyList[17] or stimulus == frequencyList[16] or stimulus == frequencyList[15]:
+            middleM_accuracy.append(accuracy[0,iBlock][0,iTrial])
             middleM_RT.append(RT[0,iBlock][0,iTrial])
         elif stimulus == frequencyList[6] or stimulus == frequencyList[7] or stimulus == frequencyList[8]:
+            catBound_accuracy.append(accuracy[0,iBlock][0,iTrial])
             catBound_RT.append(RT[0,iBlock][0,iTrial])
-        elif stimulus == frequencyList[13] or stimulus == frequencyList[12] or stimulus == frequencyList[11]:
+        elif stimulus == frequencyList[14] or stimulus == frequencyList[13] or stimulus == frequencyList[12]:
+            catBound_accuracy.append(accuracy[0,iBlock][0,iTrial])
             catBound_RT.append(RT[0,iBlock][0,iTrial])
-    b_catProto_RT.append(catProto_RT)
-    b_catBound_RT.append(catBound_RT)
-    b_middleM_RT.append(middleM_RT)
-
-#calculate the mean RT by morph
-cp_meanRT=[]
-iBlock = 0
-for iBlock,timeCP in enumerate(b_catProto_RT):
-    if timeCP != []:
-        cp_meanRT.append(stat.mean(timeCP))
+        else:
+            print("There is something wrong with your morph parsing function and stimuli are not be classified")
+            print("The following were stimuli were not parsed: ")
+            print(stimulus)
+    if catProto_accuracy != []:
+        b_catProto_accuracy.append(stat.mean(catProto_accuracy))
+        b_catProto_RT.append(stat.mean(catProto_RT))
     else:
-        cp_meanRT.append(0)
+        b_catProto_accuracy.append(0)
+        b_catProto_RT.append(0)
 
-#calculate the mean RT by morph
-mm_meanRT=[]
-iBlock = 0
-for iBlock,timeMM in enumerate(b_middleM_RT):
-    if timeMM != []:
-        mm_meanRT.append(stat.mean(timeMM))
+    if middleM_accuracy != []:
+        b_middleM_RT.append(stat.mean(middleM_RT))
+        b_middleM_accuracy.append(stat.mean(middleM_accuracy))
     else:
-        mm_meanRT.append(0)
+        b_middleM_RT.append(0)
+        b_middleM_accuracy.append(0)
 
-#calculate the mean RT by morph
-cb_meanRT = []
-iBlock = 0
-for iBlock, timeCB in enumerate(b_catBound_RT):
-    if timeCB != []:
-        cb_meanRT.append(stat.mean(timeCB))
+    if catBound_accuracy != []:
+        b_catBound_accuracy.append(stat.mean(catBound_accuracy))
+        b_catBound_RT.append(stat.mean(catBound_RT))
     else:
-        cb_meanRT.append(0)
+        b_catBound_accuracy.append(0)
+        b_catBound_RT.append(0)
+
+
+#############################################################################
+#Calculations by Position Pair
+#############################################################################
+#calculate the accuracy by morph
+iBlock = iTrial = 0
+b_wrist_ACC = []
+b_elbow_ACC = []
+b_wrist_RT = []
+b_elbow_RT = []
+for iBlock in range(sResp.size):
+    wrist_ACC = []
+    elbow_ACC = []
+    wrist_RT = []
+    elbow_RT = []
+    for iTrial in range(sResp[0,iBlock].size):
+        position = int(stimuli[0,iBlock][2,iTrial])
+        if position == 1 or position == 2:
+            wrist_ACC.append(accuracy[0,iBlock][0,iTrial])
+            wrist_RT.append(RT[0,iBlock][0,iTrial])
+        elif position == 5 or position == 6:
+            elbow_ACC.append(accuracy[0,iBlock][0,iTrial])
+            elbow_RT.append(RT[0,iBlock][0,iTrial])
+        else:
+            print("There is something wrong with your position parsing function and stimuli are not be classified")
+            print("The following were stimuli were not parsed: ")
+            print(stimulus)
+    b_wrist_ACC.append(stat.mean(wrist_ACC))
+    b_elbow_ACC.append(stat.mean(elbow_ACC))
+    b_wrist_RT.append(stat.mean(wrist_RT))
+    b_elbow_RT.append(stat.mean(elbow_RT))
 
 #############################################################################
 #Calculating mean acc and RT overall
@@ -305,59 +243,47 @@ def make_trace_line(y, name, dash):
 
 
 #make trace containing acc and RT for morph
-trace1 = make_trace_bar(cp_meanAcc,  "Category Prototype Acc")
-trace2 = make_trace_bar(mm_meanAcc, "Middle Morph Acc")
-trace3 = make_trace_bar(cb_meanAcc, "Category Boundary Acc")
-trace4 = make_trace_line(cp_meanRT, "Category Prototype RT", 'n')
-trace5 = make_trace_line(mm_meanRT, "Middle Morph RT", 'n')
-trace6 = make_trace_line(cb_meanRT, "Category Boundary RT", 'n')
+trace1 = make_trace_bar(b_catProto_accuracy,  "Category Prototype Acc")
+trace2 = make_trace_bar(b_middleM_accuracy, "Middle Morph Acc")
+trace3 = make_trace_bar(b_catBound_accuracy, "Category Boundary Acc")
+trace4 = make_trace_line(b_catProto_RT, "Category Prototype RT", 'n')
+trace5 = make_trace_line(b_middleM_RT, "Middle Morph RT", 'n')
+trace6 = make_trace_line(b_catBound_RT, "Category Boundary RT", 'n')
 
 #make trace containing overall acc and rt
 trace7 = make_trace_line(O_accuracy, "Overall Accuracy", 'y')
 trace8 = make_trace_line(O_reactionTime, "Overall RT", 'y')
 
 #make trace containing acc and RT for category type
-trace9 = make_trace_bar(mAcc_categoryA, 'Category A Acc (LF prox to wrist)')
-trace10 = make_trace_bar(mAcc_categoryB, 'Category B Acc (HF prox to wrist)')
-trace11 = make_trace_line(mRT_categoryA, 'Category A RT (LF prox to wrist)', 'n')
-trace12 = make_trace_line(mRT_categoryB, 'Category B RT (HF prox to wrist)', 'n')
+trace9 = make_trace_bar(b_categoryA, 'Category A Acc (LF prox to wrist)')
+trace10 = make_trace_bar(b_categoryB, 'Category B Acc (HF prox to wrist)')
+trace11 = make_trace_line(b_categoryA_RT, 'Category A RT (LF prox to wrist)', 'n')
+trace12 = make_trace_line(b_categoryB_RT, 'Category B RT (HF prox to wrist)', 'n')
 
-# matFileName = fileDirectory + filename
-# dataFile = sio.savemat(matFileName, {'x':x, 'y':y, 'cp_mean': cp_mean, 'mm_mean': mm_mean, 'cb_mean': cb_mean)
-# dataFile.write(x,y,cp_mean, mm_mean, cb_mean,)
-# dataFile.close()
-
+#make trace containing acc and rt for position
+trace13 = make_trace_bar(b_wrist_ACC, "Wrist Accuracy")
+trace14 = make_trace_bar(b_elbow_ACC, "Elbow Accuracy")
+trace15 = make_trace_line(b_wrist_RT, "Wrist RT", 'n')
+trace16 = make_trace_line(b_elbow_RT, "Elbow RT", 'n')
 
 # Generate Figure object with 2 axes on 2 rows, print axis grid to stdout
-fig = tls.make_subplots(
-    rows=1,
-    cols=1,
-    shared_xaxes=True,
-)
-fig2 = tls.make_subplots(
-    rows=1,
-    cols=1,
-    shared_xaxes=True,
-)
+fig  = tls.make_subplots(rows=1, cols=1, shared_xaxes=True)
+fig2 = tls.make_subplots(rows=1, cols=1, shared_xaxes=True)
+fig3 = tls.make_subplots(rows=1, cols=1, shared_xaxes=True)
 
 #set figure layout to hold mutlitple bars
-fig['layout'].update(
-    barmode='group',
-    bargroupgap=0,
-    bargap=0.25,
-    title = subjectNumber + "Accuracy and RT By Morph_Session" + session
-)
+fig['layout'].update(barmode='group', bargroupgap=0, bargap=0.25,
+    title = subjectNumber + " Accuracy and RT By Morph Session " + session)
 
-fig2['layout'].update(
-    barmode='group',
-    bargroupgap=0,
-    bargap=0.25,
-    title = subjectNumber + "Accuracy and RT By Category_Session" + session
-)
+fig2['layout'].update(barmode='group', bargroupgap=0, bargap=0.25,
+    title = subjectNumber + " Accuracy and RT By Category Session " + session)
 
+fig3['layout'].update(barmode='group', bargroupgap=0, bargap=0.25,
+    title = subjectNumber + " Accuracy and RT By Position Session " + session)
 
 fig['data']  = [trace1, trace2, trace3, trace7, trace4, trace5, trace6, trace8]
 fig2['data'] = [trace9, trace10, trace7, trace11, trace12, trace8]
+fig3['data'] = [trace13, trace14, trace7, trace15, trace16, trace8]
 
 #get the url of your figure to embed in html later
 # first_plot_url = py.plot(fig, filename= subjectName + "AccByMorph" + session, auto_open=False,)
@@ -401,6 +327,7 @@ print("The session number you have indicated is: " + session + "\n")
 #save images as png in case prefer compared to html
 py.image.save_as(fig, fileDirectory + filename + "_CategTrainingMorphAccSession" + session + ".jpeg")
 py.image.save_as(fig2, fileDirectory + filename + "_CategTrainingSession" + session + ".jpeg")
+py.image.save_as(fig3, fileDirectory + filename + "_CategTrainingByPositionSession" + session + ".jpeg")
 
 #close all open files
 # f.close()
