@@ -133,7 +133,7 @@ function spatialLocalizationExperiment(exptdesign)
         end 
         
         %save the session data in the data directory
-        save(['./data/' exptdesign.number '/' exptdesign.subjectName '_block' num2str(iBlock) '.' num2str(iTrial) '.mat'], 'trialOutput', 'exptdesign');
+        save(['./data/' exptdesign.number '/' datestr(now, 'yyyymmdd_HHMM') '-' exptdesign.subjectName '_block' num2str(iBlock) '.' num2str(iTrial) '.mat'], 'trialOutput', 'exptdesign');
         %save the history data (stimuli, last level passed)
         
         
