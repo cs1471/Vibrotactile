@@ -9,7 +9,7 @@ frequency = f1(20);
 frequencyCateg=[f1(1:4) f1(18:21); f1(18:21) f1(1:4)]; %frequency combos (8 total)
 
 %generate positions based on response profile
-channels = [1 2 3 4 5 6 9 10 11 12 13 14];
+channels = [2 1 4 3 6 5 10 9 12 11 14 13];
 
 
 %find possible stimulator combinations (8 combos total)
