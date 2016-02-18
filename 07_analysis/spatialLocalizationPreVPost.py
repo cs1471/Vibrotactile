@@ -344,8 +344,8 @@ trace7_9pre  = make_trace_bar(x2, [sD_pos9v13_ACC[0], sD_pos9v11_ACC[0], sD_pos9
 trace7_9post = make_trace_bar(x2, [sD_pos9v13_ACC[1], sD_pos9v11_ACC[1], sD_pos9v5_ACC[1], sD_pos9v3_ACC[1]], "Pos 9 Comparisons Acc - Post")
 trace8_5pre  = make_trace_line(x2, [sD_pos5v1_RT[0], sD_pos5v3_RT[0], sD_pos5v9_RT[0], sD_pos5v11_RT[0]], "Pos 5 Comparisons RT - Pre")
 trace8_5post = make_trace_line(x2, [sD_pos5v1_RT[1], sD_pos5v3_RT[1], sD_pos5v9_RT[1], sD_pos5v11_RT[1]], "Pos 5 Comparisons RT - Post")
-trace8_9pre  = make_trace_line(x2, [sD_pos9v13_RT[0], sD_pos9v11_RT[0], sD_pos9v5_RT[0], sD_pos9v3_RT[0]], "Pos 5 Comparisons RT")
-trace8_9post = make_trace_line(x2, [sD_pos9v13_RT[1], sD_pos9v11_RT[1], sD_pos9v5_RT[1], sD_pos9v3_RT[1]], "Pos 5 Comparisons RT")
+trace8_9pre  = make_trace_line(x2, [sD_pos9v13_RT[0], sD_pos9v11_RT[0], sD_pos9v5_RT[0], sD_pos9v3_RT[0]], "Pos 9 Comparisons RT - Pre")
+trace8_9post = make_trace_line(x2, [sD_pos9v13_RT[1], sD_pos9v11_RT[1], sD_pos9v5_RT[1], sD_pos9v3_RT[1]], "Pos 9 Comparisons RT - Post")
 
 # matFileName = fileDirectory + filename
 # dataFile = sio.savemat(matFileName, {'x':x, 'y':y, 'cp_mean': cp_mean, 'mm_mean': mm_mean, 'cb_mean': cb_mean)
