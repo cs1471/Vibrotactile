@@ -2,38 +2,41 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0794c37e-0125-4d6f-89ef-6834103a2107" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CategorySummary.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/Position.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/PositionFunction_Specific.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/dPrime.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/figureFunctions.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/freqDiscrimAnalysis_Category.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/freqDiscrimCateg_Group.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/freqDiscrim_Group.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/spatialLoc_Group.py" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../03_spatialLocalization/data/998/20151202_1354-998_block7.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../06_frequencyDiscrimination/data/1000/20151120_1031-1000_block5frequencyDiscrim_freqPre.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../06_frequencyDiscrimination/data/1000/20151214_1433-1000_block5frequencyDiscrim_freqpost.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../06_frequencyDiscrimination/data/1000/20151214_1433-1000_block5frequencyDiscrim_pospost.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../06_frequencyDiscrimination/data/998/20151120_1522-998_block5frequencyDiscrim_freqPre.png" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../06_frequencyDiscrimination/data/998/20151120_1522-998_block5frequencyDiscrim_posPre.png" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/data/1000/MR1000_CategTrainingMorphAccAllSession.jpeg" afterPath="$PROJECT_DIR$/../01_CategoryTraining/data/1000/MR1000_CategTrainingMorphAccAllSession.jpeg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../03_spatialLocalization/data/1000/1000spatialLoc5v9_PreVPost.png" afterPath="$PROJECT_DIR$/../03_spatialLocalization/data/1000/1000spatialLoc5v9_PreVPost.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../03_spatialLocalization/data/873/MR873_block7.144spatialLocPre.png" afterPath="$PROJECT_DIR$/../03_spatialLocalization/data/873/MR873_block7.144spatialLocPre.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../03_spatialLocalization/data/983/20151118_1817-983_block7spatialLocPre.png" afterPath="$PROJECT_DIR$/../03_spatialLocalization/data/983/20151118_1817-983_block7spatialLocPre.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../03_spatialLocalization/data/998/20151202_1354-998_block7spatialLocPre.png" afterPath="$PROJECT_DIR$/../03_spatialLocalization/data/998/20151202_1354-998_block7spatialLocPre.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../06_frequencyDiscrimination/data/873/20160128_1530-MR873_block7frequencyDiscrim_freqPre.jpeg" afterPath="$PROJECT_DIR$/../06_frequencyDiscrimination/data/873/20160128_1530-MR873_block7frequencyDiscrim_freqPre.jpeg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../06_frequencyDiscrimination/data/873/20160128_1530-MR873_block7frequencyDiscrim_posPre.jpeg" afterPath="$PROJECT_DIR$/../06_frequencyDiscrimination/data/873/20160128_1530-MR873_block7frequencyDiscrim_posPre.jpeg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../06_frequencyDiscrimination/data/888/20160127_1651-MR888_block7frequencyDiscrim_freqPre.jpeg" afterPath="$PROJECT_DIR$/../06_frequencyDiscrimination/data/888/20160127_1651-MR888_block7frequencyDiscrim_freqPre.jpeg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../06_frequencyDiscrimination/data/888/20160127_1651-MR888_block7frequencyDiscrim_posPre.jpeg" afterPath="$PROJECT_DIR$/../06_frequencyDiscrimination/data/888/20160127_1651-MR888_block7frequencyDiscrim_posPre.jpeg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../06_frequencyDiscrimination/data/983/20151119_1059-983_block7frequencyDiscrim_freqPre.jpeg" afterPath="$PROJECT_DIR$/../06_frequencyDiscrimination/data/983/20151119_1059-983_block7frequencyDiscrim_freqPre.jpeg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../06_frequencyDiscrimination/data/983/20151119_1059-983_block7frequencyDiscrim_posPre.jpeg" afterPath="$PROJECT_DIR$/../06_frequencyDiscrimination/data/983/20151119_1059-983_block7frequencyDiscrim_posPre.jpeg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/frequencyGenerator.py" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/data/1000/20151208_1505-MR1000_block6.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/data/1000/20151208_1505-MR1000_block6CategoryTrainingAccCategory.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/data/1000/20151208_1505-MR1000_block6CategoryTrainingAccMorph.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/data/1000/20151209_1728-MR1000_block6.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/data/1000/20151209_1728-MR1000_block6CategoryTrainingAccCategory.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/data/1000/20151209_1728-MR1000_block6CategoryTrainingAccMorph.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/data/1000/20151210_1347-MR1000_block6.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/data/1000/20151210_1347-MR1000_block6CategoryTrainingAccMorph.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/data/1000/20151211_1105-MR1000_block6.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/data/1000/20151211_1105-MR1000_block6CategoryTrainingAccCategory.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/data/1000/20151211_1105-MR1000_block6CategoryTrainingAccMorph.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/data/1000/20151212_1342-MR1000_block5.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/data/1000/20151212_1342-MR1000_block5CategoryTrainingAccCategory.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/data/1000/20151212_1342-MR1000_block5CategoryTrainingAccMorph.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/data/1000/20151212_1342-MR1000_block5copy6 (1).mat" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/data/1000/20160118_1632-MR1000_block5.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/data/1000/20160118_1632-MR1000_block5CategoryTrainingAccCategory.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/data/1000/20160118_1632-MR1000_block5CategoryTrainingAccMorph.png" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../03_spatialLocalization/data/1000/20151118_1239-1000_block7.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../03_spatialLocalization/data/1000/MR1000_block1.144.mat.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../03_spatialLocalization/data/1008/MR1008_block1.144.mat" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../03_spatialLocalization/data/1008/MR1008_block2.144.mat" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../03_spatialLocalization/data/1008/MR1008_block3.144.mat" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../03_spatialLocalization/data/1008/MR1008_block4.144.mat" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../03_spatialLocalization/data/1008/MR1008_block5.144.mat" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../03_spatialLocalization/data/1008/MR1008_block6.144.mat" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../03_spatialLocalization/data/1008/MR1008_block7.144.mat" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../06_frequencyDiscrimination/data/946/20160202_1521-MR946_block7frequencyDiscrim_freqPre.jpeg" afterPath="$PROJECT_DIR$/../06_frequencyDiscrimination/data/946/20160202_1521-MR946_block7frequencyDiscrim_freqPre.jpeg" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CategoryTrainingFigure.py" afterPath="$PROJECT_DIR$/CategoryTrainingFigure.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/categoryTrainingSession.py" afterPath="$PROJECT_DIR$/categoryTrainingSession.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frequencyDiscrimPreVPost.py" afterPath="$PROJECT_DIR$/frequencyDiscrimPreVPost.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frequencyDiscriminationAnalysis2.py" afterPath="$PROJECT_DIR$/frequencyDiscriminationAnalysis2.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spatialLocalizationAnalysis.py" afterPath="$PROJECT_DIR$/spatialLocalizationAnalysis.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/spatialLocalizationPreVPost.py" afterPath="$PROJECT_DIR$/spatialLocalizationPreVPost.py" />
     </list>
     <ignored path="07_analysis.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -53,104 +56,86 @@
     <favorites_list name="07_analysis" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5">
-      <split-first>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="freqDiscrimCateg_Group.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/freqDiscrimCateg_Group.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
-                  <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="55" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="freqDiscrim_Group.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/freqDiscrim_Group.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="-3.3333333">
-                  <caret line="264" column="38" selection-start-line="264" selection-start-column="38" selection-end-line="264" selection-end-column="38" />
-                  <folding>
-                    <element signature="e#20#42#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="categoryTrainingSession.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/categoryTrainingSession.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
-                  <caret line="15" column="23" selection-start-line="15" selection-start-column="23" selection-end-line="15" selection-end-column="23" />
-                  <folding>
-                    <element signature="e#20#38#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="CategoryTrainingFigure.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/CategoryTrainingFigure.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
-                  <caret line="35" column="12" selection-start-line="35" selection-start-column="12" selection-end-line="35" selection-end-column="12" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="spatialLoc_Group.py" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/spatialLoc_Group.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.51760566">
-                  <caret line="109" column="65" selection-start-line="109" selection-start-column="65" selection-end-line="109" selection-end-column="65" />
-                  <folding>
-                    <element signature="e#20#38#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf>
-          <file leaf-file-name="Position.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/Position.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
-                  <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-                  <folding>
-                    <element signature="e#0#59#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="PositionFunction_General.py" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/PositionFunction_General.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.06752411">
-                  <caret line="65" column="28" selection-start-line="65" selection-start-column="28" selection-end-line="65" selection-end-column="28" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="PositionFunction_Specific.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/PositionFunction_Specific.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
-                  <caret line="76" column="83" selection-start-line="76" selection-start-column="83" selection-end-line="76" selection-end-column="83" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="CategoryTrainingFigure.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CategoryTrainingFigure.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="326" column="0" selection-start-line="326" selection-start-column="0" selection-end-line="334" selection-end-column="14" />
+              <folding>
+                <element signature="e#20#38#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="categoryTrainingSession.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/categoryTrainingSession.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="12" column="32" selection-start-line="12" selection-start-column="32" selection-end-line="12" selection-end-column="32" />
+              <folding>
+                <element signature="e#20#38#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="frequencyGenerator.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/frequencyGenerator.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="7" column="23" selection-start-line="7" selection-start-column="23" selection-end-line="7" selection-end-column="23" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="spatialLocalizationAnalysis.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/spatialLocalizationAnalysis.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="3.8385828">
+              <caret line="287" column="73" selection-start-line="287" selection-start-column="73" selection-end-line="287" selection-end-column="73" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="spatialLocalizationPreVPost.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/spatialLocalizationPreVPost.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="177" column="22" selection-start-line="177" selection-start-column="22" selection-end-line="177" selection-end-column="22" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="frequencyDiscriminationAnalysis2.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/frequencyDiscriminationAnalysis2.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="20" column="48" selection-start-line="20" selection-start-column="48" selection-end-line="20" selection-end-column="48" />
+              <folding>
+                <element signature="e#20#38#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="frequencyDiscrimPreVPost.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/frequencyDiscrimPreVPost.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="373" column="0" selection-start-line="373" selection-start-column="0" selection-end-line="392" selection-end-column="49" />
+              <folding>
+                <element signature="e#20#38#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -171,32 +156,20 @@
         <option value="$PROJECT_DIR$/plotlyIntro/categoryTrainingSession.py" />
         <option value="$PROJECT_DIR$/frequencyDiscriminationAnalysis.py" />
         <option value="$PROJECT_DIR$/frequencyDiscrimPreVPost.py" />
-        <option value="$PROJECT_DIR$/frequencyGenerator.py" />
-        <option value="$PROJECT_DIR$/spatialLocalizationPreVPost.py" />
-        <option value="$PROJECT_DIR$/figureFunctions.py" />
-        <option value="$PROJECT_DIR$/CategorySummary.py" />
         <option value="$PROJECT_DIR$/frequencyDiscriminationAnalysis2.py" />
-        <option value="$PROJECT_DIR$/spatialLocalizationAnalysis.py" />
-        <option value="$PROJECT_DIR$/freqDiscrimAnalysis_Category.py" />
-        <option value="$PROJECT_DIR$/categoryTrainingSession.py" />
-        <option value="$PROJECT_DIR$/freqDiscrimCateg_Group.py" />
-        <option value="$PROJECT_DIR$/freqDiscrim_Group_Test.py" />
         <option value="$PROJECT_DIR$/CategoryTrainingFigure.py" />
-        <option value="$PROJECT_DIR$/PositionFunction.py" />
-        <option value="$PROJECT_DIR$/Position.py" />
-        <option value="$PROJECT_DIR$/dPrime.py" />
-        <option value="$PROJECT_DIR$/freqDiscrim_Group.py" />
-        <option value="$PROJECT_DIR$/PositionFunction_Specific.py" />
-        <option value="$PROJECT_DIR$/PositionFunction_General.py" />
-        <option value="$PROJECT_DIR$/spatialLoc_Group.py" />
+        <option value="$PROJECT_DIR$/frequencyGenerator.py" />
+        <option value="$PROJECT_DIR$/categoryTrainingSession.py" />
+        <option value="$PROJECT_DIR$/spatialLocalizationPreVPost.py" />
+        <option value="$PROJECT_DIR$/spatialLocalizationAnalysis.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="21" />
-    <option name="y" value="40" />
-    <option name="width" value="2316" />
-    <option name="height" value="1241" />
+    <option name="x" value="56" />
+    <option name="y" value="41" />
+    <option name="width" value="2214" />
+    <option name="height" value="1293" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -223,7 +196,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -245,6 +217,7 @@
         </subPane>
       </pane>
       <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -258,41 +231,7 @@
       <recent name="/usr/local/bin" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.spatialLoc_Group">
-    <configuration default="false" name="freqDiscrim_Group" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="07_analysis" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/freqDiscrim_Group.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
-    <configuration default="false" name="spatialLoc_Group" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="07_analysis" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/spatialLoc_Group.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="Python.spatialLocalizationAnalysis">
     <configuration default="false" name="CategoryTrainingFigure" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -306,6 +245,23 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="07_analysis" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CategoryTrainingFigure.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="frequencyDiscrimPreVPost" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="07_analysis" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/frequencyDiscrimPreVPost.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -327,7 +283,7 @@
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
     </configuration>
-    <configuration default="false" name="freqDiscrim_Group_Test" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration default="false" name="spatialLocalizationPreVPost" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -339,7 +295,24 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="07_analysis" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/freqDiscrim_Group_Test.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/spatialLocalizationPreVPost.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="spatialLocalizationAnalysis" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="07_analysis" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/spatialLocalizationAnalysis.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -467,19 +440,19 @@
       <method />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Python.freqDiscrim_Group" />
-      <item index="1" class="java.lang.String" itemvalue="Python.spatialLoc_Group" />
-      <item index="2" class="java.lang.String" itemvalue="Python.CategoryTrainingFigure" />
-      <item index="3" class="java.lang.String" itemvalue="Python.categoryTrainingSession" />
-      <item index="4" class="java.lang.String" itemvalue="Python.freqDiscrim_Group_Test" />
+      <item index="0" class="java.lang.String" itemvalue="Python.CategoryTrainingFigure" />
+      <item index="1" class="java.lang.String" itemvalue="Python.frequencyDiscrimPreVPost" />
+      <item index="2" class="java.lang.String" itemvalue="Python.categoryTrainingSession" />
+      <item index="3" class="java.lang.String" itemvalue="Python.spatialLocalizationPreVPost" />
+      <item index="4" class="java.lang.String" itemvalue="Python.spatialLocalizationAnalysis" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.spatialLoc_Group" />
-        <item index="1" class="java.lang.String" itemvalue="Python.CategoryTrainingFigure" />
-        <item index="2" class="java.lang.String" itemvalue="Python.freqDiscrim_Group" />
-        <item index="3" class="java.lang.String" itemvalue="Python.freqDiscrim_Group_Test" />
-        <item index="4" class="java.lang.String" itemvalue="Python.categoryTrainingSession" />
+        <item index="0" class="java.lang.String" itemvalue="Python.spatialLocalizationAnalysis" />
+        <item index="1" class="java.lang.String" itemvalue="Python.spatialLocalizationPreVPost" />
+        <item index="2" class="java.lang.String" itemvalue="Python.categoryTrainingSession" />
+        <item index="3" class="java.lang.String" itemvalue="Python.CategoryTrainingFigure" />
+        <item index="4" class="java.lang.String" itemvalue="Python.frequencyDiscrimPreVPost" />
       </list>
     </recent_temporary>
   </component>
@@ -496,29 +469,20 @@
     </task>
     <servers />
   </component>
-  <component name="TodoView">
-    <todo-panel id="selected-file">
-      <is-autoscroll-to-source value="true" />
-    </todo-panel>
-    <todo-panel id="all">
-      <are-packages-shown value="true" />
-      <is-autoscroll-to-source value="true" />
-    </todo-panel>
-  </component>
   <component name="ToolWindowManager">
-    <frame x="21" y="40" width="2316" height="1241" extended-state="0" />
-    <editor active="false" />
+    <frame x="56" y="41" width="2214" height="1293" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12026144" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32977778" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.125855" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39983305" sideWeight="0.5018067" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3288889" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3297162" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25244445" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32880205" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.42222223" sideWeight="0.49819332" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4231096" sideWeight="0.49819332" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -543,30 +507,27 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="python-line">
-          <url>file://$PROJECT_DIR$/freqDiscrimCateg_Group.py</url>
-          <line>38</line>
-          <option name="timeStamp" value="125" />
+          <url>file://$PROJECT_DIR$/CategoryTrainingFigure.py</url>
+          <line>79</line>
+          <option name="timeStamp" value="88" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
-          <url>file://$PROJECT_DIR$/freqDiscrim_Group.py</url>
-          <line>234</line>
-          <option name="timeStamp" value="143" />
+          <url>file://$PROJECT_DIR$/categoryTrainingSession.py</url>
+          <line>111</line>
+          <option name="timeStamp" value="96" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
-          <url>file://$PROJECT_DIR$/spatialLoc_Group.py</url>
-          <line>109</line>
-          <option name="timeStamp" value="144" />
+          <url>file://$PROJECT_DIR$/categoryTrainingSession.py</url>
+          <line>118</line>
+          <option name="timeStamp" value="97" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
-          <url>file://$PROJECT_DIR$/spatialLoc_Group.py</url>
-          <line>51</line>
-          <option name="timeStamp" value="145" />
+          <url>file://$PROJECT_DIR$/categoryTrainingSession.py</url>
+          <line>125</line>
+          <option name="timeStamp" value="99" />
         </line-breakpoint>
       </breakpoints>
-      <breakpoints-dialog>
-        <breakpoints-dialog />
-      </breakpoints-dialog>
-      <option name="time" value="150" />
+      <option name="time" value="103" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -574,8 +535,124 @@
     <entry file="file://$PROJECT_DIR$/CategoryTrainingFigure.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="35" column="12" selection-start-line="35" selection-start-column="12" selection-end-line="35" selection-end-column="12" />
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#20#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/categoryTrainingSession.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="99" column="0" selection-start-line="99" selection-start-column="0" selection-end-line="99" selection-end-column="0" />
+          <folding>
+            <element signature="e#20#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spatialLocalizationAnalysis.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="20" column="48" selection-start-line="20" selection-start-column="48" selection-end-line="20" selection-end-column="48" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frequencyDiscriminationAnalysis2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="20" column="48" selection-start-line="20" selection-start-column="48" selection-end-line="20" selection-end-column="48" />
+          <folding>
+            <element signature="e#20#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frequencyDiscrimPreVPost.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="44" column="0" selection-start-line="44" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
+          <folding>
+            <element signature="e#20#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spatialLocalizationAnalysis.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="76" column="22" selection-start-line="76" selection-start-column="22" selection-end-line="76" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frequencyDiscriminationAnalysis2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="69" column="14" selection-start-line="0" selection-start-column="0" selection-end-line="630" selection-end-column="0" />
+          <folding>
+            <element signature="e#20#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frequencyDiscrimPreVPost.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#20#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CategoryTrainingFigure.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="319" column="56" selection-start-line="319" selection-start-column="56" selection-end-line="319" selection-end-column="56" />
+          <folding>
+            <element signature="e#20#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spatialLocalizationAnalysis.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="76" column="22" selection-start-line="76" selection-start-column="22" selection-end-line="76" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frequencyDiscriminationAnalysis2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="69" column="14" selection-start-line="0" selection-start-column="0" selection-end-line="630" selection-end-column="0" />
+          <folding>
+            <element signature="e#20#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frequencyDiscrimPreVPost.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#20#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CategoryTrainingFigure.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="35" column="12" selection-start-line="35" selection-start-column="12" selection-end-line="35" selection-end-column="12" />
+          <folding>
+            <element signature="e#20#38#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -583,6 +660,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="34" column="32" selection-start-line="34" selection-start-column="32" selection-end-line="34" selection-end-column="32" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -590,6 +668,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#20#38#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -597,7 +678,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="375" column="0" selection-start-line="375" selection-start-column="0" selection-end-line="375" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#20#38#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -612,6 +695,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="28" column="26" selection-start-line="28" selection-start-column="26" selection-end-line="28" selection-end-column="26" />
+          <folding>
+            <element signature="e#20#38#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -619,7 +705,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="375" column="0" selection-start-line="375" selection-start-column="0" selection-end-line="375" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#20#38#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -634,6 +722,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="28" column="26" selection-start-line="28" selection-start-column="26" selection-end-line="28" selection-end-column="26" />
+          <folding>
+            <element signature="e#20#38#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -641,7 +732,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#20#38#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -677,7 +770,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#20#38#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -692,7 +787,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#20#38#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -731,6 +828,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/site-packages/numpy/core/_methods.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="64" column="0" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/RAdata.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.86975396">
@@ -738,102 +842,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/site-packages/plotly/graph_objs/graph_objs.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.019354839">
-          <caret line="933" column="0" selection-start-line="933" selection-start-column="0" selection-end-line="933" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/pydevd.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33333334">
-          <caret line="1547" column="0" selection-start-line="1547" selection-start-column="0" selection-end-line="1547" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/figureFunctions.py">
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/statistics.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frequencyDiscriminationAnalysis.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.51660514">
-          <caret line="34" column="121" selection-start-line="34" selection-start-column="121" selection-end-line="34" selection-end-column="121" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/freqDiscrimAnalysis_Category.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="68" column="19" selection-start-line="0" selection-start-column="0" selection-end-line="226" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/spatialLocalizationAnalysis.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="53" column="0" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CategorySummary.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frequencyDiscrimPreVPost.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="43" column="0" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/spatialLocalizationPreVPost.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frequencyGenerator.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="3" column="4" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="23" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/freqDiscrim_Group_Test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.25210086">
-          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/pydevd_frame.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6688103">
-          <caret line="553" column="0" selection-start-line="553" selection-start-column="0" selection-end-line="553" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/site-packages/scipy/io/matlab/mio.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frequencyDiscriminationAnalysis2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.3284132">
-          <caret line="273" column="41" selection-start-line="273" selection-start-column="41" selection-end-line="273" selection-end-column="41" />
+          <caret line="226" column="0" selection-start-line="226" selection-start-column="0" selection-end-line="226" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -844,113 +856,109 @@
         </state>
       </provider>
     </entry>
-    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/site-packages/scipy/stats/stats.py">
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_execfile.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="2106" column="0" selection-start-line="2106" selection-start-column="0" selection-end-line="2106" selection-end-column="0" />
+          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/site-packages/numpy/core/_methods.py">
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/site-packages/plotly/graph_objs/graph_objs.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6221865">
-          <caret line="55" column="0" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.019354839">
+          <caret line="933" column="0" selection-start-line="933" selection-start-column="0" selection-end-line="933" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/categoryTrainingSession.py">
+    <entry file="file://$PROJECT_DIR$/frequencyDiscriminationAnalysis.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="15" column="23" selection-start-line="15" selection-start-column="23" selection-end-line="15" selection-end-column="23" />
-          <folding>
-            <element signature="e#20#38#0" expanded="true" />
-          </folding>
+          <caret line="34" column="121" selection-start-line="34" selection-start-column="121" selection-end-line="34" selection-end-column="121" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/site-packages/scipy/io/matlab/mio.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.40490797">
+          <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/pydevd_frame.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.66871166">
+          <caret line="553" column="0" selection-start-line="553" selection-start-column="0" selection-end-line="553" selection-end-column="0" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/CategoryTrainingFigure.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="35" column="12" selection-start-line="35" selection-start-column="12" selection-end-line="35" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/freqDiscrimCateg_Group.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="55" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dPrime.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="53" column="0" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/freqDiscrim_Group.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.3333333">
-          <caret line="264" column="38" selection-start-line="264" selection-start-column="38" selection-end-line="264" selection-end-column="38" />
-          <folding>
-            <element signature="e#20#42#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/statistics.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="291" column="0" selection-start-line="291" selection-start-column="0" selection-end-line="291" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydev_imps/_pydev_execfile.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.40996784">
-          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Position.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="9" column="0" selection-start-line="9" selection-start-column="0" selection-end-line="9" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#59#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/PositionFunction_Specific.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="76" column="83" selection-start-line="76" selection-start-column="83" selection-end-line="76" selection-end-column="83" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/PositionFunction_General.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.06752411">
-          <caret line="65" column="28" selection-start-line="65" selection-start-column="28" selection-end-line="65" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/spatialLoc_Group.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.51760566">
-          <caret line="109" column="65" selection-start-line="109" selection-start-column="65" selection-end-line="109" selection-end-column="65" />
+          <caret line="326" column="0" selection-start-line="326" selection-start-column="0" selection-end-line="334" selection-end-column="14" />
           <folding>
             <element signature="e#20#38#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frequencyGenerator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="7" column="23" selection-start-line="7" selection-start-column="23" selection-end-line="7" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/pydevd.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33333334">
+          <caret line="1636" column="0" selection-start-line="1636" selection-start-column="0" selection-end-line="1636" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/categoryTrainingSession.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="12" column="32" selection-start-line="12" selection-start-column="32" selection-end-line="12" selection-end-column="32" />
+          <folding>
+            <element signature="e#20#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frequencyDiscriminationAnalysis2.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="20" column="48" selection-start-line="20" selection-start-column="48" selection-end-line="20" selection-end-column="48" />
+          <folding>
+            <element signature="e#20#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frequencyDiscrimPreVPost.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="373" column="0" selection-start-line="373" selection-start-column="0" selection-end-line="392" selection-end-column="49" />
+          <folding>
+            <element signature="e#20#38#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spatialLocalizationPreVPost.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="177" column="22" selection-start-line="177" selection-start-column="22" selection-end-line="177" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/spatialLocalizationAnalysis.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="3.8385828">
+          <caret line="287" column="73" selection-start-line="287" selection-start-column="73" selection-end-line="287" selection-end-column="73" />
+          <folding />
         </state>
       </provider>
     </entry>
