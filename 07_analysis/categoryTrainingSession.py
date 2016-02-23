@@ -8,9 +8,10 @@ import plotly.tools as tls
 import glob
 import os
 from frequencyGenerator import FrequencyGenerator as FG
+
 #################################MAIN##########################################
 
-fileDirectory = '/Users/courtney/GoogleDrive/Riesenhuber/05_2015_scripts/Vibrotactile/01_CategoryTraining/data/1000/'
+fileDirectory = '/Users/courtney/GoogleDrive/Riesenhuber/05_2015_scripts/Vibrotactile/01_CategoryTraining/data/983/'
 
 os.chdir(fileDirectory)
 
@@ -23,6 +24,8 @@ dataS1 = sio.loadmat(fileDirectory + fileList[1], struct_as_record=True)
 dataS2 = sio.loadmat(fileDirectory + fileList[2], struct_as_record=True)
 dataS3 = sio.loadmat(fileDirectory + fileList[3], struct_as_record=True)
 dataS4 = sio.loadmat(fileDirectory + fileList[4], struct_as_record=True)
+dataS5 = sio.loadmat(fileDirectory + fileList[5], struct_as_record=True)
+
 
 #make list of frequencies tested
 FL = FG()
@@ -30,30 +33,16 @@ FL.setFrequencyList()
 
 #pull relevant data from structures
 RT       = [dataS0['trialOutput']['RT'], dataS1['trialOutput']['RT'], dataS2['trialOutput']['RT'],
-            dataS3['trialOutput']['RT'], dataS4['trialOutput']['RT']]
+            dataS3['trialOutput']['RT'], dataS4['trialOutput']['RT'], dataS5['trialOutput']['RT']]
 
 accuracy = [dataS0['trialOutput']['accuracy'], dataS1['trialOutput']['accuracy'], dataS2['trialOutput']['accuracy'],
-            dataS3['trialOutput']['accuracy'],dataS4['trialOutput']['accuracy']]
+            dataS3['trialOutput']['accuracy'], dataS4['trialOutput']['accuracy'], dataS5['trialOutput']['accuracy']]
 
 stimuli  = [dataS0['trialOutput']['stimuli'], dataS1['trialOutput']['stimuli'], dataS2['trialOutput']['stimuli'],
-           dataS3['trialOutput']['stimuli'], dataS4['trialOutput']['stimuli']]
-
-nTrials = [dataS0['exptdesign']['numTrialsPerSession'][0,0][0], dataS1['exptdesign']['numTrialsPerSession'][0,0][0], dataS2['exptdesign']['numTrialsPerSession'][0,0][0],
-           dataS3['exptdesign']['numTrialsPerSession'][0,0][0], dataS4['exptdesign']['numTrialsPerSession'][0,0][0]]
-
-nBlocks = [dataS0['exptdesign']['numSessions'][0,0][0], dataS1['exptdesign']['numSessions'][0,0][0], dataS2['exptdesign']['numSessions'][0,0][0],
-           dataS3['exptdesign']['numSessions'][0,0][0], dataS4['exptdesign']['numSessions'][0,0][0]]
+            dataS3['trialOutput']['stimuli'], dataS4['trialOutput']['stimuli'], dataS5['trialOutput']['stimuli']]
 
 subjectNumber = dataS0['exptdesign']['number'][0,0][0]
 subjectName = dataS0['exptdesign']['subjectName'][0,0][0]
-
-session = ["Pre", "Post"]
-
-nBlocks[0] = 6
-nBlocks[1] = 6
-nBlocks[2] = 6
-nBlocks[3] = 6
-nBlocks[4] = 5
 
 #############################################################################
 #Generating accuracy by category
@@ -150,30 +139,32 @@ for iSession in range(len(accuracy)):
         if catProto_accuracy != []:
             b_catProto_accuracy.append(stat.mean(catProto_accuracy))
             b_catProto_RT.append(stat.mean(catProto_RT))
-        else:
-            b_catProto_accuracy.append(0)
-            b_catProto_RT.append(0)
 
         if middleM_accuracy != []:
             b_middleM_RT.append(stat.mean(middleM_RT))
             b_middleM_accuracy.append(stat.mean(middleM_accuracy))
-        else:
-            b_middleM_RT.append(0)
-            b_middleM_accuracy.append(0)
 
         if catBound_accuracy != []:
             b_catBound_accuracy.append(stat.mean(catBound_accuracy))
             b_catBound_RT.append(stat.mean(catBound_RT))
-        else:
-            b_catBound_accuracy.append(0)
-            b_catBound_RT.append(0)
-
-    s_catProto_accuracy.append(stat.mean(b_catProto_accuracy))
-    s_middleM_accuracy.append(stat.mean(b_middleM_accuracy))
-    s_catBound_accuracy.append(stat.mean(b_catBound_accuracy))
-    s_catProto_RT.append(stat.mean(b_catProto_RT))
-    s_middleM_RT.append(stat.mean(b_middleM_RT))
-    s_catBound_RT.append(stat.mean(b_catBound_RT))
+    if b_catProto_accuracy != []:
+        s_catProto_accuracy.append(stat.mean(b_catProto_accuracy))
+        s_catProto_RT.append(stat.mean(b_catProto_RT))
+    else:
+        s_catProto_accuracy.append(0)
+        s_catProto_RT.append(0)
+    if b_middleM_accuracy != []:
+        s_middleM_accuracy.append(stat.mean(b_middleM_accuracy))
+        s_middleM_RT.append(stat.mean(b_middleM_RT))
+    else:
+        s_middleM_accuracy.append(0)
+        s_middleM_RT.append(0)
+    if b_catBound_accuracy != []:
+        s_catBound_accuracy.append(stat.mean(b_catBound_accuracy))
+        s_catBound_RT.append(stat.mean(b_catBound_RT))
+    else:
+        s_catBound_accuracy.append(0)
+        s_catBound_RT.append(0)
 
 #############################################################################
 #Generating accuracy by position
@@ -323,9 +314,13 @@ fig2['layout'].update(barmode='group', bargroupgap=0, bargap=0.25,
 fig3['layout'].update(barmode='group', bargroupgap=0, bargap=0.25,
     title = subjectNumber + " Accuracy and RT By Position All Sessions")
 
-fig['data']  = [trace1, trace2, trace3, trace7, trace4, trace5, trace6, trace8]
-fig2['data'] = [trace9, trace10, trace7, trace11, trace12, trace8]
-fig3['data'] = [trace13, trace14, trace7, trace15, trace16, trace8]
+# fig['data']  = [trace1, trace2, trace3, trace7, trace4, trace5, trace6, trace8]
+# fig2['data'] = [trace9, trace10, trace7, trace11, trace12, trace8]
+# fig3['data'] = [trace13, trace14, trace7, trace15, trace16, trace8]
+fig['data']  = [trace1, trace2, trace3, trace7]
+fig2['data'] = [trace9, trace10, trace7]
+fig3['data'] = [trace13, trace14, trace7]
+
 
 #get the url of your figure to embed in html later
 # first_plot_url = py.plot(fig, filename= subjectName + "AccByMorph" + session, auto_open=False,)

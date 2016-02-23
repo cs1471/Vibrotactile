@@ -1,4 +1,5 @@
 #packages to import
+import numpy as np
 import scipy.io as sio
 import plotly.plotly as py
 import statistics as stat
@@ -8,42 +9,31 @@ import plotly.tools as tls
 import glob
 import os
 from frequencyGenerator import FrequencyGenerator as FG
-from dPrime import Dprime
 
 tls.set_credentials_file(username='cs1471', api_key='9xknhmjhas')
 
-# filename = input('Enter a filename: \n')
 # fileDirectory = input('Enter the directory where you want your figure saved: /n')
-# session = input('Enter the session number: \n')
 
 #Use when debugging or manually editing
-filename = ['20160209_1659-MR865_block7', '20160128_1530-MR873_block7', '20160127_1651-MR888_block7', '20160202_1521-MR946_block7',
-            '20151119_1059-983_block7', '20151120_1522-998_block5', '20151120_1031-1000_block5', '20160205_1552-MR1008_block7']
-fileDirectory = '/Users/courtney/GoogleDrive/Riesenhuber/05_2015_scripts/Vibrotactile/06_frequencyDiscrimination/data/'
+fileDirectory = '/Users/courtney/GoogleDrive/Riesenhuber/05_2015_scripts/Vibrotactile/06_frequencyDiscrimination/data/groupData/'
 
-data865  = sio.loadmat(fileDirectory + '865/' + filename[0], struct_as_record=True)
-data873  = sio.loadmat(fileDirectory + '873/' + filename[1], struct_as_record=True)
-data888  = sio.loadmat(fileDirectory + '888/' + filename[2], struct_as_record=True)
-data946  = sio.loadmat(fileDirectory + '946/' + filename[3], struct_as_record=True)
-data983  = sio.loadmat(fileDirectory + '983/' + filename[4], struct_as_record=True)
-data998  = sio.loadmat(fileDirectory + '998/' + filename[5], struct_as_record=True)
-data1000 = sio.loadmat(fileDirectory + '1000/' + filename[6], struct_as_record=True)
-data1008 = sio.loadmat(fileDirectory + '1008/' + filename[7], struct_as_record=True)
+os.chdir(fileDirectory)
+
+data = []
+for file in glob.glob("*.mat"):
+    data.append(sio.loadmat(file, struct_as_record=True))
 
 #make list of frequencies tested
-FreqObj = FG()
-FreqObj.setFrequencyList()
+FG = FG()
+FG.setFrequencyList()
+FL = [FG.frequencyList[1], FG.frequencyList[7], FG.frequencyList[13], FG.frequencyList[19]]
 
+iSubject = 0
 #pull relevant data from structures
-#pull relevant data from structures
-RT            = [ data865['trialOutput']['RT'], data873['trialOutput']['RT'], data888['trialOutput']['RT'], data946['trialOutput']['RT'],
-                  data983['trialOutput']['RT'], data998['trialOutput']['RT'], data1000['trialOutput']['RT'], data1008['trialOutput']['RT']]
-accuracy      = [ data865['trialOutput']['accuracy'], data873['trialOutput']['accuracy'], data888['trialOutput']['accuracy'], data946['trialOutput']['accuracy'],
-                  data983['trialOutput']['accuracy'], data998['trialOutput']['accuracy'], data1000['trialOutput']['accuracy'], data1008['trialOutput']['accuracy']]
-stimuli       = [ data865['trialOutput']['stimuli'], data873['trialOutput']['stimuli'], data888['trialOutput']['stimuli'], data946['trialOutput']['stimuli'],
-                  data983['trialOutput']['stimuli'], data998['trialOutput']['stimuli'], data1000['trialOutput']['stimuli'], data1008['trialOutput']['stimuli']]
-subjectNumber = [ data865['exptdesign']['number'][0,0][0], data873['exptdesign']['number'][0,0][0], data888['exptdesign']['number'][0,0][0], data946['exptdesign']['number'][0,0][0],
-                  data983['exptdesign']['number'][0,0][0], data998['exptdesign']['number'][0,0][0], data1000['exptdesign']['number'][0,0][0], data1008['exptdesign']['number'][0,0][0]]
+RT            = [data[iSubject]['trialOutput']['RT'] for iSubject in range(len(data))]
+accuracy      = [data[iSubject]['trialOutput']['accuracy'] for iSubject in range(len(data))]
+stimuli       = [data[iSubject]['trialOutput']['stimuli'] for iSubject in range(len(data))]
+subjectNumber = [data[iSubject]['exptdesign']['number'][0,0][0] for iSubject in range(len(data))]
 
 #############################################################################
 #Calculations by Acc category type
@@ -63,11 +53,21 @@ s_m3bRT = []
 s_m6_95RT = []
 s_m6_5RT = []
 
-FL = [FreqObj.frequencyList[1], FreqObj.frequencyList[7], FreqObj.frequencyList[13], FreqObj.frequencyList[19]]
-
-iTrial = iBlock = iSubject = 0
-for iSubject in range(len(accuracy)):
-    for iBlock in range(accuracy[iSubject].size):
+iTrial = iBlock = iSession = 0
+for iSession in range(len(accuracy)):
+    b_sameAcc = []
+    b_m3w5Acc = []
+    b_m3w95Acc = []
+    b_m3bAcc = []
+    b_m6_95Acc = []
+    b_m6_5Acc = []
+    b_sameRT = []
+    b_m3w5RT = []
+    b_m3w95RT = []
+    b_m3bRT = []
+    b_m6_95RT = []
+    b_m6_5RT = []
+    for iBlock in range(accuracy[iSession].size):
         sameAcc = []
         m3w5Acc = []
         m3w95Acc = []
@@ -80,48 +80,60 @@ for iSubject in range(len(accuracy)):
         m3bRT = []
         m6_95RT = []
         m6_5RT = []
-        for iTrial in range(accuracy[iSubject][0,iBlock].size):
-            stim1 = int(round(stimuli[iSubject][0,iBlock][0,iTrial]))
-            stim2 = int(round(stimuli[iSubject][0,iBlock][2,iTrial]))
+        for iTrial in range(accuracy[iSession][0,iBlock].size):
+            stim1 = int(round(stimuli[iSession][0,iBlock][0,iTrial]))
+            stim2 = int(round(stimuli[iSession][0,iBlock][2,iTrial]))
 
             if stim1 == stim2:
-                sameAcc.append(accuracy[iSubject][0,iBlock][0,iTrial])
-                sameRT.append(RT[iSubject][0,iBlock][0,iTrial])
+                sameAcc.append(accuracy[iSession][0,iBlock][0,iTrial])
+                sameRT.append(RT[iSession][0,iBlock][0,iTrial])
             elif (stim1 == FL[3] and stim2 == FL[1]) or (stim1 == FL[3] and stim2 == FL[1]):
-                m6_5Acc.append(accuracy[iSubject][0,iBlock][0,iTrial])
-                m6_5RT.append(RT[iSubject][0,iBlock][0,iTrial])
+                m6_5Acc.append(accuracy[iSession][0,iBlock][0,iTrial])
+                m6_5RT.append(RT[iSession][0,iBlock][0,iTrial])
             elif (stim1 == FL[2] and stim2 == FL[0]) or (stim1 == FL[0] and stim2 == FL[2]):
-                m6_95Acc.append(accuracy[iSubject][0,iBlock][0,iTrial])
-                m6_95RT.append(RT[iSubject][0,iBlock][0,iTrial])
+                m6_95Acc.append(accuracy[iSession][0,iBlock][0,iTrial])
+                m6_95RT.append(RT[iSession][0,iBlock][0,iTrial])
             elif (stim1 == FL[3] and stim2 == FL[2]) or (stim1 == FL[2] and stim2 == FL[3]):
-                m3w5Acc.append(accuracy[iSubject][0,iBlock][0,iTrial])
-                m3w5RT.append(RT[iSubject][0,iBlock][0,iTrial])
+                m3w5Acc.append(accuracy[iSession][0,iBlock][0,iTrial])
+                m3w5RT.append(RT[iSession][0,iBlock][0,iTrial])
             elif (stim1 == FL[0] and stim2 == FL[1]) or (stim1 == FL[1] and stim2 == FL[0]):
-                m3w95Acc.append(accuracy[iSubject][0,iBlock][0,iTrial])
-                m3w95RT.append(RT[iSubject][0,iBlock][0,iTrial])
+                m3w95Acc.append(accuracy[iSession][0,iBlock][0,iTrial])
+                m3w95RT.append(RT[iSession][0,iBlock][0,iTrial])
             elif (stim1 == FL[1] and stim2 == FL[2]) or (stim1 == FL[2] and stim2 == FL[1]):
-                m3bAcc.append(accuracy[iSubject][0,iBlock][0,iTrial])
-                m3bRT.append(RT[iSubject][0,iBlock][0,iTrial])
+                m3bAcc.append(accuracy[iSession][0,iBlock][0,iTrial])
+                m3bRT.append(RT[iSession][0,iBlock][0,iTrial])
 
-    s_sameAcc.append(stat.mean(sameAcc))
-    s_m3w5Acc.append(stat.mean(m3w5Acc))
-    s_m3w95Acc.append(stat.mean(m3w95Acc))
-    s_m3bAcc.append(stat.mean(m3bAcc))
-    s_m6_5Acc.append(stat.mean(m6_5Acc))
-    s_m6_95Acc.append(stat.mean(m6_95Acc))
-    s_sameRT.append(stat.mean(sameRT))
-    s_m3w5RT.append(stat.mean(m3w5RT))
-    s_m3w95RT.append(stat.mean(m3w95RT))
-    s_m3bRT.append(stat.mean(m3bRT))
-    s_m6_95RT.append(stat.mean(m6_95RT))
-    s_m6_5RT.append(stat.mean(m6_5RT))
+        b_sameAcc.append(stat.mean(sameAcc))
+        b_m3w5Acc.append(stat.mean(m3w5Acc))
+        b_m3w95Acc.append(stat.mean(m3w95Acc))
+        b_m3bAcc.append(stat.mean(m3bAcc))
+        b_m6_5Acc.append(stat.mean(m6_5Acc))
+        b_m6_95Acc.append(stat.mean(m6_95Acc))
+        b_sameRT.append(stat.mean(sameRT))
+        b_m3w5RT.append(stat.mean(m3w5RT))
+        b_m3w95RT.append(stat.mean(m3w95RT))
+        b_m3bRT.append(stat.mean(m3bRT))
+        b_m6_95RT.append(stat.mean(m6_95RT))
+        b_m6_5RT.append(stat.mean(m6_5RT))
+    s_sameAcc.append(stat.mean(b_sameAcc))
+    s_m3w5Acc.append(stat.mean(b_m3w5Acc))
+    s_m3w95Acc.append(stat.mean(b_m3w95Acc))
+    s_m3bAcc.append(stat.mean(b_m3bAcc))
+    s_m6_5Acc.append(stat.mean(b_m6_5Acc))
+    s_m6_95Acc.append(stat.mean(b_m6_95Acc))
+    s_sameRT.append(stat.mean(b_sameRT))
+    s_m3w5RT.append(stat.mean(b_m3w5RT))
+    s_m3w95RT.append(stat.mean(b_m3w95RT))
+    s_m3bRT.append(stat.mean(b_m3bRT))
+    s_m6_95RT.append(stat.mean(b_m6_95RT))
+    s_m6_5RT.append(stat.mean(b_m6_5RT))
 
 #############################################################################
 #Calculations by position
 #############################################################################
 
 #calculate the reaction time by position
-iBlock = iTrial = iSubject = 0
+iBlock = iTrial = iSession = 0
 sD_pos3or4_RT = []
 sD_pos5or6_RT = []
 sD_pos9or10_RT = []
@@ -130,8 +142,16 @@ sS_pos3or4_RT = []
 sS_pos5or6_RT = []
 sS_pos9or10_RT = []
 sS_pos11or12_RT = []
-for iSubject in range(len(accuracy)):
-    for iBlock in range(accuracy[iSubject].size):
+for iSession in range(len(accuracy)):
+    bD_pos3or4_RT = []
+    bD_pos5or6_RT = []
+    bD_pos9or10_RT = []
+    bD_pos11or12_RT = []
+    bS_pos3or4_RT = []
+    bS_pos5or6_RT = []
+    bS_pos9or10_RT = []
+    bS_pos11or12_RT = []
+    for iBlock in range(accuracy[iSession].size):
         D_pos3or4_RT = []
         D_pos5or6_RT = []
         D_pos9or10_RT = []
@@ -140,57 +160,65 @@ for iSubject in range(len(accuracy)):
         S_pos5or6_RT = []
         S_pos9or10_RT = []
         S_pos11or12_RT = []
-        for iTrial in range(accuracy[iSubject][0,iBlock].size):
-            pos1 = int(stimuli[iSubject][0,iBlock][1,iTrial])
-            pos2 = int(stimuli[iSubject][0,iBlock][3,iTrial])
-            stim1 = stimuli[iSubject][0,iBlock][0,iTrial]
-            stim2 = stimuli[iSubject][0,iBlock][2,iTrial]
+        for iTrial in range(accuracy[iSession][0,iBlock].size):
+            pos1 = int(stimuli[iSession][0,iBlock][1,iTrial])
+            pos2 = int(stimuli[iSession][0,iBlock][3,iTrial])
+            stim1 = stimuli[iSession][0,iBlock][0,iTrial]
+            stim2 = stimuli[iSession][0,iBlock][2,iTrial]
             if stim1 != stim2:
                 if (pos1 == 3 or pos1 == 4):
-                    D_pos3or4_RT.append(RT[iSubject][0,iBlock][0,iTrial])
+                    D_pos3or4_RT.append(RT[iSession][0,iBlock][0,iTrial])
                 elif (pos1 == 5 or pos1 == 6 or pos1 == 1 or pos1 == 2):
-                    D_pos5or6_RT.append(RT[iSubject][0,iBlock][0,iTrial])
+                    D_pos5or6_RT.append(RT[iSession][0,iBlock][0,iTrial])
                 elif (pos1 == 9 or pos1 == 10 or pos1 == 13 or pos1 == 14):
-                    D_pos9or10_RT.append(RT[iSubject][0,iBlock][0,iTrial])
+                    D_pos9or10_RT.append(RT[iSession][0,iBlock][0,iTrial])
                 # elif pos1 == 1 or pos1 == 2:
                 #     D_pos5or6_RT.append(RT[0,iBlock][0,iTrial])
                 # elif pos1 == 13 or pos1 == 14:
                 #     D_pos9or10_RT.append(RT[0,iBlock][0,iTrial])
                 elif (pos1 == 11 or pos1 == 12):
-                    D_pos11or12_RT.append(RT[iSubject][0,iBlock][0,iTrial])
+                    D_pos11or12_RT.append(RT[iSession][0,iBlock][0,iTrial])
                 else:
-                    print("Your script is broked and stimuli are not meeting criteria for position of different stimuli")
+                    print("Your script is broken and stimuli are not meeting criteria for position of different stimuli")
                     print(stim1, stim2)
                     print(pos1, pos2)
             else:
                 if (pos1 == 3 or pos1 == 4):
-                    S_pos3or4_RT.append(RT[iSubject][0,iBlock][0,iTrial])
+                    S_pos3or4_RT.append(RT[iSession][0,iBlock][0,iTrial])
                 elif (pos1 == 5 or pos1 == 6 or pos1 == 1 or pos1 == 2):
-                    S_pos5or6_RT.append(RT[iSubject][0,iBlock][0,iTrial])
+                    S_pos5or6_RT.append(RT[iSession][0,iBlock][0,iTrial])
                 elif (pos1 == 9 or pos1 == 10 or pos1 == 13 or pos1 == 14):
-                    S_pos9or10_RT.append(RT[iSubject][0,iBlock][0,iTrial])
+                    S_pos9or10_RT.append(RT[iSession][0,iBlock][0,iTrial])
                 # elif (pos1 == 1 or pos1 == 2):
                 #      S_pos5or6_RT.append(RT[0,iBlock][0,iTrial])
                 # elif (pos1 == 13 or pos1 == 14):
                 #     S_pos9or10_RT.append(RT[0,iBlock][0,iTrial])
                 elif (pos1 == 11 or pos1 == 12):
-                    S_pos11or12_RT.append(RT[iSubject][0,iBlock][0,iTrial])
+                    S_pos11or12_RT.append(RT[iSession][0,iBlock][0,iTrial])
                 else:
                     print("Your script is broked and stimuli are not meeting criteria for position of same stimuli")
                     print(stim1, stim2)
                     print(pos1, pos2)
 
-    sD_pos3or4_RT.append(stat.mean(D_pos3or4_RT))
-    sD_pos5or6_RT.append(stat.mean(D_pos5or6_RT))
-    sD_pos9or10_RT.append(stat.mean(D_pos9or10_RT))
-    sD_pos11or12_RT.append(stat.mean(D_pos11or12_RT))
-    sS_pos3or4_RT.append(stat.mean(S_pos3or4_RT))
-    sS_pos5or6_RT.append(stat.mean(S_pos5or6_RT))
-    sS_pos9or10_RT.append(stat.mean(S_pos9or10_RT))
-    sS_pos11or12_RT.append(stat.mean(S_pos11or12_RT))
+        bD_pos3or4_RT.append(stat.mean(D_pos3or4_RT))
+        bD_pos5or6_RT.append(stat.mean(D_pos5or6_RT))
+        bD_pos9or10_RT.append(stat.mean(D_pos9or10_RT))
+        bD_pos11or12_RT.append(stat.mean(D_pos11or12_RT))
+        bS_pos3or4_RT.append(stat.mean(S_pos3or4_RT))
+        bS_pos5or6_RT.append(stat.mean(S_pos5or6_RT))
+        bS_pos9or10_RT.append(stat.mean(S_pos9or10_RT))
+        bS_pos11or12_RT.append(stat.mean(S_pos11or12_RT))
+    sD_pos3or4_RT.append(stat.mean(bD_pos3or4_RT))
+    sD_pos5or6_RT.append(stat.mean(bD_pos5or6_RT))
+    sD_pos9or10_RT.append(stat.mean(bD_pos9or10_RT))
+    sD_pos11or12_RT.append(stat.mean(bD_pos11or12_RT))
+    sS_pos3or4_RT.append(stat.mean(bS_pos3or4_RT))
+    sS_pos5or6_RT.append(stat.mean(bS_pos5or6_RT))
+    sS_pos9or10_RT.append(stat.mean(bS_pos9or10_RT))
+    sS_pos11or12_RT.append(stat.mean(bS_pos11or12_RT))
 
 #calculate the accuracy by position
-iBlock = iTrial = iSubject = 0
+iBlock = iTrial = iSession = 0
 sD_pos3or4_accuracy = []
 sD_pos5or6_accuracy = []
 sD_pos9or10_accuracy = []
@@ -199,8 +227,16 @@ sS_pos3or4_accuracy = []
 sS_pos5or6_accuracy = []
 sS_pos9or10_accuracy = []
 sS_pos11or12_accuracy = []
-for iSubject in range(len(accuracy)):
-    for iBlock in range(accuracy[iSubject].size):
+for iSession in range(len(accuracy)):
+    bD_pos3or4_accuracy = []
+    bD_pos5or6_accuracy = []
+    bD_pos9or10_accuracy = []
+    bD_pos11or12_accuracy = []
+    bS_pos3or4_accuracy = []
+    bS_pos5or6_accuracy = []
+    bS_pos9or10_accuracy = []
+    bS_pos11or12_accuracy = []
+    for iBlock in range(accuracy[iSession].size):
         D_pos3or4_accuracy = []
         D_pos5or6_accuracy = []
         D_pos9or10_accuracy = []
@@ -209,65 +245,65 @@ for iSubject in range(len(accuracy)):
         S_pos5or6_accuracy = []
         S_pos9or10_accuracy = []
         S_pos11or12_accuracy = []
-        for iTrial in range(accuracy[iSubject][0,iBlock].size):
-            pos1 = int(stimuli[iSubject][0,iBlock][1,iTrial])
-            pos2 = int(stimuli[iSubject][0,iBlock][3,iTrial])
-            stim1 = stimuli[iSubject][0,iBlock][0,iTrial]
-            stim2 = stimuli[iSubject][0,iBlock][2,iTrial]
+        for iTrial in range(accuracy[iSession][0,iBlock].size):
+            pos1 = int(stimuli[iSession][0,iBlock][1,iTrial])
+            pos2 = int(stimuli[iSession][0,iBlock][3,iTrial])
+            stim1 = stimuli[iSession][0,iBlock][0,iTrial]
+            stim2 = stimuli[iSession][0,iBlock][2,iTrial]
             if stim1 != stim2:
                 if (pos1 == 3 or pos1 == 4):
-                    D_pos3or4_accuracy.append(accuracy[iSubject][0,iBlock][0,iTrial])
+                    D_pos3or4_accuracy.append(accuracy[iSession][0,iBlock][0,iTrial])
                 elif (pos1 == 5 or pos1 == 6 or pos1 == 1 or pos1 == 2):
-                    D_pos5or6_accuracy.append(accuracy[iSubject][0,iBlock][0,iTrial])
+                    D_pos5or6_accuracy.append(accuracy[iSession][0,iBlock][0,iTrial])
                 elif (pos1 == 9 or pos1 == 10 or pos1 == 13 or pos1 == 14):
-                    D_pos9or10_accuracy.append(accuracy[iSubject][0,iBlock][0,iTrial])
+                    D_pos9or10_accuracy.append(accuracy[iSession][0,iBlock][0,iTrial])
                 # elif pos1 == 1 or pos1 == 2:
                 #     D_pos5or6_accuracy.append(accuracy[0,iBlock][0,iTrial])
                 # elif pos1 == 13 or pos1 == 14:
                 #     D_pos9or10_accuracy.append(accuracy[0,iBlock][0,iTrial])
                 elif (pos1 == 11 or pos1 == 12):
-                    D_pos11or12_accuracy.append(accuracy[iSubject][0,iBlock][0,iTrial])
+                    D_pos11or12_accuracy.append(accuracy[iSession][0,iBlock][0,iTrial])
                 else:
                     print("Your script is broken and stimuli are not meeting criteria for position of different stimuli")
                     print(stim1, stim2)
                     print(pos1, pos2)
             else:
                 if (pos1 == 3 or pos1 == 4):
-                    S_pos3or4_accuracy.append(accuracy[iSubject][0,iBlock][0,iTrial])
+                    S_pos3or4_accuracy.append(accuracy[iSession][0,iBlock][0,iTrial])
                 elif (pos1 == 5 or pos1 == 6 or pos1 == 1 or pos1 == 2):
-                    S_pos5or6_accuracy.append(accuracy[iSubject][0,iBlock][0,iTrial])
+                    S_pos5or6_accuracy.append(accuracy[iSession][0,iBlock][0,iTrial])
                 elif (pos1 == 9 or pos1 == 10 or pos1 == 13 or pos1 == 14):
-                    S_pos9or10_accuracy.append(accuracy[iSubject][0,iBlock][0,iTrial])
+                    S_pos9or10_accuracy.append(accuracy[iSession][0,iBlock][0,iTrial])
                 # elif pos1 == 1 or pos1 == 2:
                 #     S_pos5or6_accuracy.append(accuracy[0,iBlock][0,iTrial])
                 # elif pos1 == 13 or pos1 == 14:
                 #     S_pos9or10_accuracy.append(accuracy[0,iBlock][0,iTrial])
                 elif (pos1 == 11 or pos1 == 12):
-                    S_pos11or12_accuracy.append(accuracy[iSubject][0,iBlock][0,iTrial])
+                    S_pos11or12_accuracy.append(accuracy[iSession][0,iBlock][0,iTrial])
                 else:
                     print("Your script is broken and stimuli are not meeting criteria for position of same stimuli")
                     print(stim1, stim2)
                     print(pos1, pos2)
 
-    sD_pos3or4_accuracy.append(stat.mean(D_pos3or4_accuracy))
-    sD_pos5or6_accuracy.append(stat.mean(D_pos5or6_accuracy))
-    sD_pos9or10_accuracy.append(stat.mean(D_pos9or10_accuracy))
-    sD_pos11or12_accuracy.append(stat.mean(D_pos11or12_accuracy))
-    sS_pos3or4_accuracy.append(stat.mean(S_pos3or4_accuracy))
-    sS_pos5or6_accuracy.append(stat.mean(S_pos5or6_accuracy))
-    sS_pos9or10_accuracy.append(stat.mean(S_pos9or10_accuracy))
-    sS_pos11or12_accuracy.append(stat.mean(S_pos11or12_accuracy))
-
-#############################################################################
-#Calculating dPrime
-#############################################################################
-dPrimeObj = Dprime()
-dprime = dPrimeObj.dPrimeCalc(accuracy, stimuli)
-
+        bD_pos3or4_accuracy.append(stat.mean(D_pos3or4_accuracy))
+        bD_pos5or6_accuracy.append(stat.mean(D_pos5or6_accuracy))
+        bD_pos9or10_accuracy.append(stat.mean(D_pos9or10_accuracy))
+        bD_pos11or12_accuracy.append(stat.mean(D_pos11or12_accuracy))
+        bS_pos3or4_accuracy.append(stat.mean(S_pos3or4_accuracy))
+        bS_pos5or6_accuracy.append(stat.mean(S_pos5or6_accuracy))
+        bS_pos9or10_accuracy.append(stat.mean(S_pos9or10_accuracy))
+        bS_pos11or12_accuracy.append(stat.mean(S_pos11or12_accuracy))
+    sD_pos3or4_accuracy.append(stat.mean(bD_pos3or4_accuracy))
+    sD_pos5or6_accuracy.append(stat.mean(bD_pos5or6_accuracy))
+    sD_pos9or10_accuracy.append(stat.mean(bD_pos9or10_accuracy))
+    sD_pos11or12_accuracy.append(stat.mean(bD_pos11or12_accuracy))
+    sS_pos3or4_accuracy.append(stat.mean(bS_pos3or4_accuracy))
+    sS_pos5or6_accuracy.append(stat.mean(bS_pos5or6_accuracy))
+    sS_pos9or10_accuracy.append(stat.mean(bS_pos9or10_accuracy))
+    sS_pos11or12_accuracy.append(stat.mean(bS_pos11or12_accuracy))
 
 x = ["Diff Pos3", "Diff Pos5", "Diff Pos9", "Diff Pos11", "Same Pos3", "Same Pos5", "Same Pos9", "Same Pos11"]
 x2 = ["Same", "62.50 v 40.00", "90.91 v 62.50", "40.00 v 27.03", "90.91 v 40.00", "62.50 v 27.03"]
-x3 = ['Dprime', 'True Positive Rate', 'False Positive Rate', 'True Negative Rate', 'False Negative Rate']
 
 #############################################################################
 #Generating figures
@@ -344,17 +380,6 @@ trace1008_A_Pos  = make_trace_bar(x, [sD_pos3or4_accuracy[7], sD_pos5or6_accurac
 trace1008_RT_Pos = make_trace_line(x, [sD_pos3or4_RT[7], sD_pos5or6_RT[7], sD_pos9or10_RT[7], sD_pos11or12_RT[7],
                                    sS_pos3or4_RT[7], sS_pos5or6_RT[7], sS_pos9or10_RT[7], sS_pos11or12_RT[7] ], "1008")
 
-
-#make dprime trace
-trace865_dprime_Freq   = make_trace_bar(x3, [dprime[0], dPrimeObj.TPR[0], dPrimeObj.FPR[0], dPrimeObj.TNR[0], dPrimeObj.FNR[0]], "865")
-trace873_dprime_Freq   = make_trace_bar(x3, [dprime[1], dPrimeObj.TPR[1], dPrimeObj.FPR[1], dPrimeObj.TNR[1], dPrimeObj.FNR[1]], "873")
-trace888_dprime_Freq   = make_trace_bar(x3, [dprime[2], dPrimeObj.TPR[2], dPrimeObj.FPR[2], dPrimeObj.TNR[2], dPrimeObj.FNR[2]], "888")
-trace946_dprime_Freq   = make_trace_bar(x3, [dprime[3], dPrimeObj.TPR[3], dPrimeObj.FPR[3], dPrimeObj.TNR[3], dPrimeObj.FNR[3]], "946")
-trace983_dprime_Freq   = make_trace_bar(x3, [dprime[4], dPrimeObj.TPR[4], dPrimeObj.FPR[4], dPrimeObj.TNR[4], dPrimeObj.FNR[4]], "983")
-trace998_dprime_Freq   = make_trace_bar(x3, [dprime[5], dPrimeObj.TPR[5], dPrimeObj.FPR[5], dPrimeObj.TNR[5], dPrimeObj.FNR[3]], "998")
-trace1000_dprime_Freq  = make_trace_bar(x3, [dprime[6], dPrimeObj.TPR[6], dPrimeObj.FPR[6], dPrimeObj.TNR[6], dPrimeObj.FNR[6]], "1000")
-trace1008_dprime_Freq  = make_trace_bar(x3, [dprime[7], dPrimeObj.TPR[7], dPrimeObj.FPR[7], dPrimeObj.TNR[7], dPrimeObj.FNR[7]], "1008")
-
 # Generate Figure object with 2 axes on 2 rows, print axis grid to stdout
 figFreq_ACC = tls.make_subplots(rows=1, cols=1, shared_xaxes=True)
 
@@ -364,27 +389,21 @@ figFreq_RT = tls.make_subplots(rows=1, cols=1, shared_xaxes=True)
 
 figPos_RT  = tls.make_subplots(rows=1, cols=1, shared_xaxes=True)
 
-figDPrime = tls.make_subplots(rows=1, cols=1, shared_xaxes=True)
-
 #set figure layout to hold mutlitple bars
 figFreq_ACC['layout'].update(barmode='group', bargroupgap=0, bargap=0.25,
-    title = "Accuracy by Frequency on Single Stimuli Frequency Discrimination Task")
+    title = "Accuracy by Frequency across conditions")
 
 figPos_ACC['layout'].update(barmode='group', bargroupgap=0, bargap=0.25,
-    title = "Accuracy by Position on Single Stimuli Frequency Discrimination Task")
-
-figDPrime['layout'].update(barmode='group', bargroupgap=0, bargap=0.25,
-    title = "Dprime Across Subjects on Single Stimuli Frequency Discrimination Task")
+    title = "Accuracy by Position across conditions")
 
 figFreq_RT['layout'].update(barmode='group', bargroupgap=0, bargap=0.25,
-    title = "RT by Frequency on Single Stimuli Frequency Discrimination Task")
+    title = "RT by Frequency across conditions")
 
 figPos_RT['layout'].update(barmode='group', bargroupgap=0, bargap=0.25,
-    title = "RT by Position on Single Stimuli Frequency Discrimination Task")
+    title = "RT by Position across conditions")
 
 figFreq_ACC['data'] = [trace865_A_Freq, trace873_A_Freq, trace888_A_Freq, trace946_A_Freq, trace983_A_Freq, trace998_A_Freq, trace1000_A_Freq, trace1008_A_Freq]
 figFreq_RT['data']  = [trace865_RT_Freq, trace873_RT_Freq, trace888_RT_Freq, trace946_RT_Freq, trace983_RT_Freq, trace998_RT_Freq, trace1000_RT_Freq, trace1008_RT_Freq]
-figDPrime['data']   = [trace865_dprime_Freq, trace873_dprime_Freq, trace888_dprime_Freq, trace946_dprime_Freq, trace983_dprime_Freq, trace998_dprime_Freq, trace1000_dprime_Freq, trace1008_dprime_Freq]
 figPos_ACC['data']  = [trace865_A_Pos, trace873_A_Pos, trace888_A_Pos, trace946_A_Pos, trace983_A_Pos, trace998_A_Pos, trace1000_A_Pos, trace1008_A_Pos]
 figPos_RT['data']   = [trace865_RT_Pos, trace873_RT_Pos, trace888_RT_Pos, trace946_RT_Pos, trace983_RT_Pos, trace998_RT_Pos, trace1000_RT_Pos, trace1008_RT_Pos]
 #get the url of your figure to embed in html later
@@ -424,7 +443,6 @@ print("Your graph will be saved in this directory: " + fileDirectory + "\n")
 # save images as png in case prefer compared to html
 py.image.save_as(figFreq_ACC, fileDirectory + "frequencyDiscrim_Freq_ACC_Group.jpeg")
 py.image.save_as(figFreq_RT, fileDirectory + "frequencyDiscrim_Freq_RT_Group.jpeg")
-py.image.save_as(figDPrime, fileDirectory + "frequencyDiscrim_Dprime_Group.jpeg")
 py.image.save_as(figPos_ACC, fileDirectory + "frequencyDiscrim_Pos_ACC_Group.jpeg")
 py.image.save_as(figPos_RT, fileDirectory + "frequencyDiscrim_Pos_RT_Group.jpeg")
 #close all open files

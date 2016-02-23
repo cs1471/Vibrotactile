@@ -31,8 +31,8 @@ def makeFrequency():
 # session = input('Enter the session number: \n')
 
 #Use when debugging or manually editing
-filename = ('20151118_1239-1000_block7')
-fileDirectory = '/Users/courtney/GoogleDrive/Riesenhuber/05_2015_scripts/Vibrotactile/03_spatialLocalization/data/1000/'
+filename = ('20151202_1354-998_block7')
+fileDirectory = '/Users/courtney/GoogleDrive/Riesenhuber/05_2015_scripts/Vibrotactile/03_spatialLocalization/data/998/'
 
 
 #load matfile
@@ -89,6 +89,8 @@ for iBlock in range(sResp.size):
     S_elbowPos_RT = []
     S_midline_RT = []
     for iTrial in range(sResp[0,iBlock].size):
+        # pos1 = int(stimuli[0,iBlock][1,iTrial])
+        # pos2 = int(stimuli[0,iBlock][3,iTrial])
         pos1 = int(stimuli[0,iBlock][0,iTrial])
         pos2 = int(stimuli[0,iBlock][2,iTrial])
         if pos1 != pos2:
@@ -168,6 +170,8 @@ for iBlock in range(sResp.size):
     D_pos9v11_RT = []
     D_pos9v13_RT = []
     for iTrial in range(sResp[0,iBlock].size):
+        # pos1 = int(stimuli[0,iBlock][1,iTrial])
+        # pos2 = int(stimuli[0,iBlock][3,iTrial])
         pos1 = int(stimuli[0,iBlock][0,iTrial])
         pos2 = int(stimuli[0,iBlock][2,iTrial])
         if ((pos1 == 5 or pos1 == 6) and (pos2 == 1 or pos2 == 2)) \
