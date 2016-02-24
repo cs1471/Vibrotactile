@@ -25,7 +25,7 @@ function makeTrainingStimuli
     
     %find possible stimulator combinations (8 combos total)
     s1=[3 4];
-    s2=[11 12];
+    s2=[9 10];
     stimulator=[s1; s2];
     
     %combine frequencies and stimulator combinations into stimuli for each
@@ -93,10 +93,11 @@ function makeTrainingStimuli
     %DIM2 is trials (160 trials perlevel)
     %DIM3 is level -- there are 20 levels! The stimuli are the same in 1-5,
     %6-10, etc.
-    trainingStimuli=repmat(trainingStimuli,[1 3]);
+    trainingStimuli=[trainingStimuli,repmat(trainingStimuli(:,5),1,8)];
    
     %levelAccuracy gives the accuracy required to pass the level (1-20);
-    levelAccuracy=[repmat(.75,[1 3]) .70 .75 repmat(.8, [1 3]) .75 .80 repmat(.85, [1 3]) .80 .85];
-    save ('trainingStimuli4.mat', 'trainingStimuli', 'levelAccuracy')
+    levelAccuracy = [repmat(.70, [1 4]) .75 .775 .80 .825 .85 .875 .9 .925 .95];
+    
+    save ('trainingStimuli5.mat', 'trainingStimuli', 'levelAccuracy')
 
 end
