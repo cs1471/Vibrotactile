@@ -1,6 +1,6 @@
 %vibrotactile categorization training! called by vtCategorizationTraining.m
 %Clara A. Scholl, cas243@georgetown.edu
-function vtCategorizationTrainingExperiment(name, exptdesign)
+function vtCategorizationTrainingExperiment4(name, exptdesign)
     
     %initialize the serial port -- JUST RUN TESTCONTIN FIRST
     %stimGenPTB('CloseAll');
@@ -56,11 +56,10 @@ function vtCategorizationTrainingExperiment(name, exptdesign)
         'When you click the mouse, you will feel the vibration again'], 1)
   
     %load training stimuli
-    load('trainingStimuli3.mat');
+    load('trainingStimuli4.mat');
     level=exptdesign.level;
     
     for iBlock=1:exptdesign.numSessions %how many blocks to run this training session
-        stimulusTracking=[];
         drawAndCenterText(w,['Training Block #' num2str(iBlock) ' of ' num2str(exptdesign.numSessions) '\n\n\n\n'...
             'You are on Level ' num2str(level) '\n\n\n\n' 'Click the mouse to continue'],1); 
         %WaitSecs(1);
@@ -232,10 +231,11 @@ function vtCategorizationTrainingExperiment(name, exptdesign)
         end
         
         %save the session data in the data directory
-        save(['./data/' exptdesign.number '/' datestr(now, 'yyyymmdd_HHMM') '-' exptdesign.subjectName '_block' num2str(iBlock) '.mat'], 'trialOutput', 'exptdesign');
+        save(['./data/' exptdesign.number '/' datestr(now, 'yyyymmdd_HHMM') '-' exptdesign.subName '_block' num2str(iBlock) '.mat'], 'trialOutput', 'exptdesign');
         %save the history data (stimuli, last level passed)
         
-        history=[exptdesign.training.history stimulusTracking];
+        %history=[exptdesign.training.history stimulusTracking];
+        history=[exptdesign.training.history];
         exptdesign.training.history=history;
         lastLevelPassed=level;
         save(['./history/SUBJ' exptdesign.number 'training.mat'], 'history', 'lastLevelPassed');
