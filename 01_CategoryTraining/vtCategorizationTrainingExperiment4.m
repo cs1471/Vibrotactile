@@ -2,10 +2,8 @@
 %Clara A. Scholl, cas243@georgetown.edu
 function vtCategorizationTrainingExperiment4(name, exptdesign)
     
-    %initialize the serial port -- JUST RUN TESTCONTIN FIRST
-    %stimGenPTB('CloseAll');
-    %stimGenPTB('open','COM1')
-
+    rand('twister',sum(100*clock))
+    
     % Open a screen and display instructions
     screens=Screen('Screens');
     screenNumber=0;
@@ -56,7 +54,7 @@ function vtCategorizationTrainingExperiment4(name, exptdesign)
         'When you click the mouse, you will feel the vibration again'], 1)
   
     %load training stimuli
-    load('trainingStimuli4.mat');
+    load('trainingStimuli5.mat');
     level=exptdesign.level;
     
     for iBlock=1:exptdesign.numSessions %how many blocks to run this training session

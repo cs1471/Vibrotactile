@@ -7,7 +7,7 @@ input('\n\nIs white noise playing? Hit Enter when "Yes."\n');
 input('\n\nDoes participant have ear plugs? Hit Enter when "Yes."\n');
 
 %get subject info
-name = input('\n\nEnter Subject NUMBER:\n\n','s');
+number = input('\n\nEnter Subject NUMBER:\n\n','s');
 if isempty(name)
     name = 'MR000';
 else
