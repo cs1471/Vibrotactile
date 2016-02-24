@@ -24,8 +24,8 @@ function makeTrainingStimuli
     f2=fliplr(f1);
     
     %find possible stimulator combinations (8 combos total)
-    s1=[3 4];
-    s2=[9 10];
+    s1=[3 3 3 3 4 4 4 4];
+    s2=[11 11 11 11 12 12 12 12];
     stimulator=[s1; s2];
     
     %combine frequencies and stimulator combinations into stimuli for each
@@ -35,8 +35,10 @@ function makeTrainingStimuli
     %times
     level=[f1(1:4) f1(18:21); f2(1:4) f2(18:21)]; %frequency combos (8 total)
     level=repmat(level, 1,8); %repeat 8 times
-    stimulators = [repmat(stimulator(:,1), 1,32) repmat(stimulator(:,2), 1,32)];
-    
+    stimulators = [repmat(stimulator(:,1), 1,8) repmat(stimulator(:,2), 1,8) ...
+                   repmat(stimulator(:,3), 1,8) repmat(stimulator(:,4), 1,8) ...
+                   repmat(stimulator(:,5), 1,8) repmat(stimulator(:,6), 1,8) ...
+                   repmat(stimulator(:,7), 1,8) repmat(stimulator(:,8), 1,8)];
     %label each stimulus as belonging to category 1 or 2
     for iStim=1:length(level)
         if level(1,iStim)<level(2,iStim)
@@ -74,7 +76,10 @@ function makeTrainingStimuli
      %don't match anymore
      level=[f1(1:9) f1(13:21); f2(1:9) f2(13:21)]; %frequency combos (18 total)
      level=repmat(level, 1,8); %repeat 8 times (this is 128!)
-     stimulators = [repmat(stimulator(:,1), 1,72) repmat(stimulator(:,2), 1,72)];
+     stimulators = [repmat(stimulator(:,1), 1,18) repmat(stimulator(:,2), 1,18) ...
+                    repmat(stimulator(:,3), 1,18) repmat(stimulator(:,4), 1,18) ...
+                    repmat(stimulator(:,5), 1,18) repmat(stimulator(:,6), 1,18) ...
+                    repmat(stimulator(:,7), 1,18) repmat(stimulator(:,8), 1,18)];
     %label each stimulus as belonging to category 1 or 2
     for iStim=1:length(level)
         if level(1,iStim)<level(2,iStim)
@@ -93,11 +98,10 @@ function makeTrainingStimuli
     %DIM2 is trials (160 trials perlevel)
     %DIM3 is level -- there are 20 levels! The stimuli are the same in 1-5,
     %6-10, etc.
-    trainingStimuli = repmat(trainingStimuli,1,3);
+    trainingStimuli=repmat(trainingStimuli,[1 3]);
    
     %levelAccuracy gives the accuracy required to pass the level (1-20);
-    levelAccuracy = [repmat(.75, [1 3]), .70, .75, repmat(.80, [1 3]), .75, .80, repmat(.85, [1 3]), .80, .85];
-    
+    levelAccuracy=[repmat(.75,[1 3]) .70 .75 repmat(.8, [1 3]) .75 .80 repmat(.85, [1 3]) .80 .85];
     save ('trainingStimuli4.mat', 'trainingStimuli', 'levelAccuracy')
 
 end
