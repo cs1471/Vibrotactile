@@ -31,9 +31,9 @@ def makeFrequency():
 # session = input('Enter the session number: \n')
 
 #Use when debugging or manually editing
-filename = ('20160217_1644-MR1008_block6')
-fileDirectory = '/Users/courtney/GoogleDrive/Riesenhuber/05_2015_scripts/Vibrotactile/01_CategoryTraining/data/1008/'
-session = '4'
+filename = ('20160119_1621-MR1000_block5.mat')
+fileDirectory = '/Users/courtney/GoogleDrive/Riesenhuber/05_2015_scripts/Vibrotactile/01_CategoryTraining/data/1000/'
+session = '7'
 
 #load matfile
 data = sio.loadmat(fileDirectory + filename, struct_as_record=True)
@@ -48,8 +48,9 @@ correctResponse = data['trialOutput']['correctResponse']
 accuracy = data['trialOutput']['accuracy']
 level = data['trialOutput']['level']
 stimuli = data['trialOutput']['stimuli']
-nTrials = data['exptdesign']['numTrialsPerSession'][0,0][0]
-nBlocks = data['exptdesign']['numSessions'][0,0][0]
+#nTrials = data['exptdesign']['numTrialsPerSession'][0,0][0]
+#nBlocks = data['exptdesign']['numSessions'][0,0][0]
+nBlocks = 5
 subjectNumber = data['exptdesign']['number'][0,0][0]
 subjectName = data['exptdesign']['subjectName'][0,0][0]
 
@@ -134,7 +135,7 @@ for iBlock in range(sResp.size):
         b_catProto_accuracy.append(stat.mean(catProto_accuracy))
         b_catProto_RT.append(stat.mean(catProto_RT))
     else:
-        b_catProto_accuracy.append(stat.mean(0))
+        b_catProto_accuracy.append(0)
         b_catProto_RT.append(0)
 
     if middleM_accuracy != []:
