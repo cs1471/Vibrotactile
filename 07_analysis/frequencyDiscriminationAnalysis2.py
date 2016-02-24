@@ -31,8 +31,8 @@ def makeFrequency():
 # session = input('Enter the session number: \n')
 
 #Use when debugging or manually editing
-filename = ('20160202_1521-MR946_block7')
-fileDirectory = '/Users/courtney/GoogleDrive/Riesenhuber/05_2015_scripts/Vibrotactile/06_frequencyDiscrimination/data/946/'
+filename = ('20160209_1659-MR865_block7')
+fileDirectory = '/Users/courtney/GoogleDrive/Riesenhuber/05_2015_scripts/Vibrotactile/06_frequencyDiscrimination/data/865/'
 
 
 #load matfile
@@ -163,10 +163,16 @@ for iBlock in range(sResp.size):
                 D_pos5or6_RT.append(RT[0,iBlock][0,iTrial])
             elif (pos1 == 9 or pos1 == 10):
                 D_pos9or10_RT.append(RT[0,iBlock][0,iTrial])
+            # elif pos1 == 1 or pos1 == 2:
+            #     D_pos5or6_RT.append(RT[0,iBlock][0,iTrial])
+            # elif pos1 == 13 or pos1 == 14:
+            #     D_pos9or10_RT.append(RT[0,iBlock][0,iTrial])
             elif (pos1 == 11 or pos1 == 12):
                 D_pos11or12_RT.append(RT[0,iBlock][0,iTrial])
             else:
                 print("Your script is broked and stimuli are not meeting criteria for position of different stimuli")
+                print(stim1, stim2)
+                print(pos1, pos2)
         else:
             if (pos1 == 3 or pos1 == 4):
                 S_pos3or4_RT.append(RT[0,iBlock][0,iTrial])
@@ -174,10 +180,16 @@ for iBlock in range(sResp.size):
                 S_pos5or6_RT.append(RT[0,iBlock][0,iTrial])
             elif (pos1 == 9 or pos1 == 10):
                 S_pos9or10_RT.append(RT[0,iBlock][0,iTrial])
+            # elif (pos1 == 1 or pos1 == 2):
+            #      S_pos5or6_RT.append(RT[0,iBlock][0,iTrial])
+            # elif (pos1 == 13 or pos1 == 14):
+            #     S_pos9or10_RT.append(RT[0,iBlock][0,iTrial])
             elif (pos1 == 11 or pos1 == 12):
                 S_pos11or12_RT.append(RT[0,iBlock][0,iTrial])
             else:
                 print("Your script is broked and stimuli are not meeting criteria for position of same stimuli")
+                print(stim1, stim2)
+                print(pos1, pos2)
 
     bD_pos3or4_RT.append(stat.mean(D_pos3or4_RT))
     bD_pos5or6_RT.append(stat.mean(D_pos5or6_RT))
@@ -220,10 +232,16 @@ for iBlock in range(sResp.size):
                 D_pos5or6_accuracy.append(accuracy[0,iBlock][0,iTrial])
             elif (pos1 == 9 or pos1 == 10):
                 D_pos9or10_accuracy.append(accuracy[0,iBlock][0,iTrial])
+            # elif pos1 == 1 or pos1 == 2:
+            #     D_pos5or6_accuracy.append(accuracy[0,iBlock][0,iTrial])
+            # elif pos1 == 13 or pos1 == 14:
+            #     D_pos9or10_accuracy.append(accuracy[0,iBlock][0,iTrial])
             elif (pos1 == 11 or pos1 == 12):
                 D_pos11or12_accuracy.append(accuracy[0,iBlock][0,iTrial])
             else:
-                print("Your script is broked and stimuli are not meeting criteria for position of different stimuli")
+                print("Your script is broken and stimuli are not meeting criteria for position of different stimuli")
+                print(stim1, stim2)
+                print(pos1, pos2)
         else:
             if (pos1 == 3 or pos1 == 4):
                 S_pos3or4_accuracy.append(accuracy[0,iBlock][0,iTrial])
@@ -231,10 +249,16 @@ for iBlock in range(sResp.size):
                 S_pos5or6_accuracy.append(accuracy[0,iBlock][0,iTrial])
             elif (pos1 == 9 or pos1 == 10):
                 S_pos9or10_accuracy.append(accuracy[0,iBlock][0,iTrial])
+            # elif pos1 == 1 or pos1 == 2:
+            #     S_pos5or6_accuracy.append(accuracy[0,iBlock][0,iTrial])
+            # elif pos1 == 13 or pos1 == 14:
+            #     S_pos9or10_accuracy.append(accuracy[0,iBlock][0,iTrial])
             elif (pos1 == 11 or pos1 == 12):
                 S_pos11or12_accuracy.append(accuracy[0,iBlock][0,iTrial])
             else:
-                print("Your script is broked and stimuli are not meeting criteria for position of same stimuli")
+                print("Your script is broken and stimuli are not meeting criteria for position of same stimuli")
+                print(stim1, stim2)
+                print(pos1, pos2)
 
     bD_pos3or4_accuracy.append(stat.mean(D_pos3or4_accuracy))
     bD_pos5or6_accuracy.append(stat.mean(D_pos5or6_accuracy))

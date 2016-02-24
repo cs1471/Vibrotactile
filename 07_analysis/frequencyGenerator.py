@@ -2,7 +2,7 @@ import math as m
 
 class FrequencyGenerator:
     def __init__(self):
-        frequencyList = []
+        self.frequencyList = self.setFrequencyList()
 
     #allows specified increments
     def my_range(self, start, end, step):
