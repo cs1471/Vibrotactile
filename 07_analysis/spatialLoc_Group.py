@@ -45,7 +45,7 @@ freqL.setFrequencyList()
 #############################################################################
 
 positionObj = Position()
-positionObj.parseData(accuracy, RT, stimuli)
+positionObj.parseData(accuracy, RT, stimuli, 'pos')
 
 #############################################################################
 #Calculations by position

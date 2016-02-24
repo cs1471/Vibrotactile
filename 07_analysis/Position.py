@@ -6,6 +6,6 @@ class Position():
         self.PG = PG()
         self.PC = PC()
 
-    def parseData(self, accuracy, RT, stimuli):
-        self.PG.calcAccRT(accuracy, RT, stimuli)
+    def parseData(self, accuracy, RT, stimuli, type):
+        self.PG.calcAccRT(accuracy, RT, stimuli, type)
         self.PC.calcAccRT(accuracy, RT, stimuli)
