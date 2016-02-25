@@ -137,8 +137,8 @@ class Position_general():
                             print(stim1, stim2)
                             print(pos1)
 
-                    self.RT.append([stat.mean(D_pos3or4_RT), stat.mean(D_pos5or6_RT), stat.mean(D_pos9or10_RT),stat.mean(D_pos11or12_RT),
-                                    stat.mean(S_pos3or4_RT), stat.mean(S_pos5or6_RT), stat.mean(S_pos9or10_RT), stat.mean(S_pos11or12_RT) ])
+            self.RT.append([stat.mean(D_pos3or4_RT), stat.mean(D_pos5or6_RT), stat.mean(D_pos9or10_RT),stat.mean(D_pos11or12_RT),
+                            stat.mean(S_pos3or4_RT), stat.mean(S_pos5or6_RT), stat.mean(S_pos9or10_RT), stat.mean(S_pos11or12_RT) ])
 
     def parseAcc(self, accuracy, stimuli, type):
         if type == 'freq':
@@ -187,7 +187,8 @@ class Position_general():
                             print("Your script is broken and stimuli are not meeting criteria for position of same stimuli")
                             print(stim1, stim2)
                             print(pos1)
-
+            self.ACC.append([stat.mean(D_pos3or4_accuracy), stat.mean(D_pos5or6_accuracy), stat.mean(D_pos9or10_accuracy),stat.mean(D_pos11or12_accuracy),
+                            stat.mean(S_pos3or4_accuracy), stat.mean(S_pos5or6_accuracy), stat.mean(S_pos9or10_accuracy), stat.mean(S_pos11or12_accuracy) ])
 
     def parseAcc_pos(self, accuracy, stimuli):
         for iSubject in range(len(accuracy)):

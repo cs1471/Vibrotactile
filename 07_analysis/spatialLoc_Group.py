@@ -52,7 +52,7 @@ positionObj.parseData(accuracy, RT, stimuli, 'pos')
 #############################################################################
 
 dPrimeObj = Dprime()
-dprime = dPrimeObj.dPrimeCalc(accuracy, stimuli)
+dprime = dPrimeObj.dPrimeCalc(accuracy, stimuli, 'p')
 
 #############################################################################
 #Calculating mean acc and RT overall

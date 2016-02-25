@@ -1,12 +1,10 @@
 #packages to import
 import scipy.io as sio
 import plotly.plotly as py
-import statistics as stat
 import plotly.graph_objs as go
 import plotly.tools as tls
 import glob
 import os
-from frequencyGenerator import FrequencyGenerator as FG
 from dPrime import Dprime
 from FrequencyFunction_General import Frequency_general
 from PositionFunction_General import Position_general
@@ -18,7 +16,7 @@ tls.set_credentials_file(username='cs1471', api_key='9xknhmjhas')
 # session = input('Enter the session number: \n')
 
 #Use when debugging or manually editing
-fileDirectory = '/Users/courtney/GoogleDrive/Riesenhuber/05_2015_scripts/Vibrotactile/06_frequencyDiscrimination/data/groupData'
+fileDirectory = '/Users/courtney/GoogleDrive/Riesenhuber/05_2015_scripts/Vibrotactile/06_frequencyDiscrimination/data/groupData/'
 
 os.chdir(fileDirectory)
 
@@ -30,7 +28,7 @@ for file in glob.glob("*.mat"):
 iSubject = 0
 #pull relevant data from structures
 RT            = [data[iSubject]['trialOutput']['RT'] for iSubject in range(len(data))]
-accuracy      = [data[iSubject]['trialOutput']['accuracy'] for iSubject in range(len(data))]
+ACC           = [data[iSubject]['trialOutput']['accuracy'] for iSubject in range(len(data))]
 stimuli       = [data[iSubject]['trialOutput']['stimuli'] for iSubject in range(len(data))]
 subjectNumber = [data[iSubject]['exptdesign']['number'][0,0][0] for iSubject in range(len(data))]
 
@@ -39,19 +37,19 @@ subjectNumber = [data[iSubject]['exptdesign']['number'][0,0][0] for iSubject in 
 #############################################################################
 
 FreqObj = Frequency_general()
-FreqObj.calcAccRT(accuracy, RT, stimuli)
+FreqObj.calcAccRT(ACC, RT, stimuli)
 
 #############################################################################
 #Calculations by position
 #############################################################################
 PosObj = Position_general()
-PosObj.calcAccRT(accuracy, RT, stimuli, 'freq')
+PosObj.calcAccRT(ACC, RT, stimuli, 'freq')
 
 #############################################################################
 #Calculating dPrime
 #############################################################################
 dPrimeObj = Dprime()
-dprime = dPrimeObj.dPrimeCalc(accuracy, stimuli)
+dprime = dPrimeObj.dPrimeCalc(ACC, stimuli, 'f')
 
 
 x = ["Diff Pos3", "Diff Pos5", "Diff Pos9", "Diff Pos11", "Same Pos3", "Same Pos5", "Same Pos9", "Same Pos11"]
@@ -89,10 +87,10 @@ trace_FG_ACC = []
 trace_FG_RT = []
 trace_dprime = []
 for index, iSubject in enumerate(subjectNumber):
-    trace_PG_ACC.append(make_trace_bar(x, PosObj.PG.ACC[(index+1)], iSubject))
-    trace_PG_RT.append(make_trace_line(x, PosObj.PG.RT[(index+1)], iSubject))
-    trace_FG_ACC.append(make_trace_bar(x2, FreqObj.ACC[(index+1)], iSubject))
-    trace_FG_RT.append(make_trace_line(x2, FreqObj.RT[(index+1)], iSubject))
+    trace_PG_ACC.append(make_trace_bar(x, PosObj.ACC[(index+1)], iSubject))
+    trace_PG_RT.append(make_trace_line(x, PosObj.RT[(index+1)], iSubject))
+    trace_FG_ACC.append(make_trace_bar(x2, FreqObj.ACC[(index)], iSubject))
+    trace_FG_RT.append(make_trace_line(x2, FreqObj.RT[(index)], iSubject))
     trace_dprime.append(make_trace_bar(x3, [dprime[index], dPrimeObj.TPR[index], dPrimeObj.FPR[index], dPrimeObj.TNR[index], dPrimeObj.FNR[index]], iSubject))
 
 # Generate Figure object with 2 axes on 2 rows, print axis grid to stdout
@@ -118,11 +116,11 @@ figFreq_RT['layout'].update(barmode='group', bargroupgap=0, bargap=0.25,
 figPos_RT['layout'].update(barmode='group', bargroupgap=0, bargap=0.25,
     title = "RT by Position on Single Stimuli Frequency Discrimination Task")
 
-figFreq_ACC['data'] = [trace_FG_ACC]
-figFreq_RT['data']  = [trace_FG_RT]
-figDPrime['data']   = [trace_dprime]
-figPos_ACC['data']  = [trace_PG_ACC]
-figPos_RT['data']   = [trace_PG_RT]
+figFreq_ACC['data'] = trace_FG_ACC
+figFreq_RT['data']  = trace_FG_RT
+figDPrime['data']   = trace_dprime
+figPos_ACC['data']  = trace_PG_ACC
+figPos_RT['data']   = trace_PG_RT
 #get the url of your figure to embed in html later
 # first_plot_url = py.plot(fig, filename= subjectName + "AccByMorph" + session, auto_open=False,)
 # tls.get_embed(first_plot_url)
