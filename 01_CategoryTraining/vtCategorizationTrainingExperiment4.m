@@ -71,7 +71,7 @@ function vtCategorizationTrainingExperiment4(name, exptdesign)
         ul=.8;
         
         %iterate over trials
-        for iTrial=1:exptdesign.numTrialsPerSession%size(trainingStimuli{level},2)
+        for iTrial=1:size(trainingStimuli{level},2)
            %draw fixation
            Screen('DrawTexture', w, fixationTexture);
            [FixationVBLTimestamp FixationOnsetTime FixationFlipTimestamp FixationMissed] = Screen('Flip',w);

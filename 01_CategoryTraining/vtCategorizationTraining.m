@@ -45,7 +45,7 @@ exptdesign.numSessions = 6;              % number of blocks (160 trials each) to
 if exptdesign.level >= 5
     exptdesign.numTrialsPerSession = 144;    % number of trials per block for level 5
 else 
-    exptdesign.numTrialsPerSession = 10;  % numbeer of trials per block for levels 1,2,3 and 4
+    exptdesign.numTrialsPerSession = 128;  % numbeer of trials per block for levels 1,2,3 and 4
 end
 
 exptdesign.fixationImage = 'imgsscaled/fixation.bmp';  % image for the fixation cross
