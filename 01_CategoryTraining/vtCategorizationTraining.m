@@ -8,11 +8,13 @@ input('\n\nDoes participant have ear plugs? Hit Enter when "Yes."\n');
 
 %get subject info
 number = input('\n\nEnter Subject NUMBER:\n\n','s');
+name = number;
 if isempty(name)
     name = 'MR000';
 else
     name = ['MR' name];
 end
+exptdesign.subNumber = number; 
 exptdesign.subName = name;
 WaitSecs(0.25);
 %check if the subject has a directory in data.  If not, make it.
@@ -40,7 +42,7 @@ exptdesign.level=exptdesign.training.lastLevelPassed;
 exptdesign.numSessions = 6;              % number of blocks (160 trials each) to complete this training session
 
 % if/else statement to set the number of trials for the level
-if exptdesign.level == 5
+if exptdesign.level >= 5
     exptdesign.numTrialsPerSession = 144;    % number of trials per block for level 5
 else 
     exptdesign.numTrialsPerSession = 128;  % numbeer of trials per block for levels 1,2,3 and 4

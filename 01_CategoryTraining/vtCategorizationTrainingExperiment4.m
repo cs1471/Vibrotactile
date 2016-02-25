@@ -229,14 +229,14 @@ function vtCategorizationTrainingExperiment4(name, exptdesign)
         end
         
         %save the session data in the data directory
-        save(['./data/' exptdesign.number '/' datestr(now, 'yyyymmdd_HHMM') '-' exptdesign.subName '_block' num2str(iBlock) '.mat'], 'trialOutput', 'exptdesign');
+        save(['./data/' exptdesign.subNumber '/' datestr(now, 'yyyymmdd_HHMM') '-' exptdesign.subName '_block' num2str(iBlock) '.mat'], 'trialOutput', 'exptdesign');
         %save the history data (stimuli, last level passed)
         
         %history=[exptdesign.training.history stimulusTracking];
         history=[exptdesign.training.history];
         exptdesign.training.history=history;
         lastLevelPassed=level;
-        save(['./history/SUBJ' exptdesign.number 'training.mat'], 'history', 'lastLevelPassed');
+        save(['./history/SUBJ' exptdesign.subNumber 'training.mat'], 'history', 'lastLevelPassed');
     
     end
     ShowCursor;
