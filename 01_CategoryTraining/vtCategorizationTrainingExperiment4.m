@@ -190,14 +190,14 @@ function vtCategorizationTrainingExperiment4(name, exptdesign)
            end
            
              %tell subject how they did on last trial
-           if iTrial==exptdesign.numTrialsPerSession && iBlock < exptdesign.numSessions
+           if iTrial==size(trainingStimuli{level},2) && iBlock < exptdesign.numSessions
                %calculate accuracy
                accuracyForLevel=mean(trialOutput(iBlock).accuracy);
                drawAndCenterText(w, ['Your accuracy was ' num2str(round(accuracyForLevel.*100)) '%\n\n\n'...
                     'Click mouse to continue' ],1)
                %WaitSecs(2);
                KbWait(1);
-           elseif (iTrial==exptdesign.numTrialsPerSession && iBlock == exptdesign.numSessions) || level==15
+           elseif (iTrial==size(trainingStimuli{level},2) && iBlock == exptdesign.numSessions) || level==15
                %calculate accuracy
                accuracyForLevel=mean(trialOutput(iBlock).accuracy);
                drawAndCenterText(w, ['Your accuracy was ' num2str(round(accuracyForLevel.*100)) '%\n\n\n'...
