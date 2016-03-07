@@ -23,8 +23,8 @@ FL.setFrequencyList()
 # session = input('Enter the session number: \n')
 
 #Use when debugging or manually editing
-filename = ('20160209_1457-MR1008_block7')
-fileDirectory = '/Users/courtney/GoogleDrive/Riesenhuber/05_2015_scripts/Vibrotactile/06_frequencyDiscrimination/data/1008/'
+filename = ('20160218_1456-MR976_block7')
+fileDirectory = '/Users/courtney/GoogleDrive/Riesenhuber/05_2015_scripts/Vibrotactile/06_frequencyDiscrimination/data/976/'
 
 
 #load matfile

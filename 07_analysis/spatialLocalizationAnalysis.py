@@ -6,24 +6,16 @@ import statistics as stat
 import math as m
 import plotly.graph_objs as go
 import plotly.tools as tls
+from frequencyGenerator import FrequencyGenerator as FG
+import os
+import glob
 
 tls.set_credentials_file(username='cs1471', api_key='9xknhmjhas')
 
 #################################################################################
-#allows specified increments
-def my_range(start, end, step):
-    while start <= end:
-        yield start
-        start += step
-
-#generates a list of frequencies that we test
-def makeFrequency():
-    frequencyList = [i for i in my_range(0, 2.05, 0.1)]
-
-    for index,obj in enumerate(frequencyList):
-        obj += m.log2(25)
-        frequencyList[index] = round(2**obj)
-    return frequencyList
+#make list of frequencies tested
+freqL = FG()
+freqL.setFrequencyList()
 
 #################################MAIN##########################################
 # filename = input('Enter a filename: \n')
@@ -31,26 +23,20 @@ def makeFrequency():
 # session = input('Enter the session number: \n')
 
 #Use when debugging or manually editing
-filename = ('20151202_1354-998_block7')
-fileDirectory = '/Users/courtney/GoogleDrive/Riesenhuber/05_2015_scripts/Vibrotactile/03_spatialLocalization/data/998/'
+filename = ('20160217_1154-MR976_block7.144')
+fileDirectory = '/Users/courtney/GoogleDrive/Riesenhuber/05_2015_scripts/Vibrotactile/03_spatialLocalization/data/976/'
 
 
 #load matfile
 data = sio.loadmat(fileDirectory + filename, struct_as_record=True)
 
-#make list of frequencies tested
-frequencyList = makeFrequency()
-
 #pull relevant data from structures
-RT = data['trialOutput']['RT']
-sResp = data['trialOutput']['sResp']
-correctResponse = data['trialOutput']['correctResponse']
-accuracy = data['trialOutput']['accuracy']
-stimuli = data['trialOutput']['stimuli']
-nTrials = data['exptdesign']['numTrialsPerSession'][0,0][0]
-nBlocks = data['exptdesign']['numBlocks'][0,0][0]
-subjectNumber = data['exptdesign']['number'][0,0][0]
-subjectName = data['exptdesign']['subjectName'][0,0][0]
+iBlock = 0
+#pull relevant data from structures
+RT            = data[iBlock]['trialOutput']['RT']
+accuracy      = data[iBlock]['trialOutput']['accuracy']
+stimuli       = data[iBlock]['trialOutput']['stimuli']
+subjectNumber = data[iBlock]['exptdesign']['number'][0,0][0]
 
 if int(data['trialOutput']['preOrPostTrain'][0,0][0]) == 1:
     session = "Pre"
@@ -89,10 +75,10 @@ for iBlock in range(sResp.size):
     S_elbowPos_RT = []
     S_midline_RT = []
     for iTrial in range(sResp[0,iBlock].size):
-        # pos1 = int(stimuli[0,iBlock][1,iTrial])
-        # pos2 = int(stimuli[0,iBlock][3,iTrial])
-        pos1 = int(stimuli[0,iBlock][0,iTrial])
-        pos2 = int(stimuli[0,iBlock][2,iTrial])
+        pos1 = int(stimuli[0,iBlock][1,iTrial])
+        pos2 = int(stimuli[0,iBlock][3,iTrial])
+        # pos1 = int(stimuli[0,iBlock][0,iTrial])
+        # pos2 = int(stimuli[0,iBlock][2,iTrial])
         if pos1 != pos2:
             if (pos1 == 1 or pos1 == 2 or pos1 == 3 or pos1 == 4 or pos1 == 5 or pos1 == 6)\
                     and (pos2 == 1 or pos2 == 2 or pos2 == 3 or pos2 == 4 or pos2 == 5 or pos2 == 6):
@@ -170,10 +156,10 @@ for iBlock in range(sResp.size):
     D_pos9v11_RT = []
     D_pos9v13_RT = []
     for iTrial in range(sResp[0,iBlock].size):
-        # pos1 = int(stimuli[0,iBlock][1,iTrial])
-        # pos2 = int(stimuli[0,iBlock][3,iTrial])
-        pos1 = int(stimuli[0,iBlock][0,iTrial])
-        pos2 = int(stimuli[0,iBlock][2,iTrial])
+        pos1 = int(stimuli[0,iBlock][1,iTrial])
+        pos2 = int(stimuli[0,iBlock][3,iTrial])
+        # pos1 = int(stimuli[0,iBlock][0,iTrial])
+        # pos2 = int(stimuli[0,iBlock][2,iTrial])
         if ((pos1 == 5 or pos1 == 6) and (pos2 == 1 or pos2 == 2)) \
                 or ((pos1 == 1 or pos1 == 2) and (pos2 == 5 or pos2 == 6)):
             D_pos5v1_ACC.append(accuracy[0,iBlock][0,iTrial])
