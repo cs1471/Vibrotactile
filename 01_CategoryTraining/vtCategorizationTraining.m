@@ -3,6 +3,8 @@
 %CAS cas243@georgetown.edu
 % dbstop if error;
 %prompt experimenter to check white noise, ear plubs
+% diary('log_file.log'); % this will write all the output of the commanr
+% line in a file. Useful if some errors occurred.
 input('\n\nIs white noise playing? Hit Enter when "Yes."\n');
 input('\n\nDoes participant have ear plugs? Hit Enter when "Yes."\n');
 
