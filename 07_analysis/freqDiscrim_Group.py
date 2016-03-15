@@ -11,10 +11,6 @@ from PositionFunction_General import Position_general
 
 tls.set_credentials_file(username='cs1471', api_key='9xknhmjhas')
 
-# filename = input('Enter a filename: \n')
-# fileDirectory = input('Enter the directory where you want your figure saved: /n')
-# session = input('Enter the session number: \n')
-
 #Use when debugging or manually editing
 fileDirectory = '/Users/courtney/GoogleDrive/Riesenhuber/05_2015_scripts/Vibrotactile/06_frequencyDiscrimination/data/groupData/'
 
@@ -36,14 +32,14 @@ subjectNumber = [data[iSubject]['exptdesign']['number'][0,0][0] for iSubject in 
 #Calculations by Acc category type
 #############################################################################
 
-FreqObj = Frequency_general()
-FreqObj.calcAccRT(ACC, RT, stimuli)
+FreqObj = Frequency_general(stimuli = stimuli)
+FreqObj.calcAccRT(ACC, RT, 'Subject')
 
 #############################################################################
 #Calculations by position
 #############################################################################
 PosObj = Position_general()
-PosObj.calcAccRT(ACC, RT, stimuli, 'freq')
+PosObj.calcAccRT(ACC, RT, stimuli, 'freq', 'Subject')
 
 #############################################################################
 #Calculating dPrime
@@ -87,8 +83,8 @@ trace_FG_ACC = []
 trace_FG_RT = []
 trace_dprime = []
 for index, iSubject in enumerate(subjectNumber):
-    trace_PG_ACC.append(make_trace_bar(x, PosObj.ACC[(index+1)], iSubject))
-    trace_PG_RT.append(make_trace_line(x, PosObj.RT[(index+1)], iSubject))
+    trace_PG_ACC.append(make_trace_bar(x, PosObj.ACC[(index)], iSubject))
+    trace_PG_RT.append(make_trace_line(x, PosObj.RT[(index)], iSubject))
     trace_FG_ACC.append(make_trace_bar(x2, FreqObj.ACC[(index)], iSubject))
     trace_FG_RT.append(make_trace_line(x2, FreqObj.RT[(index)], iSubject))
     trace_dprime.append(make_trace_bar(x3, [dprime[index], dPrimeObj.TPR[index], dPrimeObj.FPR[index], dPrimeObj.TNR[index], dPrimeObj.FNR[index]], iSubject))
@@ -102,58 +98,28 @@ figDPrime = tls.make_subplots(rows=1, cols=1, shared_xaxes=True)
 
 #set figure layout to hold mutlitple bars
 figFreq_ACC['layout'].update(barmode='group', bargroupgap=0, bargap=0.25,
-    title = "Accuracy by Frequency on Single Stimuli Frequency Discrimination Task")
+    title = "Accuracy by Frequency on Single Stimuli Frequency Discrimination Task", yaxis = dict(dtick = .1))
 
 figPos_ACC['layout'].update(barmode='group', bargroupgap=0, bargap=0.25,
-    title = "Accuracy by Position on Single Stimuli Frequency Discrimination Task")
+    title = "Accuracy by Position on Single Stimuli Frequency Discrimination Task", yaxis = dict(dtick = .1))
 
 figDPrime['layout'].update(barmode='group', bargroupgap=0, bargap=0.25,
-    title = "Dprime Across Subjects on Single Stimuli Frequency Discrimination Task")
+    title = "Dprime Across Subjects on Single Stimuli Frequency Discrimination Task", yaxis = dict(dtick = .1))
 
 figFreq_RT['layout'].update(barmode='group', bargroupgap=0, bargap=0.25,
-    title = "RT by Frequency on Single Stimuli Frequency Discrimination Task")
+    title = "RT by Frequency on Single Stimuli Frequency Discrimination Task", yaxis = dict(dtick = .1))
 
 figPos_RT['layout'].update(barmode='group', bargroupgap=0, bargap=0.25,
-    title = "RT by Position on Single Stimuli Frequency Discrimination Task")
+    title = "RT by Position on Single Stimuli Frequency Discrimination Task", yaxis = dict(dtick = .1))
 
 figFreq_ACC['data'] = trace_FG_ACC
 figFreq_RT['data']  = trace_FG_RT
 figDPrime['data']   = trace_dprime
 figPos_ACC['data']  = trace_PG_ACC
 figPos_RT['data']   = trace_PG_RT
-#get the url of your figure to embed in html later
-# first_plot_url = py.plot(fig, filename= subjectName + "AccByMorph" + session, auto_open=False,)
-# tls.get_embed(first_plot_url)
-# second_plot_url = py.plot(fig2, filename= subjectName + "RTbyMorph" + session, auto_open=False,)
-# tls.get_embed(second_plot_url)
-# third_plot_url = py.plot(fig3, filename= subjectName + "AccByCatgeory" + session, auto_open=False,)
-# tls.get_embed(third_plot_url)
 
 #bread crumbs to make sure entered the correct information
 print("Your graph will be saved in this directory: " + fileDirectory + "\n")
-
-# #embed figure data in html
-# html_string = '''
-# <html>
-#     <head>
-#         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-#         <style>body{ margin:0 100; background:whitesmoke; }</style>
-#     </head>
-#     <body>
-#         <!-- *** FirstPlot *** --->
-#         <iframe width="1000" height="550" frameborder="0" seamless="seamless" scrolling="no" \
-# src="'''+ first_plot_url + '''.embed?width=800&height=550"></iframe>
-#         <!-- *** Second Plot *** --->
-#         <iframe width="1000" height="550" frameborder="0" seamless="seamless" scrolling="no" \
-# src="'''+ second_plot_url + '''.embed?width=800&height=550"></iframe>
-#         <!-- *** ThirdPlot *** --->
-#         <iframe width="1000" height="550" frameborder="0" seamless="seamless" scrolling="no" \
-# src="'''+ third_plot_url + '''.embed?width=800&height=550"></iframe>
-# </html>'''
-#
-# #save figure data in location specific previously
-# f = open(fileDirectory + filename + '.html','w')
-# f.write(html_string)
 
 # save images as png in case prefer compared to html
 py.image.save_as(figFreq_ACC, fileDirectory + "frequencyDiscrim_Freq_ACC_Group.jpeg")

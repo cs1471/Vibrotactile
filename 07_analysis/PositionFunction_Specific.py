@@ -2,8 +2,8 @@ import statistics as stat
 
 class Position_catBound():
     def __init__(self):
-        self.RT = [[]]
-        self.ACC = [[]]
+        self.RT = []
+        self.ACC = []
 
     def zeroChanDiff_top(self, pos1, pos2):
         if ((pos1 == 5 or pos1 == 6) and (pos2 == 3 or pos2 == 4))\
@@ -47,16 +47,30 @@ class Position_catBound():
         else:
             return False
 
-    def parseACC(self, accuracy, stimuli):
+    def parseData(self, rawData, stimuli, DataID, parseBy ):
+        if parseBy == 'Block':
+            if DataID == 'ACC':
+                self.ACC = self._parseData_block(rawData, stimuli)
+            elif DataID == 'RT':
+                self.RT = self._parseData_block(rawData, stimuli)
+        elif parseBy == 'Subject':
+            if DataID == 'ACC':
+                self.ACC = self._parseData(rawData, stimuli)
+            elif DataID == 'RT':
+                self.RT = self._parseData(rawData, stimuli)
+
+
+    def _parseData(self, accuracy, stimuli):
+        data = []
         for iSubject in range(len(accuracy)):
-            D_pos5v1_ACC = []
-            D_pos5v3_ACC = []
-            D_pos5v9_ACC = []
-            D_pos5v11_ACC = []
-            D_pos9v3_ACC = []
-            D_pos9v5_ACC = []
-            D_pos9v11_ACC = []
-            D_pos9v13_ACC = []
+            D_pos5v1 = []
+            D_pos5v3 = []
+            D_pos5v9 = []
+            D_pos5v11 = []
+            D_pos9v3 = []
+            D_pos9v5 = []
+            D_pos9v11 = []
+            D_pos9v13 = []
             for iBlock in range(accuracy[iSubject].size):
                 for iTrial in range(accuracy[iSubject][0,iBlock].size):
                     if iSubject == 0 or iSubject == 1 or iSubject == 2:
@@ -66,64 +80,66 @@ class Position_catBound():
                         pos1 = int(stimuli[iSubject][0,iBlock][1,iTrial])
                         pos2 = int(stimuli[iSubject][0,iBlock][3,iTrial])
                     if self.oneChanDiff_top(pos1, pos2):
-                        D_pos5v1_ACC.append(accuracy[iSubject][0,iBlock][0,iTrial])
+                        D_pos5v1.append(accuracy[iSubject][0,iBlock][0,iTrial])
                     elif self.zeroChanDiff_top(pos1, pos2):
-                        D_pos5v3_ACC.append(accuracy[iSubject][0,iBlock][0,iTrial])
+                        D_pos5v3.append(accuracy[iSubject][0,iBlock][0,iTrial])
                     elif ((pos1 == 5 or pos1 == 6) and (pos2 == 9 or pos2 == 10)):
-                        D_pos5v9_ACC.append(accuracy[iSubject][0,iBlock][0,iTrial])
+                        D_pos5v9.append(accuracy[iSubject][0,iBlock][0,iTrial])
                     elif self.twoChanDiff_top(pos1, pos2):
-                        D_pos5v11_ACC.append(accuracy[iSubject][0,iBlock][0,iTrial])
+                        D_pos5v11.append(accuracy[iSubject][0,iBlock][0,iTrial])
                     elif self.twoChanDiff_bottom(pos1, pos2):
-                        D_pos9v3_ACC.append(accuracy[iSubject][0,iBlock][0,iTrial])
+                        D_pos9v3.append(accuracy[iSubject][0,iBlock][0,iTrial])
                     elif ((pos1 == 9 or pos1 == 10) and (pos2 == 5 or pos2 == 6)):
-                        D_pos9v5_ACC.append(accuracy[iSubject][0,iBlock][0,iTrial])
+                        D_pos9v5.append(accuracy[iSubject][0,iBlock][0,iTrial])
                     elif self.zeroChanDiff_bottom(pos1, pos2):
-                        D_pos9v11_ACC.append(accuracy[iSubject][0,iBlock][0,iTrial])
+                        D_pos9v11.append(accuracy[iSubject][0,iBlock][0,iTrial])
                     elif self.oneChanDiff_bottom(pos1, pos2):
-                        D_pos9v13_ACC.append(accuracy[iSubject][0,iBlock][0,iTrial])
+                        D_pos9v13.append(accuracy[iSubject][0,iBlock][0,iTrial])
 
-            self.ACC.append([stat.mean(D_pos5v1_ACC), stat.mean(D_pos5v3_ACC), stat.mean(D_pos5v9_ACC), stat.mean(D_pos5v11_ACC),
-                             stat.mean(D_pos9v3_ACC), stat.mean(D_pos9v5_ACC), stat.mean(D_pos9v11_ACC), stat.mean(D_pos9v13_ACC)])
+            data.append([stat.mean(D_pos5v1), stat.mean(D_pos5v3), stat.mean(D_pos5v9), stat.mean(D_pos5v11),
+                             stat.mean(D_pos9v3), stat.mean(D_pos9v5), stat.mean(D_pos9v11), stat.mean(D_pos9v13)])
+        return data
 
-    def parseRT(self, RT, stimuli):
-        for iSubject in range(len(RT)):
-            D_pos5v1_RT = []
-            D_pos5v3_RT = []
-            D_pos5v9_RT = []
-            D_pos5v11_RT = []
-            D_pos9v3_RT = []
-            D_pos9v5_RT = []
-            D_pos9v11_RT = []
-            D_pos9v13_RT = []
-            for iBlock in range(RT[iSubject].size):
-                for iTrial in range(RT[iSubject][0,iBlock].size):
-                    if iSubject == 0 or iSubject == 1 or iSubject == 2:
-                        pos1 = int(stimuli[iSubject][0,iBlock][0,iTrial])
-                        pos2 = int(stimuli[iSubject][0,iBlock][2,iTrial])
-                    else:
-                        pos1 = int(stimuli[iSubject][0,iBlock][1,iTrial])
-                        pos2 = int(stimuli[iSubject][0,iBlock][3,iTrial])
+    def _parseData_block(self, accuracy, stimuli):
+        data = []
+        for iBlock in range(accuracy.size):
+            D_pos5v1 = []
+            D_pos5v3 = []
+            D_pos5v9 = []
+            D_pos5v11 = []
+            D_pos9v3 = []
+            D_pos9v5 = []
+            D_pos9v11 = []
+            D_pos9v13 = []
+            for iTrial in range(accuracy[0,iBlock].size):
+                # if iSubject == 0 or iSubject == 1 or iSubject == 2:
+                #     pos1 = int(stimuli[0,iBlock][0,iTrial])
+                #     pos2 = int(stimuli[0,iBlock][2,iTrial])
+                # else:
+                pos1 = int(stimuli[0,iBlock][1,iTrial])
+                pos2 = int(stimuli[0,iBlock][3,iTrial])
+                if self.oneChanDiff_top(pos1, pos2):
+                    D_pos5v1.append(accuracy[0,iBlock][0,iTrial])
+                elif self.zeroChanDiff_top(pos1, pos2):
+                    D_pos5v3.append(accuracy[0,iBlock][0,iTrial])
+                elif ((pos1 == 5 or pos1 == 6) and (pos2 == 9 or pos2 == 10)):
+                    D_pos5v9.append(accuracy[0,iBlock][0,iTrial])
+                elif self.twoChanDiff_top(pos1, pos2):
+                    D_pos5v11.append(accuracy[0,iBlock][0,iTrial])
+                elif self.twoChanDiff_bottom(pos1, pos2):
+                    D_pos9v3.append(accuracy[0,iBlock][0,iTrial])
+                elif ((pos1 == 9 or pos1 == 10) and (pos2 == 5 or pos2 == 6)):
+                    D_pos9v5.append(accuracy[0,iBlock][0,iTrial])
+                elif self.zeroChanDiff_bottom(pos1, pos2):
+                    D_pos9v11.append(accuracy[0,iBlock][0,iTrial])
+                elif self.oneChanDiff_bottom(pos1, pos2):
+                    D_pos9v13.append(accuracy[0,iBlock][0,iTrial])
 
-                    if self.oneChanDiff_top(pos1, pos2) == True:
-                        D_pos5v1_RT.append(RT[iSubject][0,iBlock][0,iTrial])
-                    elif self.zeroChanDiff_top(pos1, pos2) == True:
-                        D_pos5v3_RT.append(RT[iSubject][0,iBlock][0,iTrial])
-                    elif ((pos1 == 5 or pos1 == 6) and (pos2 == 9 or pos2 == 10)):
-                        D_pos5v9_RT.append(RT[iSubject][0,iBlock][0,iTrial])
-                    elif self.twoChanDiff_top(pos1, pos2) == True:
-                        D_pos5v11_RT.append(RT[iSubject][0,iBlock][0,iTrial])
-                    elif self.twoChanDiff_bottom(pos1, pos2) == True:
-                        D_pos9v3_RT.append(RT[iSubject][0,iBlock][0,iTrial])
-                    elif ((pos1 == 9 or pos1 == 10) and (pos2 == 5 or pos2 == 6)):
-                        D_pos9v5_RT.append(RT[iSubject][0,iBlock][0,iTrial])
-                    elif self.zeroChanDiff_bottom(pos1, pos2) == True:
-                        D_pos9v11_RT.append(RT[iSubject][0,iBlock][0,iTrial])
-                    elif self.oneChanDiff_bottom(pos1, pos2) == True:
-                        D_pos9v13_RT.append(RT[iSubject][0,iBlock][0,iTrial])
+            data.append([stat.mean(D_pos5v1), stat.mean(D_pos5v3), stat.mean(D_pos5v9), stat.mean(D_pos5v11),
+                             stat.mean(D_pos9v3), stat.mean(D_pos9v5), stat.mean(D_pos9v11), stat.mean(D_pos9v13)])
 
-            self.RT.append([stat.mean(D_pos5v1_RT), stat.mean(D_pos5v3_RT), stat.mean(D_pos5v9_RT), stat.mean(D_pos5v11_RT),
-                            stat.mean(D_pos9v3_RT), stat.mean(D_pos9v5_RT), stat.mean(D_pos9v11_RT), stat.mean(D_pos9v13_RT)])
+            return data
 
-    def calcAccRT(self, accuracy, RT, stimuli):
-        self.parseACC(accuracy, stimuli)
-        self.parseRT(RT, stimuli)
+    def calcAccRT(self, accuracy, RT, stimuli, parseBy):
+        self.parseData(accuracy, stimuli, 'ACC', parseBy)
+        self.parseData(RT, stimuli, 'RT', parseBy)

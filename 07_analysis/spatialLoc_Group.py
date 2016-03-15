@@ -6,7 +6,6 @@ import statistics as stat
 import plotly.graph_objs as go
 import plotly.tools as tls
 from dPrime import Dprime
-from frequencyGenerator import FrequencyGenerator as FG
 from Position import Position
 import os
 import glob
@@ -34,11 +33,6 @@ RT            = [data[iSubject]['trialOutput']['RT'] for iSubject in range(len(d
 accuracy      = [data[iSubject]['trialOutput']['accuracy'] for iSubject in range(len(data))]
 stimuli       = [data[iSubject]['trialOutput']['stimuli'] for iSubject in range(len(data))]
 subjectNumber = [data[iSubject]['exptdesign']['number'][0,0][0] for iSubject in range(len(data))]
-
-
-#make list of frequencies tested
-freqL = FG()
-freqL.setFrequencyList()
 
 #############################################################################
 #Calculations by position
@@ -110,10 +104,10 @@ trace_PC_ACC = []
 trace_PC_RT = []
 trace_dprime = []
 for index, iSubject in enumerate(subjectNumber):
-    trace_PG_ACC.append(make_trace_bar(x3, positionObj.PG.ACC[(index+1)], iSubject))
-    trace_PG_RT.append(make_trace_line(x3, positionObj.PG.RT[(index+1)], iSubject))
-    trace_PC_ACC.append(make_trace_bar(x2, positionObj.PC.ACC[(index+1)], iSubject))
-    trace_PC_RT.append(make_trace_line(x2, positionObj.PC.RT[(index+1)], iSubject))
+    trace_PG_ACC.append(make_trace_bar(x3, positionObj.PG.ACC[(index)], iSubject))
+    trace_PG_RT.append(make_trace_line(x3, positionObj.PG.RT[(index)], iSubject))
+    trace_PC_ACC.append(make_trace_bar(x2, positionObj.PC.ACC[(index)], iSubject))
+    trace_PC_RT.append(make_trace_line(x2, positionObj.PC.RT[(index)], iSubject))
     trace_dprime.append(make_trace_bar(x4, [dprime[index], dPrimeObj.TPR[index], dPrimeObj.FPR[index], dPrimeObj.TNR[index], dPrimeObj.FNR[index]], iSubject))
 
 # Generate Figure object with 2 axes on 2 rows, print axis grid to stdout
@@ -141,29 +135,8 @@ fig_dprime['data']     = trace_dprime
 fig_Pos5v9_ACC['data'] = trace_PC_ACC
 fig_Pos5v9_RT['data']  = trace_PC_RT
 
-# #get the url of your figure to embed in html later
-# first_plot_url = py.plot(fig, filename= subjectName + "AccByMorph" + session, auto_open=False,)
-# tls.get_embed(first_plot_url)
-
 #bread crumbs to make sure entered the correct information
 print("Your graph will be saved in this directory: " + fileDirectory + "\n")
-
-# #embed figure data in html
-# html_string = '''
-# <html>
-#     <head>
-#         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-#         <style>body{ margin:0 100; background:whitesmoke; }</style>
-#     </head>
-#     <body>
-#         <!-- *** FirstPlot *** --->
-#         <iframe width="1000" height="550" frameborder="0" seamless="seamless" scrolling="no" \
-# src="'''+ first_plot_url + '''.embed?width=800&height=550"></iframe>
-# </html>'''
-#
-# #save figure data in location specific previously
-# f = open(fileDirectory + filename + '.html','w')
-# f.write(html_string)
 
 # save images as png in case prefer compared to html
 py.image.save_as(fig_Pos_ACC, fileDirectory + "spatialLoc_ACC_Group.jpeg")
@@ -171,7 +144,6 @@ py.image.save_as(fig_Pos_RT, fileDirectory + "spatialLoc_RT_Group.jpeg")
 py.image.save_as(fig_dprime, fileDirectory + "spatialLoc_dprime_Group.jpeg")
 py.image.save_as(fig_Pos5v9_ACC, fileDirectory + "spatialLoc5v9_ACC_Group.jpeg")
 py.image.save_as(fig_Pos5v9_RT, fileDirectory + "spatialLoc5v9_RT_Group.jpeg")
-#close all open files
-# f.close()
+
 
 print("Done!")

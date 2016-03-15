@@ -6,6 +6,7 @@ import statistics as stat
 import math as m
 import plotly.graph_objs as go
 import plotly.tools as tls
+from frequencyFunction_specific import FrequencySpecific
 
 tls.set_credentials_file(username='cs1471', api_key='9xknhmjhas')
 
@@ -31,9 +32,9 @@ def makeFrequency():
 # session = input('Enter the session number: \n')
 
 #Use when debugging or manually editing
-filename = ('20160303_1844-MR001levan_block6')
-fileDirectory = '/Users/courtney/GoogleDrive/Riesenhuber/05_2015_scripts/Vibrotactile/01_CategoryTraining/data/001levan/'
-session = '1'
+filename      = ('20160315_1108-MR1012_block6')
+fileDirectory = '/Users/courtney/GoogleDrive/Riesenhuber/05_2015_scripts/Vibrotactile/01_CategoryTraining/data/1012/'
+session       = '3'
 
 #load matfile
 data = sio.loadmat(fileDirectory + filename, struct_as_record=True)
@@ -42,49 +43,24 @@ data = sio.loadmat(fileDirectory + filename, struct_as_record=True)
 frequencyList = makeFrequency()
 
 #pull relevant data from structures
-RT = data['trialOutput']['RT']
-sResp = data['trialOutput']['sResp']
+RT              = data['trialOutput']['RT']
+sResp           = data['trialOutput']['sResp']
 correctResponse = data['trialOutput']['correctResponse']
-accuracy = data['trialOutput']['accuracy']
-level = data['trialOutput']['level']
-stimuli = data['trialOutput']['stimuli']
-nTrials = data['exptdesign']['numTrialsPerSession'][0,0][0]
-nBlocks = data['exptdesign']['numSessions'][0,0][0]
-subjectName = data['exptdesign']['subName'][0,0][0]
+accuracy        = data['trialOutput']['accuracy']
+level           = data['trialOutput']['level']
+stimuli         = data['trialOutput']['stimuli']
+nTrials         = data['exptdesign']['numTrialsPerSession'][0,0][0]
+nBlocks         = data['exptdesign']['numSessions'][0,0][0]
+subjectName     = data['exptdesign']['subName'][0,0][0]
 
 
 #############################################################################
-#Calculations by category type
+#Calculations by Frequency Pair
 #############################################################################
 
-#calculate accuracy by category type
-b_categoryA = []
-b_categoryB = []
-b_categoryA_RT = []
-b_categoryB_RT = []
-iBlock = iTrial = 0
-for iBlock in range(sResp.size):
-    categoryA = []
-    categoryB = []
-    categoryA_RT = []
-    categoryB_RT = []
-    for iTrial in range(sResp[0,iBlock].size):
-        stimulus = round(stimuli[0,iBlock][0,iTrial])
-        if stimulus < 47:
-            categoryA.append(accuracy[0,iBlock][0,iTrial])
-            categoryA_RT.append(RT[0,iBlock][0,iTrial])
-        elif stimulus > 47:
-            categoryB.append(accuracy[0,iBlock][0,iTrial])
-            categoryB_RT.append(RT[0,iBlock][0,iTrial])
-        else:
-            print("Sorry there is an error in your category parsing function and some stimuli are not being classified")
-            print("This stimulus was not put into a category: ")
-            print(stimulus)
+#FS = FrequencySpecific(stimuli=stimuli)
+#FS.frequencyPair_parse(accuracy)
 
-    b_categoryA.append(stat.mean(categoryA))
-    b_categoryB.append(stat.mean(categoryB))
-    b_categoryA_RT.append(stat.mean(categoryA_RT))
-    b_categoryB_RT.append(stat.mean(categoryB_RT))
 
 #############################################################################
 #Calculations by morph
@@ -168,7 +144,7 @@ for iBlock in range(RT.size):
 #x-axis label
 x = []
 i=0
-for i in range(nBlocks):
+for i in range(5):
             x.append("Block: " + str(i+1) + ", Level: " + str(level[0,i][0,0])),
 
 #############################################################################
@@ -176,13 +152,13 @@ for i in range(nBlocks):
 #############################################################################
 
 # (1.1) Define a trace-generating function (returns a Bar object)
-def make_trace_bar(y, name):
+def make_trace_bar(x, y, name):
     return go.Bar(
         x     = x,
         y     = y,            # take in the y-coords
         name  = name,      # label for hover
         xaxis = 'x1',                    # (!) both subplots on same x-axis
-        yaxis = 'y1'
+        yaxis = 'y1',
     )
 
 # (1.1) Define a trace-generating function (returns a line object)
@@ -207,11 +183,15 @@ def make_trace_line(y, name, dash):
             yaxis = 'y1',
     )
 
+#make trace containing each frequency pair
+x2 = ['[25,100]', '[27,91]', '[29,91]', '[31,83]', '[33,77]', '[36,71]', '[38,67]', '[40,62.5]', '[43,59]']
+
+#trace_ACC_FP = make_trace_bar(x2, mF, '')
 
 #make trace containing acc and RT for morph
-trace1 = make_trace_bar(b_catProto_accuracy,  "Category Prototype Acc")
-trace2 = make_trace_bar(b_middleM_accuracy, "Middle Morph Acc")
-trace3 = make_trace_bar(b_catBound_accuracy, "Category Boundary Acc")
+trace1 = make_trace_bar(x, b_catProto_accuracy,  "Category Prototype Acc")
+trace2 = make_trace_bar(x, b_middleM_accuracy, "Middle Morph Acc")
+trace3 = make_trace_bar(x, b_catBound_accuracy, "Category Boundary Acc")
 trace4 = make_trace_line(b_catProto_RT, "Category Prototype RT", 'n')
 trace5 = make_trace_line(b_middleM_RT, "Middle Morph RT", 'n')
 trace6 = make_trace_line(b_catBound_RT, "Category Boundary RT", 'n')
@@ -220,68 +200,29 @@ trace6 = make_trace_line(b_catBound_RT, "Category Boundary RT", 'n')
 trace7 = make_trace_line(O_accuracy, "Overall Accuracy", 'y')
 trace8 = make_trace_line(O_reactionTime, "Overall RT", 'y')
 
-#make trace containing acc and RT for category type
-trace9 = make_trace_bar(b_categoryA, 'Category A Acc (LF prox to wrist)')
-trace10 = make_trace_bar(b_categoryB, 'Category B Acc (HF prox to wrist)')
-trace11 = make_trace_line(b_categoryA_RT, 'Category A RT (LF prox to wrist)', 'n')
-trace12 = make_trace_line(b_categoryB_RT, 'Category B RT (HF prox to wrist)', 'n')
-
 # Generate Figure object with 2 axes on 2 rows, print axis grid to stdout
 fig  = tls.make_subplots(rows=1, cols=1, shared_xaxes=True)
-fig2 = tls.make_subplots(rows=1, cols=1, shared_xaxes=True)
+#fig_FP = tls.make_subplots(rows=1, cols=1, shared_xaxes=True)
 
 #set figure layout to hold mutlitple bars
 fig['layout'].update(barmode='group', bargroupgap=0, bargap=0.25,
-    title = subjectName + " Accuracy and RT By Morph Session " + session)
+    title = subjectName + " Accuracy and RT By Morph Session " + session, yaxis = dict(dtick = .1))
 
-fig2['layout'].update(barmode='group', bargroupgap=0, bargap=0.25,
-    title = subjectName + " Accuracy and RT By Category Session " + session)
+#fig_FP['layout'].update(barmode='group', bargroupgap=0, bargap=0.25,
+#    title = subjectName + " Accuracy and RT By Frequency Pair, Session " + session,  yaxis = dict(dtick = .1))
 
 fig['data']  = [trace1, trace2, trace3, trace7, trace4, trace5, trace6, trace8]
-fig2['data'] = [trace9, trace10, trace7, trace11, trace12, trace8]
-
-#get the url of your figure to embed in html later
-# first_plot_url = py.plot(fig, filename= subjectName + "AccByMorph" + session, auto_open=False,)
-# tls.get_embed(first_plot_url)
-# second_plot_url = py.plot(fig2, filename= subjectName + "RTbyMorph" + session, auto_open=False,)
-# tls.get_embed(second_plot_url)
-
+#fig_FP['data'] = [go.Bar(x=x2, y=mF)]
 #bread crumbs to make sure entered the correct information
 print("Your graph will be saved in this directory: " + fileDirectory + "\n")
 print("Your graph will be saved under: " + filename + "\n")
 print("The session number you have indicated is: " + session + "\n")
 
 
-#embed figure data in html
-# html_string = '''
-# <html>
-#     <head>
-#         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-#         <style>body{ margin:0 100; background:whitesmoke; }</style>
-#     </head>
-#     <body>
-#         <!-- *** Accuracy by Morph *** --->
-#         <iframe width="1000" height="550" frameborder="0" seamless="seamless" scrolling="no" \
-# src="'''+ first_plot_url + '''.embed?width=800&height=550"></iframe>
-#         <!-- *** Accuracy by Morph *** --->
-#         <iframe width="1000" height="550" frameborder="0" seamless="seamless" scrolling="no" \
-# src="'''+ second_plot_url + '''.embed?width=800&height=550"></iframe>
-#         <!-- *** Accuracy by Morph *** --->
-#         <iframe width="1000" height="550" frameborder="0" seamless="seamless" scrolling="no" \
-# src="'''+ third_plot_url + '''.embed?width=800&height=550"></iframe>
-#         <!-- *** Accuracy by Morph *** --->
-#         <iframe width="1000" height="550" frameborder="0" seamless="seamless" scrolling="no" \
-# src="'''+ fourth_plot_url + '''.embed?width=800&height=550"></iframe>
-#     </body>
-# </html>'''
-#
-# #save figure data in location specific previously
-# f = open(fileDirectory + filename + '.html','w')
-# f.write(html_string)
 
 #save images as png in case prefer compared to html
 py.image.save_as(fig, fileDirectory + filename + "_CategTrainingMorphAccSession" + session + ".jpeg")
-py.image.save_as(fig2, fileDirectory + filename + "_CategTrainingSession" + session + ".jpeg")
+#py.image.save_as(fig_FP, fileDirectory + filename + "_FP_AccSession" + session + ".jpeg")
 
 #close all open files
 # f.close()

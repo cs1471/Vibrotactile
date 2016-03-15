@@ -8,8 +8,8 @@ class Position():
         self.PC = PC()
 
     def parseData(self, accuracy, RT, stimuli, type):
-        self.PG.calcAccRT(accuracy, RT, stimuli, type)
-        self.PC.calcAccRT(accuracy, RT, stimuli)
+        self.PG.calcAccRT(accuracy, RT, stimuli, type, 'Subject')
+        self.PC.calcAccRT(accuracy, RT, stimuli, 'Subject')
 
     def parserBySubject(self, dataRaw, stimuli):
         data = []

@@ -50,14 +50,14 @@ class Dprime:
                             print("Sorry something seems to be wrong with your parse data function in your dprime class")
                             print("Here are the same stimuli that are not being parsed")
                             print(stim1, stim2)
-                self.TPR.append(sum(truePositive)/sum(truePositive + falseNegative))
-                self.FPR.append(sum(falsePositive)/sum(trueNegative + falsePositive))
-                self.TNR.append(sum(trueNegative)/sum(trueNegative + falsePositive))
-                self.FNR.append(sum(falseNegative)/sum(truePositive + falseNegative))
-                self.totalTP.append(sum(truePositive))
-                self.totalFP.append(sum(falsePositive))
-                self.totalTN.append(sum(trueNegative))
-                self.totalFN.append(sum(falseNegative))
+            self.TPR.append(sum(truePositive)/sum(truePositive + falseNegative))
+            self.FPR.append(sum(falsePositive)/sum(trueNegative + falsePositive))
+            self.TNR.append(sum(trueNegative)/sum(trueNegative + falsePositive))
+            self.FNR.append(sum(falseNegative)/sum(truePositive + falseNegative))
+            self.totalTP.append(sum(truePositive))
+            self.totalFP.append(sum(falsePositive))
+            self.totalTN.append(sum(trueNegative))
+            self.totalFN.append(sum(falseNegative))
 
     def zscore(self):
         zscore = [stats.zscore(self.TPR), stats.zscore(self.FPR),
@@ -70,7 +70,5 @@ class Dprime:
         self.parseData(accuracy, stimuli, flag)
         for index, value in enumerate(self.TPR):
             dprime.append(ndtri(value) - ndtri(self.FPR[index]))
-            ztpr = ndtri(value)
-            zfpr = ndtri(self.FPR[index])
-            print(ztpr-zfpr)
+            print(ndtri(value) - ndtri(self.FPR[index]))
         return dprime

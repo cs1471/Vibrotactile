@@ -2,8 +2,8 @@ import statistics as stat
 
 class Position_general():
     def __init__(self):
-        self.RT = [[]]
-        self.ACC = [[]]
+        self.RT = []
+        self.ACC = []
 
     def secondRow_pos(self, pos1):
         if (pos1 == 3 or pos1 == 4):
@@ -55,22 +55,41 @@ class Position_general():
         else:
             return False
 
-    def parseRT(self, RT, stimuli, type):
-        if type == 'freq':
-            self.parseRT_freq(RT, stimuli)
-        else:
-            self.parseRT_pos(RT, stimuli)
+    def parseData(self, rawData, stimuli, dataStringID, type, parseBy):
+        if type == 'pos':
+            if parseBy == 'Block':
+                if dataStringID == 'ACC':
+                    self.ACC = self.parseData_pos_block(rawData, stimuli)
+                elif dataStringID == 'RT':
+                    self.RT = self.parseData_pos_block(rawData, stimuli)
+            elif parseBy == 'Subject':
+                if dataStringID == 'ACC':
+                    self.ACC = self.parseData_pos(rawData, stimuli)
+                elif dataStringID == 'RT':
+                    self.RT = self.parseData_pos(rawData, stimuli)
+        elif type == 'freq':
+            if parseBy == 'Block':
+                if dataStringID == 'ACC':
+                    self.ACC = self.parseData_freq_block(rawData, stimuli)
+                elif dataStringID == 'RT':
+                    self.RT = self.parseData_freq_block(rawData, stimuli)
+            elif parseBy == 'Subject':
+                if dataStringID == 'ACC':
+                    self.ACC = self.parseData_freq(rawData, stimuli)
+                elif dataStringID == 'RT':
+                    self.RT = self.parseData_freq(rawData, stimuli)
 
-    def parseRT_pos (self, RT, stimuli):
-        for iSubject in range(len(RT)):
-            D_wristPos_RT = []
-            D_elbowPos_RT = []
-            D_crossMidline_RT = []
-            S_wristPos_RT = []
-            S_elbowPos_RT = []
-            S_midline_RT = []
-            for iBlock in range(RT[iSubject].size):
-                for iTrial in range(RT[iSubject][0,iBlock].size):
+    def parseData_pos (self, rawData, stimuli):
+        data = []
+        for iSubject in range(len(rawData)):
+            D_wristPos = []
+            D_elbowPos = []
+            D_crossMidline = []
+            S_wristPos = []
+            S_elbowPos = []
+            S_midline = []
+            for iBlock in range(rawData[iSubject].size):
+                for iTrial in range(rawData[iSubject][0,iBlock].size):
                     if iSubject == 0 or iSubject == 1 or iSubject == 2:
                         pos1 = int(stimuli[iSubject][0,iBlock][0,iTrial])
                         pos2 = int(stimuli[iSubject][0,iBlock][2,iTrial])
@@ -79,151 +98,150 @@ class Position_general():
                         pos2 = int(stimuli[iSubject][0,iBlock][3,iTrial])
                     if pos1 != pos2:
                         if self.wristPos_Different(pos1, pos2) == True:
-                            D_wristPos_RT.append(RT[iSubject][0,iBlock][0,iTrial])
+                            D_wristPos.append(rawData[iSubject][0,iBlock][0,iTrial])
                         elif self.elbowPos_Different(pos1, pos2) == True:
-                            D_elbowPos_RT.append(RT[iSubject][0,iBlock][0,iTrial])
+                            D_elbowPos.append(rawData[iSubject][0,iBlock][0,iTrial])
                         else:
-                            D_crossMidline_RT.append(RT[iSubject][0,iBlock][0,iTrial])
+                            D_crossMidline.append(rawData[iSubject][0,iBlock][0,iTrial])
                     else:
                         if self.wristPos_Same(pos1, pos2) == True:
-                            S_wristPos_RT.append(RT[iSubject][0,iBlock][0,iTrial])
+                            S_wristPos.append(rawData[iSubject][0,iBlock][0,iTrial])
                         elif self.elbowPos_Same(pos1, pos2) == True:
-                            S_elbowPos_RT.append(RT[iSubject][0,iBlock][0,iTrial])
+                            S_elbowPos.append(rawData[iSubject][0,iBlock][0,iTrial])
                         else:
-                            S_midline_RT.append(RT[iSubject][0,iBlock][0,iTrial])
+                            S_midline.append(rawData[iSubject][0,iBlock][0,iTrial])
 
-            self.RT.append([stat.mean(D_wristPos_RT), stat.mean(D_crossMidline_RT), stat.mean(D_elbowPos_RT),
-                            stat.mean(S_wristPos_RT), stat.mean(S_midline_RT), stat.mean(S_elbowPos_RT)])
+            data.append([stat.mean(D_wristPos), stat.mean(D_crossMidline), stat.mean(D_elbowPos),
+                            stat.mean(S_wristPos), stat.mean(S_midline), stat.mean(S_elbowPos)])
+        return data
 
-    def parseRT_freq (self, RT, stimuli):
-        for iSubject in range(len(RT)):
-            for iBlock in range(RT[iSubject].size):
-                D_pos3or4_RT = []
-                D_pos5or6_RT = []
-                D_pos9or10_RT = []
-                D_pos11or12_RT = []
-                S_pos3or4_RT = []
-                S_pos5or6_RT = []
-                S_pos9or10_RT = []
-                S_pos11or12_RT = []
-                for iTrial in range(RT[iSubject][0,iBlock].size):
+    def parseData_freq (self, rawData, stimuli):
+        data = []
+        for iSubject in range(len(rawData)):
+            D_pos3or4 = []
+            D_pos5or6 = []
+            D_pos9or10 = []
+            D_pos11or12 = []
+            S_pos3or4 = []
+            S_pos5or6 = []
+            S_pos9or10 = []
+            S_pos11or12 = []
+            for iBlock in range(rawData[iSubject].size):
+                for iTrial in range(rawData[iSubject][0,iBlock].size):
                     pos1 = int(stimuli[iSubject][0,iBlock][1,iTrial])
                     stim1 = stimuli[iSubject][0,iBlock][0,iTrial]
                     stim2 = stimuli[iSubject][0,iBlock][2,iTrial]
                     if stim1 != stim2:
                         if self.secondRow_pos(pos1) == True:
-                            D_pos3or4_RT.append(RT[iSubject][0,iBlock][0,iTrial])
+                            D_pos3or4.append(rawData[iSubject][0,iBlock][0,iTrial])
                         elif self.thirdRow_pos(pos1) == True:
-                            D_pos5or6_RT.append(RT[iSubject][0,iBlock][0,iTrial])
+                            D_pos5or6.append(rawData[iSubject][0,iBlock][0,iTrial])
                         elif self.fourthRow_pos(pos1) == True:
-                            D_pos9or10_RT.append(RT[iSubject][0,iBlock][0,iTrial])
+                            D_pos9or10.append(rawData[iSubject][0,iBlock][0,iTrial])
                         elif self.fifthRow_pos(pos1) == True:
-                            D_pos11or12_RT.append(RT[iSubject][0,iBlock][0,iTrial])
+                            D_pos11or12.append(rawData[iSubject][0,iBlock][0,iTrial])
                         else:
                             print("Your script is broked and stimuli are not meeting criteria for position of different stimuli")
                             print(stim1, stim2)
                             print(pos1)
                     else:
                         if self.secondRow_pos(pos1) == True:
-                            S_pos3or4_RT.append(RT[iSubject][0,iBlock][0,iTrial])
+                            S_pos3or4.append(rawData[iSubject][0,iBlock][0,iTrial])
                         elif self.thirdRow_pos(pos1) == True:
-                            S_pos5or6_RT.append(RT[iSubject][0,iBlock][0,iTrial])
+                            S_pos5or6.append(rawData[iSubject][0,iBlock][0,iTrial])
                         elif self.fourthRow_pos(pos1) == True:
-                            S_pos9or10_RT.append(RT[iSubject][0,iBlock][0,iTrial])
+                            S_pos9or10.append(rawData[iSubject][0,iBlock][0,iTrial])
                         elif self.fifthRow_pos(pos1) == True:
-                            S_pos11or12_RT.append(RT[iSubject][0,iBlock][0,iTrial])
+                            S_pos11or12.append(rawData[iSubject][0,iBlock][0,iTrial])
                         else:
                             print("Your script is broked and stimuli are not meeting criteria for position of same stimuli")
                             print(stim1, stim2)
                             print(pos1)
 
-            self.RT.append([stat.mean(D_pos3or4_RT), stat.mean(D_pos5or6_RT), stat.mean(D_pos9or10_RT),stat.mean(D_pos11or12_RT),
-                            stat.mean(S_pos3or4_RT), stat.mean(S_pos5or6_RT), stat.mean(S_pos9or10_RT), stat.mean(S_pos11or12_RT) ])
+            data.append([stat.mean(D_pos3or4), stat.mean(D_pos5or6), stat.mean(D_pos9or10),stat.mean(D_pos11or12),
+                            stat.mean(S_pos3or4), stat.mean(S_pos5or6), stat.mean(S_pos9or10), stat.mean(S_pos11or12) ])
+        return data
 
-    def parseAcc(self, accuracy, stimuli, type):
-        if type == 'freq':
-            self.parseAcc_freq(accuracy, stimuli)
-        else:
-            self.parseAcc_pos(accuracy, stimuli)
-
-    def parseAcc_freq(self, accuracy, stimuli):
-        for iSubject in range(len(accuracy)):
-            for iBlock in range(accuracy[iSubject].size):
-                D_pos3or4_accuracy = []
-                D_pos5or6_accuracy = []
-                D_pos9or10_accuracy = []
-                D_pos11or12_accuracy = []
-                S_pos3or4_accuracy = []
-                S_pos5or6_accuracy = []
-                S_pos9or10_accuracy = []
-                S_pos11or12_accuracy = []
-                for iTrial in range(accuracy[iSubject][0,iBlock].size):
-                    pos1 = int(stimuli[iSubject][0,iBlock][1,iTrial])
-                    stim1 = stimuli[iSubject][0,iBlock][0,iTrial]
-                    stim2 = stimuli[iSubject][0,iBlock][2,iTrial]
-                    if stim1 != stim2:
-                        if self.secondRow_pos(pos1) == True:
-                            D_pos3or4_accuracy.append(accuracy[iSubject][0,iBlock][0,iTrial])
-                        elif self.thirdRow_pos(pos1) == True:
-                            D_pos5or6_accuracy.append(accuracy[iSubject][0,iBlock][0,iTrial])
-                        elif self.fourthRow_pos(pos1) == True:
-                            D_pos9or10_accuracy.append(accuracy[iSubject][0,iBlock][0,iTrial])
-                        elif self.fifthRow_pos(pos1) == True:
-                            D_pos11or12_accuracy.append(accuracy[iSubject][0,iBlock][0,iTrial])
-                        else:
-                            print("Your script is broken and stimuli are not meeting criteria for position of different stimuli")
-                            print(stim1, stim2)
-                            print(pos1)
+    def parseData_pos_block (self, rawData, stimuli):
+        data = []
+        for iBlock in range(rawData.size):
+            D_wristPos = []
+            D_elbowPos = []
+            D_crossMidline = []
+            S_wristPos = []
+            S_elbowPos = []
+            S_midline = []
+            for iTrial in range(rawData[0,iBlock].size):
+                # if iSubject == 0 or iSubject == 1 or iSubject == 2:
+                #     pos1 = int(stimuli[0,iBlock][0,iTrial])
+                #     pos2 = int(stimuli[0,iBlock][2,iTrial])
+                pos1 = int(stimuli[0,iBlock][1,iTrial])
+                pos2 = int(stimuli[0,iBlock][3,iTrial])
+                if pos1 != pos2:
+                    if self.wristPos_Different(pos1, pos2) == True:
+                        D_wristPos.append(rawData[0,iBlock][0,iTrial])
+                    elif self.elbowPos_Different(pos1, pos2) == True:
+                        D_elbowPos.append(rawData[0,iBlock][0,iTrial])
                     else:
-                        if self.secondRow_pos(pos1):
-                            S_pos3or4_accuracy.append(accuracy[iSubject][0,iBlock][0,iTrial])
-                        elif self.thirdRow_pos(pos1):
-                            S_pos5or6_accuracy.append(accuracy[iSubject][0,iBlock][0,iTrial])
-                        elif self.fourthRow_pos(pos1):
-                            S_pos9or10_accuracy.append(accuracy[iSubject][0,iBlock][0,iTrial])
-                        elif self.fifthRow_pos(pos1):
-                            S_pos11or12_accuracy.append(accuracy[iSubject][0,iBlock][0,iTrial])
-                        else:
-                            print("Your script is broken and stimuli are not meeting criteria for position of same stimuli")
-                            print(stim1, stim2)
-                            print(pos1)
-            self.ACC.append([stat.mean(D_pos3or4_accuracy), stat.mean(D_pos5or6_accuracy), stat.mean(D_pos9or10_accuracy),stat.mean(D_pos11or12_accuracy),
-                            stat.mean(S_pos3or4_accuracy), stat.mean(S_pos5or6_accuracy), stat.mean(S_pos9or10_accuracy), stat.mean(S_pos11or12_accuracy) ])
-
-    def parseAcc_pos(self, accuracy, stimuli):
-        for iSubject in range(len(accuracy)):
-            D_wristPos_ACC = []
-            D_elbowPos_ACC = []
-            D_crossMidline_ACC = []
-            S_wristPos_ACC = []
-            S_elbowPos_ACC = []
-            S_midline_ACC = []
-            for iBlock in range(accuracy[iSubject].size):
-                for iTrial in range(accuracy[iSubject][0,iBlock].size):
-                    if iSubject == 0 or iSubject == 1 or iSubject == 2:
-                        pos1 = int(stimuli[iSubject][0,iBlock][0,iTrial])
-                        pos2 = int(stimuli[iSubject][0,iBlock][2,iTrial])
+                        D_crossMidline.append(rawData[0,iBlock][0,iTrial])
+                else:
+                    if self.wristPos_Same(pos1, pos2) == True:
+                        S_wristPos.append(rawData[0,iBlock][0,iTrial])
+                    elif self.elbowPos_Same(pos1, pos2) == True:
+                        S_elbowPos.append(rawData[0,iBlock][0,iTrial])
                     else:
-                        pos1 = int(stimuli[iSubject][0,iBlock][1,iTrial])
-                        pos2 = int(stimuli[iSubject][0,iBlock][3,iTrial])
-                    if pos1 != pos2:
-                        if self.wristPos_Different(pos1, pos2) == True:
-                            D_wristPos_ACC.append(accuracy[iSubject][0,iBlock][0,iTrial])
-                        elif self.elbowPos_Different(pos1, pos2) == True:
-                            D_elbowPos_ACC.append(accuracy[iSubject][0,iBlock][0,iTrial])
-                        else:
-                            D_crossMidline_ACC.append(accuracy[iSubject][0,iBlock][0,iTrial])
+                        S_midline.append(rawData[0,iBlock][0,iTrial])
+
+            data.append([stat.mean(D_wristPos), stat.mean(D_crossMidline), stat.mean(D_elbowPos),
+                            stat.mean(S_wristPos), stat.mean(S_midline), stat.mean(S_elbowPos)])
+        return data
+
+    def parseData_freq_block (self, rawData, stimuli):
+        data = []
+        for iBlock in range(rawData.size):
+            D_pos3or4 = []
+            D_pos5or6 = []
+            D_pos9or10 = []
+            D_pos11or12 = []
+            S_pos3or4 = []
+            S_pos5or6 = []
+            S_pos9or10 = []
+            S_pos11or12 = []
+            for iTrial in range(rawData[0,iBlock].size):
+                pos1 = int(stimuli[0,iBlock][1,iTrial])
+                stim1 = stimuli[0,iBlock][0,iTrial]
+                stim2 = stimuli[0,iBlock][2,iTrial]
+                if stim1 != stim2:
+                    if self.secondRow_pos(pos1) == True:
+                        D_pos3or4.append(rawData[0,iBlock][0,iTrial])
+                    elif self.thirdRow_pos(pos1) == True:
+                        D_pos5or6.append(rawData[0,iBlock][0,iTrial])
+                    elif self.fourthRow_pos(pos1) == True:
+                        D_pos9or10.append(rawData[0,iBlock][0,iTrial])
+                    elif self.fifthRow_pos(pos1) == True:
+                        D_pos11or12.append(rawData[0,iBlock][0,iTrial])
                     else:
-                        if self.wristPos_Same(pos1, pos2) == True:
-                            S_wristPos_ACC.append(accuracy[iSubject][0,iBlock][0,iTrial])
-                        elif self.elbowPos_Same(pos1, pos2) == True:
-                            S_elbowPos_ACC.append(accuracy[iSubject][0,iBlock][0,iTrial])
-                        else:
-                            S_midline_ACC.append(accuracy[iSubject][0,iBlock][0,iTrial])
+                        print("Your script is broked and stimuli are not meeting criteria for position of different stimuli")
+                        print(stim1, stim2)
+                        print(pos1)
+                else:
+                    if self.secondRow_pos(pos1) == True:
+                        S_pos3or4.append(rawData[0,iBlock][0,iTrial])
+                    elif self.thirdRow_pos(pos1) == True:
+                        S_pos5or6.append(rawData[0,iBlock][0,iTrial])
+                    elif self.fourthRow_pos(pos1) == True:
+                        S_pos9or10.append(rawData[0,iBlock][0,iTrial])
+                    elif self.fifthRow_pos(pos1) == True:
+                        S_pos11or12.append(rawData[0,iBlock][0,iTrial])
+                    else:
+                        print("Your script is broked and stimuli are not meeting criteria for position of same stimuli")
+                        print(stim1, stim2)
+                        print(pos1)
 
-            self.ACC.append([stat.mean(D_wristPos_ACC), stat.mean(D_crossMidline_ACC), stat.mean(D_elbowPos_ACC),
-                                    stat.mean(S_wristPos_ACC), stat.mean(S_midline_ACC), stat.mean(S_elbowPos_ACC)])
+            data.append([stat.mean(D_pos3or4), stat.mean(D_pos5or6), stat.mean(D_pos9or10),stat.mean(D_pos11or12),
+                            stat.mean(S_pos3or4), stat.mean(S_pos5or6), stat.mean(S_pos9or10), stat.mean(S_pos11or12) ])
+        return data
 
-    def calcAccRT(self, accuracy, RT, stimuli, type):
-        self.parseAcc(accuracy, stimuli, type)
-        self.parseRT(RT, stimuli, type)
+    def calcAccRT(self, accuracy, RT, stimuli, type, parseBy):
+        self.parseData(accuracy, stimuli, 'ACC', type, parseBy)
+        self.parseData(RT, stimuli, 'RT', type, parseBy)
