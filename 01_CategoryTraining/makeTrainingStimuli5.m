@@ -93,10 +93,10 @@ function makeTrainingStimuli
     %DIM2 is trials (160 trials perlevel)
     %DIM3 is level -- there are 20 levels! The stimuli are the same in 1-5,
     %6-10, etc.
-    trainingStimuli=[trainingStimuli,repmat(trainingStimuli(:,5),1,8)];
    
     %levelAccuracy gives the accuracy required to pass the level (1-20);
-    levelAccuracy = [repmat(.75, [1 3]) .70 .75 .775 .80 .825 .85 .875 .9 .925 .95];
+    %levelAccuracy = [repmat(.75, [1 3]) .70 .75 .775 .80 .825 .85 .875 .9 .925 .95];
+    levelAccuracy = [repmat(.75, [1 3]) .70 .75];
     
     save ('trainingStimuli5.mat', 'trainingStimuli', 'levelAccuracy')
 
