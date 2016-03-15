@@ -27,7 +27,6 @@ function makeWeightedTrainingStimuli(prevAcc, prevStimuli, levelTrain)
     %find possible stimulator combinations (8 combos total)
     stimulator=[3; 9];
    %%
-   f = nan(numFreqPairs, 16);
    for i = 1:numFreqPairs
         f(i,:) = prevAcc(prevStimuli(1,:) == f1(i) | prevStimuli(1,:) == f1(22-i));
    end

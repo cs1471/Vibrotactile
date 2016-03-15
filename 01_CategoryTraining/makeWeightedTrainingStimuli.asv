@@ -2,7 +2,7 @@
 %June 15 2015
 %Clara Scholl cas243@georgetown.edu
 
-function makeWeightedTrainingStimuli(levelPreviousAccuracy, prevStimuli)
+function makeWeightedTrainingStimuli(prevAcc, prevStimuli, levelTrain)
 
     %dimensions are 240 stimuli x 4 parameters x 20 levels
     %the five columns (dimension 2) are:
@@ -57,10 +57,11 @@ function makeWeightedTrainingStimuli(levelPreviousAccuracy, prevStimuli)
            category(iStim)=2;
        end
    end
-   level6=[level; stimulators; category];
+   
+   level = [level; stimulators; category];
    
    %now combine the 5 levels into all 20 levels (repeating each 4 times)
-   trainingStimuli={(level6)};
+   trainingStimuli={(level)};
    %trainingStimuli=cat(3,level1, level2, level3, level4, level5);
    %values in trainingStimuli by dimension:
    %DIM1 is [f1 f2 s1 s2 category]
@@ -68,10 +69,6 @@ function makeWeightedTrainingStimuli(levelPreviousAccuracy, prevStimuli)
    %DIM3 is level -- there are 20 levels! The stimuli are the same in 1-5,
    %6-10, etc.
    
-   %levelAccuracy gives the accuracy required to pass the level (1-20);
-   %levelAccuracy = [repmat(.75, [1 3]) .70 .75 .775 .80 .825 .85 .875 .9 .925 .95];
-   levelAccuracy = [repmat(.75, [1 3]) .70 .75];
-   
-   save ('trainingStimuliWeight.mat', 'trainingStimuli', 'levelAccuracy')
+   save ('trainingStimuliWeight.mat', 'trainingStimuli', 'levelTrain')
 
 end
