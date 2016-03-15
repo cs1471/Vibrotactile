@@ -7,9 +7,6 @@
 number = input('\n\nEnter Subject NUMBER:\n\n','s');
 exptdesign.number = number;
 
-exptdesign.practiceType = input(['\n\n Is this for category training practice or channel testing?'...
-    'Enter 0 for category training practice, 1 for channel testing: \n\n'],'s');
-
 if isempty(number)
     name = 'MR000';
 else
