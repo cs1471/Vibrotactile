@@ -84,9 +84,8 @@ function makeTrainingStimuli
         end
     end
     level5=[level; stimulators; category];
-    
     %now combine the 5 levels into all 20 levels (repeating each 4 times)
-    trainingStimuli={(level1) (level2) (level3) (level4) (level5)};
+    trainingStimuli={(level1) (level2) (level3) (level4) (level5) (level5) (level5) (level5) (level5) (level5) (level5) (level5) (level5)};
     %trainingStimuli=cat(3,level1, level2, level3, level4, level5);
     %values in trainingStimuli by dimension:
     %DIM1 is [f1 f2 s1 s2 category]
@@ -95,8 +94,8 @@ function makeTrainingStimuli
     %6-10, etc.
    
     %levelAccuracy gives the accuracy required to pass the level (1-20);
-    %levelAccuracy = [repmat(.75, [1 3]) .70 .75 .775 .80 .825 .85 .875 .9 .925 .95];
-    levelAccuracy = [repmat(.75, [1 3]) .70 .75];
+    levelAccuracy = [repmat(.75, [1 3]) .70 .75 .775 .80 .825 .85 .875 .9 .925 .95];
+    %levelAccuracy = [repmat(.75, [1 3]) .70 .75];
     
     save ('trainingStimuli5.mat', 'trainingStimuli', 'levelAccuracy')
 
