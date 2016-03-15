@@ -24,6 +24,9 @@ end
 
 exptdesign.numBlocks = 1;              % number of blocks
 exptdesign.numTrialsPerSession = 12;
+
+exptdesign.practiceType = 1; % added this manualy. Should be an input? 
+
 if exptdesign.practiceType == '0'
     exptdesign.StimPresentationWindow = .3;
 else
