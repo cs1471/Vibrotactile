@@ -98,13 +98,13 @@ class FrequencyGeneral():
 
     def parser_block(self, dataRaw):
         data = []
+        same = []
+        m3w5 = []
+        m3w95 = []
+        m3b = []
+        m6_5 = []
+        m6_95 = []
         for iBlock in range(dataRaw.size):
-            same = []
-            m3w5 = []
-            m3w95 = []
-            m3b = []
-            m6_5 = []
-            m6_95 = []
             for iTrial in range(dataRaw[0,iBlock].size):
                 stim1 = int(round(self.stimuli[0,iBlock][0,iTrial]))
                 stim2 = int(round(self.stimuli[0,iBlock][2,iTrial]))
@@ -122,6 +122,6 @@ class FrequencyGeneral():
                 elif self.m3b(stim1, stim2) == True:
                     m3b.append(dataRaw[0,iBlock][0,iTrial])
 
-            data.append([sum(same)/len(same), stat.mean(m3w5), stat.mean(m3w95), stat.mean(m3b), stat.mean(m6_5), stat.mean(m6_95)])
+        data.append([sum(same)/len(same), stat.mean(m3w5), stat.mean(m3w95), stat.mean(m3b), stat.mean(m6_5), stat.mean(m6_95)])
 
         return data

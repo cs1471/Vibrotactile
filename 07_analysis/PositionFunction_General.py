@@ -163,14 +163,13 @@ class Position_general():
         return data
 
     def parseData_pos_block (self, rawData, stimuli):
-        data = []
+        D_wristPos = []
+        D_elbowPos = []
+        D_crossMidline = []
+        S_wristPos = []
+        S_elbowPos = []
+        S_midline = []
         for iBlock in range(rawData.size):
-            D_wristPos = []
-            D_elbowPos = []
-            D_crossMidline = []
-            S_wristPos = []
-            S_elbowPos = []
-            S_midline = []
             for iTrial in range(rawData[0,iBlock].size):
                 # if iSubject == 0 or iSubject == 1 or iSubject == 2:
                 #     pos1 = int(stimuli[0,iBlock][0,iTrial])
@@ -192,8 +191,8 @@ class Position_general():
                     else:
                         S_midline.append(rawData[0,iBlock][0,iTrial])
 
-            data.append([stat.mean(D_wristPos), stat.mean(D_crossMidline), stat.mean(D_elbowPos),
-                            stat.mean(S_wristPos), stat.mean(S_midline), stat.mean(S_elbowPos)])
+        data = [sum(D_wristPos)/len(D_wristPos), sum(D_crossMidline)/len(D_crossMidline), sum(D_elbowPos)/len(D_elbowPos),
+                sum(S_wristPos)/len(S_wristPos), sum(S_midline)/len(S_midline), sum(S_elbowPos)/len(S_elbowPos)]
         return data
 
     def parseData_freq_block (self, rawData, stimuli):

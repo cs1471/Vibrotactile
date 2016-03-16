@@ -32,9 +32,9 @@ def makeFrequency():
 # session = input('Enter the session number: \n')
 
 #Use when debugging or manually editing
-filename      = ('20160315_1108-MR1012_block6')
-fileDirectory = '/Users/courtney/GoogleDrive/Riesenhuber/05_2015_scripts/Vibrotactile/01_CategoryTraining/data/1012/'
-session       = '3'
+filename      = ('20160316_1156-MR976_block6')
+fileDirectory = '/Users/courtney/GoogleDrive/Riesenhuber/05_2015_scripts/Vibrotactile/01_CategoryTraining/data/976/'
+session       = '5'
 
 #load matfile
 data = sio.loadmat(fileDirectory + filename, struct_as_record=True)

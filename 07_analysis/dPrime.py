@@ -70,5 +70,4 @@ class Dprime:
         self.parseData(accuracy, stimuli, flag)
         for index, value in enumerate(self.TPR):
             dprime.append(ndtri(value) - ndtri(self.FPR[index]))
-            print(ndtri(value) - ndtri(self.FPR[index]))
         return dprime

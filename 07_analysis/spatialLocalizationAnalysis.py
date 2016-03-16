@@ -14,20 +14,18 @@ tls.set_credentials_file(username='cs1471', api_key='9xknhmjhas')
 # session = input('Enter the session number: \n')
 
 #Use when debugging or manually editing
-filename = ('20160217_1154-MR976_block7.144')
-fileDirectory = '/Users/courtney/GoogleDrive/Riesenhuber/05_2015_scripts/Vibrotactile/03_spatialLocalization/data/976/'
+filename = ('20160315_1409-MR1009_block7.144')
+fileDirectory = '/Users/courtney/GoogleDrive/Riesenhuber/05_2015_scripts/Vibrotactile/03_spatialLocalization/data/1009/'
 
 
 #load matfile
 data = sio.loadmat(fileDirectory + filename, struct_as_record=True)
 
 #pull relevant data from structures
-iBlock = 0
-#pull relevant data from structures
-RT            = data[iBlock]['trialOutput']['RT']
-ACC           = data[iBlock]['trialOutput']['accuracy']
-stimuli       = data[iBlock]['trialOutput']['stimuli']
-subjectNumber = data[iBlock]['exptdesign']['number'][0,0][0]
+RT            = data['trialOutput']['RT']
+ACC           = data['trialOutput']['accuracy']
+stimuli       = data['trialOutput']['stimuli']
+subjectNumber = data['exptdesign']['number'][0,0][0]
 
 if int(data['trialOutput']['preOrPostTrain'][0,0][0]) == 1:
     session = "Pre"
@@ -77,18 +75,18 @@ def make_trace_line(x, y, name):
     return go.Scatter( x = x, y = y, name = name, xaxis = 'x1', yaxis = 'y1')
 
 #make trace containing acc and RT by position for Different Condition
-trace1 = make_trace_bar( x, [stat.mean(PosObj.PG.ACC[0]), stat.mean(PosObj.PG.ACC[3])], "Wrist Accuracy" )
-trace2 = make_trace_bar( x, [stat.mean(PosObj.PG.ACC[1]), stat.mean(PosObj.PG.ACC[4])], "Across Mid Accuracy" )
-trace3 = make_trace_bar( x, [stat.mean(PosObj.PG.ACC[2]), stat.mean(PosObj.PG.ACC[5])], "Elbow Accuracy" )
-trace4 = make_trace_line( x, [stat.mean(PosObj.PG.RT[0]), stat.mean(PosObj.PG.RT[3])], "Wrist RT" )
-trace5 = make_trace_line( x, [stat.mean(PosObj.PG.RT[1]), stat.mean(PosObj.PG.RT[4])], "Across Mid RT" )
-trace6 = make_trace_line( x, [stat.mean(PosObj.PG.RT[2]), stat.mean(PosObj.PG.RT[5])], "Elbow RT" )
+trace1 = make_trace_bar( x, [PosObj.PG.ACC[0], PosObj.PG.ACC[3]], "Wrist Accuracy" )
+trace2 = make_trace_bar( x, [PosObj.PG.ACC[1], PosObj.PG.ACC[4]], "Across Mid Accuracy" )
+trace3 = make_trace_bar( x, [PosObj.PG.ACC[2], PosObj.PG.ACC[5]], "Elbow Accuracy" )
+trace4 = make_trace_line( x, [PosObj.PG.RT[0], PosObj.PG.RT[3]], "Wrist RT" )
+trace5 = make_trace_line( x, [PosObj.PG.RT[1], PosObj.PG.RT[4]], "Across Mid RT" )
+trace6 = make_trace_line( x, [PosObj.PG.RT[2], PosObj.PG.RT[5]], "Elbow RT" )
 
 #make trace parsing out positions 5 and 9
-trace7 = make_trace_bar(x2, PosObj.PC.ACC[0:3], "Pos 5 Comparisons Acc")
-trace8 = make_trace_bar(x2, PosObj.PC.ACC[4:7], "Pos 9 Comparisons Acc")
-trace9 = make_trace_line(x2, PosObj.PC.RT[0:3], "Pos 5 Comparisons RT")
-trace10 = make_trace_line(x2, PosObj.PC.ACC[4:7], "Pos 5 Comparisons RT")
+trace7 = make_trace_bar(x2, PosObj.PC.ACC[0:4], "Pos 5 Comparisons Acc")
+trace8 = make_trace_bar(x2, PosObj.PC.ACC[4:8], "Pos 9 Comparisons Acc")
+trace9 = make_trace_line(x2, PosObj.PC.RT[0:4], "Pos 5 Comparisons RT")
+trace10 = make_trace_line(x2, PosObj.PC.RT[4:8], "Pos 9 Comparisons RT")
 
 # Generate Figure object with 2 axes on 2 rows, print axis grid to stdout
 fig = tls.make_subplots( rows=1, cols=1, shared_xaxes=True,)

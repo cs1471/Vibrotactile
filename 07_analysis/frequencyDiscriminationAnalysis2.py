@@ -5,7 +5,7 @@ import plotly.plotly as py
 import statistics as stat
 import plotly.graph_objs as go
 import plotly.tools as tls
-from FrequencyFunction_General import Frequency_general
+from FrequencyFunction_General import FrequencyGeneral
 from PositionFunction_General import Position_general
 
 tls.set_credentials_file(username='cs1471', api_key='9xknhmjhas')
@@ -15,18 +15,19 @@ tls.set_credentials_file(username='cs1471', api_key='9xknhmjhas')
 # session = input('Enter the session number: \n')
 
 #Use when debugging or manually editing
-filename = ('20160307_1534-MR979_block7')
-fileDirectory = '/Users/courtney/GoogleDrive/Riesenhuber/05_2015_scripts/Vibrotactile/06_frequencyDiscrimination/data/979/'
+filename = ('20160314_1044-MR1009_block7')
+fileDirectory = '/Users/courtney/GoogleDrive/Riesenhuber/05_2015_scripts/Vibrotactile/06_frequencyDiscrimination/data/1009/'
 
 #load matfile
 data = sio.loadmat(fileDirectory + filename, struct_as_record=True)
 
+iBlock = 0
 #pull relevant data from structures
-RT            = [data[iBlock]['trialOutput']['RT'] for iBlock in range(len(data))]
-ACC           = [data[iBlock]['trialOutput']['accuracy'] for iBlock in range(len(data))]
-stimuli       = [data[iBlock]['trialOutput']['stimuli'] for iBlock in range(len(data))]
-subjectNumber = [data[iBlock]['exptdesign']['number'][0,0][0] for iBlock in range(len(data))]
-nBlocks       = [data[iBlock]['exptdesign']['numBlocks'][0,0][0] for iBlock in range(len(data))]
+RT            = data['trialOutput']['RT']
+ACC           = data['trialOutput']['accuracy']
+stimuli       = data['trialOutput']['stimuli']
+subjectNumber = data['exptdesign']['number'][0,0][0]
+nBlocks       = data['exptdesign']['numBlocks'][0,0][0]
 
 if int(data['exptdesign']['preOrPostTrain'][0,0][0]) == 1:
     session = "Pre"
@@ -37,8 +38,8 @@ else:
 #Calculations by Acc by frequency
 #############################################################################
 
-FreqObj = Frequency_general()
-FreqObj.calcAccRT(ACC, RT, stimuli, 'Block')
+FreqObj = FrequencyGeneral(stimuli=stimuli)
+FreqObj.calcAccRT(ACC, RT, 'Block')
 
 
 #############################################################################
@@ -64,10 +65,10 @@ for iBlock in range(RT.size):
     O_reactionTime.append(np.mean(RT[0,iBlock]))
 
 #x-axis label
-# x = []
-# i=0
-# for i in range(nBlocks):
-#             x.append("Block: " + str(i+1)),
+x3 = []
+i=0
+for i in range(nBlocks):
+            x3.append("Block: " + str(i+1)),
 x = ["Different", "Same"]
 x2 = ["Same", "62.50 v 40.00", "90.91 v 62.50", "40.00 v 27.03", "90.91 v 40.00", "62.50 v 27.03"]
 
