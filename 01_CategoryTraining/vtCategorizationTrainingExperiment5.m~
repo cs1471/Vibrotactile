@@ -62,16 +62,13 @@ function vtCategorizationTrainingExperiment5(name, exptdesign)
         drawAndCenterText(w,['Training Block #' num2str(iBlock) ' of ' num2str(exptdesign.numSessions) '\n\n\n\n'...
             'You are on Level ' num2str(level) '\n\n\n\n' 'Click the mouse to continue'],1); 
         KbWait(1);
-        if level > 5 && (exist('trainingStimuliWeight.mat', 'file') == 2)
+        if level >= 5 && (exist('trainingStimuliWeight.mat', 'file') == 2)
             clear trainingStimuli;
             load('trainingStimuliWeight');
              %randomize the stimuli for this level
             order = randperm(size(trainingStimuli,2));
             stimuli = trainingStimuli{:,order};
-        elseif level > 5 
-            order = randperm(size(trainingStimuli{5},2));
-            stimuli = trainingStimuli{5}(:,order);
-        else
+        elseif level < 5
             order = randperm(size(trainingStimuli{level},2));
             stimuli = trainingStimuli{level}(:,order);
         end
