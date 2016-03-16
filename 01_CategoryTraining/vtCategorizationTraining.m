@@ -41,7 +41,8 @@ pause(2)
 
 exptdesign.level=exptdesign.training.lastLevelPassed;
 
-exptdesign.numSessions = 6;              % number of blocks (160 trials each) to complete this training session
+exptdesign.numSessions = 3;              % number of blocks (160 trials each) to complete this training session
+%REMEMBER TO CHANGE BACK TO%%%%%
 
 % if/else statement to set the number of trials for the level
 if exptdesign.level >= 5
@@ -79,4 +80,4 @@ catch
 end
 stimGenPTB('open','COM1')
 
-vtCategorizationTrainingExperiment4(name,exptdesign);
+vtCategorizationTrainingExperiment5(name,exptdesign);

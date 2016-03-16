@@ -24,15 +24,15 @@ function makeWeightedTrainingStimuli(prevAcc, prevStimuli, name, iBlock)
     f2=fliplr(f1);
     numFreqPairs = (length(f1) -3)/2;
     ACC(1,:) = prevAcc;
-    stim(1,1:20) = prevStimuli(1,1:20);
+    stim(1,20) = prevStimuli(1,20);
     %find possible stimulator combinations (8 combos total)
     stimulator=[3; 9];
    %%
    for i = 1:numFreqPairs
-        f(i,:) = {ACC(stim(1,:) == f1(i) | stim(1,:) == f1(22-i))};
+        f(i,:) = ACC(stim(1,:) == f1(i) | stim(1,:) == f1(22-i));
    end
    
-   f = cellfun(@mean, f);
+   f = mean(f,2);
    [fSort, fMinInd] = sort(f);
 
    %%  

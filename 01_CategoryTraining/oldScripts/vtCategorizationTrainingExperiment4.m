@@ -1,18 +1,17 @@
 %vibrotactile categorization training! called by vtCategorizationTraining.m
 %Clara A. Scholl, cas243@georgetown.edu
-function vtCategorizationTrainingExperiment5(name, exptdesign)
+function vtCategorizationTrainingExperiment4(name, exptdesign)
     
     rand('twister',sum(100*clock))
     
     % Open a screen and display instructions
-    screens = Screen('Screens');
-    screenNumber = min(screens);
+    screens=Screen('Screens');
+    screenNumber=0;
 
     % Open window with default settings:
-    [w windowRect] = Screen('OpenWindow', screenNumber,[128 128 128], [0 0 200 200]);
-    %[w windowRect] = Screen('OpenWindow', screenNumber,[128 128 128]);
+    [w windowRect] =Screen('OpenWindow', screenNumber,[128 128 128]);
 
-    %HideCursor;
+    HideCursor;
     %load images
     fixationImage = imread(exptdesign.fixationImage);
     % BLANK IMAGE
@@ -61,24 +60,18 @@ function vtCategorizationTrainingExperiment5(name, exptdesign)
     for iBlock=1:exptdesign.numSessions %how many blocks to run this training session
         drawAndCenterText(w,['Training Block #' num2str(iBlock) ' of ' num2str(exptdesign.numSessions) '\n\n\n\n'...
             'You are on Level ' num2str(level) '\n\n\n\n' 'Click the mouse to continue'],1); 
+        %WaitSecs(1);
         KbWait(1);
-        if level >= 5 && (exist('trainingStimuliWeight.mat', 'file') == 2)
-            clear trainingStimuli;
-            load('trainingStimuliWeight');
-             %randomize the stimuli for this level
-            order = randperm(size(trainingStimuli,2));
-            stimuli = trainingStimuli{:,order};
-        elseif level < 5
-            order = randperm(size(trainingStimuli{level},2));
-            stimuli = trainingStimuli{level}(:,order);
-        end
-        
+        %randomize the stimuli for this level
+        order=randperm(size(trainingStimuli{level},2));
+        %stimuli=squeeze(trainingStimuli(:,order,level));
+        stimuli=trainingStimuli{level}(:,order);
         %lower and upper limit of fixation before stimulus is presented
         ll=.3;
         ul=.8;
         
         %iterate over trials
-        for iTrial=1:exptdesign.numTrialsPerSession
+        for iTrial=1:size(trainingStimuli{level},2)
            %draw fixation
            Screen('DrawTexture', w, fixationTexture);
            [FixationVBLTimestamp FixationOnsetTime FixationFlipTimestamp FixationMissed] = Screen('Flip',w);
@@ -163,6 +156,9 @@ function vtCategorizationTrainingExperiment5(name, exptdesign)
            trialOutput(iBlock).wait1(iTrial)=wait1;
            
            %save stimulus presentation timestamps
+           %[FixationVBLTimestamp FixationOnsetTime FixationFlipTimestamp FixationMissed]
+           %[RespVBLTimestamp RespOnsetTime RespFlipTimestamp RespMissed]
+           %
            trialOutput(iBlock).FixationVBLTimestamp(iTrial)=FixationVBLTimestamp;
            trialOutput(iBlock).FixationOnsetTime(iTrial)=FixationOnsetTime;
            trialOutput(iBlock).FixationFlipTimestamp(iTrial)=FixationFlipTimestamp;
@@ -194,17 +190,20 @@ function vtCategorizationTrainingExperiment5(name, exptdesign)
            end
            
              %tell subject how they did on last trial
-           if iTrial==exptdesign.numTrialsPerSession && iBlock < exptdesign.numSessions
+           if iTrial==size(trainingStimuli{level},2) && iBlock < exptdesign.numSessions
                %calculate accuracy
                accuracyForLevel=mean(trialOutput(iBlock).accuracy);
                drawAndCenterText(w, ['Your accuracy was ' num2str(round(accuracyForLevel.*100)) '%\n\n\n'...
                     'Click mouse to continue' ],1)
-                
-           elseif iTrial==exptdesign.numTrialsPerSession && iBlock == exptdesign.numSessions
+               %WaitSecs(2);
+               KbWait(1);
+           elseif (iTrial==size(trainingStimuli{level},2) && iBlock == exptdesign.numSessions) || level==15
                %calculate accuracy
                accuracyForLevel=mean(trialOutput(iBlock).accuracy);
                drawAndCenterText(w, ['Your accuracy was ' num2str(round(accuracyForLevel.*100)) '%\n\n\n'...
                    'You have completed this training session.  Thank you for your work!' ],1)
+               %WaitSecs(2);
+               KbWait(1);
                Screen('CloseAll')
            end
            
@@ -212,29 +211,20 @@ function vtCategorizationTrainingExperiment5(name, exptdesign)
            clear correctResponse correctionTexture;
            
            %record stimuli the participant has experienced
-        end %end of trial 
+        end
         %record parameters for the block
         %stimuli, order
         trialOutput(iBlock).order=order;
         trialOutput(iBlock).stimuli=stimuli;
         trialOutput(iBlock).accuracyForLevel=accuracyForLevel;
         trialOutput(iBlock).level = level;
-        
         %check if they pass level and increase level if they do;
-        levelAccuracy = [repmat(.75, [1 3]) .70 .75 .775 .80 .825 .85 .875 .9 .925 .95];
-        if accuracyForLevel >= levelAccuracy(level);
-            level = level + 1;
+        if accuracyForLevel>levelAccuracy(level);
+            level=level+1;
         end
         
-        if level > 5 && level ~= exptdesign.maxLevel
-            %call function that generates a weighted training stimuli file 
-            makeWeightedTrainingStimuli(trialOutput(iBlock).accuracy, trialOutput(iBlock).stimuli, level);
-        end
-        
-        if level == exptdesign.maxLevel
-            accuracyForLevel=mean(trialOutput(iBlock).accuracy);
-            drawAndCenterText(w, ['Great Job! You have completed training! \n\n\n'... 
-            'Your final accuracy was ' num2str(round(accuracyForLevel.*100))],1)
+        if level>15
+            drawAndCenterText(w, 'Great Job! You have completed training!',1)
             Screen('CloseAll')
         end
         
@@ -243,12 +233,12 @@ function vtCategorizationTrainingExperiment5(name, exptdesign)
         %save the history data (stimuli, last level passed)
         
         %history=[exptdesign.training.history stimulusTracking];
-        history = [exptdesign.training.history];
-        exptdesign.training.history = history;
-        lastLevelPassed = level;
+        history=[exptdesign.training.history];
+        exptdesign.training.history=history;
+        lastLevelPassed=level;
         save(['./history/SUBJ' exptdesign.subNumber 'training.mat'], 'history', 'lastLevelPassed');
     
-    end %end of block
+    end
     ShowCursor;
     
 

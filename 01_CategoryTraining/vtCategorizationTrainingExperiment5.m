@@ -9,8 +9,8 @@ function vtCategorizationTrainingExperiment5(name, exptdesign)
     screenNumber = min(screens);
 
     % Open window with default settings:
-    [w windowRect] = Screen('OpenWindow', screenNumber,[128 128 128], [0 0 200 200]);
-    %[w windowRect] = Screen('OpenWindow', screenNumber,[128 128 128]);
+    %[w windowRect] = Screen('OpenWindow', screenNumber,[128 128 128], [0 0 200 200]);
+    [w windowRect] = Screen('OpenWindow', screenNumber,[128 128 128]);
 
     %HideCursor;
     %load images
@@ -55,19 +55,19 @@ function vtCategorizationTrainingExperiment5(name, exptdesign)
         'When you click the mouse, you will feel the vibration again'], 1)
   
     %load training stimuli
-    load('trainingStimuli5.mat');
+    load('trainingStimuli6.mat');
     level=exptdesign.level;
     
     for iBlock=1:exptdesign.numSessions %how many blocks to run this training session
         drawAndCenterText(w,['Training Block #' num2str(iBlock) ' of ' num2str(exptdesign.numSessions) '\n\n\n\n'...
             'You are on Level ' num2str(level) '\n\n\n\n' 'Click the mouse to continue'],1); 
         KbWait(1);
-        if level > 5 && (exist('trainingStimuliWeight.mat', 'file') == 2)
+        if level > 5 && (exist(['./history/trainingStimuliWeight' name '.mat'], 'file') == 2)
             clear trainingStimuli;
-            load('trainingStimuliWeight');
+            load(['./history/trainingStimuliWeight' name '.mat']);
              %randomize the stimuli for this level
-            order = randperm(size(trainingStimuli,2));
-            stimuli = trainingStimuli{:,order};
+            order = randperm(size(trainingStimuli{:},2));
+            stimuli = trainingStimuli{1}(:,order);
         elseif level > 5 
             order = randperm(size(trainingStimuli{5},2));
             stimuli = trainingStimuli{5}(:,order);
@@ -231,7 +231,10 @@ function vtCategorizationTrainingExperiment5(name, exptdesign)
         
         if level > 5 && level ~= exptdesign.maxLevel
             %call function that generates a weighted training stimuli file 
-            makeWeightedTrainingStimuli(trialOutput(iBlock).accuracy, trialOutput(iBlock).stimuli, level);
+            if (exist(['./history/trainingStimuliWeight' name '.mat'], 'file') == 2)
+                delete(['./history/trainingStimuliWeight' name '.mat'])
+            end
+            makeWeightedTrainingStimuli(trialOutput(iBlock).accuracy, trialOutput(iBlock).stimuli, name, iBlock);
         end
         
         if level == exptdesign.maxLevel
