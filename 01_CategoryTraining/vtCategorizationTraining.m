@@ -40,14 +40,13 @@ else
 end
 pause(2)
 
-%exptdesign.level=exptdesign.training.lastLevelPassed;
-exptdesign.level = 13;
+exptdesign.level=exptdesign.training.lastLevelPassed;
 
-exptdesign.numSessions = 1;              % number of blocks (160 trials each) to complete this training session
+exptdesign.numSessions = 6;              % number of blocks (160 trials each) to complete this training session
 
 % if/else statement to set the number of trials for the level
 if exptdesign.level >= 5
-    exptdesign.numTrialsPerSession = 3;    % number of trials per block for level 5
+    exptdesign.numTrialsPerSession = 144;    % number of trials per block for level 5
 else 
     exptdesign.numTrialsPerSession = 128;  % numbeer of trials per block for levels 1,2,3 and 4
 end
@@ -74,6 +73,11 @@ exptdesign.correct2='imgsscaled/replayTrelp.png';
 
 exptdesign.imageDirectory = 'imgsscaled/';
 
+handle = errordlg(['Did you remember to pull from Git repo?!\n'...
+                   'Because I know for a fact Courtney will eat\n'
+                   'your grandbabies if you didnt!']);
+disp(handle);
+
 %open COM1 port
 try
     stimGenPTB('open','COM1')
@@ -84,6 +88,6 @@ catch
     Screen('CloseAll');
 end
 
- handle = errordlg('Please ensure the driver box is turned off!');
+ handle = errordlg('Please ensure the driver box is turned off');
  disp(handle);
 
