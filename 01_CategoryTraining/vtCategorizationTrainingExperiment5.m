@@ -66,7 +66,7 @@ function vtCategorizationTrainingExperiment5(name, exptdesign)
             clear trainingStimuli;
             filename = dir(['./history/' name '/training*']);
             filename = filename(length(filename)).name;
-            load(filename);
+            load(['./history/' name '/' filename]);
              %randomize the stimuli for this level
             order = randperm(size(trainingStimuli{:},2));
             stimuli = trainingStimuli{1}(:,order);
