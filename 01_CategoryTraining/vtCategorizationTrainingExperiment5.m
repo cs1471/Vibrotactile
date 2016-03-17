@@ -60,7 +60,7 @@ function vtCategorizationTrainingExperiment5(name, exptdesign)
     
     for iBlock=1:exptdesign.numSessions %how many blocks to run this training session
         drawAndCenterText(w,['Training Block #' num2str(iBlock) ' of ' num2str(exptdesign.numSessions) '\n\n\n\n'...
-            'You are on Level ' num2str(level) '\n\n\n\n' 'Click the mouse to continue'],1); 
+            'You are on Level ' num2str(level) '\n\n\n\n' 'Click the mouse to continue'],0); 
         KbWait(1);
         if level > 5 && (exist(['./history/' name ], 'dir') == 7)
             clear trainingStimuli;

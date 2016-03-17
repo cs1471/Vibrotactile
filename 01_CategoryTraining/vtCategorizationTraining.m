@@ -41,7 +41,7 @@ pause(2)
 
 exptdesign.level=exptdesign.training.lastLevelPassed;
 
-exptdesign.numSessions = 6;              % number of blocks (160 trials each) to complete this training session
+exptdesign.numSessions = 2;              % number of blocks (160 trials each) to complete this training session
 
 % if/else statement to set the number of trials for the level
 if exptdesign.level >= 5
