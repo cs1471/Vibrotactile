@@ -7,6 +7,7 @@
 % line in a file. Useful if some errors occurred.
 input('\n\nIs white noise playing? Hit Enter when "Yes."\n');
 input('\n\nDoes participant have ear plugs? Hit Enter when "Yes."\n');
+input('\n\nIs the driver machine on? Hit Enter when "Yes."\n');
 
 %get subject info
 number = input('\n\nEnter Subject NUMBER:\n\n','s');
@@ -39,13 +40,14 @@ else
 end
 pause(2)
 
-exptdesign.level=exptdesign.training.lastLevelPassed;
+%exptdesign.level=exptdesign.training.lastLevelPassed;
+exptdesign.level = 13;
 
-exptdesign.numSessions = 2;              % number of blocks (160 trials each) to complete this training session
+exptdesign.numSessions = 1;              % number of blocks (160 trials each) to complete this training session
 
 % if/else statement to set the number of trials for the level
 if exptdesign.level >= 5
-    exptdesign.numTrialsPerSession = 144;    % number of trials per block for level 5
+    exptdesign.numTrialsPerSession = 3;    % number of trials per block for level 5
 else 
     exptdesign.numTrialsPerSession = 128;  % numbeer of trials per block for levels 1,2,3 and 4
 end
@@ -74,9 +76,14 @@ exptdesign.imageDirectory = 'imgsscaled/';
 
 %open COM1 port
 try
-stimGenPTB('CloseAll');
+    stimGenPTB('open','COM1')
+    vtCategorizationTrainingExperiment5(name,exptdesign);
 catch
+    disp('Closing all screens and closing the comport')
+    stimGenPTB('close');
+    Screen('CloseAll');
 end
-stimGenPTB('open','COM1')
 
-vtCategorizationTrainingExperiment5(name,exptdesign);
+ handle = errordlg('Please ensure the driver box is turned off!');
+ disp(handle);
+

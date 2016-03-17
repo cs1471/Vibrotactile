@@ -211,6 +211,7 @@ function vtCategorizationTrainingExperiment5(name, exptdesign)
                accuracyForLevel=mean(trialOutput(iBlock).accuracy);
                drawAndCenterText(w, ['Your accuracy was ' num2str(round(accuracyForLevel.*100)) '%\n\n\n'...
                    'You have completed this training session.  Thank you for your work!' ],1)
+               KbWait(1)
                Screen('CloseAll')
            end
            
@@ -237,23 +238,22 @@ function vtCategorizationTrainingExperiment5(name, exptdesign)
             makeWeightedTrainingStimuli(trialOutput(iBlock).accuracy, trialOutput(iBlock).stimuli, name);
         end
         
-        if level == exptdesign.maxLevel
-            accuracyForLevel=mean(trialOutput(iBlock).accuracy);
-            drawAndCenterText(w, ['Great Job! You have completed training! \n\n\n'... 
-            'Your final accuracy was ' num2str(round(accuracyForLevel.*100))],1)
-            Screen('CloseAll')
-        end
-        
         %save the session data in the data directory
         save(['./data/' exptdesign.subNumber '/' datestr(now, 'yyyymmdd_HHMM') '-' exptdesign.subName '_block' num2str(iBlock) '.mat'], 'trialOutput', 'exptdesign');
-        %save the history data (stimuli, last level passed)
-        
-        %history=[exptdesign.training.history stimulusTracking];
+        %save the history data (stimuli, last level passed
         history = [exptdesign.training.history];
         exptdesign.training.history = history;
         lastLevelPassed = level;
         save(['./history/SUBJ' exptdesign.subNumber 'training.mat'], 'history', 'lastLevelPassed');
     
+        if level == exptdesign.maxLevel% && (accuracyForLevel >= levelAccuracy(level))
+            accuracyForLevel=mean(trialOutput(iBlock).accuracy);
+            drawAndCenterText(w, ['Great Job! You have completed training! \n\n\n'... 
+            'Your final accuracy was ' num2str(round(accuracyForLevel.*100))])
+            Screen('CloseAll')
+            break
+        end
+        
     end %end of block
     ShowCursor;
     
