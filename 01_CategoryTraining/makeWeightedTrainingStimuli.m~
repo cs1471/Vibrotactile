@@ -2,7 +2,7 @@
 %June 15 2015
 %Clara Scholl cas243@georgetown.edu
 
-function makeWeightedTrainingStimuli(prevAcc, prevStim, name)
+function makeWeightedTrainingStimuli(prevAcc, prevStimuli, name)
 
     %dimensions are 240 stimuli x 4 parameters x 20 levels
     %the five columns (dimension 2) are:
@@ -20,14 +20,16 @@ function makeWeightedTrainingStimuli(prevAcc, prevStim, name)
     
     %find possible frequencies: 1/10th octave steps (5% steps along
     %frequency line)
-    f1 = 2.^((0:.1:2)+log2(25));
-    f2 = fliplr(f1);
+    f1=2.^((0:.1:2)+log2(25));
+    f2=fliplr(f1);
     numFreqPairs = (length(f1) -3)/2;
-    stimulator = [3; 9];
-    
+    ACC(1,:) = prevAcc;
+    stim(1,1:20) = prevStimuli(1,1:20);
+    %find possible stimulator combinations (8 combos total)
+    stimulator=[3; 9];
    %%
    for i = 1:numFreqPairs
-        f(i,:) = {prevAcc(prevStim(1,:) == f1(i) | prevStim(1,:) == f1(22-i))};
+        f(i,:) = {ACC(stim(1,:) == f1(i) | stim(1,:) == f1(22-i))};
    end
    
    f = cellfun(@mean, f);
@@ -66,11 +68,7 @@ function makeWeightedTrainingStimuli(prevAcc, prevStim, name)
    %DIM2 is trials (160 trials perlevel)
    %DIM3 is level -- there are 20 levels! The stimuli are the same in 1-5,
    %6-10, etc.
-   if exist(['./history/' name],'dir')
-   else
-       mkdir(['./history/' name])
-   end
-
-   save (['./history/' name '/trainingStimuliWeight_' datestr(now, 'yyyymmdd_HHMM') '.mat'], 'trainingStimuli')
+   
+   save (['./history/trainingStimuliWeight' name '.mat'], 'trainingStimuli')
 
 end

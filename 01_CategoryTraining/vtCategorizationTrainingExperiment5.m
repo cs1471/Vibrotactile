@@ -62,9 +62,11 @@ function vtCategorizationTrainingExperiment5(name, exptdesign)
         drawAndCenterText(w,['Training Block #' num2str(iBlock) ' of ' num2str(exptdesign.numSessions) '\n\n\n\n'...
             'You are on Level ' num2str(level) '\n\n\n\n' 'Click the mouse to continue'],1); 
         KbWait(1);
-        if level > 5 && (exist(['./history/trainingStimuliWeight' name '.mat'], 'file') == 2)
+        if level > 5 && (exist(['./history/' name ], 'dir') == 7)
             clear trainingStimuli;
-            load(['./history/trainingStimuliWeight' name '.mat']);
+            filename = dir(['./history/' name '/training*']);
+            filename = filename(length(filename)).name;
+            load(filename);
              %randomize the stimuli for this level
             order = randperm(size(trainingStimuli{:},2));
             stimuli = trainingStimuli{1}(:,order);
@@ -232,10 +234,7 @@ function vtCategorizationTrainingExperiment5(name, exptdesign)
         
         if level > 5 && level ~= exptdesign.maxLevel
             %call function that generates a weighted training stimuli file 
-            if (exist(['./history/trainingStimuliWeight' name '.mat'], 'file') == 2)
-                delete(['./history/trainingStimuliWeight' name '.mat'])
-            end
-            makeWeightedTrainingStimuli(trialOutput(iBlock).accuracy, trialOutput(iBlock).stimuli, name, iBlock);
+            makeWeightedTrainingStimuli(trialOutput(iBlock).accuracy, trialOutput(iBlock).stimuli, name);
         end
         
         if level == exptdesign.maxLevel

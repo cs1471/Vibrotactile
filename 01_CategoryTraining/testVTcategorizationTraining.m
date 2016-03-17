@@ -1,17 +1,11 @@
 %Wrapper For Categoziation Training
 %June 15 2015
 %CAS cas243@georgetown.edu
-% dbstop if error;
 %prompt experimenter to check white noise, ear plubs
-% diary('log_file.log'); % this will write all the output of the commanr
-% line in a file. Useful if some errors occurred.
-input('\n\nIs white noise playing? Hit Enter when "Yes."\n');
-input('\n\nDoes participant have ear plugs? Hit Enter when "Yes."\n');
 
 %get subject info
-number = input('\n\nEnter Subject NUMBER:\n\n','s');
-name = number;
-if isempty(name)
+number = '915';
+if isempty(number)
     name = 'MR000';
 else
     name = ['MR' name];
@@ -41,7 +35,7 @@ pause(2)
 
 exptdesign.level=exptdesign.training.lastLevelPassed;
 
-exptdesign.numSessions = 6;              % number of blocks (160 trials each) to complete this training session
+exptdesign.numSessions = 2;              % number of blocks (160 trials each) to complete this training session
 
 % if/else statement to set the number of trials for the level
 if exptdesign.level >= 5
@@ -72,11 +66,10 @@ exptdesign.correct2='imgsscaled/replayTrelp.png';
 
 exptdesign.imageDirectory = 'imgsscaled/';
 
-%open COM1 port
 try
-stimGenPTB('CloseAll');
-catch
-end
 stimGenPTB('open','COM1')
-
 vtCategorizationTrainingExperiment5(name,exptdesign);
+catch
+Screen('CloseAll')
+stimGenPTB('CloseAll');
+end
