@@ -1,9 +1,8 @@
 %Wrapper For Categoziation Training
 %June 15 2015
 %CAS cas243@georgetown.edu
-%prompt experimenter to check white noise, ear plubs
 
-input('\nDid you pull from github? Hit Enter when "Yes."\n');
+input('\nDid you pull from Git? Hit Enter when "Yes."\n');
 input('\nIs white noise playing? Hit Enter when "Yes."\n');
 input('\nDoes participant have ear plugs? Hit Enter when "Yes."\n');
 input('\nIs the driver machine on? Hit Enter when "Yes."\n');
@@ -52,7 +51,7 @@ end
 
 exptdesign.fixationImage = 'imgsscaled/fixation.bmp';  % image for the fixation cross
 exptdesign.blankImage = 'imgsscaled/blank.bmp';        % image for the blank screen
-exptdesign.maxLevel = 13;
+exptdesign.maxLevel = 14;
 
 exptdesign.giveFeedback=1;
 exptdesign.cat1label='imgsscaled/labelsGarkTrelp.png'; 

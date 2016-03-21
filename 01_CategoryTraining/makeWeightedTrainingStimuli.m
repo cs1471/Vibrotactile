@@ -34,15 +34,15 @@ function makeWeightedTrainingStimuli(prevAcc, prevStim, name)
    [fSort, fMinInd] = sort(f);
 
    %%  
-   f = f1(fMinInd(1:4));
-   fReverse = f1(22-fMinInd(1:4));
+   f = f1(fMinInd(1:2));
+   fReverse = f1(22-fMinInd(1:2));
    
    %level 5 goes through all stimuli, once; so stimulators and category
    %don't match anymore
    level=[f1(1:9) f1(13:21); f2(1:9) f2(13:21)]; %frequency combos (18 total)
    level=repmat(level, 1,5); %repeat 8 times (this is 128!)
-   weightedLevel = [repmat(f,1,6) repmat(fReverse,1,6), repmat(f1(fMinInd(1)),1,6);
-                    repmat(fReverse,1,6) repmat(f,1,6), repmat(f1(22-fMinInd(1)),1,6)];
+   weightedLevel = [repmat(f(1),1,14), repmat(fReverse(1),1,14), repmat(f(2),1,12), repmat(fReverse(2),1,12);
+                    repmat(f(1),1,14), repmat(fReverse(1),1,14), repmat(f(2),1,12), repmat(fReverse(2),1,12)];
    
    level = [level, weightedLevel];
    
