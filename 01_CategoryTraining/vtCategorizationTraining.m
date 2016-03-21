@@ -1,13 +1,12 @@
 %Wrapper For Categoziation Training
 %June 15 2015
 %CAS cas243@georgetown.edu
-% dbstop if error;
 %prompt experimenter to check white noise, ear plubs
-% diary('log_file.log'); % this will write all the output of the commanr
-% line in a file. Useful if some errors occurred.
-input('\n\nIs white noise playing? Hit Enter when "Yes."\n');
-input('\n\nDoes participant have ear plugs? Hit Enter when "Yes."\n');
-input('\n\nIs the driver machine on? Hit Enter when "Yes."\n');
+
+input('\nDid you pull from github? Hit Enter when "Yes."\n');
+input('\nIs white noise playing? Hit Enter when "Yes."\n');
+input('\nDoes participant have ear plugs? Hit Enter when "Yes."\n');
+input('\nIs the driver machine on? Hit Enter when "Yes."\n');
 
 %get subject info
 number = input('\n\nEnter Subject NUMBER:\n\n','s');
@@ -72,11 +71,6 @@ exptdesign.correct1='imgsscaled/replayGark.png';
 exptdesign.correct2='imgsscaled/replayTrelp.png';
 
 exptdesign.imageDirectory = 'imgsscaled/';
-
-handle = errordlg(['Did you remember to pull from Git repo?!\n'...
-                   'Because I know for a fact Courtney will eat\n'
-                   'your grandbabies if you didnt!']);
-disp(handle);
 
 %open COM1 port
 try
