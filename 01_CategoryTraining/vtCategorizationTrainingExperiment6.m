@@ -231,18 +231,18 @@ try
         levelAccuracy = [repmat(.75, [1 3]) .70 .75 .775 .80 .825 .85 .875 .9 .925 .90];
        
         f1 = 2.^((0:.1:2)+log2(25));
-        if (accuracyForLevel >= levelAccuracy(level)) && level < exptdesign.maxLevel;
+        if (accuracyForLevel >= levelAccuracy(level)) && level < exptdesign.maxLevel-1;
             level = level + 1;
         else
             counter = 1;
-            for i = 1:length(accuracyForLevel)
-                if stimuli(1) == f1(8) || stimuli(1) == f1(14)
-                    level13Acc(counter) = accuracyForLevel(i)
+            for i = 1:size(trialOutput(iBlock).accuracy,2)
+                if stimuli(1,i) == f1(8) || stimuli(1,i) == f1(14)
+                    level13Acc(counter) = trialOutput(iBlock).accuracy(i);
                     counter = counter + 1;
                 end
             end
             if mean(level13Acc) >= levelAccuracy(level)
-                level = level + 1
+                level = level + 1;
             end
         end
         

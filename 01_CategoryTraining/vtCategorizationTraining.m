@@ -74,9 +74,9 @@ exptdesign.imageDirectory = 'imgsscaled/';
 %open COM1 port
 try
     stimGenPTB('open','COM1')
-    vtCategorizationTrainingExperiment5(name,exptdesign);
+    vtCategorizationTrainingExperiment6(name,exptdesign);
 catch
-    disp('Closing all screens and closing the comport')
+    disp('Closing all screens and closing the Com Port')
     stimGenPTB('close');
     Screen('CloseAll');
 end
