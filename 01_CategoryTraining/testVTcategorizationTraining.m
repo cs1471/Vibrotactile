@@ -5,7 +5,7 @@
 
 %get subject info
 number = '915';
-name = ['MR' name];
+name = ['MR' number];
 exptdesign.subNumber = number; 
 exptdesign.subName = name;
 WaitSecs(0.25);
@@ -58,10 +58,10 @@ exptdesign.correct2='imgsscaled/replayTrelp.png';
 
 exptdesign.imageDirectory = 'imgsscaled/';
 
-try
+%try
 stimGenPTB('open','COM1')
-vtCategorizationTrainingExperiment5(name,exptdesign);
-catch
-Screen('CloseAll')
-stimGenPTB('CloseAll');
-end
+vtCategorizationTrainingExperiment7(name,exptdesign);
+% catch
+% Screen('CloseAll')
+% stimGenPTB('CloseAll');
+% end
