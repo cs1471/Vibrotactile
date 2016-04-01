@@ -17,10 +17,7 @@ WaitSecs(0.25);
 exptdesign.subjectName = name;
 exptdesign.numBlocks = 1;              % number of blocks
 exptdesign.numTrialsPerSession = 4; 
-
-if exptdesign.practiceType == '0'
-    exptdesign.StimPresentationWindow = .3;
-end
+exptdesign.StimPresentationWindow = .3;
 
 exptdesign.fixationImage  = 'imgScaled/fixation.bmp';  % image for the fixation cross
 exptdesign.stimBoardImages = dir('imgScaled/stimBoard*.bmp');

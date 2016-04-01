@@ -9,7 +9,7 @@ function testChannelsExperiment(exptdesign)
     % Open window with default settings:
     Screen('Preference', 'SkipSyncTests', 1)
     [w windowRect] = Screen('OpenWindow', screenNumber,[128 128 128]);
-    %[w windowRect] = Screen('OpenWindow', screenNumber,[128 128 128], [0 0 1000 1000]); 
+    %[w windowRect] = Screen('OpenWindow', screenNumber,[128 128 128], [0 0 200 200]); 
    
     %HideCursor;
     %load images and textures
@@ -17,16 +17,15 @@ function testChannelsExperiment(exptdesign)
     fixationTexture = Screen('MakeTexture', w, double(fixationImage));
     j = 1;
     for i = 1:length(exptdesign.stimBoardImages)
-        stimBoardImages(:,:,:,j) = imread(['imgScaled/' exptdesign.stimBoardImages(i).name]);
+        stimBoardImages(:,:,:,j) = {imread(['imgScaled/' exptdesign.stimBoardImages(i).name])};
         j = j+1;
     end
     
     for i = 1:size(stimBoardImages,4)
-        stimBoardTextures(i) = Screen('MakeTexture', w, double(stimBoardImages(:,:,:,i)));
+        stimBoardTextures(i) = Screen('MakeTexture', w, double(stimBoardImages{:,:,:,i}));
     end
     
     stimPresentation = exptdesign.StimPresentationWindow;
-    practiceType = exptdesign.practiceType;
     
     %load training stimuli
     load('testStimuli.mat');
