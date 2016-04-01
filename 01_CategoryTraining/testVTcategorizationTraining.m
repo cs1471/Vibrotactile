@@ -5,11 +5,7 @@
 
 %get subject info
 number = '915';
-if isempty(number)
-    name = 'MR000';
-else
-    name = ['MR' name];
-end
+name = ['MR' name];
 exptdesign.subNumber = number; 
 exptdesign.subName = name;
 WaitSecs(0.25);
@@ -38,15 +34,11 @@ exptdesign.level=exptdesign.training.lastLevelPassed;
 exptdesign.numSessions = 2;              % number of blocks (160 trials each) to complete this training session
 
 % if/else statement to set the number of trials for the level
-if exptdesign.level >= 5
-    exptdesign.numTrialsPerSession = 144;    % number of trials per block for level 5
-else 
-    exptdesign.numTrialsPerSession = 128;  % numbeer of trials per block for levels 1,2,3 and 4
-end
+exptdesign.numTrialsPerSession = 144;    % number of trials per block for level 5
 
 exptdesign.fixationImage = 'imgsscaled/fixation.bmp';  % image for the fixation cross
 exptdesign.blankImage = 'imgsscaled/blank.bmp';        % image for the blank screen
-exptdesign.maxLevel = 13;
+exptdesign.maxLevel = 14;
 
 exptdesign.giveFeedback=1;
 exptdesign.cat1label='imgsscaled/labelsGarkTrelp.png'; 
