@@ -1,9 +1,7 @@
 function testChannelsExperiment(exptdesign)
 
     % frequencyDiscrimination
-    % Courtney Sprouse cs1471@georgetown.edu, 
-    % Patrick Malone pmalone333@gmail.com,
-    % Levan Bokeria levan.bokeria@georgetown.edu
+    % Courtney Sprouse cs1471@georgetown.edu
     
     % Open a screen and display instructions
     screenNumber = 0;
@@ -31,11 +29,7 @@ function testChannelsExperiment(exptdesign)
     practiceType = exptdesign.practiceType;
     
     %load training stimuli
-    if practiceType == '0'
-        load('testStimuliCateg.mat');
-    else
-        load('testStimuli.mat');
-    end
+    load('testStimuli.mat');
     
     for iBlock=1:exptdesign.numBlocks
         drawAndCenterText(w, ['You will feel three pulses of a vibration at a particular channel.\n\n\n'...

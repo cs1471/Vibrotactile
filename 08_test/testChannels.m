@@ -15,22 +15,11 @@ end
 WaitSecs(0.25);
 
 exptdesign.subjectName = name;
-
-%check if the subject has a directory in data.  If not, make it.
-if exist(['./data/' number],'dir')
-else
-    mkdir(['./data/' number])
-end
-
 exptdesign.numBlocks = 1;              % number of blocks
-exptdesign.numTrialsPerSession = 12;
-
-exptdesign.practiceType = 1; % added this manualy. Should be an input? 
+exptdesign.numTrialsPerSession = 4; 
 
 if exptdesign.practiceType == '0'
     exptdesign.StimPresentationWindow = .3;
-else
-    exptdesign.StimPresentationWindow = .5;
 end
 
 exptdesign.fixationImage  = 'imgScaled/fixation.bmp';  % image for the fixation cross
