@@ -9,7 +9,7 @@ from dPrime import Dprime
 from FrequencyFunction_General import FrequencyGeneral
 from PositionFunction_General import Position_general
 import numpy as np
-import statistics as stat
+
 
 tls.set_credentials_file(username='cs1471', api_key='9xknhmjhas')
 

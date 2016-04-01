@@ -2,48 +2,23 @@
 import numpy as np
 import scipy.io as sio
 import plotly.plotly as py
-import statistics as stat
-import math as m
 import plotly.graph_objs as go
 import plotly.tools as tls
 from frequencyFunction_specific import FrequencySpecific
+from category import category
 
 tls.set_credentials_file(username='cs1471', api_key='9xknhmjhas')
 
-#################################################################################
-#allows specified increments
-def my_range(start, end, step):
-    while start <= end:
-        yield start
-        start += step
-
-#generates a list of frequencies that we test
-def makeFrequency():
-    frequencyList = [i for i in my_range(0, 2.05, 0.1)]
-
-    for index,obj in enumerate(frequencyList):
-        obj += m.log2(25)
-        frequencyList[index] = round(2**obj)
-    return frequencyList
-
-#################################MAIN##########################################
-# filename = input('Enter a filename: \n')
-# fileDirectory = input('Enter the directory where you want your figure saved: /n')
-# session = input('Enter the session number: \n')
-
 #Use when debugging or manually editing
-filename      = ('20160316_1156-MR976_block6')
-fileDirectory = '/Users/courtney/GoogleDrive/Riesenhuber/05_2015_scripts/Vibrotactile/01_CategoryTraining/data/976/'
-session       = '5'
+filename      = ('20160317_0940-MR1011_block3')
+fileDirectory = '/Users/courtney/GoogleDrive/Riesenhuber/05_2015_scripts/Vibrotactile/01_CategoryTraining/data/1011/'
+session       = '4'
 
 #load matfile
 data = sio.loadmat(fileDirectory + filename, struct_as_record=True)
 
-#make list of frequencies tested
-frequencyList = makeFrequency()
-
 #pull relevant data from structures
-RT              = data['trialOutput']['RT']
+reactionTime    = data['trialOutput']['RT']
 sResp           = data['trialOutput']['sResp']
 correctResponse = data['trialOutput']['correctResponse']
 accuracy        = data['trialOutput']['accuracy']
@@ -58,73 +33,15 @@ subjectName     = data['exptdesign']['subName'][0,0][0]
 #Calculations by Frequency Pair
 #############################################################################
 
-#FS = FrequencySpecific(stimuli=stimuli)
-#FS.frequencyPair_parse(accuracy)
-
+FS = FrequencySpecific(stimuli=stimuli)
+mF, countTotal = FS.frequencyPair_parse(accuracy)
 
 #############################################################################
 #Calculations by morph
 #############################################################################
 
-#calculate the accuracy by morph
-iBlock = iTrial = 0
-b_catProto_accuracy = []
-b_middleM_accuracy = []
-b_catBound_accuracy = []
-b_catProto_RT = []
-b_middleM_RT = []
-b_catBound_RT = []
-for iBlock in range(sResp.size):
-    catProto_accuracy = []
-    middleM_accuracy = []
-    catBound_accuracy = []
-    catProto_RT = []
-    middleM_RT = []
-    catBound_RT = []
-    for iTrial in range(sResp[0,iBlock].size):
-        stimulus = round(stimuli[0,iBlock][0,iTrial])
-        if stimulus == frequencyList[0] or stimulus == frequencyList[1] or stimulus == frequencyList[2]:
-            catProto_accuracy.append(accuracy[0,iBlock][0,iTrial])
-            catProto_RT.append(RT[0,iBlock][0,iTrial])
-        elif stimulus == frequencyList[20] or stimulus == frequencyList[19] or stimulus == frequencyList[18]:
-            catProto_accuracy.append(accuracy[0,iBlock][0,iTrial])
-            catProto_RT.append(RT[0,iBlock][0,iTrial])
-        elif stimulus == frequencyList[3] or stimulus == frequencyList[4] or stimulus == frequencyList[5]:
-            middleM_accuracy.append(accuracy[0,iBlock][0,iTrial])
-            middleM_RT.append(RT[0,iBlock][0,iTrial])
-        elif stimulus == frequencyList[17] or stimulus == frequencyList[16] or stimulus == frequencyList[15]:
-            middleM_accuracy.append(accuracy[0,iBlock][0,iTrial])
-            middleM_RT.append(RT[0,iBlock][0,iTrial])
-        elif stimulus == frequencyList[6] or stimulus == frequencyList[7] or stimulus == frequencyList[8]:
-            catBound_accuracy.append(accuracy[0,iBlock][0,iTrial])
-            catBound_RT.append(RT[0,iBlock][0,iTrial])
-        elif stimulus == frequencyList[14] or stimulus == frequencyList[13] or stimulus == frequencyList[12]:
-            catBound_accuracy.append(accuracy[0,iBlock][0,iTrial])
-            catBound_RT.append(RT[0,iBlock][0,iTrial])
-        else:
-            print("There is something wrong with your morph parsing function and stimuli are not be classified")
-            print("The following were stimuli were not parsed: ")
-            print(stimulus)
-    if catProto_accuracy != []:
-        b_catProto_accuracy.append(stat.mean(catProto_accuracy))
-        b_catProto_RT.append(stat.mean(catProto_RT))
-    else:
-        b_catProto_accuracy.append(0)
-        b_catProto_RT.append(0)
-
-    if middleM_accuracy != []:
-        b_middleM_RT.append(stat.mean(middleM_RT))
-        b_middleM_accuracy.append(stat.mean(middleM_accuracy))
-    else:
-        b_middleM_RT.append(0)
-        b_middleM_accuracy.append(0)
-
-    if catBound_accuracy != []:
-        b_catBound_accuracy.append(stat.mean(catBound_accuracy))
-        b_catBound_RT.append(stat.mean(catBound_RT))
-    else:
-        b_catBound_accuracy.append(0)
-        b_catBound_RT.append(0)
+catObj = category(stimuli= stimuli)
+RT,ACC = catObj.wrapper(accuracy, reactionTime)
 
 #############################################################################
 #Calculating mean acc and RT overall
@@ -138,14 +55,16 @@ for iBlock in range(accuracy.size):
 #calculate the mean RT overall by block
 O_reactionTime = []
 iBlock = 0
-for iBlock in range(RT.size):
-    O_reactionTime.append(np.mean(RT[0,iBlock]))
+for iBlock in range(reactionTime.size):
+    O_reactionTime.append(np.mean(reactionTime[0,iBlock]))
 
 #x-axis label
 x = []
 i=0
-for i in range(5):
+for i in range(nBlocks):
             x.append("Block: " + str(i+1) + ", Level: " + str(level[0,i][0,0])),
+
+
 
 #############################################################################
 #Generating figures
@@ -157,7 +76,7 @@ def make_trace_bar(x, y, name):
         x     = x,
         y     = y,            # take in the y-coords
         name  = name,      # label for hover
-        xaxis = 'x1',                    # (!) both subplots on same x-axis
+        xaxis = 'x1',
         yaxis = 'y1',
     )
 
@@ -184,17 +103,24 @@ def make_trace_line(y, name, dash):
     )
 
 #make trace containing each frequency pair
-x2 = ['[25,100]', '[27,91]', '[29,91]', '[31,83]', '[33,77]', '[36,71]', '[38,67]', '[40,62.5]', '[43,59]']
+x2 = ['[25,100]', '[27,91]', '[29,91]', '[31,83]', '[33,77]', '[36,71]', '[38,67]', '[40,62.5]', '[43,59]',
+      '[59, 43]', '[62.5, 40]', '[67, 38]', '[71, 36]','[77, 33]', '[83, 31]', '[91, 29]', '[91, 27]','[100, 25]']
 
-#trace_ACC_FP = make_trace_bar(x2, mF, '')
+trace_ACC_FP = make_trace_bar(x2, mF, '')
 
+#, ACC[9], ACC[12], ACC[15]
+#, ACC[10], ACC[13], ACC[16]
+#, ACC[11], ACC[14], ACC[17]
+#, RT[9], RT[12], RT[15]
+#, RT[10], RT[13], RT[16]
+#, RT[11], RT[14], RT[17]
 #make trace containing acc and RT for morph
-trace1 = make_trace_bar(x, b_catProto_accuracy,  "Category Prototype Acc")
-trace2 = make_trace_bar(x, b_middleM_accuracy, "Middle Morph Acc")
-trace3 = make_trace_bar(x, b_catBound_accuracy, "Category Boundary Acc")
-trace4 = make_trace_line(b_catProto_RT, "Category Prototype RT", 'n')
-trace5 = make_trace_line(b_middleM_RT, "Middle Morph RT", 'n')
-trace6 = make_trace_line(b_catBound_RT, "Category Boundary RT", 'n')
+trace1 = make_trace_bar(x, [ACC[0], ACC[3], ACC[6]],  "Category Prototype Acc")
+trace2 = make_trace_bar(x, [ACC[1], ACC[4], ACC[7]], "Middle Morph Acc")
+trace3 = make_trace_bar(x, [ACC[2], ACC[5], ACC[8]], "Category Boundary Acc")
+trace4 = make_trace_line([RT[0], RT[3], RT[6]], "Category Prototype RT", 'n')
+trace5 = make_trace_line([RT[1], RT[4], RT[7]], "Middle Morph RT", 'n')
+trace6 = make_trace_line([RT[2], RT[5], RT[8]], "Category Boundary RT", 'n')
 
 #make trace containing overall acc and rt
 trace7 = make_trace_line(O_accuracy, "Overall Accuracy", 'y')
@@ -202,29 +128,31 @@ trace8 = make_trace_line(O_reactionTime, "Overall RT", 'y')
 
 # Generate Figure object with 2 axes on 2 rows, print axis grid to stdout
 fig  = tls.make_subplots(rows=1, cols=1, shared_xaxes=True)
-#fig_FP = tls.make_subplots(rows=1, cols=1, shared_xaxes=True)
+fig_FP = tls.make_subplots(rows=1, cols=1, shared_xaxes=True)
 
 #set figure layout to hold mutlitple bars
 fig['layout'].update(barmode='group', bargroupgap=0, bargap=0.25,
     title = subjectName + " Accuracy and RT By Morph Session " + session, yaxis = dict(dtick = .1))
 
-#fig_FP['layout'].update(barmode='group', bargroupgap=0, bargap=0.25,
-#    title = subjectName + " Accuracy and RT By Frequency Pair, Session " + session,  yaxis = dict(dtick = .1))
+xZip = x2[:len(x2)]
+yZip = countTotal
+
+fig_FP['layout'].update(barmode='group', bargroupgap=0, bargap=0.25,
+    title = subjectName + " Accuracy By Frequency Pair, Session " + session,  yaxis = dict(dtick = .1),
+    annotations = [dict(x = xZip[i], y = mF[i], text=yZip[i], xanchor='center', yanchor='bottom', showarrow=False) for i in range(len(xZip))])
+
+colorRA = ['black', 'blue', 'black', 'black', 'black', 'black', 'black' ,'blue', 'black',
+           'black', 'blue', 'black', 'black', 'black', 'black', 'black' ,'blue', 'black']
 
 fig['data']  = [trace1, trace2, trace3, trace7, trace4, trace5, trace6, trace8]
-#fig_FP['data'] = [go.Bar(x=x2, y=mF)]
+fig_FP['data'] = [go.Bar(x=x2, y=mF, marker = dict(color = colorRA))]
 #bread crumbs to make sure entered the correct information
 print("Your graph will be saved in this directory: " + fileDirectory + "\n")
 print("Your graph will be saved under: " + filename + "\n")
 print("The session number you have indicated is: " + session + "\n")
 
-
-
 #save images as png in case prefer compared to html
 py.image.save_as(fig, fileDirectory + filename + "_CategTrainingMorphAccSession" + session + ".jpeg")
-#py.image.save_as(fig_FP, fileDirectory + filename + "_FP_AccSession" + session + ".jpeg")
-
-#close all open files
-# f.close()
+py.image.save_as(fig_FP, fileDirectory + filename + "_FP_AccSession" + session + ".jpeg")
 
 print("Done!")

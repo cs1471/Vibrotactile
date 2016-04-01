@@ -28,14 +28,11 @@ FL = FG()
 FL.setFrequencyList()
 
 #pull relevant data from structures
-RT       = [dataS0['trialOutput']['RT'], dataS1['trialOutput']['RT']]
-
-accuracy = [dataS0['trialOutput']['accuracy'], dataS1['trialOutput']['accuracy']]
-
-stimuli  = [dataS0['trialOutput']['stimuli'], dataS1['trialOutput']['stimuli']]
-
+RT            = [dataS0['trialOutput']['RT'], dataS1['trialOutput']['RT']]
+accuracy      = [dataS0['trialOutput']['accuracy'], dataS1['trialOutput']['accuracy']]
+stimuli       = [dataS0['trialOutput']['stimuli'], dataS1['trialOutput']['stimuli']]
 subjectNumber = dataS0['exptdesign']['subNumber'][0,0][0]
-subjectName = dataS0['exptdesign']['subName'][0,0][0]
+subjectName   = dataS0['exptdesign']['subName'][0,0][0]
 
 #############################################################################
 #Generating accuracy by category
