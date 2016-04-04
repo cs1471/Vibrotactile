@@ -60,6 +60,9 @@ exptdesign.fb1='imgsscaled/labelsWordSet1_wrong1.png';
 exptdesign.fb2='imgsscaled/labelsWordSet1_wrong2.png';
 exptdesign.fb3='imgsscaled/labelsWordSet2_wrong1.png';
 exptdesign.fb4='imgsscaled/labelsWordSet2_wrong2.png';
+%show correct answers
+exptdesign.correct1='imgsscaled/replayBlue.png';
+exptdesign.correct2='imgsscaled/replayRed.png';
 
 exptdesign.imageDirectory = 'imgsscaled/';
 
@@ -68,10 +71,10 @@ try
     stimGenPTB('open','COM1')
     vtCategorizationTrainingExperiment7(name,exptdesign);
 catch
-    disp('Closing all screens and closing the Com Port')
-    stimGenPTB('close');
-    Screen('CloseAll');
-end
+     disp('Closing all screens and closing the Com Port')
+     stimGenPTB('close');
+     Screen('CloseAll');
+ end
 
  handle = errordlg('Please ensure the driver box is turned off');
  disp(handle);

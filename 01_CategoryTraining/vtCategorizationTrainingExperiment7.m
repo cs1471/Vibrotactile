@@ -1,7 +1,7 @@
 %vibrotactile categorization training! called by vtCategorizationTraining.m
 %Clara A. Scholl, cas243@georgetown.edu
 function vtCategorizationTrainingExperiment7(name, exptdesign)
-try
+%try
     rand('twister',sum(100*clock))
 
     % Open a screen and display instructions
@@ -18,6 +18,8 @@ try
     %load the images and pngs
     response1 = imread(exptdesign.cat1label, 'png', 'BackgroundColor', [0.5 0.5 0.5]);
     response2 = imread(exptdesign.cat2label, 'png', 'BackgroundColor', [0.5 0.5 0.5]);
+    correct1=imread(exptdesign.correct1, 'png', 'BackgroundColor', [0.5 0.5 0.5]);
+    correct2=imread(exptdesign.correct2, 'png', 'BackgroundColor', [0.5 0.5 0.5]);
 
     %feedback for incorrect trials
     fb1=imread(exptdesign.fb1, 'png', 'BackgroundColor', [0.5 0.5 0.5]);
@@ -34,6 +36,8 @@ try
     fb2Texture=Screen('MakeTexture', w, double(fb2));
     fb3Texture=Screen('MakeTexture', w, double(fb3));
     fb4Texture=Screen('MakeTexture', w, double(fb4));
+    correct1Texture=Screen('MakeTexture', w, double(correct1));
+    correct2Texture=Screen('MakeTexture', w, double(correct2));
     %Display experiment instructions
     drawAndCenterText(w, ['Please review instructions \n'...
         'Please click a mouse button to advance at each screen'],1)
@@ -258,10 +262,10 @@ try
     end %end of block
     ShowCursor;
 
-catch
-    ShowCursor;
-    save(['./data/' exptdesign.subNumber '/' datestr(now, 'yyyymmdd_HHMM') '-' exptdesign.subName '_block' num2str(iBlock) '.mat'], 'trialOutput', 'exptdesign');
-end
+%catch
+    %ShowCursor;
+    %save(['./data/' exptdesign.subNumber '/' datestr(now, 'yyyymmdd_HHMM') '-' exptdesign.subName '_block' num2str(iBlock) '.mat'], 'trialOutput', 'exptdesign');
+%end
 
 
 end
