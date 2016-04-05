@@ -15,7 +15,7 @@ tls.set_credentials_file(username='cs1471', api_key='9xknhmjhas')
 # session = input('Enter the session number: \n')
 
 #Use when debugging or manually editing
-filename = ('20160314_1044-MR1009_block7')
+filename = ('20160404_1404-MR1009_block7')
 fileDirectory = '/Users/courtney/GoogleDrive/Riesenhuber/05_2015_scripts/Vibrotactile/06_frequencyDiscrimination/data/1009/'
 
 #load matfile
@@ -89,14 +89,14 @@ def make_trace_line(x, y, name):
 trace_FG_ACC = []
 trace_FG_RT = []
 
-trace_PG_ACC_3or4   = make_trace_bar(x, [stat.mean(PosObj.ACC[0]),stat.mean(PosObj.ACC[4])], "Position 3 or 4 Acc" )
-trace_PG_ACC_5or6   = make_trace_bar(x, [stat.mean(PosObj.ACC[1]),stat.mean(PosObj.ACC[5])],"Position 5 or 6 Acc" )
-trace_PG_ACC_9or10  = make_trace_bar(x, [stat.mean(PosObj.ACC[2]),stat.mean(PosObj.ACC[6])],"Position 9 or 10 Acc" )
-trace_PG_ACC_11or12 = make_trace_bar(x, [stat.mean(PosObj.ACC[3]),stat.mean(PosObj.ACC[7])],"Position 11 or 12 Acc" )
-trace_PG_RT_3or4    = make_trace_line(x, [stat.mean(PosObj.RT[0]),stat.mean(PosObj.RT[4])],"Position 3 or 4 RT" )
-trace_PG_RT_5or6    = make_trace_line(x, [stat.mean(PosObj.RT[1]),stat.mean(PosObj.RT[5])],"Position 5 or 6 RT" )
-trace_PG_RT_9or10   = make_trace_line(x, [stat.mean(PosObj.RT[2]),stat.mean(PosObj.RT[6])],"Position 9 or 10 RT" )
-trace_PG_RT_11or12  = make_trace_line(x, [stat.mean(PosObj.RT[3]),stat.mean(PosObj.RT[7])],"Position 11 or 12 RT" )
+trace_PG_ACC_3or4   = make_trace_bar(x, [PosObj.ACC[0][0], PosObj.ACC[0][4]], "Position 3 or 4 Acc" )
+trace_PG_ACC_5or6   = make_trace_bar(x, [PosObj.ACC[0][1],PosObj.ACC[0][5]],"Position 5 or 6 Acc" )
+trace_PG_ACC_9or10  = make_trace_bar(x, [PosObj.ACC[0][2],PosObj.ACC[0][6]],"Position 9 or 10 Acc" )
+trace_PG_ACC_11or12 = make_trace_bar(x, [PosObj.ACC[0][3],PosObj.ACC[0][7]],"Position 11 or 12 Acc" )
+trace_PG_RT_3or4    = make_trace_line(x, [PosObj.RT[0][0],PosObj.RT[0][4]],"Position 3 or 4 RT" )
+trace_PG_RT_5or6    = make_trace_line(x, [PosObj.RT[0][1],PosObj.RT[0][5]],"Position 5 or 6 RT" )
+trace_PG_RT_9or10   = make_trace_line(x, [PosObj.RT[0][2],PosObj.RT[0][6]],"Position 9 or 10 RT" )
+trace_PG_RT_11or12  = make_trace_line(x, [PosObj.RT[0][3],PosObj.RT[0][7]],"Position 11 or 12 RT" )
 
 #make trace containing acc by frequency for Same and different Condition
 for index in FreqObj.ACC:

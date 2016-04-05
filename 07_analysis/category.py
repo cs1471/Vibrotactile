@@ -42,6 +42,29 @@ class category():
         else:
             return False
 
+    def parseCategory(self, rawData):
+        #calculate accuracy by category type
+        b_categoryA = []
+        b_categoryB = []
+        for iBlock in range(rawData.size):
+            categoryA = []
+            categoryB = []
+            for iTrial in range(rawData[0,iBlock].size):
+                stimulus = round(rawData[0,iBlock][0,iTrial])
+                if stimulus < 47:
+                    categoryA.append(rawData[0,iBlock][0,iTrial])
+                elif stimulus > 47:
+                    categoryB.append(rawData[0,iBlock][0,iTrial])
+                else:
+                    print("Sorry there is an error in your category parsing function and some stimuli are not being classified")
+                    print("This stimulus was not put into a category: ")
+                    print(stimulus)
+
+            b_categoryA.append(stat.mean(categoryA))
+            b_categoryB.append(stat.mean(categoryB))
+
+        data = [b_categoryA, b_categoryB]
+        return data
 
     def parser(self, rawData):
         #calculate the accuracy by morph

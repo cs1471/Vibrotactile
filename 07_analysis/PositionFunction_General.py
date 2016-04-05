@@ -197,15 +197,15 @@ class Position_general():
 
     def parseData_freq_block (self, rawData, stimuli):
         data = []
+        D_pos3or4 = []
+        D_pos5or6 = []
+        D_pos9or10 = []
+        D_pos11or12 = []
+        S_pos3or4 = []
+        S_pos5or6 = []
+        S_pos9or10 = []
+        S_pos11or12 = []
         for iBlock in range(rawData.size):
-            D_pos3or4 = []
-            D_pos5or6 = []
-            D_pos9or10 = []
-            D_pos11or12 = []
-            S_pos3or4 = []
-            S_pos5or6 = []
-            S_pos9or10 = []
-            S_pos11or12 = []
             for iTrial in range(rawData[0,iBlock].size):
                 pos1 = int(stimuli[0,iBlock][1,iTrial])
                 stim1 = stimuli[0,iBlock][0,iTrial]
@@ -237,8 +237,8 @@ class Position_general():
                         print(stim1, stim2)
                         print(pos1)
 
-            data.append([stat.mean(D_pos3or4), stat.mean(D_pos5or6), stat.mean(D_pos9or10),stat.mean(D_pos11or12),
-                            stat.mean(S_pos3or4), stat.mean(S_pos5or6), stat.mean(S_pos9or10), stat.mean(S_pos11or12) ])
+        data.append([stat.mean(D_pos3or4), stat.mean(D_pos5or6), stat.mean(D_pos9or10),stat.mean(D_pos11or12),
+                     stat.mean(S_pos3or4), stat.mean(S_pos5or6), stat.mean(S_pos9or10), stat.mean(S_pos11or12) ])
         return data
 
     def calcAccRT(self, accuracy, RT, stimuli, type, parseBy):
