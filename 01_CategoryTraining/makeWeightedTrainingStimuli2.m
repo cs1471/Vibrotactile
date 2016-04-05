@@ -2,7 +2,7 @@
 %June 15 2015
 %Clara Scholl cas243@georgetown.edu
 
-function makeWeightedTrainingStimuli(prevAcc, prevStim, name)
+function makeWeightedTrainingStimuli2(prevAcc, prevStim, name)
 
     %dimensions are 240 stimuli x 4 parameters x 20 levels
     %the five columns (dimension 2) are:
@@ -22,27 +22,26 @@ function makeWeightedTrainingStimuli(prevAcc, prevStim, name)
     %frequency line)
     f1 = 2.^((0:.1:2)+log2(25));
     f2 = fliplr(f1);
-    numFreqPairs = (length(f1) -3)/2;
+    numFreqPairs = (length(f1) -3);
     stimulator = [3; 9];
     
    %%
    for i = 1:numFreqPairs
-        f(i,:) = {prevAcc(prevStim(1,:) == f1(i) | prevStim(1,:) == f1(22-i))};
+        f(i,:) = {prevAcc(prevStim(1,:) == f1(i))};
    end
    
    f = cellfun(@mean, f);
    [fSort, fMinInd] = sort(f);
 
    %%  
-   f = f1(fMinInd(1:2));
-   fReverse = f1(22-fMinInd(1:2));
+   f = f1(fMinInd(1:4));
    
    %level 5 goes through all stimuli, once; so stimulators and category
    %don't match anymore
    level=[f1(1:9) f1(13:21); f2(1:9) f2(13:21)]; %frequency combos (18 total)
    level=repmat(level, 1,5); %repeat 8 times (this is 128!)
    weightedLevel = [repmat(f(1),1,14), repmat(fReverse(1),1,14), repmat(f(2),1,13), repmat(fReverse(2),1,13);
-                    repmat(fReverse(1),1,14), repmat(f(1),1,14), repmat(fReverse(2),1,13), repmat(f(2),1,13)];
+                    repmat(f(1),1,14), repmat(fReverse(1),1,14), repmat(f(2),1,13), repmat(fReverse(2),1,13)];
    
    level = [level, weightedLevel];
    
