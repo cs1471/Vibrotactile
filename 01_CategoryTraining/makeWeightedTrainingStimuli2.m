@@ -41,7 +41,7 @@ function makeWeightedTrainingStimuli2(prevAcc, prevStim, name)
    level=[f1(1:9) f1(13:21); f2(1:9) f2(13:21)]; %frequency combos (18 total)
    level=repmat(level, 1,5); %repeat 8 times (this is 128!)
    weightedLevel = [repmat(f(1),1,14), repmat(fReverse(1),1,14), repmat(f(2),1,13), repmat(fReverse(2),1,13);
-                    repmat(f(1),1,14), repmat(fReverse(1),1,14), repmat(f(2),1,13), repmat(fReverse(2),1,13)];
+                    repmat(fReverse(1),1,14), repmat(f(1),1,14), repmat(fReverse(2),1,13) , repmat(f(2),1,13)];
    
    level = [level, weightedLevel];
    
