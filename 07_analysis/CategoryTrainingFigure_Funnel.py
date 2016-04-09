@@ -10,9 +10,9 @@ from category import category
 tls.set_credentials_file(username='cs1471', api_key='9xknhmjhas')
 
 #Use when debugging or manually editing
-filename      = ('20160404_1518-MR1011_block6')
+filename      = ('20160406_1446-MR1011_block6')
 fileDirectory = '/Users/courtney/GoogleDrive/Riesenhuber/05_2015_scripts/Vibrotactile/01_CategoryTraining/data/1011/'
-session       = '7'
+session       = '8'
 
 #load matfile
 data = sio.loadmat(fileDirectory + filename, struct_as_record=True)
@@ -104,7 +104,8 @@ def make_trace_line(x, y, name, dash):
 #make trace containing each frequency pair
 x2 = ['[25,100]', '[27,91]', '[29,91]', '[31,83]', '[33,77]', '[36,71]', '[38,67]', '[40,62.5]', '[43,59]',
       '[59, 43]', '[62.5, 40]', '[67, 38]', '[71, 36]','[77, 33]', '[83, 31]', '[91, 29]', '[91, 27]','[100, 25]']
-x3 = ['100%', '95%', '90%', '85%', '80%', '75%', '70%', '65%', '60%', '55%', '50%', '45%', '40%', '35%', '30%', '25%', '20%', '15%', '10%', '5%', '0%']
+x3 = ['95%', '90%', '85%', '80%', '75%', '70%', '65%', '60%', '40%', '35%', '30%', '25%', '20%', '15%', '10%', '5%']
+#x3 = ['95%', '90%', '85%', '80%', '75%', '70%', '65%', '60%', '55%', '50%', '45%', '40%', '35%', '30%', '25%', '20%', '15%', '10%', '5%']
 
 trace_ACC_FP = make_trace_bar(x2, mF, '')
 
@@ -122,12 +123,12 @@ trace8 = make_trace_line(x, O_reactionTime, "Overall RT", 'n')
 
 # make categorization curve
 traceCatCurve = []
-for obj in catA:
+for index, obj in enumerate(catA):
     traceCatCurve.append(make_trace_line(x3, obj, '', 'n'))
 # Generate Figure object with 2 axes on 2 rows, print axis grid to stdout
 fig          = tls.make_subplots(rows=1, cols=1, shared_xaxes=True)
 fig_FP       = tls.make_subplots(rows=1, cols=1, shared_xaxes=True)
-fig_CatCurve = tls.make_subplots(rows=1, cols=1, shared_xaxes=True)
+fig_CatCurve = tls.make_subplots(rows=1, cols=1)
 
 #set figure layout to hold mutlitple bars
 fig['layout'].update(barmode='group', bargroupgap=0, bargap=0.25,
@@ -141,14 +142,14 @@ fig_FP['layout'].update(barmode='group', bargroupgap=0, bargap=0.25,
     annotations = [dict(x = xZip[i], y = mF[i], text=yZip[i], xanchor='center', yanchor='bottom', showarrow=False) for i in range(len(xZip))])
 
 fig_CatCurve['layout'].update(barmode='group', bargroupgap=0, bargap=0.25,
-    title = subjectName + " Categorization Curve " + session, yaxis = dict(dtick = .1))
+    title = subjectName + " Categorization Curve " + session, xaxis = dict(autorange = 'reversed', dtick = 5, range=[0,100]), yaxis = dict(range=[0,100], dtick = 5), annotations = [dict(text = 'Category Boundary')])
 
 colorRA = ['black', 'blue', 'black', 'black', 'black', 'black', 'black' ,'blue', 'black',
            'black', 'blue', 'black', 'black', 'black', 'black', 'black' ,'blue', 'black']
 
 fig['data']  = [trace1, trace2, trace3, trace7, trace4, trace5, trace6, trace8]
 fig_FP['data'] = [go.Bar(x=x2, y=mF, marker = dict(color = colorRA))]
-fig_CatCurve['data'] = [traceCatCurve]
+fig_CatCurve['data'] = [go.Scatter(x = x3, y=catA)]
 
 #bread crumbs to make sure entered the correct information
 print("Your graph will be saved in this directory: " + fileDirectory + "\n")

@@ -99,9 +99,10 @@ trace_PG_RT_9or10   = make_trace_line(x, [PosObj.RT[0][2],PosObj.RT[0][6]],"Posi
 trace_PG_RT_11or12  = make_trace_line(x, [PosObj.RT[0][3],PosObj.RT[0][7]],"Position 11 or 12 RT" )
 
 #make trace containing acc by frequency for Same and different Condition
-for index in FreqObj.ACC:
-    trace_FG_ACC.append(make_trace_bar(x2, [stat.mean(index)], "Acc"))
-    trace_FG_RT.append(make_trace_line(x2, [stat.mean(index)], "RT"))
+trace_FG_ACC.append(make_trace_bar(x2, [FreqObj.ACC[0][0], FreqObj.ACC[0][1], FreqObj.ACC[0][2], FreqObj.ACC[0][3], FreqObj.ACC[0][4], FreqObj.ACC[0][5]] , "Acc"))
+
+for index in range(6):
+    trace_FG_RT.append(make_trace_line(x2[index], FreqObj.RT[0][index], "RT"))
 
 # Generate Figure object with 2 axes on 2 rows, print axis grid to stdout
 fig_frequency = tls.make_subplots( rows=1, cols=1, shared_xaxes=True )
@@ -114,7 +115,7 @@ fig_frequency['layout'].update( barmode='group', bargroupgap=0, bargap=0.25,
 fig_position['layout'].update( barmode='group', bargroupgap=0, bargap=0.25,
                        title = subjectNumber + " Accuracy by Position across conditions " + session )
 
-fig_frequency['data']  = [trace_FG_ACC, trace_FG_RT ]
+fig_frequency['data']  = trace_FG_ACC
 fig_position['data'] = [trace_PG_ACC_3or4, trace_PG_ACC_5or6, trace_PG_ACC_9or10, trace_PG_ACC_11or12,
                           trace_PG_RT_3or4, trace_PG_RT_5or6, trace_PG_RT_9or10, trace_PG_RT_11or12 ]
 

@@ -2,22 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0794c37e-0125-4d6f-89ef-6834103a2107" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/data/915/20160401_1652-MRMRMRMR000_block1.mat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/data/915/20160401_1657-MRMRMRMRMR000_block1.mat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/data/915/20160401_1706-MRMRMRMRMRMRMRMR000_block1.mat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/data/915/20160401_1711-MRMRMRMRMRMRMRMRMR000_block1.mat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/data/915/20160401_1719-MRMRMRMRMRMRMRMRMRMRMRMR000_block1.mat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/data/915/20160401_1721-MRMRMRMRMRMRMRMRMRMRMRMRMRMR000_block1.mat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/data/915/20160401_1722-MRMRMRMRMRMRMRMRMRMRMRMRMRMRMR000_block1.mat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/data/915/20160401_1724-MRMRMRMRMRMRMRMRMRMRMRMRMRMRMRMR000_block1.mat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/makeTrainingStimuli6.m" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/trainingStimuli6.mat" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/../01_CategoryTraining/vtCategorizationTrainingExperiment6.m" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../01_CategoryTraining/makeWeightedTrainingStimuli.m" afterPath="$PROJECT_DIR$/../01_CategoryTraining/makeWeightedTrainingStimuli.m" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CategoryTrainingFigure_Funnel.py" afterPath="$PROJECT_DIR$/CategoryTrainingFigure_Funnel.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/PositionFunction_General.py" afterPath="$PROJECT_DIR$/PositionFunction_General.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/category.py" afterPath="$PROJECT_DIR$/category.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/freqDiscrim_Group.py" afterPath="$PROJECT_DIR$/freqDiscrim_Group.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frequencyDiscriminationAnalysis2.py" afterPath="$PROJECT_DIR$/frequencyDiscriminationAnalysis2.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frequencyFunction_specific.py" afterPath="$PROJECT_DIR$/frequencyFunction_specific.py" />
     </list>
@@ -44,7 +31,7 @@
         <entry file="file://$PROJECT_DIR$/PositionFunction_General.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="239" column="0" selection-start-line="239" selection-start-column="0" selection-end-line="239" selection-end-column="0" />
+              <caret line="160" column="25" selection-start-line="160" selection-start-column="25" selection-end-line="160" selection-end-column="25" />
               <folding />
             </state>
           </provider>
@@ -54,7 +41,7 @@
         <entry file="file://$PROJECT_DIR$/CategoryTrainingFigure_Funnel.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="124" column="0" selection-start-line="124" selection-start-column="0" selection-end-line="124" selection-end-column="0" />
+              <caret line="116" column="98" selection-start-line="116" selection-start-column="98" selection-end-line="116" selection-end-column="98" />
               <folding>
                 <element signature="e#20#38#0" expanded="true" />
                 <element signature="e#2646#2827#0" expanded="false" />
@@ -63,12 +50,14 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="frequencyFunction_specific.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/frequencyFunction_specific.py">
+      <file leaf-file-name="freqDiscrim_Group.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/freqDiscrim_Group.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="116" column="0" selection-start-line="116" selection-start-column="0" selection-end-line="116" selection-end-column="0" />
-              <folding />
+            <state vertical-scroll-proportion="0.7705882">
+              <caret line="152" column="0" selection-start-line="152" selection-start-column="0" selection-end-line="152" selection-end-column="0" />
+              <folding>
+                <element signature="e#20#42#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -83,28 +72,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="frequencyDiscriminationAnalysis2.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/frequencyDiscriminationAnalysis2.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.53294116">
-              <caret line="102" column="54" selection-start-line="102" selection-start-column="54" selection-end-line="102" selection-end-column="54" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FrequencyFunction_General.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/FrequencyFunction_General.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="106" column="0" selection-start-line="106" selection-start-column="0" selection-end-line="106" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#25#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="category.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/category.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -115,24 +82,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EEG.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/EEG/EEG.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="188" column="28" selection-start-line="188" selection-start-column="28" selection-end-line="188" selection-end-column="28" />
-              <folding>
-                <element signature="e#20#38#0" expanded="true" />
-                <element signature="e#4156#4337#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="spatialLoc_Group.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/spatialLoc_Group.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="136" column="0" selection-start-line="136" selection-start-column="0" selection-end-line="136" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="frequencyFunction_specific.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/frequencyFunction_specific.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="194" column="39" selection-start-line="194" selection-start-column="39" selection-end-line="194" selection-end-column="39" />
               <folding />
             </state>
           </provider>
@@ -176,15 +140,15 @@
         <option value="$PROJECT_DIR$/dPrime.py" />
         <option value="$PROJECT_DIR$/spatialLocalizationAnalysis.py" />
         <option value="$PROJECT_DIR$/categoryTrainingSession_Funnel.py" />
-        <option value="$PROJECT_DIR$/freqDiscrim_Group.py" />
         <option value="$PROJECT_DIR$/test.py" />
         <option value="$PROJECT_DIR$/EEG/morphParse.py" />
         <option value="$PROJECT_DIR$/EEG/EEG.py" />
         <option value="$PROJECT_DIR$/category.py" />
-        <option value="$PROJECT_DIR$/CategoryTrainingFigure_Funnel.py" />
-        <option value="$PROJECT_DIR$/frequencyFunction_specific.py" />
         <option value="$PROJECT_DIR$/PositionFunction_General.py" />
         <option value="$PROJECT_DIR$/frequencyDiscriminationAnalysis2.py" />
+        <option value="$PROJECT_DIR$/frequencyFunction_specific.py" />
+        <option value="$PROJECT_DIR$/CategoryTrainingFigure_Funnel.py" />
+        <option value="$PROJECT_DIR$/freqDiscrim_Group.py" />
       </list>
     </option>
   </component>
@@ -270,7 +234,7 @@
       <recent name="/usr/local/bin" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.frequencyDiscriminationAnalysis2">
+  <component name="RunManager" selected="Python.freqDiscrim_Group">
     <configuration default="false" name="frequencyDiscriminationAnalysis2" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -487,10 +451,10 @@
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.frequencyDiscriminationAnalysis2" />
+        <item index="0" class="java.lang.String" itemvalue="Python.freqDiscrim_Group" />
         <item index="1" class="java.lang.String" itemvalue="Python.CategoryTrainingFigure_Funnel" />
-        <item index="2" class="java.lang.String" itemvalue="Python.EEG" />
-        <item index="3" class="java.lang.String" itemvalue="Python.freqDiscrim_Group" />
+        <item index="2" class="java.lang.String" itemvalue="Python.frequencyDiscriminationAnalysis2" />
+        <item index="3" class="java.lang.String" itemvalue="Python.EEG" />
         <item index="4" class="java.lang.String" itemvalue="Python.freqDiscrimAnalysis_Category" />
       </list>
     </recent_temporary>
@@ -527,7 +491,7 @@
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3296328" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32792485" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2502135" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2502135" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -576,28 +540,18 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/CategoryTrainingFigure_Funnel.py</url>
-          <line>150</line>
+          <line>151</line>
           <option name="timeStamp" value="311" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
-          <url>file://$PROJECT_DIR$/CategoryTrainingFigure_Funnel.py</url>
-          <line>124</line>
-          <option name="timeStamp" value="313" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="python-line">
-          <url>file://$PROJECT_DIR$/frequencyFunction_specific.py</url>
-          <line>115</line>
-          <option name="timeStamp" value="315" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="python-line">
-          <url>file://$PROJECT_DIR$/frequencyFunction_specific.py</url>
-          <line>116</line>
-          <option name="timeStamp" value="316" />
+          <url>file://$PROJECT_DIR$/frequencyDiscriminationAnalysis2.py</url>
+          <line>118</line>
+          <option name="timeStamp" value="333" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/frequencyDiscriminationAnalysis2.py</url>
-          <line>91</line>
-          <option name="timeStamp" value="326" />
+          <line>117</line>
+          <option name="timeStamp" value="334" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
@@ -610,7 +564,7 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="327" />
+      <option name="time" value="336" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -862,14 +816,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/freqDiscrim_Group.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="5" column="2" selection-start-line="5" selection-start-column="0" selection-end-line="6" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/pydevd.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -929,41 +875,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/category.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="71" column="0" selection-start-line="71" selection-start-column="0" selection-end-line="71" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CategoryTrainingFigure_Funnel.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="124" column="0" selection-start-line="124" selection-start-column="0" selection-end-line="124" selection-end-column="0" />
-          <folding>
-            <element signature="e#20#38#0" expanded="true" />
-            <element signature="e#2646#2827#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frequencyFunction_specific.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="116" column="0" selection-start-line="116" selection-start-column="0" selection-end-line="116" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CategoryTrainingFigure.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="60" column="0" selection-start-line="60" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/FrequencyFunction_General.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -971,14 +882,6 @@
           <folding>
             <element signature="e#0#25#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/PositionFunction_General.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="239" column="0" selection-start-line="239" selection-start-column="0" selection-end-line="239" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -992,9 +895,62 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/frequencyDiscriminationAnalysis2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.53294116">
-          <caret line="102" column="54" selection-start-line="102" selection-start-column="54" selection-end-line="102" selection-end-column="54" />
+        <state vertical-scroll-proportion="0.33882353">
+          <caret line="81" column="0" selection-start-line="81" selection-start-column="0" selection-end-line="81" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CategoryTrainingFigure.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="60" column="0" selection-start-line="60" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/category.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="71" column="0" selection-start-line="71" selection-start-column="0" selection-end-line="71" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frequencyFunction_specific.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="194" column="39" selection-start-line="194" selection-start-column="39" selection-end-line="194" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PositionFunction_General.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="160" column="25" selection-start-line="160" selection-start-column="25" selection-end-line="160" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CategoryTrainingFigure_Funnel.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="116" column="98" selection-start-line="116" selection-start-column="98" selection-end-line="116" selection-end-column="98" />
+          <folding>
+            <element signature="e#20#38#0" expanded="true" />
+            <element signature="e#2646#2827#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/freqDiscrim_Group.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7705882">
+          <caret line="152" column="0" selection-start-line="152" selection-start-column="0" selection-end-line="152" selection-end-column="0" />
+          <folding>
+            <element signature="e#20#42#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

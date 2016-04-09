@@ -150,7 +150,7 @@ print("Your graph will be saved in this directory: " + fileDirectory + "\n")
 # save images as png in case prefer compared to html
 # py.image.save_as(figFreq_ACC, fileDirectory + "frequencyDiscrim_Freq_ACC_Group.jpeg")
 # py.image.save_as(figFreq_RT, fileDirectory + "frequencyDiscrim_Freq_RT_Group.jpeg")
-# py.image.save_as(figDPrime, fileDirectory + "frequencyDiscrim_Dprime_Group.jpeg")
+py.image.save_as(figDPrime, fileDirectory + "frequencyDiscrim_Dprime_Group.jpeg")
 # py.image.save_as(figPos_ACC, fileDirectory + "frequencyDiscrim_Pos_ACC_Group.jpeg")
 # py.image.save_as(figPos_RT, fileDirectory + "frequencyDiscrim_Pos_RT_Group.jpeg")
 py.image.save_as(figOverall, fileDirectory + "frequencyDiscrim_Overall_Group.jpeg")
