@@ -59,7 +59,7 @@ function vtCategorizationTrainingExperimentRA(name, exptdesign)
         drawAndCenterText(w,['Training Block #' num2str(iBlock) ' of ' num2str(exptdesign.numSessions) '\n\n\n\n'...
             'You are on Level ' num2str(level) '\n\n\n\n' 'Click the mouse to continue'],1);
         %randomize the stimuli for this level
-        order = randperm(size(trainingStimuli{:},2));
+        order = randperm(size(trainingStimuli{1},2));
         stimuli = trainingStimuli{1}(:,order);
 
         %lower and upper limit of fixation before stimulus is presented
@@ -220,9 +220,9 @@ function vtCategorizationTrainingExperimentRA(name, exptdesign)
                     counter = counter + 1;
                 end
             end
-            if mean(level13Acc) >= levelAccuracy(level)
-                level = level + 1;
-            end
+%             if mean(level13Acc) >= levelAccuracy(level)
+%                 level = level + 1;
+%             end
         end
 
         %save the session data in the data directory
@@ -244,14 +244,14 @@ function vtCategorizationTrainingExperimentRA(name, exptdesign)
 
     end %end of block
     ShowCursor;
-
+end
 %catch
     %ShowCursor;
     %save(['./data/' exptdesign.subNumber '/' datestr(now, 'yyyymmdd_HHMM') '-' exptdesign.subName '_block' num2str(iBlock) '.mat'], 'trialOutput', 'exptdesign');
 %end
 
 
-end
+
 
 function drawAndCenterText(window,message, wait)
 if wait == 1

@@ -38,12 +38,13 @@ else
 end
 pause(2)
 
-exptdesign.level=exptdesign.training.lastLevelPassed;
+% exptdesign.level=exptdesign.training.lastLevelPassed;
+exptdesign.level=13;
 
 exptdesign.numSessions = 6;              % number of blocks (160 trials each) to complete this training session
 
 % if/else statement to set the number of trials for the level
-exptdesign.numTrialsPerSession = 144;    % number of trials per block for level 5
+exptdesign.numTrialsPerSession = 1;    % number of trials per block for level 5
 
 exptdesign.fixationImage = 'imgsscaled/fixation.bmp';  % image for the fixation cross
 exptdesign.blankImage = 'imgsscaled/blank.bmp';        % image for the blank screen
@@ -67,14 +68,14 @@ exptdesign.correct2='imgsscaled/replayRed.png';
 exptdesign.imageDirectory = 'imgsscaled/';
 
 %open COM1 port
-try
+%try
     stimGenPTB('open','COM1')
     vtCategorizationTrainingExperimentRA(name,exptdesign);
-catch
+%catch
      disp('Closing all screens and closing the Com Port')
      stimGenPTB('close');
      Screen('CloseAll');
- end
+ %end
 
  handle = errordlg('Please ensure the driver box is turned off');
  disp(handle);
