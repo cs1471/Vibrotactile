@@ -10,8 +10,8 @@ from category import category
 tls.set_credentials_file(username='cs1471', api_key='9xknhmjhas')
 
 #Use when debugging or manually editing
-filename      = ('20160406_1446-MR1011_block6')
-fileDirectory = '/Users/courtney/GoogleDrive/Riesenhuber/05_2015_scripts/Vibrotactile/01_CategoryTraining/data/1011/'
+filename      = ('20160411_1030-MR1012_block4')
+fileDirectory = '/Users/courtney/GoogleDrive/Riesenhuber/05_2015_scripts/Vibrotactile/01_CategoryTraining/data/1012/'
 session       = '8'
 
 #load matfile
@@ -142,14 +142,14 @@ fig_FP['layout'].update(barmode='group', bargroupgap=0, bargap=0.25,
     annotations = [dict(x = xZip[i], y = mF[i], text=yZip[i], xanchor='center', yanchor='bottom', showarrow=False) for i in range(len(xZip))])
 
 fig_CatCurve['layout'].update(barmode='group', bargroupgap=0, bargap=0.25,
-    title = subjectName + " Categorization Curve " + session, xaxis = dict(autorange = 'reversed', dtick = 5, range=[0,100]), yaxis = dict(range=[0,100], dtick = 5), annotations = [dict(text = 'Category Boundary')])
+    title = subjectName + " Categorization Curve " + session, xaxis = dict(autorange = 'reversed', dtick = 5, range=[0,100], showgrid=True), yaxis = dict(range=[0,100], dtick = 5))
 
 colorRA = ['black', 'blue', 'black', 'black', 'black', 'black', 'black' ,'blue', 'black',
            'black', 'blue', 'black', 'black', 'black', 'black', 'black' ,'blue', 'black']
 
 fig['data']  = [trace1, trace2, trace3, trace7, trace4, trace5, trace6, trace8]
 fig_FP['data'] = [go.Bar(x=x2, y=mF, marker = dict(color = colorRA))]
-fig_CatCurve['data'] = [go.Scatter(x = x3, y=catA)]
+fig_CatCurve['data'] = [go.Scatter(x = x3, y=catA, name = 'SubjectData'), go.Scatter(x= [50,50], y = [0,100], name = 'Category Boundary', line = dict(color='red'))]
 
 #bread crumbs to make sure entered the correct information
 print("Your graph will be saved in this directory: " + fileDirectory + "\n")

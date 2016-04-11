@@ -1,6 +1,6 @@
 %vibrotactile categorization training! called by vtCategorizationTraining.m
 %Clara A. Scholl, cas243@georgetown.edu
-function vtCategorizationTrainingExperiment7(name, exptdesign)
+function vtCategorizationTrainingExperimentRA(name, exptdesign)
 %try
     rand('twister',sum(100*clock))
 
@@ -58,21 +58,9 @@ function vtCategorizationTrainingExperiment7(name, exptdesign)
     for iBlock=1:exptdesign.numSessions %how many blocks to run this training session
         drawAndCenterText(w,['Training Block #' num2str(iBlock) ' of ' num2str(exptdesign.numSessions) '\n\n\n\n'...
             'You are on Level ' num2str(level) '\n\n\n\n' 'Click the mouse to continue'],1);
-        if level > 5 && (exist(['./history/' name ], 'dir') == 7)
-            clear trainingStimuli;
-            filename = dir(['./history/' name '/training*']);
-            filename = filename(length(filename)).name;
-            load(['./history/' name '/' filename]);
-            %randomize the stimuli for this level
-            order = randperm(size(trainingStimuli{:},2));
-            stimuli = trainingStimuli{1}(:,order);
-        elseif level > 5
-            order = randperm(size(trainingStimuli{5},2));
-            stimuli = trainingStimuli{5}(:,order);
-        else
-            order = randperm(size(trainingStimuli{level},2));
-            stimuli = trainingStimuli{level}(:,order);
-        end
+        %randomize the stimuli for this level
+        order = randperm(size(trainingStimuli{:},2));
+        stimuli = trainingStimuli{1}(:,order);
 
         %lower and upper limit of fixation before stimulus is presented
         ll=.3;
@@ -235,11 +223,6 @@ function vtCategorizationTrainingExperiment7(name, exptdesign)
             if mean(level13Acc) >= levelAccuracy(level)
                 level = level + 1;
             end
-        end
-
-        if level > 5 && level ~= exptdesign.maxLevel
-            %call function that generates a weighted training stimuli file
-            makeWeightedTrainingStimuli2(trialOutput(iBlock).accuracy, trialOutput(iBlock).stimuli, name);
         end
 
         %save the session data in the data directory
