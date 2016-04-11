@@ -1,7 +1,6 @@
-%Wrapper For Categoziation Training for generating sigmoidal categorization
-%curve. No feedback, positions 4 and 10 included for testing generalization
-%April 11 2016
-%PSM pmalone333@gmail.com
+%Wrapper For Categoziation Training
+%June 15 2015
+%CAS cas243@georgetown.edu
 
 input('\nDid you pull from Git? Hit Enter when "Yes."\n');
 input('\nIs white noise playing? Hit Enter when "Yes."\n');
@@ -25,6 +24,18 @@ else
     mkdir(['./data/' number])
 end
 
+%check if the subject has a saved level matrix.  If not, make it with
+%starting levels.
+%LOAD SUBJECT'S FILE TO APPEND
+% if exist(['./history/SUBJ' number 'training.mat'], 'file')
+%     exptdesign.training=load(['./history/SUBJ' number 'training.mat']);
+%     fprintf(['Subject has been here before, starting at level ' num2str(exptdesign.training.lastLevelPassed)])
+% else
+%     level=1;
+%     fprintf('Subject has not been entered before, starting at level 1')
+%     exptdesign.training.lastLevelPassed=1; %changed this to one cas 08/10/15
+%     exptdesign.training.history=[];
+% end
 pause(2)
 
 % exptdesign.level=exptdesign.training.lastLevelPassed;
@@ -36,9 +47,22 @@ exptdesign.numTrialsPerSession = 144;    % number of trials per block for level 
 
 exptdesign.fixationImage = 'imgsscaled/fixation.bmp';  % image for the fixation cross
 exptdesign.blankImage = 'imgsscaled/blank.bmp';        % image for the blank screen
+exptdesign.maxLevel = 14;
 
+exptdesign.giveFeedback=1;
 exptdesign.cat1label='imgsscaled/labelsGarkTrelp.png'; 
 exptdesign.cat2label='imgsscaled/labelsTrelpGark.png'; 
+
+%feedback for incorrect answers == 4 possibilities
+%edit 6/22/15 -- there will be no feedback for correct answers (advance
+%immediatley to next trial)
+exptdesign.fb1='imgsscaled/labelsWordSet1_wrong1.png';
+exptdesign.fb2='imgsscaled/labelsWordSet1_wrong2.png';
+exptdesign.fb3='imgsscaled/labelsWordSet2_wrong1.png';
+exptdesign.fb4='imgsscaled/labelsWordSet2_wrong2.png';
+%show correct answers
+exptdesign.correct1='imgsscaled/replayBlue.png';
+exptdesign.correct2='imgsscaled/replayRed.png';
 
 exptdesign.imageDirectory = 'imgsscaled/';
 

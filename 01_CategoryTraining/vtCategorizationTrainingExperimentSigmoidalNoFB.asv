@@ -21,23 +21,23 @@ function vtCategorizationTrainingExperimentSigmoidalNoFB(name, exptdesign)
     correct1=imread(exptdesign.correct1, 'png', 'BackgroundColor', [0.5 0.5 0.5]);
     correct2=imread(exptdesign.correct2, 'png', 'BackgroundColor', [0.5 0.5 0.5]);
 
-%     %feedback for incorrect trials
-%     fb1=imread(exptdesign.fb1, 'png', 'BackgroundColor', [0.5 0.5 0.5]);
-%     fb2=imread(exptdesign.fb2, 'png', 'BackgroundColor', [0.5 0.5 0.5]);
-%     fb3=imread(exptdesign.fb3, 'png', 'BackgroundColor', [0.5 0.5 0.5]);
-%     fb4=imread(exptdesign.fb4, 'png', 'BackgroundColor', [0.5 0.5 0.5]);
+    %feedback for incorrect trials
+    fb1=imread(exptdesign.fb1, 'png', 'BackgroundColor', [0.5 0.5 0.5]);
+    fb2=imread(exptdesign.fb2, 'png', 'BackgroundColor', [0.5 0.5 0.5]);
+    fb3=imread(exptdesign.fb3, 'png', 'BackgroundColor', [0.5 0.5 0.5]);
+    fb4=imread(exptdesign.fb4, 'png', 'BackgroundColor', [0.5 0.5 0.5]);
 
     fixationTexture=Screen('MakeTexture', w, double(fixationImage));
     blankTexture=Screen('MakeTexture', w, double(blankImage));
     response1Texture=Screen('MakeTexture', w, double(response1));
     response2Texture=Screen('MakeTexture', w, double(response2));
 
-%     fb1Texture=Screen('MakeTexture', w, double(fb1));
-%     fb2Texture=Screen('MakeTexture', w, double(fb2));
-%     fb3Texture=Screen('MakeTexture', w, double(fb3));
-%     fb4Texture=Screen('MakeTexture', w, double(fb4));
-%     correct1Texture=Screen('MakeTexture', w, double(correct1));
-%     correct2Texture=Screen('MakeTexture', w, double(correct2));
+    fb1Texture=Screen('MakeTexture', w, double(fb1));
+    fb2Texture=Screen('MakeTexture', w, double(fb2));
+    fb3Texture=Screen('MakeTexture', w, double(fb3));
+    fb4Texture=Screen('MakeTexture', w, double(fb4));
+    correct1Texture=Screen('MakeTexture', w, double(correct1));
+    correct2Texture=Screen('MakeTexture', w, double(correct2));
     %Display experiment instructions
     drawAndCenterText(w, ['Please review instructions \n'...
         'Please click a mouse button to advance at each screen'],1)
@@ -47,30 +47,28 @@ function vtCategorizationTrainingExperimentSigmoidalNoFB(name, exptdesign)
         'by clicking the mouse (left or right) according to the correct label\n'...
         'presented on the screen.'  ],1)
     
-    drawAndCenterText(w, ['There will be no feedback given this time for incorrect and correct answers.\n'...
-     ], 1)
+    drawAndCenterText(w, ['There will be no feedback given for correct or incorrect answeres this time.'], 1)
     %load training stimuli
-    load('trainingStimuli7.mat');
+    load('trainingStimuliSigmoidalNoFB.mat');
     level=exptdesign.level;
 
     for iBlock=1:exptdesign.numSessions %how many blocks to run this training session
-        drawAndCenterText(w,['Training Block #' num2str(iBlock) ' of ' num2str(exptdesign.numSessions) '\n\n\n\n'...
-            'You are on Level ' num2str(level) '\n\n\n\n' 'Click the mouse to continue'],1);
-        if level > 5 && (exist(['./history/' name ], 'dir') == 7)
-            clear trainingStimuli;
-            filename = dir(['./history/' name '/training*']);
-            filename = filename(length(filename)).name;
-            load(['./history/' name '/' filename]);
-            %randomize the stimuli for this level
-            order = randperm(size(trainingStimuli{:},2));
+        drawAndCenterText(w,['Training Block #' num2str(iBlock) ' of ' num2str(exptdesign.numSessions) 'Click the mouse to continue'],1);
+%         if level > 5 && (exist(['./history/' name ], 'dir') == 7)
+%             clear trainingStimuli;
+%             filename = dir(['./history/' name '/training*']);
+%             filename = filename(length(filename)).name;
+%             load(['./history/' name '/' filename]);
+%             %randomize the stimuli for this level
+%             order = randperm(size(trainingStimuli{:},2));
+%             stimuli = trainingStimuli{1}(:,order);
+%         elseif level > 5
+%             order = randperm(size(trainingStimuli{5},2));
+%             stimuli = trainingStimuli{5}(:,order);
+%         else
+            order = randperm(size(trainingStimuli{1},2));
             stimuli = trainingStimuli{1}(:,order);
-        elseif level > 5
-            order = randperm(size(trainingStimuli{5},2));
-            stimuli = trainingStimuli{5}(:,order);
-        else
-            order = randperm(size(trainingStimuli{level},2));
-            stimuli = trainingStimuli{level}(:,order);
-        end
+%         end
 
         %lower and upper limit of fixation before stimulus is presented
         ll=.3;
