@@ -44,7 +44,7 @@ exptdesign.level=13;
 exptdesign.numSessions = 6;              % number of blocks (160 trials each) to complete this training session
 
 % if/else statement to set the number of trials for the level
-exptdesign.numTrialsPerSession = 1;    % number of trials per block for level 5
+exptdesign.numTrialsPerSession = 144;    % number of trials per block for level 5
 
 exptdesign.fixationImage = 'imgsscaled/fixation.bmp';  % image for the fixation cross
 exptdesign.blankImage = 'imgsscaled/blank.bmp';        % image for the blank screen
