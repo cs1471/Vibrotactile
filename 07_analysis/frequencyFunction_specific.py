@@ -108,6 +108,44 @@ class FrequencySpecific():
         return mF, countTotal
 
 
+    def category_parse_RA(self, rawData):
+        countF2 = countF8 = 0
+        countF2_b = countF8_b = 0
+        countF14 = countF20 = 0
+        countF14_a = countF20_a = 0
+        for iBlock in range(rawData.size):
+            for iTrial in range(rawData[0,iBlock].size):
+                stimulus = round(self.stimuli[0,iBlock][0,iTrial])
+                catAorB = int(self.stimuli[0,iBlock][4,iTrial])
+                if catAorB == 1 and rawData[0,iBlock][0,iTrial] == 1:
+                    if stimulus == self.FL.frequencyList[1]:
+                        countF2 += 1
+                    elif stimulus == self.FL.frequencyList[8]:
+                        countF8 += 1
+                elif catAorB == 1 and rawData[0,iBlock][0,iTrial] == 0:
+                    if stimulus == self.FL.frequencyList[1]:
+                        countF2_b += 1
+                    elif stimulus == self.FL.frequencyList[7]:
+                        countF8_b += 1
+                elif catAorB == 2 and rawData[0,iBlock][0,iTrial] == 1:
+                    if stimulus == self.FL.frequencyList[19]:
+                        countF20 += 1
+                    elif stimulus == self.FL.frequencyList[13]:
+                        countF14 += 1
+                elif catAorB == 2 and rawData[0,iBlock][0,iTrial] == 0:
+                    if stimulus == self.FL.frequencyList[19]:
+                        countF20_a += 1
+                    elif stimulus == self.FL.frequencyList[13]:
+                        countF14_a += 1
+
+
+        countTotal = [countF2/(countF2+countF2_b), countF8/(countF8+countF8_b), countF14_a/(countF14+countF14_a), countF20_a/(countF20+countF20_a)]
+
+        countTotal = [count*100 for count in countTotal]
+
+
+        return countTotal
+
     def category_parse(self, rawData):
         countF1 = countF2 = countF3 = countF4 = countF5 = countF6 = countF7 = countF8 = countF9 = 0
         countF1_b = countF2_b = countF3_b = countF4_b = countF5_b = countF6_b = countF7_b = countF8_b = countF9_b = 0
@@ -193,6 +231,7 @@ class FrequencySpecific():
                         countF14_a += 1
                     elif stimulus == self.FL.frequencyList[12]:
                         countF13_a += 1
+
 
         countTotal = [countF1/(countF1+countF1_b), countF2/(countF2+countF2_b), countF3/(countF3+countF3_b),
                       countF4/(countF4+countF4_b), countF5/(countF5+countF5_b), countF6/(countF6+countF6_b),

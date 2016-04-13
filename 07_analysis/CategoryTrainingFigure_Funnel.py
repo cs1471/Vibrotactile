@@ -10,9 +10,9 @@ from category import category
 tls.set_credentials_file(username='cs1471', api_key='9xknhmjhas')
 
 #Use when debugging or manually editing
-filename      = ('20160411_1030-MR1012_block4')
+filename      = ('20160412_1636-MR1012_block4')
 fileDirectory = '/Users/courtney/GoogleDrive/Riesenhuber/05_2015_scripts/Vibrotactile/01_CategoryTraining/data/1012/'
-session       = '8'
+session       = '9'
 
 #load matfile
 data = sio.loadmat(fileDirectory + filename, struct_as_record=True)
@@ -35,7 +35,7 @@ subjectName     = data['exptdesign']['subName'][0,0][0]
 
 FS = FrequencySpecific(stimuli=stimuli)
 mF, countTotal = FS.frequencyPair_parse(accuracy)
-catA = FS.category_parse(accuracy)
+catA = FS.category_parse_RA(accuracy)
 
 #############################################################################
 #Calculations by morph
@@ -62,7 +62,7 @@ for iBlock in range(reactionTime.size):
 #x-axis label
 x = []
 i=0
-for i in range(nBlocks):
+for i in range(4):
             x.append("Block: " + str(i+1) + ", Level: " + str(level[0,i][0,0])),
 
 #############################################################################
@@ -109,13 +109,20 @@ x3 = ['95%', '90%', '85%', '80%', '75%', '70%', '65%', '60%', '40%', '35%', '30%
 
 trace_ACC_FP = make_trace_bar(x2, mF, '')
 
+#, ACC[12], ACC[15]
+#, ACC[13], ACC[16]
+#, ACC[14], ACC[17]
+#, RT[12], RT[15]
+#, RT[13], RT[16]
+#, RT[14], RT[17]
+
 #make trace containing acc and RT for morph
-trace1 = make_trace_bar(x, [ACC[0], ACC[3], ACC[6], ACC[9], ACC[12], ACC[15]],  "Category Prototype Acc")
-trace2 = make_trace_bar(x, [ACC[1], ACC[4], ACC[7], ACC[10], ACC[13], ACC[16]], "Middle Morph Acc")
-trace3 = make_trace_bar(x, [ACC[2], ACC[5], ACC[8], ACC[11], ACC[14], ACC[17]], "Category Boundary Acc")
-trace4 = make_trace_line(x, [RT[0], RT[3], RT[6], RT[9], RT[12], RT[15]], "Category Prototype RT", 'n')
-trace5 = make_trace_line(x, [RT[1], RT[4], RT[7], RT[10], RT[13], RT[16]], "Middle Morph RT", 'n')
-trace6 = make_trace_line(x, [RT[2], RT[5], RT[8], RT[11], RT[14], RT[17]], "Category Boundary RT", 'n')
+trace1 = make_trace_bar(x, [ACC[0], ACC[3], ACC[6], ACC[9]],  "Category Prototype Acc")
+trace2 = make_trace_bar(x, [ACC[1], ACC[4], ACC[7], ACC[10]], "Middle Morph Acc")
+trace3 = make_trace_bar(x, [ACC[2], ACC[5], ACC[8], ACC[11]], "Category Boundary Acc")
+trace4 = make_trace_line(x, [RT[0], RT[3], RT[6], RT[9]], "Category Prototype RT", 'n')
+trace5 = make_trace_line(x, [RT[1], RT[4], RT[7], RT[10]], "Middle Morph RT", 'n')
+trace6 = make_trace_line(x, [RT[2], RT[5], RT[8], RT[11]], "Category Boundary RT", 'n')
 
 #make trace containing overall acc and rt
 trace7 = make_trace_line(x, O_accuracy, "Overall Accuracy", 'y')

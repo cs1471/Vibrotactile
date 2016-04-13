@@ -2,7 +2,7 @@
 %June 15 2015
 %Clara Scholl cas243@georgetown.edu
 
-function makeTrainingStimuli7
+function makeRAstimuli
 
     %dimensions are 240 stimuli x 4 parameters x 20 levels
     %the five columns (dimension 2) are:
@@ -28,7 +28,7 @@ function makeTrainingStimuli7
    %%  
      %level 5 goes through all stimuli, once; so stimulators and category
      %don't match anymore
-     level=[f1(2) f1(9) f1(14) f1(20); f1(20) f1(14) f1(9) f1(2)]; %frequency combos (18 total)
+     level=[f1(2) f1(8) f1(14) f1(20); f1(20) f1(14) f1(8) f1(2)]; %frequency combos (18 total)
      level=repmat(level, 1,36); %repeat 8 times (this is 128!)
      stimulators = [repmat(stimulator(:,1), 1,72) repmat(stimulator(:,2), 1,72)];
     %label each stimulus as belonging to category 1 or 2
