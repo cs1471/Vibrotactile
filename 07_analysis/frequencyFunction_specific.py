@@ -120,7 +120,7 @@ class FrequencySpecific():
                 if catAorB == 1 and rawData[0,iBlock][0,iTrial] == 1:
                     if stimulus == self.FL.frequencyList[1]:
                         countF2 += 1
-                    elif stimulus == self.FL.frequencyList[8]:
+                    elif stimulus == self.FL.frequencyList[7]:
                         countF8 += 1
                 elif catAorB == 1 and rawData[0,iBlock][0,iTrial] == 0:
                     if stimulus == self.FL.frequencyList[1]:

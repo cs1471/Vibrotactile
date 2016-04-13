@@ -6,13 +6,13 @@ import plotly.graph_objs as go
 import plotly.tools as tls
 from frequencyFunction_specific import FrequencySpecific
 from category import category
-
+from PositionFunction_General import Position_general
 tls.set_credentials_file(username='cs1471', api_key='9xknhmjhas')
 
 #Use when debugging or manually editing
-filename      = ('20160412_1636-MR1012_block4')
+filename      = ('20160413_1559-MR1012_block6')
 fileDirectory = '/Users/courtney/GoogleDrive/Riesenhuber/05_2015_scripts/Vibrotactile/01_CategoryTraining/data/1012/'
-session       = '9'
+session       = '10'
 
 #load matfile
 data = sio.loadmat(fileDirectory + filename, struct_as_record=True)
@@ -28,14 +28,13 @@ nTrials         = data['exptdesign']['numTrialsPerSession'][0,0][0]
 nBlocks         = data['exptdesign']['numSessions'][0,0][0]
 subjectName     = data['exptdesign']['subName'][0,0][0]
 
-
 #############################################################################
 #Calculations by Frequency Pair
 #############################################################################
 
 FS = FrequencySpecific(stimuli=stimuli)
 mF, countTotal = FS.frequencyPair_parse(accuracy)
-catA = FS.category_parse_RA(accuracy)
+catA = FS.category_parse(accuracy)
 
 #############################################################################
 #Calculations by morph
@@ -43,6 +42,7 @@ catA = FS.category_parse_RA(accuracy)
 
 catObj = category(stimuli= stimuli)
 RT,ACC = catObj.wrapper(accuracy, reactionTime)
+pos_acc = catObj.parseData_freq_block(accuracy, stimuli)
 
 #############################################################################
 #Calculating mean acc and RT overall
@@ -62,7 +62,7 @@ for iBlock in range(reactionTime.size):
 #x-axis label
 x = []
 i=0
-for i in range(4):
+for i in range(nBlocks):
             x.append("Block: " + str(i+1) + ", Level: " + str(level[0,i][0,0])),
 
 #############################################################################
@@ -105,24 +105,20 @@ def make_trace_line(x, y, name, dash):
 x2 = ['[25,100]', '[27,91]', '[29,91]', '[31,83]', '[33,77]', '[36,71]', '[38,67]', '[40,62.5]', '[43,59]',
       '[59, 43]', '[62.5, 40]', '[67, 38]', '[71, 36]','[77, 33]', '[83, 31]', '[91, 29]', '[91, 27]','[100, 25]']
 x3 = ['95%', '90%', '85%', '80%', '75%', '70%', '65%', '60%', '40%', '35%', '30%', '25%', '20%', '15%', '10%', '5%']
-#x3 = ['95%', '90%', '85%', '80%', '75%', '70%', '65%', '60%', '55%', '50%', '45%', '40%', '35%', '30%', '25%', '20%', '15%', '10%', '5%']
+x4 = ['[27,91]', '[40,62.5]', '[62.5, 40]', '[91, 27]']
+
+trace_PG_ACC_3 = make_trace_bar(x4, [pos_acc[0][0], pos_acc[0][1], pos_acc[0][2], pos_acc[0][3]], 'pos3')
+trace_PG_ACC_4 = make_trace_bar(x4, [pos_acc[0][4], pos_acc[0][5], pos_acc[0][6], pos_acc[0][7]], 'pos4')
 
 trace_ACC_FP = make_trace_bar(x2, mF, '')
 
-#, ACC[12], ACC[15]
-#, ACC[13], ACC[16]
-#, ACC[14], ACC[17]
-#, RT[12], RT[15]
-#, RT[13], RT[16]
-#, RT[14], RT[17]
-
 #make trace containing acc and RT for morph
-trace1 = make_trace_bar(x, [ACC[0], ACC[3], ACC[6], ACC[9]],  "Category Prototype Acc")
-trace2 = make_trace_bar(x, [ACC[1], ACC[4], ACC[7], ACC[10]], "Middle Morph Acc")
-trace3 = make_trace_bar(x, [ACC[2], ACC[5], ACC[8], ACC[11]], "Category Boundary Acc")
-trace4 = make_trace_line(x, [RT[0], RT[3], RT[6], RT[9]], "Category Prototype RT", 'n')
-trace5 = make_trace_line(x, [RT[1], RT[4], RT[7], RT[10]], "Middle Morph RT", 'n')
-trace6 = make_trace_line(x, [RT[2], RT[5], RT[8], RT[11]], "Category Boundary RT", 'n')
+trace1 = make_trace_bar(x, [ACC[0], ACC[3], ACC[6], ACC[9], ACC[12], ACC[15]],  "Category Prototype Acc")
+trace2 = make_trace_bar(x, [ACC[1], ACC[4], ACC[7], ACC[10], ACC[13], ACC[16]], "Middle Morph Acc")
+trace3 = make_trace_bar(x, [ACC[2], ACC[5], ACC[8], ACC[11], ACC[14], ACC[17]], "Category Boundary Acc")
+trace4 = make_trace_line(x, [RT[0], RT[3], RT[6], RT[9], RT[12], RT[15]], "Category Prototype RT", 'n')
+trace5 = make_trace_line(x, [RT[1], RT[4], RT[7], RT[10], RT[13], RT[16]], "Middle Morph RT", 'n')
+trace6 = make_trace_line(x, [RT[2], RT[5], RT[8], RT[11], RT[14], RT[17]], "Category Boundary RT", 'n')
 
 #make trace containing overall acc and rt
 trace7 = make_trace_line(x, O_accuracy, "Overall Accuracy", 'y')
@@ -136,6 +132,7 @@ for index, obj in enumerate(catA):
 fig          = tls.make_subplots(rows=1, cols=1, shared_xaxes=True)
 fig_FP       = tls.make_subplots(rows=1, cols=1, shared_xaxes=True)
 fig_CatCurve = tls.make_subplots(rows=1, cols=1)
+fig_pos      = tls.make_subplots(rows=1, cols=1, shared_xaxes=True)
 
 #set figure layout to hold mutlitple bars
 fig['layout'].update(barmode='group', bargroupgap=0, bargap=0.25,
@@ -146,10 +143,13 @@ yZip = countTotal
 
 fig_FP['layout'].update(barmode='group', bargroupgap=0, bargap=0.25,
     title = subjectName + " Accuracy By Frequency Pair, Session " + session,  yaxis = dict(dtick = .1),
-    annotations = [dict(x = xZip[i], y = mF[i], text=yZip[i], xanchor='center', yanchor='bottom', showarrow=False) for i in range(len(xZip))])
+    annotations = [dict(x = xZip[i], y = mF[i], showarrow=False, text=yZip[i], xanchor='center', yanchor='bottom', ) for i in range(len(xZip))])
 
 fig_CatCurve['layout'].update(barmode='group', bargroupgap=0, bargap=0.25,
     title = subjectName + " Categorization Curve " + session, xaxis = dict(autorange = 'reversed', dtick = 5, range=[0,100], showgrid=True), yaxis = dict(range=[0,100], dtick = 5))
+
+fig_pos['layout'].update(barmode='group', bargroupgap=0, bargap=0.25,
+    title = subjectName + " Pos Accuracy RA stimuli " + session, yaxis = dict(dtick = .1))
 
 colorRA = ['black', 'blue', 'black', 'black', 'black', 'black', 'black' ,'blue', 'black',
            'black', 'blue', 'black', 'black', 'black', 'black', 'black' ,'blue', 'black']
@@ -157,6 +157,7 @@ colorRA = ['black', 'blue', 'black', 'black', 'black', 'black', 'black' ,'blue',
 fig['data']  = [trace1, trace2, trace3, trace7, trace4, trace5, trace6, trace8]
 fig_FP['data'] = [go.Bar(x=x2, y=mF, marker = dict(color = colorRA))]
 fig_CatCurve['data'] = [go.Scatter(x = x3, y=catA, name = 'SubjectData'), go.Scatter(x= [50,50], y = [0,100], name = 'Category Boundary', line = dict(color='red'))]
+fig_pos['data'] = [trace_PG_ACC_3, trace_PG_ACC_4]
 
 #bread crumbs to make sure entered the correct information
 print("Your graph will be saved in this directory: " + fileDirectory + "\n")
@@ -167,6 +168,6 @@ print("The session number you have indicated is: " + session + "\n")
 py.image.save_as(fig, fileDirectory + filename + "_CategTrainingMorphAccSession" + session + ".jpeg")
 py.image.save_as(fig_FP, fileDirectory + filename + "_FP_AccSession" + session + ".jpeg")
 py.image.save_as(fig_CatCurve, fileDirectory + filename + "_CatCurve_Session" + session + ".jpeg")
-
+py.image.save_as(fig_pos, fileDirectory + filename + "_PosRA_ACC_Session" + session + ".jpeg")
 
 print("Done!")

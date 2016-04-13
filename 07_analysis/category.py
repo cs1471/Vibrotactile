@@ -107,6 +107,43 @@ class category():
                 data.append(0)
         return data
 
+
+    def parseData_freq_block (self, rawData, stimuli):
+        data = []
+        pos3_f2 = []
+        pos3_f8 = []
+        pos3_f14 = []
+        pos3_f20 = []
+        pos4_f2 = []
+        pos4_f8 = []
+        pos4_f14 = []
+        pos4_f20 = []
+        for iBlock in range(rawData.size):
+            for iTrial in range(rawData[0,iBlock].size):
+                pos1 = int(stimuli[0,iBlock][2,iTrial])
+                freq1 = round(stimuli[0,iBlock][0,iTrial])
+                if pos1 == 3 and freq1 ==self.FL.frequencyList[1]:
+                    pos3_f2.append(rawData[0,iBlock][0,iTrial])
+                elif pos1 == 3 and freq1 ==self.FL.frequencyList[7]:
+                    pos3_f8.append(rawData[0,iBlock][0,iTrial])
+                elif pos1 == 3 and freq1 ==self.FL.frequencyList[13]:
+                    pos3_f14.append(rawData[0,iBlock][0,iTrial])
+                elif pos1 == 3 and freq1 ==self.FL.frequencyList[19]:
+                    pos3_f20.append(rawData[0,iBlock][0,iTrial])
+                elif pos1 == 4 and freq1 ==self.FL.frequencyList[1]:
+                    pos4_f2.append(rawData[0,iBlock][0,iTrial])
+                elif pos1 == 4 and freq1 ==self.FL.frequencyList[7]:
+                    pos4_f8.append(rawData[0,iBlock][0,iTrial])
+                elif pos1 == 4 and freq1 ==self.FL.frequencyList[13]:
+                    pos4_f14.append(rawData[0,iBlock][0,iTrial])
+                elif pos1 == 4 and freq1 ==self.FL.frequencyList[19]:
+                    pos4_f20.append(rawData[0,iBlock][0,iTrial])
+
+
+        data.append([stat.mean(pos3_f2), stat.mean(pos3_f8), stat.mean(pos3_f14), stat.mean(pos3_f20),
+                     stat.mean(pos4_f2), stat.mean(pos4_f8), stat.mean(pos4_f14), stat.mean(pos4_f20),])
+        return data
+
     def wrapper(self, ACC, RT):
         RT = self.parser(RT)
         ACC = self.parser(ACC)
