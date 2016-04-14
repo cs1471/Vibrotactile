@@ -11,7 +11,7 @@ try
 stimGenPTB('CloseAll');
 catch
 end
-stimGenPTB('open','COM1')
+stimGenPTB('open','COM2')
 
 %% Define stimulus
 stimuli = [];

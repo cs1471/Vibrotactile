@@ -60,7 +60,7 @@ try
     end
     
     % Load stimuli file
-    stimuli = load('stimuliRApractice.mat');
+    stimuli = load('stimuliRApractice1.mat');
     exptdesign.start = GetSecs;
     
     totalTrialCounter = 1;
