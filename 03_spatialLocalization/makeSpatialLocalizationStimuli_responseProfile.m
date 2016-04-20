@@ -2,8 +2,15 @@ f1=2.^([0:.1:2]+log2(25));
 
 frequency = [f1(2) f1(20)];
 
-channels = [1 1 3 3 3 5 5 5 5 7 7 7 7 9 9 9 11 11; 
-            3 5 5 1 7 1 3 7 9 3 5 9 11 5 7 11 9 7];
+response = input('\n\nEnter Response Profile: \n\n','s');
+
+if response == '0'
+    channels = [1 1 3 3 3 5 5 5 5 13 13 11 11 11 9 9 9 9; 
+                3 5 5 1 9 1 3 9 11 9 11 9 13 5 13 11 5 3];
+else        
+    channels = [2 2 4 4 4 6 6 6 6 14 14 12 12 12 10 10 10 10;
+                4 6 6 10 2 2 4 10 12 12 10 14 10 6 14 12 6 4];
+end
 
 different = [repmat(frequency(1),1,18), repmat(frequency(2),1,18);
              repmat(channels(1,:),1,2);
@@ -19,5 +26,9 @@ same = [repmat(frequency,1,18);
 stimuli = [different,same];
 stimuli = repmat(stimuli,1,2); 
 
-% populate trial structure with 2 instances of the same stimulus
-save ('spatialLocalizationStimuli.mat','stimuli')
+if response == '0'
+    % populate trial structure with 2 instances of the same stimulus
+    save ('spatialLocalizationStimuli_0.mat','stimuli')
+else
+    save ('spatialLocalizationStimuli_1.mat','stimuli')
+end

@@ -21,13 +21,93 @@ function frequencyDiscrimExperiment(exptdesign)
     responseTime = exptdesign.responseTime;
     
     %load training stimuli
-    if exptdesign.response == '0'
-        load('frequencyDiscrimStimuli_0.mat');
-    else
-        load('frequencyDiscrimStimuli_1.mat');
-    end
+    load('frequencyDiscrimStimuli.mat');
+
     
     for iBlock=1:exptdesign.numBlocks
+        if iBlock == 1 && strcmp(exptdesign.preOrPostTrain,'1') %% run practice trials only for pre-training session
+            drawAndCenterText(w, ['Please review instructions\n\n'...
+                'Please click a mouse button to advance'],1)
+            
+            drawAndCenterText(w,['\nOn each trial, you will feel 2 vibrations, one after the other. \n'...
+                'Indicate whether the vibrations are the same or different\n\n'...
+                'LEFT mouse button = "SAME"\n\n'... 
+                'RIGHT = "DIFFERENT".\n\n'...
+                'Please click the mouse to continue\n'],1)
+            
+            drawAndCenterText(w,['\nFirst, you will do some practice trials with feedback. \n'...
+                'After the practice trials, you will no longer recieve feedback.\n\n'...
+                'Please click the mouse to continue\n'],1)
+            
+            drawAndCenterText(w,['Practice block \n\n\n\n'...
+            'Click the mouse to continue'],1);
+            
+            %randomize stimuli
+            order=randperm(size(stimuli,2));
+            stimuli=stimuli(:, order);
+            %lower and upper limit of fixation before stimulus is presented
+            ll=.3;
+            ul=.8;
+            
+           for iTrial=1:exptdesign.numPracticeTrials
+           Screen('DrawTexture', w, fixationTexture);
+               [FixationVBLTimestamp, FixationOnsetTime, FixationFlipTimestamp, FixationMissed] = Screen('Flip',w);
+           
+           %pre-load stimulus 
+            [stimLoadTime] = loadStimuli(stimuli(:,iTrial));
+               
+           %initial wait before stim presentation    
+           wait1 = ll + (ul-ll).*rand(1);
+           WaitSecs(wait1);
+           
+           stimOnset = GetSecs;
+           rtn=-1;
+           while rtn==-1
+               rtn=stimGenPTB('start');
+           end
+           stimFinished = GetSecs;
+           
+           drawAndCenterText(w,'Were the vibrations the same or different? \n', 0);
+           
+           %collect Response
+           responseStartTime=GetSecs;
+           sResp=getResponseMouse(responseTime, iBlock);
+           responseFinishedTime=GetSecs;
+           
+           if isequal(stimuli(1:2, iTrial),stimuli(3:4,iTrial))
+               correctResponse=1;
+           elseif ~isequal(stimuli(1:2, iTrial),stimuli(3:4,iTrial))
+               correctResponse=2;
+           end
+
+           %score the answer -- is sResp(iTrial)==correctResponse?
+           if sResp==correctResponse
+               accuracy=1;
+               feedback = 'Correct!';
+           else
+               accuracy=0;
+               feedback = 'Sorry, that was incorrect.';
+           end
+           drawAndCenterText(w,['\n' feedback '\n'...
+                   'Please click the mouse to continue\n'],1)
+           kbWait(1); % feedback screen would advance without waiting for mouse click, so added this as fix. requires 2 clicks when subject does not respond "same" or "different", however
+           
+                    
+           %record parameters for the trial
+               practiceTrialOutput.order                          = order;
+               practiceTrialOutput.stimuli                        = stimuli;
+               practiceTrialOutput.RT(iTrial)                     = responseFinishedTime-responseStartTime;
+               practiceTrialOutput.sResp(iTrial)                  = sResp;
+               practiceTrialOutput.correctResponse(iTrial)        = correctResponse;
+               practiceTrialOutput.accuracy(iTrial)               = accuracy;
+           
+           clear correctResponse;
+
+           end
+         drawAndCenterText(w,['\nYou have completed the practice trials.\n'...
+         'Please click the mouse to continue\n'],1)
+         kbWait(1);
+        end
          if mod(iBlock,2)
             drawAndCenterText(w, ['Please review instructions\n\n'...
                 'Please click a mouse button to advance'],1)
@@ -141,7 +221,7 @@ function frequencyDiscrimExperiment(exptdesign)
         end  
 
         %save the session data in the data directory
-        save(['./data/' exptdesign.number '/' datestr(now, 'yyyymmdd_HHMM') '-' exptdesign.subjectName '_block' num2str(iBlock) '.mat'], 'trialOutput', 'exptdesign');
+        save(['./data/' exptdesign.number '/' datestr(now, 'yyyymmdd_HHMM') '-' exptdesign.subjectName '_block' num2str(iBlock) '.mat'], 'trialOutput', 'exptdesign','practiceTrialOutput');
         %save the history data (stimuli, last level passed)
         
         

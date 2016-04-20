@@ -14,8 +14,6 @@ exptdesign.number = number;
 preOrPostTrain = input('\n\nIs this pre or post-training? Enter 1 for pre-training, 2 for post-training:\n\n','s');
 exptdesign.preOrPostTrain = preOrPostTrain; % 1 for pre, 2 for post
 
-response = input('\n\nPlease enter the response profile (0 or 1)\n\n');
-exptdesign.response = response;
 exptdesign.responseTime = 1.5;
 exptdesign.interStimulusInterval = .4;
 
@@ -36,6 +34,7 @@ end
 
 exptdesign.numBlocks = 7;              % number of blocks
 exptdesign.numTrialsPerSession = 160;
+exptdesign.numPracticeTrials = 20;
 
 
 exptdesign.fixationImage = 'imgsscaled/fixation.bmp';  % image for the fixation cross

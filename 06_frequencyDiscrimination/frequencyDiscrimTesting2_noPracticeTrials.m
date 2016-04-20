@@ -1,5 +1,5 @@
-% SpatialLocalizationWrapper
-% Wrapper, calls PositionLocalizationExperiment.m
+% FrequencyDiscrimWrapper
+% Wrapper, calls frequencyDiscrimExperiment.m
 % Patrick Malone pmalone333@gmail.com && Courtney Sprouse
 % cs1471@georgetown.edu && Levan Bokeria levan.bokeria@georgetown.edu
 
@@ -9,13 +9,14 @@ input('\n\nDoes participant have ear plugs? Hit Enter when "Yes."\n')
 
 %get subject info
 number = input('\n\nEnter Subject NUMBER:\n\n','s');
-exptdesign.number=number;
+exptdesign.number = number;
+exptdesign.subjectName = number;
 
-%pre/post time point
 preOrPostTrain = input('\n\nIs this pre or post-training? Enter 1 for pre-training, 2 for post-training:\n\n','s');
 exptdesign.preOrPostTrain = preOrPostTrain; % 1 for pre, 2 for post
 
 exptdesign.responseTime = 1.5;
+exptdesign.interStimulusInterval = .4;
 
 if isempty(number)
     name = 'MR000';
@@ -23,26 +24,28 @@ else
     name = ['MR' number];
 end
 WaitSecs(0.25);
+
+exptdesign.subjectName = name;
+
 %check if the subject has a directory in data.  If not, make it.
 if exist(['./data/' number],'dir')
 else
     mkdir(['./data/' number])
 end
 
-exptdesign.subjectName = name;
-
 exptdesign.numBlocks = 7;              % number of blocks
 exptdesign.numTrialsPerSession = 144;
-exptdesign.numPracticeTrials = 20;
+
 
 exptdesign.fixationImage = 'imgsscaled/fixation.bmp';  % image for the fixation cross
 exptdesign.imageDirectory = 'imgsscaled/';
 
-% open COM port 1
+% open COM port1
 try
 stimGenPTB('close');
 catch
 end
 stimGenPTB('open','COM1')
 
-spatialLocalizationExperiment(exptdesign);
+frequencyDiscrimExperiment2_noPracticeTrials(exptdesign);
+stimGenPTB('close')

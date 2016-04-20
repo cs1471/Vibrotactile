@@ -34,7 +34,8 @@ else
 end
 
 exptdesign.numBlocks = 7;              % number of blocks
-exptdesign.numTrialsPerSession = 144;
+exptdesign.numTrialsPerSession = 72; 
+exptdesign.numPracticeTrials = 20;
 
 
 exptdesign.fixationImage = 'imgsscaled/fixation.bmp';  % image for the fixation cross

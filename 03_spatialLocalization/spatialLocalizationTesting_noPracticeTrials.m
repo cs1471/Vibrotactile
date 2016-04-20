@@ -15,6 +15,9 @@ exptdesign.number=number;
 preOrPostTrain = input('\n\nIs this pre or post-training? Enter 1 for pre-training, 2 for post-training:\n\n','s');
 exptdesign.preOrPostTrain = preOrPostTrain; % 1 for pre, 2 for post
 
+%response profile
+response = input('\n\nPlease enter the response profile\n\n');
+exptdesign.response = response;
 exptdesign.responseTime = 1.5;
 
 if isempty(number)
@@ -32,8 +35,7 @@ end
 exptdesign.subjectName = name;
 
 exptdesign.numBlocks = 7;              % number of blocks
-exptdesign.numTrialsPerSession = 144;
-exptdesign.numPracticeTrials = 20;
+exptdesign.numTrialsPerSession = 144; 
 
 exptdesign.fixationImage = 'imgsscaled/fixation.bmp';  % image for the fixation cross
 exptdesign.imageDirectory = 'imgsscaled/';
@@ -45,4 +47,4 @@ catch
 end
 stimGenPTB('open','COM1')
 
-spatialLocalizationExperiment(exptdesign);
+spatialLocalizationExperiment_noPracticeTrials(exptdesign);
