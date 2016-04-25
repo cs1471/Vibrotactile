@@ -21,8 +21,8 @@ function makeTrainingStimuli7
     f2=fliplr(f1);
     
     %find possible stimulator combinations (8 combos total)
-    s1=[3 3];
-    s2=[9 9];
+    s1=[7 7];
+    s2=[13 13];
     stimulator=[s1; s2];
    
    %%  

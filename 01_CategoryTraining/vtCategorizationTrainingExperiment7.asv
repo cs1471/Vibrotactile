@@ -95,12 +95,10 @@ function vtCategorizationTrainingExperiment7(name, exptdesign)
                 %on odd blocks, lower frequency @top is on left of screen
                 if stimuli(1,iTrial)<stimuli(2,iTrial)
                     correctResponse=1;
-                    correctWord = 'GARK';
                     errorTexture=fb4Texture;
                     correctionTexture=correct1Texture;
                 else
                     correctResponse=2;
-                    correctWord = 'TRELP';
                     errorTexture=fb3Texture;
                     correctionTexture=correct2Texture;
                 end
@@ -142,7 +140,7 @@ function vtCategorizationTrainingExperiment7(name, exptdesign)
                 WaitSecs(.1);
                 [CorrectionVBLTimestamp CorrectionOnsetTime CorrectionFlipTimestamp CorrectionMissed]=Screen('Flip', w);
                 KbPressWait(1);
-                drawAndCenterText(w, ['If you would like to play the vibration ' correctWord ' again\n\n click the RIGHT mouse button'], 1.5);
+                drawAndCenterText(w, 'If you would like to play the vibration again\n\n click the RIGHT mouse button', 1.5);
                 [var1, keycode, var2] = KbPressWait(1);
                 %tResp = getResponseMouse2();
                 while keycode(1) ~= 1
@@ -150,7 +148,7 @@ function vtCategorizationTrainingExperiment7(name, exptdesign)
                     while rtn==-1
                         rtn=stimGenPTB('start');
                     end
-                    drawAndCenterText(w, ['If you would like to play the vibration ' correctWord ' again\n\n click the RIGHT mouse button'], 1.5);
+                    drawAndCenterText(w, 'If you would like to play the vibration again\n\n click the RIGHT mouse button', 1.5);
                     [var1, keycode, var2] = KbPressWait(1);
                     %tResp = getResponseMouse2();
                 end
