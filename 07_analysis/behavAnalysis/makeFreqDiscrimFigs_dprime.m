@@ -16,7 +16,7 @@ function makeFreqDiscrimFigs_dprime(sub,positionType,preOrPost,cfg)
     data_path = dir(fullfile(cfg.dirs.behav_dir,sub,preOrPost,'freqDiscrim','*block5.mat'));
     if size(data_path,1)>1, error('More than 1 frequency discrimination data structure found'), end
     load(fullfile(cfg.dirs.behav_dir,sub,preOrPost,'freqDiscrim',data_path(1).name));
-
+    
     %% d prime by block
     numBlocks = length(trialOutput);
     dPrimeByBlock = ones(numBlocks,1);
