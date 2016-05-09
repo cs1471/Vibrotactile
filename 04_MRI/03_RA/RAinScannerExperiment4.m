@@ -1,4 +1,3 @@
-
 function trialOutput = RAinScannerExperiment4(name,exptdesign)
 
 try
@@ -131,7 +130,7 @@ try
                 evt = CMUBox('GetEvent', exptdesign.boxHandle);
             end
             
-            %pre cue first stimulus 
+            %pre load first stimulus 
             if withinTrialCounter == 1
                 [stimLoadTime] = loadStimuli(stimuli(:,iTrial));
             end
@@ -150,6 +149,7 @@ try
                while rtn==-1
                     rtn=stimGenPTB('start');
                end
+               %collect timing of stimulus
                stimulusFinished = GetSecs;
                stimulusDuration = stimulusFinished-stimulusOnset;
                stimDurationOffset = stimulusPresentationTime - stimulusDuration;
@@ -169,7 +169,7 @@ try
                sResp = 0;
                RT = responseDuration; %codes RT for no response (max response window)
                
-               % sResp =1 is same, sResp = 2 if differnt
+               % sResp =2 is same, sResp = 1 if differnt
                if ~isempty(evt)
                    if evt.state == responseMapping.same
                        sResp = 2;
@@ -193,6 +193,7 @@ try
                end
                
            else
+               %for null tries - record timing and code in -1 for sResp
                stimulusOnset = GetSecs;
                waitTime = trialDuration; 
                stimulusFinished = GetSecs;
@@ -200,6 +201,9 @@ try
                correctResponse = -1;
            end
            
+           %increment counter variables - two counters withinTrialCounter
+           %to pre load stimuli and totalTrialCounter for
+           %screenFlips/timing
            withinTrialCounter = withinTrialCounter + 1;
            totalTrialCounter = totalTrialCounter + 1;
            
@@ -237,6 +241,7 @@ try
            trialOutput(iBlock,1).trialDuration(iTrial)         = trialEndTime - trialStartTime;
             
         end
+        %record block timing
         blockEndTime = GetSecs;
         trialOutput(iBlock,1).blockEndTime                     = blockEndTime;
         trialOutput(iBlock,1).blockDuration                    = blockEndTime - blockStart;
@@ -277,6 +282,7 @@ try
 end
 end
 
+%function for drawing text on screen i.e. instructions
 function drawAndCenterText(window,message, time)
 
     % Now horizontally and vertically centered:
@@ -284,6 +290,7 @@ function drawAndCenterText(window,message, time)
     Screen('Flip',window, time);
 end
 
+%function to load vibrotactile stimuli 
 function [stimLoadTime] = loadStimuli(stimuli)
     f = [stimuli(1:2), stimuli(5:6)];
     p = [stimuli(3:4), stimuli(7:8)];

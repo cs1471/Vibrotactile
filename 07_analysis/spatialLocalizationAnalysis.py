@@ -14,8 +14,8 @@ tls.set_credentials_file(username='cs1471', api_key='9xknhmjhas')
 # session = input('Enter the session number: \n')
 
 #Use when debugging or manually editing
-filename = ('20160315_1409-MR1009_block7.144')
-fileDirectory = '/Users/courtney/GoogleDrive/Riesenhuber/05_2015_scripts/Vibrotactile/03_spatialLocalization/data/1009/'
+filename = ('20160420_1822-MR1032_block7.144')
+fileDirectory = '/Users/courtney/GoogleDrive/Riesenhuber/05_2015_scripts/Vibrotactile/03_spatialLocalization/data/1032/'
 
 
 #load matfile
@@ -77,10 +77,10 @@ def make_trace_line(x, y, name):
 #make trace containing acc and RT by position for Different Condition
 trace1 = make_trace_bar( x, [PosObj.PG.ACC[0], PosObj.PG.ACC[3]], "Wrist Accuracy" )
 trace2 = make_trace_bar( x, [PosObj.PG.ACC[1], PosObj.PG.ACC[4]], "Across Mid Accuracy" )
-trace3 = make_trace_bar( x, [PosObj.PG.ACC[2], PosObj.PG.ACC[5]], "Elbow Accuracy" )
+trace3 = make_trace_bar( x, [PosObj.PG.ACC[2], 0], "Elbow Accuracy" )
 trace4 = make_trace_line( x, [PosObj.PG.RT[0], PosObj.PG.RT[3]], "Wrist RT" )
 trace5 = make_trace_line( x, [PosObj.PG.RT[1], PosObj.PG.RT[4]], "Across Mid RT" )
-trace6 = make_trace_line( x, [PosObj.PG.RT[2], PosObj.PG.RT[5]], "Elbow RT" )
+trace6 = make_trace_line( x, [PosObj.PG.RT[2], 0], "Elbow RT" )
 
 #make trace parsing out positions 5 and 9
 trace7 = make_trace_bar(x2, PosObj.PC.ACC[0:4], "Pos 5 Comparisons Acc")

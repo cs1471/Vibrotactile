@@ -23,8 +23,8 @@ FL.setFrequencyList()
 # session = input('Enter the session number: \n')
 
 #Use when debugging or manually editing
-filename = ('20160314_1044-MR1009_block7')
-fileDirectory = '/Users/courtney/GoogleDrive/Riesenhuber/05_2015_scripts/Vibrotactile/06_frequencyDiscrimination/data/1009/'
+filename = ('20160425_1431-MR1032_block7')
+fileDirectory = '/Users/courtney/GoogleDrive/Riesenhuber/05_2015_scripts/Vibrotactile/06_frequencyDiscrimination/data/1032/'
 
 
 #load matfile
@@ -132,11 +132,6 @@ iBlock = 0
 for iBlock in range(RT.size):
     O_reactionTime.append(np.mean(RT[0,iBlock]))
 
-#x-axis label
-# x = []
-# i=0
-# for i in range(nBlocks):
-#             x.append("Block: " + str(i+1)),
 x = ["Different", "Same"]
 x2 = ["Same", "M3B", "M3WH", "M3WL", "M6H", "M6L"]
 
@@ -166,11 +161,6 @@ def make_trace_line(x, y, name):
 #make trace containing acc by frequency for Same and different Condition\
 trace1 = make_trace_bar(x2, [stat.mean(b_sameAcc), stat.mean(b_m3bAcc), stat.mean(b_m3wHAcc), stat.mean(b_m3wLAcc), stat.mean(b_m6_H_Acc), stat.mean(b_m6_L_Acc)], "Acc")
 trace2 = make_trace_line(x2, [stat.mean(b_sameRT), stat.mean(b_m3bRT), stat.mean(b_m3wHRT), stat.mean(b_m3wLRT), stat.mean(b_m6_H_RT), stat.mean(b_m6_L_RT)], "RT")
-# matFileName = fileDirectory + filename
-# dataFile = sio.savemat(matFileName, {'x':x, 'y':y, 'cp_mean': cp_mean, 'mm_mean': mm_mean, 'cb_mean': cb_mean)
-# dataFile.write(x,y,cp_mean, mm_mean, cb_mean,)
-# dataFile.close()
-
 
 # Generate Figure object with 2 axes on 2 rows, print axis grid to stdout
 fig = tls.make_subplots( rows=1, cols=1, shared_xaxes=True,)
@@ -181,42 +171,11 @@ fig['layout'].update( barmode='group', bargroupgap=0, bargap=0.25,
 
 fig['data']  = [trace1, trace2]
 
-#get the url of your figure to embed in html later
-# first_plot_url = py.plot(fig, filename= subjectName + "AccByMorph" + session, auto_open=False,)
-# tls.get_embed(first_plot_url)
-# second_plot_url = py.plot(fig2, filename= subjectName + "RTbyMorph" + session, auto_open=False,)
-# tls.get_embed(second_plot_url)
-# third_plot_url = py.plot(fig3, filename= subjectName + "AccByCatgeory" + session, auto_open=False,)
-# tls.get_embed(third_plot_url)
-
 #bread crumbs to make sure entered the correct information
 print("Your graph will be saved in this directory: " + fileDirectory + "\n")
 print("Your graph will be saved under: " + filename + "\n")
 print("The session number you have indicated is: " + session + "\n")
 
-
-# #embed figure data in html
-# html_string = '''
-# <html>
-#     <head>
-#         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-#         <style>body{ margin:0 100; background:whitesmoke; }</style>
-#     </head>
-#     <body>
-#         <!-- *** FirstPlot *** --->
-#         <iframe width="1000" height="550" frameborder="0" seamless="seamless" scrolling="no" \
-# src="'''+ first_plot_url + '''.embed?width=800&height=550"></iframe>
-#         <!-- *** Second Plot *** --->
-#         <iframe width="1000" height="550" frameborder="0" seamless="seamless" scrolling="no" \
-# src="'''+ second_plot_url + '''.embed?width=800&height=550"></iframe>
-#         <!-- *** ThirdPlot *** --->
-#         <iframe width="1000" height="550" frameborder="0" seamless="seamless" scrolling="no" \
-# src="'''+ third_plot_url + '''.embed?width=800&height=550"></iframe>
-# </html>'''
-#
-# #save figure data in location specific previously
-# f = open(fileDirectory + filename + '.html','w')
-# f.write(html_string)
 
 # save images as png in case prefer compared to html
 py.image.save_as(fig, fileDirectory + filename + "frequencyDiscrim_CategStimuli" + session + ".jpeg")

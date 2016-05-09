@@ -237,7 +237,7 @@ class FrequencySpecific():
                       countF4/(countF4+countF4_b), countF5/(countF5+countF5_b), countF6/(countF6+countF6_b),
                       countF7/(countF7+countF7_b), countF8/(countF8+countF8_b), countF9/(countF9+countF9_b),
                       countF13_a/(countF13+countF13_a), countF14_a/(countF14+countF14_a), countF15_a/(countF15+countF15_a),
-                      countF16_a/(countF16+countF16_a), countF16_a/(countF16+countF16_a), countF18_a/(countF18+countF18_a),
+                      countF16_a/(countF16+countF16_a), countF17_a/(countF17+countF17_a), countF18_a/(countF18+countF18_a),
                       countF19_a/(countF19+countF19_a), countF20_a/(countF20+countF20_a), countF21_a/(countF21+countF21_a)]
 
         countTotal = [count*100 for count in countTotal]

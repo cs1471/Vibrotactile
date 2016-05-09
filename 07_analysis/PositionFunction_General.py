@@ -18,13 +18,13 @@ class Position_general():
             return False
 
     def fourthRow_pos(self, pos1):
-        if (pos1 == 9 or pos1 == 10 or pos1 == 13 or pos1 == 14):
+        if (pos1 == 7 or pos1 == 8):
             return True
         else:
             return False
 
     def fifthRow_pos(self, pos1):
-        if (pos1 == 11 or pos1 == 12):
+        if (pos1 == 9 or pos1 == 10):
             return True
         else:
             return False
@@ -200,11 +200,11 @@ class Position_general():
         D_pos3or4 = []
         D_pos5or6 = []
         D_pos9or10 = []
-        D_pos11or12 = []
+        D_pos7or8 = []
         S_pos3or4 = []
         S_pos5or6 = []
         S_pos9or10 = []
-        S_pos11or12 = []
+        S_pos7or8 = []
         for iBlock in range(rawData.size):
             for iTrial in range(rawData[0,iBlock].size):
                 pos1 = int(stimuli[0,iBlock][1,iTrial])
@@ -216,9 +216,9 @@ class Position_general():
                     elif self.thirdRow_pos(pos1) == True:
                         D_pos5or6.append(rawData[0,iBlock][0,iTrial])
                     elif self.fourthRow_pos(pos1) == True:
-                        D_pos9or10.append(rawData[0,iBlock][0,iTrial])
+                        D_pos7or8.append(rawData[0,iBlock][0,iTrial])
                     elif self.fifthRow_pos(pos1) == True:
-                        D_pos11or12.append(rawData[0,iBlock][0,iTrial])
+                        D_pos9or10.append(rawData[0,iBlock][0,iTrial])
                     else:
                         print("Your script is broked and stimuli are not meeting criteria for position of different stimuli")
                         print(stim1, stim2)
@@ -229,16 +229,16 @@ class Position_general():
                     elif self.thirdRow_pos(pos1) == True:
                         S_pos5or6.append(rawData[0,iBlock][0,iTrial])
                     elif self.fourthRow_pos(pos1) == True:
-                        S_pos9or10.append(rawData[0,iBlock][0,iTrial])
+                        S_pos7or8.append(rawData[0,iBlock][0,iTrial])
                     elif self.fifthRow_pos(pos1) == True:
-                        S_pos11or12.append(rawData[0,iBlock][0,iTrial])
+                        S_pos9or10.append(rawData[0,iBlock][0,iTrial])
                     else:
                         print("Your script is broked and stimuli are not meeting criteria for position of same stimuli")
                         print(stim1, stim2)
                         print(pos1)
 
-        data.append([stat.mean(D_pos3or4), stat.mean(D_pos5or6), stat.mean(D_pos9or10),stat.mean(D_pos11or12),
-                     stat.mean(S_pos3or4), stat.mean(S_pos5or6), stat.mean(S_pos9or10), stat.mean(S_pos11or12) ])
+        data.append([stat.mean(D_pos3or4), stat.mean(D_pos5or6), stat.mean(D_pos7or8),stat.mean(D_pos9or10),
+                     stat.mean(S_pos3or4), stat.mean(S_pos5or6), stat.mean(S_pos7or8), stat.mean(S_pos9or10) ])
         return data
 
     def calcAccRT(self, accuracy, RT, stimuli, type, parseBy):

@@ -10,9 +10,9 @@ from PositionFunction_General import Position_general
 tls.set_credentials_file(username='cs1471', api_key='9xknhmjhas')
 
 #Use when debugging or manually editing
-filename      = ('20160413_1559-MR1012_block6')
-fileDirectory = '/Users/courtney/GoogleDrive/Riesenhuber/05_2015_scripts/Vibrotactile/01_CategoryTraining/data/1012/'
-session       = '10'
+filename      = ('20160427_1435-MR1009_block5')
+fileDirectory = '/Users/courtney/GoogleDrive/Riesenhuber/05_2015_scripts/Vibrotactile/01_CategoryTraining/data/1009/'
+session       = '6'
 
 #load matfile
 data = sio.loadmat(fileDirectory + filename, struct_as_record=True)
@@ -62,7 +62,7 @@ for iBlock in range(reactionTime.size):
 #x-axis label
 x = []
 i=0
-for i in range(nBlocks):
+for i in range(5):
             x.append("Block: " + str(i+1) + ", Level: " + str(level[0,i][0,0])),
 
 #############################################################################
@@ -104,11 +104,10 @@ def make_trace_line(x, y, name, dash):
 #make trace containing each frequency pair
 x2 = ['[25,100]', '[27,91]', '[29,91]', '[31,83]', '[33,77]', '[36,71]', '[38,67]', '[40,62.5]', '[43,59]',
       '[59, 43]', '[62.5, 40]', '[67, 38]', '[71, 36]','[77, 33]', '[83, 31]', '[91, 29]', '[91, 27]','[100, 25]']
-x3 = ['95%', '90%', '85%', '80%', '75%', '70%', '65%', '60%', '40%', '35%', '30%', '25%', '20%', '15%', '10%', '5%']
+x3 = ['100%', '95%', '90%', '85%', '80%', '75%', '70%', '65%', '60%', '40%', '35%', '30%', '25%', '20%', '15%', '10%', '5%', '0%']
 x4 = ['[27,91]', '[40,62.5]', '[62.5, 40]', '[91, 27]']
 
-trace_PG_ACC_3 = make_trace_bar(x4, [pos_acc[0][0], pos_acc[0][1], pos_acc[0][2], pos_acc[0][3]], 'pos3')
-trace_PG_ACC_4 = make_trace_bar(x4, [pos_acc[0][4], pos_acc[0][5], pos_acc[0][6], pos_acc[0][7]], 'pos4')
+trace_PG_ACC_7  = make_trace_bar(x4, [pos_acc[0][0], pos_acc[0][1], pos_acc[0][2], pos_acc[0][3]], 'pos3')
 
 trace_ACC_FP = make_trace_bar(x2, mF, '')
 
@@ -128,6 +127,7 @@ trace8 = make_trace_line(x, O_reactionTime, "Overall RT", 'n')
 traceCatCurve = []
 for index, obj in enumerate(catA):
     traceCatCurve.append(make_trace_line(x3, obj, '', 'n'))
+
 # Generate Figure object with 2 axes on 2 rows, print axis grid to stdout
 fig          = tls.make_subplots(rows=1, cols=1, shared_xaxes=True)
 fig_FP       = tls.make_subplots(rows=1, cols=1, shared_xaxes=True)
@@ -157,7 +157,7 @@ colorRA = ['black', 'blue', 'black', 'black', 'black', 'black', 'black' ,'blue',
 fig['data']  = [trace1, trace2, trace3, trace7, trace4, trace5, trace6, trace8]
 fig_FP['data'] = [go.Bar(x=x2, y=mF, marker = dict(color = colorRA))]
 fig_CatCurve['data'] = [go.Scatter(x = x3, y=catA, name = 'SubjectData'), go.Scatter(x= [50,50], y = [0,100], name = 'Category Boundary', line = dict(color='red'))]
-fig_pos['data'] = [trace_PG_ACC_3, trace_PG_ACC_4]
+fig_pos['data'] = [trace_PG_ACC_7]
 
 #bread crumbs to make sure entered the correct information
 print("Your graph will be saved in this directory: " + fileDirectory + "\n")

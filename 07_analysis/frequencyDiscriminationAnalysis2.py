@@ -15,8 +15,8 @@ tls.set_credentials_file(username='cs1471', api_key='9xknhmjhas')
 # session = input('Enter the session number: \n')
 
 #Use when debugging or manually editing
-filename = ('20160404_1404-MR1009_block7')
-fileDirectory = '/Users/courtney/GoogleDrive/Riesenhuber/05_2015_scripts/Vibrotactile/06_frequencyDiscrimination/data/1009/'
+filename = ('20160421_1107-MR1032_block7')
+fileDirectory = '/Users/courtney/GoogleDrive/Riesenhuber/05_2015_scripts/Vibrotactile/06_frequencyDiscrimination/data/1032/'
 
 #load matfile
 data = sio.loadmat(fileDirectory + filename, struct_as_record=True)

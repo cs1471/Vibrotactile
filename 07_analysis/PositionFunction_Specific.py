@@ -5,6 +5,20 @@ class Position_catBound():
         self.RT = []
         self.ACC = []
 
+    def ch5vch7(self, pos1, pos2):
+        if ((pos1 == 5 or pos1 == 6) and (pos2 == 7 or pos2 == 8))\
+            or ((pos1 == 7 or pos1 == 8) and (pos2 == 5 or pos2 == 6)):
+            return True
+        else:
+            return False
+
+    def ch9vch7(self, pos1, pos2):
+        if ((pos1 == 9 or pos1 == 10) and (pos2 == 7 or pos2 == 8))\
+            or ((pos1 == 7 or pos1 == 8) and (pos2 == 9 or pos2 == 10)):
+            return True
+        else:
+            return False
+
     def zeroChanDiff_top(self, pos1, pos2):
         if ((pos1 == 5 or pos1 == 6) and (pos2 == 3 or pos2 == 4))\
             or ((pos1 == 3 or pos1 == 4) and (pos2 == 5 or pos2 == 6)):
@@ -93,22 +107,22 @@ class Position_catBound():
                         D_pos9v5.append(rawData[iSubject][0,iBlock][0,iTrial])
                     elif self.zeroChanDiff_bottom(pos1, pos2):
                         D_pos9v11.append(rawData[iSubject][0,iBlock][0,iTrial])
-                    elif self.oneChanDiff_bottom(pos1, pos2):
-                        D_pos9v13.append(rawData[iSubject][0,iBlock][0,iTrial])
+                    # elif self.oneChanDiff_bottom(pos1, pos2):
+                    #     D_pos9v13.append(rawData[iSubject][0,iBlock][0,iTrial])
 
             data.append([stat.mean(D_pos5v1), stat.mean(D_pos5v3), stat.mean(D_pos5v9), stat.mean(D_pos5v11),
-                         stat.mean(D_pos9v13), stat.mean(D_pos9v11), stat.mean(D_pos9v5), stat.mean(D_pos9v3)])
+                         stat.mean(D_pos9v13), stat.mean(D_pos9v11), stat.mean(D_pos9v5)])
         return data
 
     def _parseData_block(self, rawData, stimuli):
         D_pos5v1 = []
         D_pos5v3 = []
         D_pos5v9 = []
-        D_pos5v11 = []
+        D_pos5v7 = []
         D_pos9v3 = []
         D_pos9v5 = []
         D_pos9v11 = []
-        D_pos9v13 = []
+        D_pos9v7 = []
         for iBlock in range(rawData.size):
             for iTrial in range(rawData[0,iBlock].size):
                 # if iSubject == 0 or iSubject == 1 or iSubject == 2:
@@ -123,19 +137,23 @@ class Position_catBound():
                     D_pos5v3.append(rawData[0,iBlock][0,iTrial])
                 elif ((pos1 == 5 or pos1 == 6) and (pos2 == 9 or pos2 == 10)):
                     D_pos5v9.append(rawData[0,iBlock][0,iTrial])
-                elif self.twoChanDiff_top(pos1, pos2):
-                    D_pos5v11.append(rawData[0,iBlock][0,iTrial])
-                elif self.twoChanDiff_bottom(pos1, pos2):
-                    D_pos9v3.append(rawData[0,iBlock][0,iTrial])
+                elif self.ch5vch7(pos1, pos2):
+                    D_pos5v7.append(rawData[0,iBlock][0,iTrial])
+                # elif self.twoChanDiff_top(pos1, pos2):
+                #     D_pos5v11.append(rawData[0,iBlock][0,iTrial])
+                # elif self.twoChanDiff_bottom(pos1, pos2):
+                #     D_pos9v3.append(rawData[0,iBlock][0,iTrial])
+                elif self.ch9vch7(pos1, pos2):
+                    D_pos9v7.append(rawData[0,iBlock][0,iTrial])
                 elif ((pos1 == 9 or pos1 == 10) and (pos2 == 5 or pos2 == 6)):
                     D_pos9v5.append(rawData[0,iBlock][0,iTrial])
                 elif self.zeroChanDiff_bottom(pos1, pos2):
                     D_pos9v11.append(rawData[0,iBlock][0,iTrial])
-                elif self.oneChanDiff_bottom(pos1, pos2):
-                    D_pos9v13.append(rawData[0,iBlock][0,iTrial])
+                # elif self.oneChanDiff_bottom(pos1, pos2):
+                #      D_pos9v13.append(rawData[0,iBlock][0,iTrial])
 
-        data = ([stat.mean(D_pos5v1), stat.mean(D_pos5v3), stat.mean(D_pos5v9), stat.mean(D_pos5v11),
-                 stat.mean(D_pos9v3), stat.mean(D_pos9v5), stat.mean(D_pos9v11), stat.mean(D_pos9v13)])
+        data = ([stat.mean(D_pos5v1), stat.mean(D_pos5v3), stat.mean(D_pos5v7), stat.mean(D_pos5v9),
+                 stat.mean(D_pos9v5), stat.mean(D_pos9v7), stat.mean(D_pos9v11)])
 
         return data
 

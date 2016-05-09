@@ -2,7 +2,7 @@ f1=2.^([0:.1:2]+log2(25));
 
 frequency = [f1(1) f1(8) f1(14) f1(21)];
 
-channels = [3 9];
+channels = [7 13];
 
 % generate 4 prototype stimuli (see Josh/Clara poster)
 proto1 = [frequency(1) frequency(4) channels(1) channels(2)]';   
