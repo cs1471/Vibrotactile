@@ -17,8 +17,8 @@ order_condV = vertcat(order_cond(:,1), order_cond(:,2), order_cond(:,3), order_c
 frequency = [f1(2) f1(8) f1(14) f1(20); f1(20) f1(14) f1(8) f1(2)];
 
 %generate stimulator channel pairs
-s1=[3 4];
-s2=[9 10];
+s1=[7 8];
+s2=[13 14];
 stimulator=[s1; s2]; 
 
 % define the stimuli

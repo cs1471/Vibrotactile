@@ -255,13 +255,15 @@ function vtCategorizationTrainingExperiment7(name, exptdesign)
         lastLevelPassed = level;
         save(['./history/SUBJ' exptdesign.subNumber 'training.mat'], 'history', 'lastLevelPassed');
 
-        if level == exptdesign.maxLevel
-            accuracyForLevel = mean(trialOutput(iBlock).accuracy);
-            drawAndCenterText(w, ['Great Job! You have completed training! \n\n\n'...
-                'Your final accuracy was ' num2str(round(accuracyForLevel.*100))])
-            Screen('CloseAll')
-            break
-        end
+        % commenting out code below so training continues after level
+        % 13 is reached
+%         if level == exptdesign.maxLevel
+%             accuracyForLevel = mean(trialOutput(iBlock).accuracy);
+%             drawAndCenterText(w, ['Great Job! You have completed training! \n\n\n'...
+%                 'Your final accuracy was ' num2str(round(accuracyForLevel.*100))])
+%             Screen('CloseAll')
+%             break
+%         end
 
     end %end of block
     ShowCursor;

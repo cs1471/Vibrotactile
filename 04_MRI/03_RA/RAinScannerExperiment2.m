@@ -110,7 +110,7 @@ try
     
     % Load stimuli file
     load('stimuliRA.mat');
-    
+
     if iRuns == 1
         stimuli = stimuliRun1;
     elseif iRuns == 2
