@@ -49,8 +49,8 @@ function vtCategorizationTrainingExperimentSigmoidalNoFB(name, exptdesign)
     
     drawAndCenterText(w, ['There will be no feedback for incorrect or correct answers this time.'], 1)
     %load training stimuli
-    load('trainingStimuliSigmoidalNoFB.mat');
-    level=exptdesign.level;
+    load('trainingStimuliSigmoidalNoFB_3MorphLines.mat');
+    %level=exptdesign.level;
 
     for iBlock=1:exptdesign.numSessions %how many blocks to run this training session
         drawAndCenterText(w,['Training Block #' num2str(iBlock) '. Click the mouse to continue'],1);
@@ -211,7 +211,7 @@ function vtCategorizationTrainingExperimentSigmoidalNoFB(name, exptdesign)
         trialOutput(iBlock).order=order;
         trialOutput(iBlock).stimuli=stimuli;
         trialOutput(iBlock).accuracyForLevel=accuracyForLevel;
-        trialOutput(iBlock).level = level;
+%        trialOutput(iBlock).level = level;
 
         %check if they pass level and increase level if they do;
         %levelAccuracy = [repmat(.75, [1 3]) .70 .75 .775 .80 .825 .85 .875 .9 .925 .90];
