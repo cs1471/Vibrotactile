@@ -14,7 +14,7 @@ if ~exist(['./data_RAscan/' number],'dir')
 end
 
 exptdesign.subjectName = name;
-
+x
 %Trial/Block/Run lengths
 exptdesign.numBlocks = 1;
 exptdesign.numTrialsPerSession = 127;

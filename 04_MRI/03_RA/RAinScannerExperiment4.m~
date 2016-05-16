@@ -213,17 +213,14 @@ try
            end
            
            if sResp == correctResponse
-               accuracy = 1;
-           else 
-               accuracy = 0;
-           end
+               accuracy = 1
+               
            
            endOfTrialWaitTime = waitTime-stimLoadTime;    
            
            % Record parameters for the trial and block
            trialOutput(iBlock,1).sResp(iTrial)                 = sResp;
            trialOutput(iBlock,1).correctResponse(iTrial)       = correctResponse;
-           trialOutput(iBlock,1).accuracy(iTrial)              = accuracy;
            trialOutput(iBlock,1).stimulusOnset(iTrial)         = stimulusOnset;
            trialOutput(iBlock,1).stimulusDuration(iTrial)      = stimulusDuration;
            trialOutput(iBlock,1).stimulusFinished(iTrial)      = stimulusFinished;
@@ -252,7 +249,6 @@ try
         blockEndTime = GetSecs;
         trialOutput(iBlock,1).blockEndTime                     = blockEndTime;
         trialOutput(iBlock,1).blockDuration                    = blockEndTime - blockStart;
-        disp(mean(trialOutput.accuracy)); %NEED TO CHECK THIS TO MAKE SURE IT WORKS
     end
     
     % Draw fixation cross for last 10 seconds
