@@ -35,15 +35,15 @@ m0 = [repmat(frequency(:,1),1,40) repmat(frequency(:,2),1,10) repmat(frequency(:
 m3w = [repmat(frequency(:,1),1,51) repmat(frequency(:,4),1,51);
        repmat(stimulator,1,102);
        repmat(frequency(:,2),1,51) repmat(frequency(:,3),1,51);
-       repmat(stimulator,1,102)];
+       repmat(stimulator,1,51)];
 m3b = [repmat(frequency(:,2),1,102);
-       repmat(stimulator,1,102);
+       repmat(stimulator,1,51);
        repmat(frequency(:,3),1,102);
-       repmat(stimulator,1,102)];
+       repmat(stimulator,1,51)];
 m6 = [repmat(frequency(:,1),1,51) repmat(frequency(:,4),1,50);
-      repmat(stimulator,1,101);
+      repmat(stimulator,1,51);
       repmat(frequency(:,3),1,51) repmat(frequency(:,2),1,50);
-      repmat(stimulator,1,101)];
+      repmat(stimulator,1,51)];
 null = zeros(8,102);
   
 %load indices of each condition type
