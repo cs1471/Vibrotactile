@@ -10,9 +10,10 @@ from PositionFunction_General import Position_general
 tls.set_credentials_file(username='cs1471', api_key='9xknhmjhas')
 
 #Use when debugging or manually editing
-filename      = ('20160427_1435-MR1009_block5')
-fileDirectory = '/Users/courtney/GoogleDrive/Riesenhuber/05_2015_scripts/Vibrotactile/01_CategoryTraining/data/1009/'
-session       = '6'
+filename      = ('20160512_1431-MR1009_block6')
+# fileDirectory = '/Users/courtney/GoogleDrive/Riesenhuber/05_2015_scripts/Vibrotactile/01_CategoryTraining/data/1009/'
+fileDirectory = '/Users/courtney/GoogleDrive/Riesenhuber/05_2015_scripts/Vibrotactile/09_CategoryTesting/data/1009/'
+session       = 'Test'
 
 #load matfile
 data = sio.loadmat(fileDirectory + filename, struct_as_record=True)
