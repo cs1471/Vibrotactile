@@ -50,6 +50,15 @@ for iRuns = 1:exptdesign.numRuns
     [trialOutput.run] = RAinScannerExperiment2(name,exptdesign);
 end
 
+exptdesign.raExtra = input('\n\n Press 0 to run an extra run else enter 1(option 0 or 1):\n\n');
+
+if exptdesign.raExtra == '0'
+    for iRuns = 3:3
+        exptdesign.iRuns=iRuns;
+        [trialOutput.run] = RAinScannerExperiment2(name,exptdesign);
+    end
+end
+
 %close com3 port
 if exptdesign.responseBox
     CMUBox('Close',exptdesign.boxHandle);
