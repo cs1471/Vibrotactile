@@ -2,7 +2,7 @@
 %Clara A. Scholl, cas243@georgetown.edu
 function vtCategorizationTrainingExperiment7(name, exptdesign)
 %try
-    %rand('twister',sum(100*clock))
+    rand('twister',sum(100*clock))
 
     % Open a screen and display instructions
     screens = Screen('Screens');
