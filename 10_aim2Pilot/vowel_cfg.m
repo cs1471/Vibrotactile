@@ -1,0 +1,9 @@
+
+audio_filename = 'E:\JohnsHopkins1986_SAL_EECS_DISC1_Side1vowelsFemaleMONO.wav';
+list_startSamples = [1505504;2002000;3083080;2506504;3011008;...
+    2106104;1633632;1881880;2730728;2226224;2346344;2810808];
+list_numSamples = [128128;96096;96096;120120;64064;120120;...
+    104104;120120;80080;120120;160160;96096];
+
+list_words = {'heed';'how''d';'who''d';'hide';'hoy''d';...
+    'hid';'head';'hood';'hod';'had';'haw''d';'hoed'};
