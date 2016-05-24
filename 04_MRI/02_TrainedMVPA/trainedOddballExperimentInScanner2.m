@@ -195,6 +195,7 @@ try
         trialOutput(iBlock,1).conditionKey          = metaData{runCounter}.dataKey;
     end
     
+    disp(sum(trialOutput.sResp))
     Screen('DrawTexture', w, fixationTexture);
     Screen('Flip',w)
     WaitSecs(10);

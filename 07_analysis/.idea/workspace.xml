@@ -2,11 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0794c37e-0125-4d6f-89ef-6834103a2107" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CategoryTesting.py" afterPath="$PROJECT_DIR$/CategoryTesting.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CategoryTrainingFigure_Funnel.py" afterPath="$PROJECT_DIR$/CategoryTrainingFigure_Funnel.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/category.py" afterPath="$PROJECT_DIR$/category.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frequencyFunction_specific.py" afterPath="$PROJECT_DIR$/frequencyFunction_specific.py" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../04_MRI/02_TrainedMVPA/trainedOddballExperimentInScanner2.asv" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../04_MRI/02_TrainedMVPA/trainedOddballExperimentInScanner2.m" afterPath="$PROJECT_DIR$/../04_MRI/02_TrainedMVPA/trainedOddballExperimentInScanner2.m" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../04_MRI/03_RA/RAinScanner.m" afterPath="$PROJECT_DIR$/../04_MRI/03_RA/RAinScanner.m" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EEG/EEG.py" afterPath="$PROJECT_DIR$/EEG/EEG.py" />
     </list>
     <ignored path="07_analysis.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -26,83 +25,18 @@
     <favorites_list name="07_analysis" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.49434888">
+    <splitter split-orientation="horizontal" split-proportion="0.63587224">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="CategoryTrainingFigure_Funnel.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/CategoryTrainingFigure_Funnel.py">
+          <file leaf-file-name="EEG.py" pinned="false" current-in-tab="true">
+            <entry file="file://$PROJECT_DIR$/EEG/EEG.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
-                  <caret line="25" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="174" selection-end-column="0" />
+                <state vertical-scroll-proportion="0.24561404">
+                  <caret line="237" column="69" selection-start-line="237" selection-start-column="69" selection-end-line="237" selection-end-column="69" />
                   <folding>
-                    <element signature="e#20#38#0" expanded="true" />
-                    <element signature="e#2871#3052#0" expanded="false" />
-                    <element signature="e#3165#3816#0" expanded="false" />
+                    <element signature="e#6476#6657#0" expanded="false" />
+                    <element signature="e#6770#7482#0" expanded="false" />
                   </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="CategoryTesting.py" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/CategoryTesting.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.33882353">
-                  <caret line="106" column="28" selection-start-line="106" selection-start-column="28" selection-end-line="106" selection-end-column="28" />
-                  <folding>
-                    <element signature="e#20#38#0" expanded="true" />
-                    <element signature="e#2672#2853#0" expanded="false" />
-                    <element signature="e#2966#3617#0" expanded="false" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="frequencyDiscriminationAnalysis.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/frequencyDiscriminationAnalysis.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
-                  <caret line="114" column="0" selection-start-line="114" selection-start-column="0" selection-end-line="114" selection-end-column="0" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="PositionFunction_Specific.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/PositionFunction_Specific.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
-                  <caret line="155" column="17" selection-start-line="155" selection-start-column="17" selection-end-line="155" selection-end-column="17" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="frequencyDiscriminationAnalysis2.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/frequencyDiscriminationAnalysis2.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
-                  <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="freqDiscrimAnalysis_Category.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/freqDiscrimAnalysis_Category.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
-                  <caret line="149" column="0" selection-start-line="149" selection-start-column="0" selection-end-line="149" selection-end-column="0" />
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="PositionFunction_General.py" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/PositionFunction_General.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.0">
-                  <caret line="26" column="35" selection-start-line="26" selection-start-column="35" selection-end-line="26" selection-end-column="35" />
-                  <folding />
                 </state>
               </provider>
             </entry>
@@ -114,7 +48,7 @@
           <file leaf-file-name="category.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/category.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state vertical-scroll-proportion="0.64235294">
+                <state vertical-scroll-proportion="0.6385965">
                   <caret line="148" column="0" selection-start-line="148" selection-start-column="0" selection-end-line="148" selection-end-column="0" />
                   <folding />
                 </state>
@@ -170,7 +104,6 @@
         <option value="$PROJECT_DIR$/categoryTrainingSession_Funnel.py" />
         <option value="$PROJECT_DIR$/test.py" />
         <option value="$PROJECT_DIR$/EEG/morphParse.py" />
-        <option value="$PROJECT_DIR$/EEG/EEG.py" />
         <option value="$PROJECT_DIR$/freqDiscrim_Group.py" />
         <option value="$PROJECT_DIR$/frequencyDiscriminationAnalysis2.py" />
         <option value="$PROJECT_DIR$/PositionFunction_General.py" />
@@ -181,6 +114,7 @@
         <option value="$PROJECT_DIR$/frequencyFunction_specific.py" />
         <option value="$PROJECT_DIR$/category.py" />
         <option value="$PROJECT_DIR$/CategoryTesting.py" />
+        <option value="$PROJECT_DIR$/EEG/EEG.py" />
       </list>
     </option>
   </component>
@@ -267,24 +201,7 @@
       <recent name="/usr/local/bin" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.CategoryTesting">
-    <configuration default="false" name="frequencyDiscriminationAnalysis2" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="07_analysis" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/frequencyDiscriminationAnalysis2.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="Python.EEG">
     <configuration default="false" name="CategoryTrainingFigure_Funnel" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -349,6 +266,23 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <module name="07_analysis" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CategoryTesting.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="EEG" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/EEG" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="07_analysis" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/EEG/EEG.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -476,19 +410,19 @@
       <method />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Python.frequencyDiscriminationAnalysis2" />
-      <item index="1" class="java.lang.String" itemvalue="Python.CategoryTrainingFigure_Funnel" />
-      <item index="2" class="java.lang.String" itemvalue="Python.spatialLocalizationAnalysis" />
-      <item index="3" class="java.lang.String" itemvalue="Python.freqDiscrimAnalysis_Category" />
-      <item index="4" class="java.lang.String" itemvalue="Python.CategoryTesting" />
+      <item index="0" class="java.lang.String" itemvalue="Python.CategoryTrainingFigure_Funnel" />
+      <item index="1" class="java.lang.String" itemvalue="Python.spatialLocalizationAnalysis" />
+      <item index="2" class="java.lang.String" itemvalue="Python.freqDiscrimAnalysis_Category" />
+      <item index="3" class="java.lang.String" itemvalue="Python.CategoryTesting" />
+      <item index="4" class="java.lang.String" itemvalue="Python.EEG" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.CategoryTesting" />
-        <item index="1" class="java.lang.String" itemvalue="Python.CategoryTrainingFigure_Funnel" />
-        <item index="2" class="java.lang.String" itemvalue="Python.freqDiscrimAnalysis_Category" />
-        <item index="3" class="java.lang.String" itemvalue="Python.spatialLocalizationAnalysis" />
-        <item index="4" class="java.lang.String" itemvalue="Python.frequencyDiscriminationAnalysis2" />
+        <item index="0" class="java.lang.String" itemvalue="Python.EEG" />
+        <item index="1" class="java.lang.String" itemvalue="Python.CategoryTesting" />
+        <item index="2" class="java.lang.String" itemvalue="Python.CategoryTrainingFigure_Funnel" />
+        <item index="3" class="java.lang.String" itemvalue="Python.freqDiscrimAnalysis_Category" />
+        <item index="4" class="java.lang.String" itemvalue="Python.spatialLocalizationAnalysis" />
       </list>
     </recent_temporary>
   </component>
@@ -523,7 +457,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39983305" sideWeight="0.5018067" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32792485" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2502135" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24594364" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32992327" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -563,12 +497,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/EEG/EEG.py</url>
-          <line>190</line>
+          <line>258</line>
           <option name="timeStamp" value="298" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/EEG/EEG.py</url>
-          <line>178</line>
+          <line>240</line>
           <option name="timeStamp" value="299" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
@@ -596,6 +530,16 @@
           <line>109</line>
           <option name="timeStamp" value="353" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/EEG/EEG.py</url>
+          <line>46</line>
+          <option name="timeStamp" value="357" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/EEG/EEG.py</url>
+          <line>223</line>
+          <option name="timeStamp" value="359" />
+        </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
@@ -607,7 +551,7 @@
           </properties>
         </breakpoint>
       </default-breakpoints>
-      <option name="time" value="356" />
+      <option name="time" value="360" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -844,17 +788,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/EEG/EEG.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="188" column="28" selection-start-line="188" selection-start-column="28" selection-end-line="188" selection-end-column="28" />
-          <folding>
-            <element signature="e#20#38#0" expanded="false" />
-            <element signature="e#4156#4337#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/figureFunctions.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -976,22 +909,33 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/category.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.64235294">
-          <caret line="148" column="0" selection-start-line="148" selection-start-column="0" selection-end-line="148" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/CategoryTesting.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33882353">
+        <state vertical-scroll-proportion="0.0">
           <caret line="106" column="28" selection-start-line="106" selection-start-column="28" selection-end-line="106" selection-end-column="28" />
           <folding>
             <element signature="e#20#38#0" expanded="true" />
             <element signature="e#2672#2853#0" expanded="false" />
             <element signature="e#2966#3617#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/category.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6385965">
+          <caret line="148" column="0" selection-start-line="148" selection-start-column="0" selection-end-line="148" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/EEG/EEG.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.24561404">
+          <caret line="237" column="69" selection-start-line="237" selection-start-column="69" selection-end-line="237" selection-end-column="69" />
+          <folding>
+            <element signature="e#6476#6657#0" expanded="false" />
+            <element signature="e#6770#7482#0" expanded="false" />
           </folding>
         </state>
       </provider>
