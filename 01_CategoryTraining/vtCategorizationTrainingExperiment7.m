@@ -100,7 +100,7 @@ function vtCategorizationTrainingExperiment7(name, exptdesign)
                     correctionTexture=correct1Texture;
                 else
                     correctResponse=2;
-                    correctWord = 'TRELP';
+                    correctWord = 'SKAY';
                     errorTexture=fb3Texture;
                     correctionTexture=correct2Texture;
                 end
@@ -115,7 +115,7 @@ function vtCategorizationTrainingExperiment7(name, exptdesign)
                     correctionTexture=correct1Texture;
                 else
                     correctResponse=1;
-                    correctWord = 'TRELP';
+                    correctWord = 'SKAY';
                     errorTexture=fb2Texture;
                     correctionTexture=correct2Texture;
                 end
