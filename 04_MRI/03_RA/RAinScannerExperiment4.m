@@ -252,7 +252,13 @@ try
         blockEndTime = GetSecs;
         trialOutput(iBlock,1).blockEndTime                     = blockEndTime;
         trialOutput(iBlock,1).blockDuration                    = blockEndTime - blockStart;
-        disp(mean(trialOutput.accuracy)); %NEED TO CHECK THIS TO MAKE SURE IT WORKS
+        sum = 0;
+        for i = 1:exptdesign.numTrialsPerSession
+            sum = sum + trialOutput.accuracy(i);
+        end
+        tMean = sum/exptdesign.numTrialsPerSession;
+        handle = errordlg(['Subject Accuracy: ' num2str(tMean)]);
+        disp(handle);
     end
     
     % Draw fixation cross for last 10 seconds

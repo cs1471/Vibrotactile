@@ -21,7 +21,7 @@ try
 
     % Open window with default settings:
     [w windowRect] = Screen('OpenWindow', screenNumber,[128 128 128]);
-%     [w windowRect] = Screen('OpenWindow', screenNumber,[128 128 128], [0 0 800 800]); %for debugging
+ %   [w windowRect] = Screen('OpenWindow', screenNumber,[128 128 128], [0 0 800 800]); %for debugging
 
     % Select specific text font, style and size, unless we're on Linux
     % where this combo is not available:
@@ -147,6 +147,7 @@ try
            else
                 correctResponse = 0;
            end
+        
            
             %record parameters for the trial and block       
            trialOutput(iBlock,1).correctResponse(iTrial)       = correctResponse;
@@ -183,9 +184,17 @@ try
             evt = CMUBox('GetEvent', exptdesign.boxHandle);
         end
         
+        if sResp == correctResponse
+            accuracy = 1;
+        else
+            accuracy = 0;
+        end
+    
+        
         blockFinished = GetSecs;
         
         trialOutput(iBlock,1).sResp                 = sResp;
+        trialOutput(iBlock,1).accuracy              = accuracy;
         trialOutput(iBlock,1).responseFinishedTime  = responseFinishedTime;
         trialOutput(iBlock,1).stimuli               = stimuliBlock;
         trialOutput(iBlock,1).blockStart            = blockStart;
@@ -195,7 +204,14 @@ try
         trialOutput(iBlock,1).conditionKey          = metaData{runCounter}.dataKey;
     end
     
-    disp(sum(trialOutput.sResp))
+    sum = 0;
+    sum_sResp = 0;
+    for i = 1:length(trialOutput)
+        sum = sum + trialOutput(i).accuracy;
+        sum_sResp = sum_sResp + trialOutput(i).sResp;
+    end
+    handle = ERRORDLG(['Subject Responses: ' num2str(sum_sResp)]);
+    disp(handle)
     Screen('DrawTexture', w, fixationTexture);
     Screen('Flip',w)
     WaitSecs(10);
