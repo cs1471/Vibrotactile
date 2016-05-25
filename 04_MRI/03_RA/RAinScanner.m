@@ -14,10 +14,10 @@ if ~exist(['./data_RAscan/' number],'dir')
 end
 
 exptdesign.subjectName = name;
-x
+
 %Trial/Block/Run lengths
 exptdesign.numBlocks = 1;
-exptdesign.numTrialsPerSession = 127;
+exptdesign.numTrialsPerSession = 5;
 exptdesign.numRuns = 2;
 
 %fixation location/duration         
@@ -46,8 +46,17 @@ stimGenPTB('open')
 
 %run all 1 runs right after the last 
 for iRuns = 1:exptdesign.numRuns
+    if iRuns == 1
+        startOrNot = 'y';
+    else
+        startOrNot = input('Start the next run? y or n\n');
+    end
+    if strcmp(startOrNot,'y')==1
+        [trialOutput.run] =  RAinScannerExperiment4(name,exptdesign);
+    else
+        fprintf(['Skipping run ' num2str(iRun) '\n']);
+    end
     exptdesign.iRuns=iRuns;
-    [trialOutput.run] = RAinScannerExperiment2(name,exptdesign);
 end
 
 exptdesign.raExtra = input('\n\n Press 0 to run an extra run else enter 1(option 0 or 1):\n\n');
@@ -55,7 +64,7 @@ exptdesign.raExtra = input('\n\n Press 0 to run an extra run else enter 1(option
 if exptdesign.raExtra == '0'
     for iRuns = 3:3
         exptdesign.iRuns=iRuns;
-        [trialOutput.run] = RAinScannerExperiment2(name,exptdesign);
+        [trialOutput.run] = RAinScannerExperiment4(name,exptdesign);
     end
 end
 

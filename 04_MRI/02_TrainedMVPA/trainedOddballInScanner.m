@@ -20,7 +20,7 @@ end
 exptdesign.subjectName = name;
 
 %Trial/Block/Run lengths
-exptdesign.numBlocks = 24;              
+exptdesign.numBlocks = 28; %28            
 exptdesign.numTrialsPerSession = 6;    
 exptdesign.numRuns = 6;
 
@@ -67,7 +67,7 @@ for iRuns = 1:exptdesign.numRuns
     if strcmp(startOrNot,'y')==1
         [trialOutput.run] = trainedOddballExperimentInScanner2(name,exptdesign);
     else
-        fprintf(['Skipping run ' int2str(iRun) '\n']);
+        fprintf(['Skipping run ' num2str(iRun) '\n']);
     end
 end
 
