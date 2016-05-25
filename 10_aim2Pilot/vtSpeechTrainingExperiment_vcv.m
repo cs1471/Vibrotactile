@@ -1,7 +1,7 @@
 %vibrotactile speech training. called by vtSpeechTraining.m
 %PSM pmalone333@gmail.com
 
-function vtSpeechTrainingExperiment(name, exptdesign)
+function vtSpeechTrainingExperiment_vcv(name, exptdesign)
 
     rand('twister',sum(100*clock))
 
@@ -11,6 +11,9 @@ function vtSpeechTrainingExperiment(name, exptdesign)
 
     %open window with default settings:
     [w windowRect] = Screen('OpenWindow', screenNumber,[128 128 128]);
+    
+    %set font size
+    Screen('TextSize',w, 24);
 
     %load images
     fixationImage = imread(exptdesign.fixationImage);
@@ -22,7 +25,7 @@ function vtSpeechTrainingExperiment(name, exptdesign)
     drawAndCenterText(w, ['Please review instructions \n'...
         'Please click a mouse button to advance at each screen'],1)
 
-    drawAndCenterText(w,'\nAim 2 VT speech training.',1)
+    drawAndCenterText(w,'\nAim 2 VT speech training',1)
     
     vcv_cfg %load vowel-consonant-vowel config file 
 
@@ -44,7 +47,11 @@ function vtSpeechTrainingExperiment(name, exptdesign)
         ll=.3;
         ul=.8;
         
-        word_pairs = repmat(word_pairs_voicing,1,12);
+        if iBlock == 1, word_pairs = repmat(word_pairs_voicing,1,floor(exptdesign.numTrialsPerSession/length(word_pairs_voicing)));
+        elseif iBlock == 2, word_pairs = repmat(word_pairs_manner,1,floor(exptdesign.numTrialsPerSession/length(word_pairs_manner)));
+        elseif iBlock == 3, word_pairs = repmat(word_pairs_place,1,floor(exptdesign.numTrialsPerSession/length(word_pairs_place)));
+        end
+        
         stimOrder = randperm(length(word_pairs));
         word_pairs = word_pairs(stimOrder);
 
@@ -54,12 +61,14 @@ function vtSpeechTrainingExperiment(name, exptdesign)
             r = randperm(2); %random permutation of 1 and 2 to randomize word presentation order
             word1 = word_pairs{iTrial}(r(1));
             word2 = word_pairs{iTrial}(r(2));
-            word1_ind = strfind(list_words,char(word1));
-            word1_ind = find(not(cellfun('isempty', word1_ind)));
+            word1_ind = find(strcmp(list_words, char(word1)));
+            %word1_ind = strcmp(list_words,char(word1));
+            %word1_ind = find(not(cellfun('isempty', word1_ind)));
             r = randperm(2); %random permutation of 1 and 2 determines which copy of word1 is selected from list_words
             word1_ind = word1_ind(r(1));
-            word2_ind = strfind(list_words,char(word2));
-            word2_ind = find(not(cellfun('isempty', word2_ind)));
+            %word2_ind = strcmp(list_words,char(word2));
+            word2_ind = find(strcmp(list_words, char(word2)));
+            %word2_ind = find(not(cellfun('isempty', word2_ind)));
             r = randperm(2); %random permutation of 1 and 2 determines which copy of word2 is selected from list_words
             word2_ind = word2_ind(r(1));
             
@@ -120,7 +129,7 @@ function vtSpeechTrainingExperiment(name, exptdesign)
             %show the two arm images at a latency of .6+wait1 seconds
             %drawAndCenterText(w, ['Was ' correctWord{1} ' the first or second stimulus?\n'],0)
             
-            
+            [nx, ny, bbox] = DrawFormattedText(w, ['Was ' correctWord{1} ' the first or second stimulus?\n'], 'center', 'center', 1);
             [RespVBLTimestamp RespOnsetTime RespFlipTimestamp RespMissed] = Screen('Flip', w, 0.6+wait1);
             responseStartTime=GetSecs;
             sResp = getResponseMouse(100);
@@ -141,7 +150,7 @@ function vtSpeechTrainingExperiment(name, exptdesign)
                 WaitSecs(.1);
                 [CorrectionVBLTimestamp CorrectionOnsetTime CorrectionFlipTimestamp CorrectionMissed]=Screen('Flip', w);
                 %KbPressWait(1);
-                drawAndCenterText(w, [correctWord{1} ' was stimulus number ' num2str(correctResp) '\n' ...
+                drawAndCenterText(w, ['Incorrect. ' correctWord{1} ' was stimulus number ' num2str(correctResp) '\n' ...
                     'Click the mouse to play the stimuli again.'], 1);
                 %load word1
                 %awave = wavedata(1:2, startSamp:startSamp+numSamps);

@@ -19,10 +19,10 @@ else
     mkdir(['./data/' number])
 end
 
-exptdesign.numSessions = 1; %number of blocks
-exptdesign.numTrialsPerSession = 1;
+exptdesign.numSessions = 3; %number of blocks
+exptdesign.numTrialsPerSession = 60;
 
 exptdesign.fixationImage = 'imgsscaled/fixation.bmp';  % image for the fixation cross
 exptdesign.blankImage = 'imgsscaled/blank.bmp';        % image for the blank screen
 
-vtSpeechTrainingExperiment(name,exptdesign);
+vtSpeechTrainingExperiment_vcv(name,exptdesign);

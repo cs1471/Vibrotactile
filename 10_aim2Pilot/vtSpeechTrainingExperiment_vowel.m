@@ -1,7 +1,7 @@
 %vibrotactile speech training. called by vtSpeechTraining.m
 %PSM pmalone333@gmail.com
 
-function vtSpeechTrainingExperiment(name, exptdesign)
+function vtSpeechTrainingExperiment_vowel(name, exptdesign)
 
     rand('twister',sum(100*clock))
 
@@ -25,9 +25,9 @@ function vtSpeechTrainingExperiment(name, exptdesign)
     drawAndCenterText(w, ['Please review instructions \n'...
         'Please click a mouse button to advance at each screen'],1)
 
-    drawAndCenterText(w,'\nAim 2 VT speech training.',1)
+    drawAndCenterText(w,'\nAim 2 VT speech training',1)
     
-    vcv_cfg %load vowel-consonant-vowel config file 
+    vowel_cfg %load vowel config file 
 
     %load audio
     [y,freq,dummy] = wavread(audio_filename);
@@ -39,7 +39,7 @@ function vtSpeechTrainingExperiment(name, exptdesign)
     %fill primary buffer with waveform... tokens will be copied from this
     PsychPortAudio('FillBuffer', soundhandle, wavedata, 0, 1);  
 
-    for iBlock=1:exptdesign.numSessions %how many blocks to run this training session
+    for iBlock=5:exptdesign.numSessions %how many blocks to run this training session
         drawAndCenterText(w,['Training Block #' num2str(iBlock) ' of ' num2str(exptdesign.numSessions) '\n\n\n\n'...
             'Click the mouse to continue'],1);
 
@@ -47,7 +47,15 @@ function vtSpeechTrainingExperiment(name, exptdesign)
         ll=.3;
         ul=.8;
         
-        word_pairs = repmat(word_pairs_voicing,1,12);
+        if iBlock == 1, word_pairs = repmat(word_pairs_length,1,floor(60/length(word_pairs_length)));
+        elseif iBlock == 2, word_pairs = repmat(word_pairs_H2L2,1,floor(60/length(word_pairs_H2L2)));
+        elseif iBlock == 3, word_pairs = repmat(word_pairs_H1L1,1,floor(60/length(word_pairs_H1L1)));
+        elseif iBlock == 4, word_pairs = repmat(word_pairs_M2L2,1,floor(60/length(word_pairs_M2L2)));
+        elseif iBlock == 5, word_pairs = repmat(word_pairs_M1L1,1,floor(60/length(word_pairs_M1L1)));
+        elseif iBlock == 6, word_pairs = repmat(word_pairs_H2M2,1,floor(60/length(word_pairs_H2M2)));
+        elseif iBlock == 7, word_pairs = repmat(word_pairs_H1M1,1,floor(60/length(word_pairs_H1M1)));
+        end
+        
         stimOrder = randperm(length(word_pairs));
         word_pairs = word_pairs(stimOrder);
 
@@ -57,14 +65,12 @@ function vtSpeechTrainingExperiment(name, exptdesign)
             r = randperm(2); %random permutation of 1 and 2 to randomize word presentation order
             word1 = word_pairs{iTrial}(r(1));
             word2 = word_pairs{iTrial}(r(2));
-            word1_ind = strfind(list_words,char(word1));
-            word1_ind = find(not(cellfun('isempty', word1_ind)));
-            r = randperm(2); %random permutation of 1 and 2 determines which copy of word1 is selected from list_words
-            word1_ind = word1_ind(r(1));
-            word2_ind = strfind(list_words,char(word2));
-            word2_ind = find(not(cellfun('isempty', word2_ind)));
-            r = randperm(2); %random permutation of 1 and 2 determines which copy of word2 is selected from list_words
-            word2_ind = word2_ind(r(1));
+            word1_ind = find(strcmp(list_words, char(word1)));
+            %word1_ind = strcmp(list_words,char(word1));
+            %word1_ind = find(not(cellfun('isempty', word1_ind)));
+            word2_ind = find(strcmp(list_words, char(word2)));
+            %word2_ind = strcmp(list_words,char(word2));
+            %word2_ind = find(not(cellfun('isempty', word2_ind)));
             
             %start sample and duration for word1 
             startSamp1 = list_startSamples(word1_ind);
@@ -144,7 +150,7 @@ function vtSpeechTrainingExperiment(name, exptdesign)
                 WaitSecs(.1);
                 [CorrectionVBLTimestamp CorrectionOnsetTime CorrectionFlipTimestamp CorrectionMissed]=Screen('Flip', w);
                 %KbPressWait(1);
-                drawAndCenterText(w, [correctWord{1} ' was stimulus number ' num2str(correctResp) '\n' ...
+                drawAndCenterText(w, ['Incorrect. ' correctWord{1} ' was stimulus number ' num2str(correctResp) '\n' ...
                     'Click the mouse to play the stimuli again.'], 1);
                 %load word1
                 %awave = wavedata(1:2, startSamp:startSamp+numSamps);
