@@ -17,7 +17,7 @@ exptdesign.subjectName = name;
 
 %Trial/Block/Run lengths
 exptdesign.numBlocks = 1;
-exptdesign.numTrialsPerSession = 5;
+exptdesign.numTrialsPerSession = 127;
 exptdesign.numRuns = 2;
 
 %fixation location/duration         
