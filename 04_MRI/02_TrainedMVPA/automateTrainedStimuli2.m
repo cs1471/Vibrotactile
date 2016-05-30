@@ -1,4 +1,4 @@
-% function stimuliAllRuns = automateTrainedStimuli2(nRuns,response)
+function stimuliAllRuns = automateTrainedStimuli2(nRuns,response)
 
 nCond = 7;
 if (nargin < 1) 
@@ -125,5 +125,5 @@ end
 %% Save the matrix and metadata
 save(['./stimuliAllRunsRP' int2str(response) '.mat'],'stimuliAllRuns','metaData');
 
-% end
+end
 
