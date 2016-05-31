@@ -12,7 +12,7 @@ end
 WaitSecs(0.25);
 
 %check if subject has data on file
-exptdesign.saveDir = ['./data_Trained_Localizer/' number];
+exptdesign.saveDir = ['./data_Trained_Localizer/practice_trials/' number];
 if ~exist(exptdesign.saveDir,'dir')
     mkdir(exptdesign.saveDir)
 end
@@ -20,9 +20,9 @@ end
 exptdesign.subjectName = name;
 
 %Trial/Block/Run lengths
-exptdesign.numBlocks = 28; %28            
+exptdesign.numBlocks = 6; %28            
 exptdesign.numTrialsPerSession = 6;    
-exptdesign.numRuns = 6;
+exptdesign.numRuns = 1;
 
 %fixation location/duration
 exptdesign.fixationDuration =0.700;
@@ -41,10 +41,7 @@ exptdesign.imageDirectory = 'imgsscaled/';
 % end
 
 
-% exptdesign.response = input('\n\nEnter response key profile (option 0 or 1):\n\n');
-% Line above is commented because now we need the RP to be 0 so that the
-% correct stimulus file is generated.
-exptdesign.response = 0;
+exptdesign.response = input('\n\nEnter response key profile (option 0 or 1):\n\n');
 exptdesign.responseBox = 1; 
 exptdesign.interTrialInterval = 0.7;                % amount of time between trials
 
@@ -68,7 +65,7 @@ for iRuns = 1:exptdesign.numRuns
         startOrNot = input('Start the next run? y or n\n');
     end
     if strcmp(startOrNot,'y')==1
-        [trialOutput.run] = trainedOddballExperimentInScanner2(name,exptdesign);
+        [trialOutput.run] = trainedOddballExperimentInScanner2_PRACTICE(name,exptdesign);
     else
         fprintf(['Skipping run ' num2str(iRun) '\n']);
     end

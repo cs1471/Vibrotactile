@@ -1,5 +1,5 @@
 
-function trialOutput = trainedOddballExperimentInScanner2(name,exptdesign)
+function trialOutput = trainedOddballExperimentInScanner2_PRACTICE(name,exptdesign)
 % dbstop if error;
 try
 %     dbstop if error;
@@ -94,7 +94,7 @@ try
     response = exptdesign.response;
 
     %load training stimuli
-    load(['stimuliAllRunsRP' int2str(response) '.mat']);
+    load(['stimuliAllRunsRP' int2str(response) '_PRACTICE.mat']);
     stimuli = stimuliAllRuns{runCounter};
     
     totalTrialCounter = 1;
@@ -199,9 +199,9 @@ try
         trialOutput(iBlock,1).stimuli               = stimuliBlock;
         trialOutput(iBlock,1).blockStart            = blockStart;
         trialOutput(iBlock,1).blockFinished         = blockFinished;
-        trialOutput(iBlock,1).conditionIndex        = metaData{runCounter}.conditionIndices(iBlock,1);
-        trialOutput(iBlock,1).oddball               = metaData{runCounter}.oddballPosition(iBlock,1);
-        trialOutput(iBlock,1).conditionKey          = metaData{runCounter}.dataKey;
+%         trialOutput(iBlock,1).conditionIndex        = metaData{runCounter}.conditionIndices(iBlock,1);
+%         trialOutput(iBlock,1).oddball               = metaData{runCounter}.oddballPosition(iBlock,1);
+%         trialOutput(iBlock,1).conditionKey          = metaData{runCounter}.dataKey;
     end
     
     sum = 0;
@@ -210,12 +210,13 @@ try
         sum = sum + trialOutput(i).accuracy;
         sum_sResp = sum_sResp + trialOutput(i).sResp;
     end
+   
     Screen('DrawTexture', w, fixationTexture);
     Screen('Flip',w)
     WaitSecs(10);
      
     ShowCursor;
-  
+
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     %		END
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
