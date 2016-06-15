@@ -243,7 +243,7 @@ function vtCategorizationTrainingExperiment7(name, exptdesign)
 
         if level > 5 && level ~= exptdesign.maxLevel
             %call function that generates a weighted training stimuli file
-            makeWeightedTrainingStimuli2(trialOutput(iBlock).accuracy, trialOutput(iBlock).stimuli, name);
+            makeWeightedTrainingStimuli3(trialOutput(iBlock).accuracy, trialOutput(iBlock).stimuli, name);
         end
 
         %save the session data in the data directory
