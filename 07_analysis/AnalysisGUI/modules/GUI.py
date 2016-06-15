@@ -4,6 +4,7 @@ from tkinter import messagebox
 
 from freqDiscrimAnalysis_Category import freqDiscrimAnalysis_Category
 from CategoryTrainingFigure_Funnel import CategoryTrainingFigure_Funnel
+from CategoryTesting import CategoryTesting
 
 class GUI(tkinter.Frame):
 	def __init__(self, master=None):
@@ -12,11 +13,14 @@ class GUI(tkinter.Frame):
 		self.createWidgets()
 
 	def createWidgets(self):
-		optionList = ["Category Training", "Frequency Discrimination"]
+		self.options = [{"Name": "Category Testing", "SessionRequired": False},
+					{"Name": "Category Training", "SessionRequired": True},
+					{"Name": "Frequency Discrimination", "SessionRequired": False}]
+			#Name is the string that goes in the menu; SessionRequired is whether the Session field is enabled
 		self.sessionType = tkinter.StringVar()							#variable to hold choice
-		self.sessionType.set(optionList[0])								#set default option as first option
+		self.sessionType.set("Category Training")						#set default option as Category Training
 
-		self.optionMenu = tkinter.OptionMenu(self, self.sessionType, *optionList)
+		self.optionMenu = tkinter.OptionMenu(self, self.sessionType, *[option["Name"] for option in self.options], command = self.updateSessionField)
 		self.optionMenu.grid(row = 0, columnspan = 2)					#drop-down list with script options
 
 		self.chooseFileButton = tkinter.Button(self, text = "Choose File...", command = self.chooseFile)
@@ -32,6 +36,7 @@ class GUI(tkinter.Frame):
 		self.session = tkinter.StringVar()
 		self.sessionField = tkinter.Entry(self, textvariable = self.session, width = 3)
 		self.sessionField.grid(row = 3, column = 1, sticky = tkinter.W)	#field to enter the number of the session
+		self.updateSessionField()
 
 		self.runButton = tkinter.Button(self, text = "Create Figures", command = (lambda: self.runScript(self.sessionType.get(), self.chosenFile.get(), self.session.get())))
 		self.runButton.grid(row = 5, columnspan = 2)					#runs the chosen script
@@ -45,6 +50,13 @@ class GUI(tkinter.Frame):
 		filename = filedialog.askopenfilename(filetypes = [("MATLAB Data Files", ".mat"), ("All Files", ".*")])
 		self.chosenFile.set(filename)
 
+	def updateSessionField(self, event = None):							#session field is enabled or not based on chosen script
+		optionIndex = [option["Name"] for option in self.options].index(self.sessionType.get())
+		if self.options[optionIndex]["SessionRequired"]:
+			self.sessionField["state"] = tkinter.NORMAL
+		else:
+			self.sessionField["state"] = tkinter.DISABLED
+
 	def runScript(self, sessionType, dataFilename, session):
 		self.status.set("Generating figures...")
 		self.statusLabel.update()
@@ -56,7 +68,9 @@ class GUI(tkinter.Frame):
 
 		fileDirectory = dataFilename[:-1 * len(filename)]				#file directory is the path up to the name
 
-		if sessionType == "Category Training":
+		if sessionType == "Category Testing":
+			CategoryTesting(fileDirectory, filename[:-4])							#remove ".mat" from filename
+		elif sessionType == "Category Training":
 			CategoryTrainingFigure_Funnel(fileDirectory, filename[:-4], session)	#remove ".mat" from filename
 		elif sessionType == "Frequency Discrimination":
 			freqDiscrimAnalysis_Category(fileDirectory, filename[:-4])				#remove ".mat" from filename
