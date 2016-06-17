@@ -1,3 +1,5 @@
+print("Loading...")
+
 from GUI import GUI
 
 

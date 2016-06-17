@@ -7,12 +7,11 @@ import plotly.tools as tls
 from frequencyFunction_specific import FrequencySpecific
 from category import category
 from PositionFunction_General import Position_general
+tls.set_credentials_file(username='cs1471', api_key='9xknhmjhas')
 
 
 
 def CategoryTrainingFigure_Funnel(fileDirectory, filename, session):
-	tls.set_credentials_file(username='cs1471', api_key='9xknhmjhas')
-
 	#Use when debugging or manually editing
 	#filename      = ('20160605_1137-MR1035_block6')
 	#fileDirectory = 'C:\\Users\\Jason\\Documents\\MaxLab\\Repos\\Vibrotactile\\01_CategoryTraining\\data\\1035\\'
@@ -66,7 +65,7 @@ def CategoryTrainingFigure_Funnel(fileDirectory, filename, session):
 	#x-axis label
 	x = []
 	i=0
-	for i in range(5):
+	for i in range(6):
 				x.append("Block: " + str(i+1) + ", Level: " + str(level[0,i][0,0])),
 
 	#############################################################################

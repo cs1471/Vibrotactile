@@ -27,7 +27,7 @@ class GUI(tkinter.Frame):
 		self.chooseFileButton.grid(row = 2, column = 0, padx = 2)		#open file choice dialog for data file
 
 		self.chosenFile = tkinter.StringVar()
-		self.chosenFileField = tkinter.Entry(self, textvariable = self.chosenFile, width = 40)
+		self.chosenFileField = tkinter.Entry(self, textvariable = self.chosenFile, width = 40, justify = tkinter.RIGHT)
 		self.chosenFileField.grid(row = 2, column = 1)					#shows which data file was selected
 
 		self.sessionLabel = tkinter.Label(self, text = "Session:")
@@ -49,6 +49,8 @@ class GUI(tkinter.Frame):
 	def chooseFile(self):												#file choice dialog
 		filename = filedialog.askopenfilename(filetypes = [("MATLAB Data Files", ".mat"), ("All Files", ".*")])
 		self.chosenFile.set(filename)
+		self.chosenFileField.focus()
+		self.chosenFileField.index(tkinter.END)							#so that the filename is visible
 
 	def updateSessionField(self, event = None):							#session field is enabled or not based on chosen script
 		optionIndex = [option["Name"] for option in self.options].index(self.sessionType.get())
