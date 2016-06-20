@@ -12,6 +12,7 @@ class GUI(tkinter.Frame):
 		self.grid()
 		self.createWidgets()
 
+
 	def createWidgets(self):
 		self.options = [{"Name": "Category Testing", "SessionRequired": False},
 					{"Name": "Category Training", "SessionRequired": True},
@@ -27,6 +28,7 @@ class GUI(tkinter.Frame):
 		self.chooseFileButton.grid(row = 2, column = 0, padx = 2)		#open file choice dialog for data file
 
 		self.chosenFile = tkinter.StringVar()
+		self.initialDir = ""											#the directory that the file choice dialog opens to
 		self.chosenFileField = tkinter.Entry(self, textvariable = self.chosenFile, width = 40, justify = tkinter.RIGHT)
 		self.chosenFileField.grid(row = 2, column = 1)					#shows which data file was selected
 
@@ -46,11 +48,20 @@ class GUI(tkinter.Frame):
 		self.statusLabel = tkinter.Label(self, textvariable = self.status)
 		self.statusLabel.grid(row = 6, columnspan = 2)
 
+
 	def chooseFile(self):												#file choice dialog
-		filename = filedialog.askopenfilename(filetypes = [("MATLAB Data Files", ".mat"), ("All Files", ".*")])
+		filename = filedialog.askopenfilename(initialdir = self.initialDir, filetypes = [("MATLAB Data Files", ".mat"), ("All Files", ".*")])
 		self.chosenFile.set(filename)
+
+		#update initial directory
+		if "\\" in filename:										#if the file path uses backslashes
+			self.initialDir = filename[:-1 * len(filename.split("\\")[-1])]
+		else:															#if the file path uses forward slashes
+			self.initialDir = filename[:-1 * len(filename.split("/")[-1])]
+
 		self.chosenFileField.focus()
-		self.chosenFileField.index(tkinter.END)							#so that the filename is visible
+		self.chosenFileField.icursor(tkinter.END)						#so that the filename is visible
+
 
 	def updateSessionField(self, event = None):							#session field is enabled or not based on chosen script
 		optionIndex = [option["Name"] for option in self.options].index(self.sessionType.get())
@@ -58,6 +69,7 @@ class GUI(tkinter.Frame):
 			self.sessionField["state"] = tkinter.NORMAL
 		else:
 			self.sessionField["state"] = tkinter.DISABLED
+
 
 	def runScript(self, sessionType, dataFilename, session):
 		self.status.set("Generating figures...")

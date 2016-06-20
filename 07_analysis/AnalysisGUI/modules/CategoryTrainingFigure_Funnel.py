@@ -65,7 +65,7 @@ def CategoryTrainingFigure_Funnel(fileDirectory, filename, session):
 	#x-axis label
 	x = []
 	i=0
-	for i in range(6):
+	for i in range(accuracy.size):
 				x.append("Block: " + str(i+1) + ", Level: " + str(level[0,i][0,0])),
 
 	#############################################################################
