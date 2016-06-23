@@ -27,7 +27,7 @@ function makeWeightedTrainingStimuli2(prevAcc, prevStim, name)
     
    %%
    for i = 1:numFreqPairs
-       if ismember(i,[10,11,12]), continue; end
+       if ismember(i,[9,10,11,12,13]), continue; end
         f(i,:) = {prevAcc(prevStim(1,:) == f1(i))};
    end
    

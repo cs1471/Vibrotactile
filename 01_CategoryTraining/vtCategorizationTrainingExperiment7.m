@@ -52,7 +52,7 @@ function vtCategorizationTrainingExperiment7(name, exptdesign)
         'and have the opportunity to review the stimulus while you view the correct label.\n'...
         'When you click the mouse, you will feel the vibration again'], 1)
     %load training stimuli
-    load('trainingStimuli7.mat');
+    load('trainingStimuli8.mat');
     level=exptdesign.level;
 
     for iBlock=1:exptdesign.numSessions %how many blocks to run this training session
