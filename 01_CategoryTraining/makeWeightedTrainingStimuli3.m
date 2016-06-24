@@ -2,7 +2,7 @@
 %June 15 2015
 %Clara Scholl cas243@georgetown.edu
 
-function makeWeightedTrainingStimuli2(prevAcc, prevStim, name)
+function makeWeightedTrainingStimuli3(prevAcc, prevStim, name)
 
     %dimensions are 240 stimuli x 4 parameters x 20 levels
     %the five columns (dimension 2) are:
@@ -39,9 +39,9 @@ function makeWeightedTrainingStimuli2(prevAcc, prevStim, name)
    
    %level 5 goes through all stimuli, once; so stimulators and category
    %don't match anymore
-   level=[f1(1:9) f1(13:21); f2(1:9) f2(13:21)]; %frequency combos (18 total)
+   level=[f1(1:8) f1(14:21); f2(1:8) f2(14:21)]; %frequency combos (18 total)
    level=repmat(level, 1,5); %repeat 8 times (this is 128!)
-   weightedLevel = [repmat(f(:,1),1,14), repmat(f(:,3),1,14), repmat(f(:,2),1,13), repmat(f(:,4),1,13)];
+   weightedLevel = [repmat(f(:,1),1,16), repmat(f(:,3),1,16), repmat(f(:,2),1,16), repmat(f(:,4),1,16)];
    
    level = [level, weightedLevel];
    
