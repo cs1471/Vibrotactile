@@ -43,7 +43,7 @@ def CategoryTrainingFigure_Funnel(fileDirectory, filename, session):
 	#Calculations by morph
 	#############################################################################
 
-	catObj = category(stimuli= stimuli)
+	catObj = category(stimuli = stimuli)
 	RT,ACC = catObj.wrapper(accuracy, reactionTime)
 	pos_acc = catObj.parseData_freq_block(accuracy, stimuli)
 
@@ -73,9 +73,8 @@ def CategoryTrainingFigure_Funnel(fileDirectory, filename, session):
 	#############################################################################
 
 	#make trace containing each frequency pair
-	x2 = ['[25,100]', '[27,91]', '[29,91]', '[31,83]', '[33,77]', '[36,71]', '[38,67]', '[40,62.5]', '[43,59]',
-		  '[59, 43]', '[62.5, 40]', '[67, 38]', '[71, 36]','[77, 33]', '[83, 31]', '[91, 29]', '[91, 27]','[100, 25]']
-	x3 = ['100%', '95%', '90%', '85%', '80%', '75%', '70%', '65%', '60%', '40%', '35%', '30%', '25%', '20%', '15%', '10%', '5%', '0%']
+	x2 = ['[25,100]', '[27,91]', '[29,91]', '[31,83]', '[33,77]', '[36,71]', '[38,67]', '[40,62.5]', '[62.5, 40]', '[67, 38]', '[71, 36]','[77, 33]', '[83, 31]', '[91, 29]', '[91, 27]','[100, 25]']
+	x3 = ['100%', '95%', '90%', '85%', '80%', '75%', '70%', '65%', '35%', '30%', '25%', '20%', '15%', '10%', '5%', '0%']
 	x4 = ['[27,91]', '[40,62.5]', '[62.5, 40]', '[91, 27]']
 
 	#trace_PG_ACC_7  = make_trace_bar(x4, [pos_acc[0][0], pos_acc[0][1], pos_acc[0][2], pos_acc[0][3]], 'pos3')
@@ -123,8 +122,8 @@ def CategoryTrainingFigure_Funnel(fileDirectory, filename, session):
 	fig_pos['layout'].update(barmode='group', bargroupgap=0, bargap=0.25,
 		title = subjectName + " Pos Accuracy RA stimuli " + session, yaxis = dict(dtick = .1))
 
-	colorRA = ['black', 'blue', 'black', 'black', 'black', 'black', 'black' ,'blue', 'black',
-			   'black', 'blue', 'black', 'black', 'black', 'black', 'black' ,'blue', 'black']
+	colorRA = ['black', 'blue', 'black', 'black', 'black', 'black', 'black' ,'blue',
+			   'blue', 'black', 'black', 'black', 'black', 'black' ,'blue', 'black']
 
 	fig['data']  = [trace1, trace2, trace3, trace7, trace4, trace5, trace6, trace8]
 	fig_FP['data'] = [go.Bar(x=x2, y=mF, marker = dict(color = colorRA))]
