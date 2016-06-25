@@ -4,8 +4,8 @@
 % Levan Bokeria levan.bokeria@georgetown.edu
 
 %get subject info
-number = input('\n\nEnter Subject NUMBER:\n\n','s');
-exptdesign.number = number;
+% number = input('\n\nEnter Subject NUMBER:\n\n','s');
+% exptdesign.number = number;
 
 if isempty(number)
     name = 'MR000';
