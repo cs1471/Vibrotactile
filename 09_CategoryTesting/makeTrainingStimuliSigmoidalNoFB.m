@@ -21,8 +21,8 @@ function makeTrainingStimuliSigmoidalNoFB
     f2=fliplr(f1);
     
     %find possible stimulator combinations (8 combos total)
-    s1=[3 4];
-    s2=[9 10];
+    s1=[7 7];
+    s2=[13 13];
     stimulator=[s1; s2];
    
    %%  

@@ -50,7 +50,7 @@ function vtCategorizationTrainingExperimentSigmoidalNoFB(name, exptdesign)
     drawAndCenterText(w, ['There will be no feedback for incorrect or correct answers this time.'], 1)
     %load training stimuli
     load('trainingStimuliSigmoidalNoFB.mat');
-    level=exptdesign.level;
+    %level=exptdesign.level;
 
     for iBlock=1:exptdesign.numSessions %how many blocks to run this training session
         drawAndCenterText(w,['Training Block #' num2str(iBlock) '. Click the mouse to continue'],1);

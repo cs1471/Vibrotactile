@@ -1,6 +1,6 @@
 % get subject info
-%number = input('\n\nEnter Subject ID:\n\n','s');
-number = '915';
+number = input('\n\nEnter Subject ID:\n\n','s');
+%number = '915';
 exptdesign.number = number;
 if isempty(number)
     name = [datestr(now,'yyyy-mm-dd-HH-MM-') 'MR000'];
@@ -18,7 +18,7 @@ exptdesign.subjectName = name;
 
 %Trial/Block/Run lengths
 exptdesign.numBlocks = 1;              
-exptdesign.numTrialsPerSession = 30;    
+exptdesign.numTrialsPerSession = 40;    
 exptdesign.numRuns = 1;
 
 %fixation location/duration         

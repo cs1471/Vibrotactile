@@ -67,14 +67,14 @@ exptdesign.correct2='imgsscaled/replayRed.png';
 exptdesign.imageDirectory = 'imgsscaled/';
 
 %open COM1 port
-try
+%try
     stimGenPTB('open','COM1')
     vtCategorizationTrainingExperimentSigmoidalNoFB(name,exptdesign);
-catch
+%catch
      disp('Closing all screens and closing the Com Port')
      stimGenPTB('close');
      Screen('CloseAll');
- end
+ %end
 
  handle = errordlg('Please ensure the driver box is turned off');
  disp(handle);

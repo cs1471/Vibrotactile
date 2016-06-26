@@ -48,11 +48,11 @@ try
         end
         
         % Get the responses keyed in from subject
-        drawAndCenterText(w,'Please press the button for same vibration.',0);
+        drawAndCenterText(w,'Please press the button "same category".',0);
         evt = CMUBox('GetEvent', exptdesign.boxHandle, 1); % get event for button pressed
         responseMapping.same = evt.state; % stores button box in variable
         
-        drawAndCenterText(w,'Please press the button for different vibration.',0);
+        drawAndCenterText(w,'Please press the button "different category".',0);
         evt = CMUBox('GetEvent', exptdesign.boxHandle, 1); % get event for button pressed
         responseMapping.different = evt.state; % stores button box in variable
       
@@ -91,14 +91,14 @@ try
     % Display experiment instructions
     if response == '0'
         drawAndCenterText(w,['\nOn each trial, you will feel 2 vibrations \n'...
-                             'You will indicate whether the vibrations were different categories by pressing \n'...
+                             'You will indicate whether the vibrations are members of different categories by pressing \n'...
                              'the button with your index finger\n'...
-                             'or the same category by pushing the button with your middle finger.'  ],1)
+                             'or members of the same category by pushing the button with your middle finger.'  ],1)
     else
         drawAndCenterText(w,['\nOn each trial, you will feel 2 vibrations \n'...
-                             'You will indicate whether the vibrations were different categories by pressing \n'...
+                             'You will indicate whether the vibrations are members of different categories by pressing \n'...
                              'the button with your middle finger\n'...
-                             'or the same category by pushing the button with your index finger.'  ],1)
+                             'or members of the same category by pushing the button with your index finger.'  ],1)
     end
     
     % Load stimuli file
