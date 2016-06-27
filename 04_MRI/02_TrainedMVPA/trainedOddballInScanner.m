@@ -20,7 +20,7 @@ end
 exptdesign.subjectName = name;
 
 %Trial/Block/Run lengths
-exptdesign.numBlocks = 28; %28            
+exptdesign.numBlocks = 28;         
 exptdesign.numTrialsPerSession = 6;    
 exptdesign.numRuns = 6;
 

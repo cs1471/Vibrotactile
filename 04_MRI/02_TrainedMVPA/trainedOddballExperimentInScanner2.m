@@ -63,14 +63,14 @@ try
         %while loop that continues to iterate until trigger is pressed at
         %which point triggername == trigger
         while ~isequal(triggername,trigger)
-            evt = CMUBox('GetEvent', exptdesign.boxHandle, 1);
-            trigger = evt.state;
+            evt       = CMUBox('GetEvent', exptdesign.boxHandle, 1);
+            trigger   = evt.state;
             starttime = evt.time;
         end
         
         %store start time and response mapping in exptdesign struct
-        exptdesign.scanStart = starttime;
-        exptdesign.responseMapping=responseMapping;
+        exptdesign.scanStart       = starttime;
+        exptdesign.responseMapping = responseMapping;
     else
         %checks for in between runs so that experminter can control run
         %start
@@ -80,9 +80,9 @@ try
     end
     
     %marks the number of runs passed in from exptdesign struct
-    runCounter=exptdesign.iRuns;
-    numBlocks  = exptdesign.numBlocks;
-    numTrialsPerSession = exptdesign.numTrialsPerSession;
+    runCounter           = exptdesign.iRuns;
+    numBlocks            = exptdesign.numBlocks;
+    numTrialsPerSession  = exptdesign.numTrialsPerSession;
     stimulusPresentation = exptdesign.stimulusPresentation;
 
     %Display experiment instructions
@@ -98,7 +98,7 @@ try
     stimuli = stimuliAllRuns{runCounter};
     
     totalTrialCounter = 1;
-    for iBlock=1:numBlocks %how many blocks to run this training session
+    for iBlock = 1:numBlocks %how many blocks to run this training session
         blockStart = GetSecs;
         for i = 1:size(stimuli,2)
             stimuliBlock{i} = stimuli{iBlock,i};
@@ -111,8 +111,8 @@ try
             evt = CMUBox('GetEvent', exptdesign.boxHandle);
         end
         
-        %iterate over trials
-        for iTrial=1:numTrialsPerSession
+        %% iterate over trials
+        for iTrial = 1:numTrialsPerSession
             
            %call function that generates stimuli for driver box
            if withinTrialCounter == 1
@@ -124,23 +124,23 @@ try
            [FixationVBLTimestamp, FixationOnsetTime, FixationFlipTimestamp, FixationMissed] = Screen('Flip',w, exptdesign.scanStart + 10*(iBlock) + 1*(totalTrialCounter-1)); 
            
            stimulusOnset = GetSecs;
-           rtn=-1;
+           rtn=-1; % why do we still have this?... 
            while rtn==-1
                rtn = stimGenPTB('start');
            end
            stimulusFinished = GetSecs;
-           stimulusDuration = stimulusFinished - stimulusOnset;
-           stimulusOffset = stimulusPresentation - stimulusDuration;
+           stimulusDuration = stimulusFinished     - stimulusOnset;
+           stimulusOffset   = stimulusPresentation - stimulusDuration;
            WaitSecs(stimulusOffset)
            
-           responseStartTime=GetSecs;
+           responseStartTime = GetSecs;
            
            % Load stimuli
            if withinTrialCounter ~= numTrialsPerSession
-                [stimLoadTime] = loadStimuli(stimuliBlock ,iTrial+1);
+                [stimLoadTime] = loadStimuli(stimuliBlock ,iTrial + 1);
            end
            
-           waitTime = exptdesign.interTrialInterval- stimLoadTime;
+           waitTime = exptdesign.interTrialInterval - stimLoadTime;
            
            if length(stimuliBlock{1,iTrial}(1,:)) > 1
                 correctResponse = 1;
@@ -164,7 +164,7 @@ try
            
            withinTrialCounter = withinTrialCounter + 1;
            totalTrialCounter = totalTrialCounter + 1;
-        end
+        end % end of trial loop
         %set variables == 0 if no response
         responseFinishedTime = 0;
         sResp=0;
@@ -174,7 +174,7 @@ try
         evt = CMUBox('GetEvent', exptdesign.boxHandle);
         
         while ~isempty(evt)
-            eventCount=eventCount+1;
+            eventCount = eventCount + 1;
             %sResp ==1 if button pressed
             sResp(eventCount) = 1;
             %record end time of response
