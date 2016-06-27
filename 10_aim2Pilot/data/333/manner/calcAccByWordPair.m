@@ -22,7 +22,7 @@ for t=1:length(trialOutput)
           n_pres(4,1) = n_pres(4,1) + 1;
       elseif strcmp(trialOutput{t}.stimuli{s}(1),'ata') || strcmp(trialOutput{t}.stimuli{s}(1),'asa')
           hits(5,1) = hits(5,1) + trialOutput{t}.accuracy(s);
-          n_pres(5,1) = n_pres(1,1) + 1;
+          n_pres(5,1) = n_pres(5,1) + 1;
       end
    end
 end
