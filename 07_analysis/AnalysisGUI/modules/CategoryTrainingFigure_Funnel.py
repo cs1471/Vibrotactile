@@ -44,7 +44,7 @@ def CategoryTrainingFigure_Funnel(fileDirectory, filename, session):
 	#############################################################################
 
 	catObj = category(stimuli = stimuli)
-	RT,ACC = catObj.wrapper(accuracy, reactionTime)
+	RT, ACC = catObj.wrapper(accuracy, reactionTime)
 	pos_acc = catObj.parseData_freq_block(accuracy, stimuli)
 
 	#############################################################################
@@ -83,12 +83,27 @@ def CategoryTrainingFigure_Funnel(fileDirectory, filename, session):
 	trace_ACC_FP = make_trace_bar(x2, mF, '')
 
 	#make trace containing acc and RT for morph
-	trace1 = make_trace_bar(x, [ACC[0], ACC[3], ACC[6], ACC[9], ACC[12], ACC[15]],  "Category Prototype Acc")
-	trace2 = make_trace_bar(x, [ACC[1], ACC[4], ACC[7], ACC[10], ACC[13], ACC[16]], "Middle Morph Acc")
-	trace3 = make_trace_bar(x, [ACC[2], ACC[5], ACC[8], ACC[11], ACC[14], ACC[17]], "Category Boundary Acc")
-	trace4 = make_trace_line(x, [RT[0], RT[3], RT[6], RT[9], RT[12], RT[15]], "Category Prototype RT", 'n')
-	trace5 = make_trace_line(x, [RT[1], RT[4], RT[7], RT[10], RT[13], RT[16]], "Middle Morph RT", 'n')
-	trace6 = make_trace_line(x, [RT[2], RT[5], RT[8], RT[11], RT[14], RT[17]], "Category Boundary RT", 'n')
+	prototypeAcc = [0] * (len(ACC) // 3)
+	middleAcc = [0] * (len(ACC) // 3)
+	boundaryAcc = [0] * (len(ACC) // 3)
+	prototypeRT = [0] * (len(ACC) // 3)
+	middleRT = [0] * (len(ACC) // 3)
+	boundaryRT = [0] * (len(ACC) // 3)
+
+	for i in range(len(ACC) // 3):
+		prototypeAcc[i] = ACC[3 * i]
+		middleAcc[i] = ACC[3 * i + 1]
+		boundaryAcc[i] = ACC[3 * i + 2]
+		prototypeRT[i] = RT[3 * i]
+		middleRT[i] = RT[3 * i + 1]
+		boundaryRT[i] = RT[3 * i + 2]
+
+	trace1 = make_trace_bar(x, prototypeAcc, "Category Prototype Acc")
+	trace2 = make_trace_bar(x, middleAcc, "Middle Morph Acc")
+	trace3 = make_trace_bar(x, boundaryAcc, "Category Boundary Acc")
+	trace4 = make_trace_line(x, prototypeRT, "Category Prototype RT", 'n')
+	trace5 = make_trace_line(x, middleRT, "Middle Morph RT", 'n')
+	trace6 = make_trace_line(x, boundaryRT, "Category Boundary RT", 'n')
 
 	#make trace containing overall acc and rt
 	trace7 = make_trace_line(x, O_accuracy, "Overall Accuracy", 'y')
