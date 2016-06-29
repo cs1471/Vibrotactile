@@ -7,6 +7,7 @@
 % number = input('\n\nEnter Subject NUMBER:\n\n','s');
 % exptdesign.number = number;
 
+number = [];
 if isempty(number)
     name = 'MR000';
 else
