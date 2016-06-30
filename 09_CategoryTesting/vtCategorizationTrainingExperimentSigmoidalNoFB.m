@@ -211,7 +211,7 @@ function vtCategorizationTrainingExperimentSigmoidalNoFB(name, exptdesign)
         trialOutput(iBlock).order=order;
         trialOutput(iBlock).stimuli=stimuli;
         trialOutput(iBlock).accuracyForLevel=accuracyForLevel;
-        trialOutput(iBlock).level = level;
+%         trialOutput(iBlock).level = level;
 
         %check if they pass level and increase level if they do;
         %levelAccuracy = [repmat(.75, [1 3]) .70 .75 .775 .80 .825 .85 .875 .9 .925 .90];
