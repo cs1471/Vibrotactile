@@ -4,7 +4,6 @@
 
 input('\nDid you pull from Git? Hit Enter when "Yes."\n');
 input('\nIs white noise playing? Hit Enter when "Yes."\n');
-input('\nDoes participant have ear plugs? Hit Enter when "Yes."\n');
 input('\nIs the driver machine on? Hit Enter when "Yes."\n');
 
 %get subject info
