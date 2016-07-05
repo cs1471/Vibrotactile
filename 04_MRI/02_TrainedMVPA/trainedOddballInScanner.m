@@ -1,8 +1,10 @@
+exptdesign.debug = 0;
 % get subject info
-%name = '915';
-%number = name;
-
-number = input('\n\nEnter Subject ID:\n\n','s');
+if exptdesign.debug
+    number = '915';
+else
+    number = input('\n\nEnter Subject ID:\n\n','s');
+end
 exptdesign.number = number;
 if isempty(number)
     name = [datestr(now,'yyyy-mm-dd-HH-MM') 'MR000'];
@@ -20,9 +22,17 @@ end
 exptdesign.subjectName = name;
 
 %Trial/Block/Run lengths
-exptdesign.numBlocks = 28;         
-exptdesign.numTrialsPerSession = 6;    
-exptdesign.numRuns = 6;
+
+if exptdesign.debug 
+    disp('WARNING!!! YOU ARE IN DEBUG MODE') 
+    exptdesign.numBlocks = 3;         
+    exptdesign.numTrialsPerSession = 6;    
+    exptdesign.numRuns = 1;
+else
+    exptdesign.numBlocks = 28;         
+    exptdesign.numTrialsPerSession = 6;    
+    exptdesign.numRuns = 6;
+end
 
 %fixation location/duration
 exptdesign.fixationDuration =0.700;
@@ -31,7 +41,7 @@ exptdesign.fixationImage = 'imgsscaled/fixation.bmp';
 exptdesign.imageDirectory = 'imgsscaled/';   
 
 % Decide which response mapping you are using
-% if exptdesign.debugmode
+
 %     exptdesign.response = 1;
 %     exptdesign.responseBox = 0;
 %     exptdesign.boxHandle = 2; % we still need this variable in the debug mode. 
@@ -70,7 +80,7 @@ for iRuns = 1:exptdesign.numRuns
     if strcmp(startOrNot,'y')==1
         [trialOutput.run] = trainedOddballExperimentInScanner2(name,exptdesign);
     else
-        fprintf(['Skipping run ' num2str(iRun) '\n']);
+        fprintf(['Skipping run ' num2str(iRuns) '\n']);
     end
 end
 

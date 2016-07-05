@@ -1,6 +1,6 @@
 
 function trialOutput = trainedOddballExperimentInScanner2(name,exptdesign)
-% dbstop if error;
+%dbstop if error;
 try
 %     dbstop if error;
     KbName('UnifyKeyNames');
@@ -8,7 +8,9 @@ try
 
     %settings so that Psychtoolbox doesn't display annoying warnings--DON'T CHANGE
     oldLevel = Screen('Preference', 'VisualDebugLevel', 1);
-    HideCursor;
+    if ~exptdesign.debug
+        HideCursor;
+    end
 
     WaitSecs(1); % make sure it is loaded into memory;
 
@@ -20,8 +22,11 @@ try
     screenNumber = min(screens);
 
     % Open window with default settings:
-    [w windowRect] = Screen('OpenWindow', screenNumber,[128 128 128]);
- %   [w windowRect] = Screen('OpenWindow', screenNumber,[128 128 128], [0 0 800 800]); %for debugging
+    if exptdesign.debug
+        [w windowRect] = Screen('OpenWindow', screenNumber,[128 128 128], [0 0 800 800]); %for debugging
+    else
+        [w windowRect] = Screen('OpenWindow', screenNumber,[128 128 128]);
+    end
 
     % Select specific text font, style and size, unless we're on Linux
     % where this combo is not available:
@@ -168,6 +173,10 @@ try
         %set variables == 0 if no response
         responseFinishedTime = 0;
         sResp=0;
+        
+        if iTrial == 6
+            waitSecs(2);
+        end
         
         %collect event queue
         eventCount=0;

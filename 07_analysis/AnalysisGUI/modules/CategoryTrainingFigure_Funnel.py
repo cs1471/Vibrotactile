@@ -13,9 +13,9 @@ tls.set_credentials_file(username='cs1471', api_key='9xknhmjhas')
 
 def CategoryTrainingFigure_Funnel(fileDirectory, filename, session):
 	#Use when debugging or manually editing
-	#filename      = ('20160605_1137-MR1035_block6')
-	#fileDirectory = 'C:\\Users\\Jason\\Documents\\MaxLab\\Repos\\Vibrotactile\\01_CategoryTraining\\data\\1035\\'
-	#session       = '2'
+	filename      = ('20160630_1430-MR1040_block6')
+	fileDirectory = '/Users/courtney/GoogleDrive/Riesenhuber/05_2015_scripts/Vibrotactile/01_CategoryTraining/data/1040/'
+	session       = '2'
 
 	#load matfile
 	data = sio.loadmat(fileDirectory + filename, struct_as_record=True)
