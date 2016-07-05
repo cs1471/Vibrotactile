@@ -114,8 +114,6 @@ class category():
         pos7_f5 = []
         pos7_f7 = []
         pos7_f8 = []
-        pos7_f9 = []
-        pos7_f13 = []
         pos7_f14 = []
         pos7_f15 = []
         pos7_f17 = []
@@ -126,8 +124,6 @@ class category():
         pos1_f5 = []
         pos1_f7 = []
         pos1_f8 = []
-        pos1_f9 = []
-        pos1_f13 = []
         pos1_f14 = []
         pos1_f15 = []
         pos1_f17 = []
@@ -138,8 +134,6 @@ class category():
         pos8_f5 = []
         pos8_f7 = []
         pos8_f8 = []
-        pos8_f9 = []
-        pos8_f13 = []
         pos8_f14 = []
         pos8_f15 = []
         pos8_f17 = []
@@ -160,10 +154,6 @@ class category():
                     pos7_f7.append(rawData[0,iBlock][0,iTrial])
                 elif pos1 == 7 and freq1 ==self.FL.frequencyList[7]:
                     pos7_f8.append(rawData[0,iBlock][0,iTrial])
-                elif pos1 == 7 and freq1 ==self.FL.frequencyList[8]:
-                    pos7_f9.append(rawData[0,iBlock][0,iTrial])
-                elif pos1 == 7 and freq1 ==self.FL.frequencyList[12]:
-                    pos7_f13.append(rawData[0,iBlock][0,iTrial])
                 elif pos1 == 7 and freq1 ==self.FL.frequencyList[13]:
                     pos7_f14.append(rawData[0,iBlock][0,iTrial])
                 elif pos1 == 7 and freq1 ==self.FL.frequencyList[14]:
@@ -174,64 +164,69 @@ class category():
                     pos7_f19.append(rawData[0,iBlock][0,iTrial])
                 elif pos1 == 7 and freq1 ==self.FL.frequencyList[20]:
                     pos7_f21.append(rawData[0,iBlock][0,iTrial])
-                elif pos1 == 1 and freq1 ==self.FL.frequencyList[0]:
-                    pos1_f1.append(rawData[0,iBlock][0,iTrial])
-                elif pos1 == 1 and freq1 ==self.FL.frequencyList[2]:
-                    pos1_f3.append(rawData[0,iBlock][0,iTrial])
-                elif pos1 == 1 and freq1 ==self.FL.frequencyList[4]:
-                    pos1_f5.append(rawData[0,iBlock][0,iTrial])
-                elif pos1 == 1 and freq1 ==self.FL.frequencyList[6]:
-                    pos1_f7.append(rawData[0,iBlock][0,iTrial])
-                elif pos1 == 1 and freq1 ==self.FL.frequencyList[7]:
-                    pos1_f8.append(rawData[0,iBlock][0,iTrial])
-                elif pos1 == 1 and freq1 ==self.FL.frequencyList[8]:
-                    pos1_f9.append(rawData[0,iBlock][0,iTrial])
-                elif pos1 == 1 and freq1 ==self.FL.frequencyList[12]:
-                    pos1_f13.append(rawData[0,iBlock][0,iTrial])
-                elif pos1 == 1 and freq1 ==self.FL.frequencyList[13]:
-                    pos1_f14.append(rawData[0,iBlock][0,iTrial])
-                elif pos1 == 1 and freq1 ==self.FL.frequencyList[14]:
-                    pos1_f15.append(rawData[0,iBlock][0,iTrial])
-                elif pos1 == 1 and freq1 ==self.FL.frequencyList[16]:
-                    pos1_f17.append(rawData[0,iBlock][0,iTrial])
-                elif pos1 == 1 and freq1 ==self.FL.frequencyList[18]:
-                    pos1_f19.append(rawData[0,iBlock][0,iTrial])
-                elif pos1 == 1 and freq1 ==self.FL.frequencyList[20]:
-                    pos1_f21.append(rawData[0,iBlock][0,iTrial])
-                elif pos1 == 8 and freq1 ==self.FL.frequencyList[0]:
-                    pos8_f1.append(rawData[0,iBlock][0,iTrial])
-                elif pos1 == 8 and freq1 ==self.FL.frequencyList[2]:
-                    pos8_f3.append(rawData[0,iBlock][0,iTrial])
-                elif pos1 == 8 and freq1 ==self.FL.frequencyList[4]:
-                    pos8_f5.append(rawData[0,iBlock][0,iTrial])
-                elif pos1 == 8 and freq1 ==self.FL.frequencyList[6]:
-                    pos8_f7.append(rawData[0,iBlock][0,iTrial])
-                elif pos1 == 8 and freq1 ==self.FL.frequencyList[7]:
-                    pos8_f8.append(rawData[0,iBlock][0,iTrial])
-                elif pos1 == 8 and freq1 ==self.FL.frequencyList[8]:
-                    pos8_f9.append(rawData[0,iBlock][0,iTrial])
-                elif pos1 == 8 and freq1 ==self.FL.frequencyList[12]:
-                    pos8_f13.append(rawData[0,iBlock][0,iTrial])
-                elif pos1 == 8 and freq1 ==self.FL.frequencyList[13]:
-                    pos8_f14.append(rawData[0,iBlock][0,iTrial])
-                elif pos1 == 8 and freq1 ==self.FL.frequencyList[14]:
-                    pos8_f15.append(rawData[0,iBlock][0,iTrial])
-                elif pos1 == 8 and freq1 ==self.FL.frequencyList[16]:
-                    pos8_f17.append(rawData[0,iBlock][0,iTrial])
-                elif pos1 == 8 and freq1 ==self.FL.frequencyList[18]:
-                    pos8_f19.append(rawData[0,iBlock][0,iTrial])
-                elif pos1 == 8 and freq1 ==self.FL.frequencyList[20]:
-                    pos8_f21.append(rawData[0,iBlock][0,iTrial])
+                #elif pos1 == 1 and freq1 ==self.FL.frequencyList[0]:
+                #    pos1_f1.append(rawData[0,iBlock][0,iTrial])
+                #elif pos1 == 1 and freq1 ==self.FL.frequencyList[2]:
+                #    pos1_f3.append(rawData[0,iBlock][0,iTrial])
+                #elif pos1 == 1 and freq1 ==self.FL.frequencyList[4]:
+                #    pos1_f5.append(rawData[0,iBlock][0,iTrial])
+                #elif pos1 == 1 and freq1 ==self.FL.frequencyList[6]:
+                #    pos1_f7.append(rawData[0,iBlock][0,iTrial])
+                #elif pos1 == 1 and freq1 ==self.FL.frequencyList[7]:
+                #    pos1_f8.append(rawData[0,iBlock][0,iTrial])
+                #elif pos1 == 1 and freq1 ==self.FL.frequencyList[8]:
+                #    pos1_f9.append(rawData[0,iBlock][0,iTrial])
+                #elif pos1 == 1 and freq1 ==self.FL.frequencyList[12]:
+                #    pos1_f13.append(rawData[0,iBlock][0,iTrial])
+                #elif pos1 == 1 and freq1 ==self.FL.frequencyList[13]:
+                #    pos1_f14.append(rawData[0,iBlock][0,iTrial])
+                #elif pos1 == 1 and freq1 ==self.FL.frequencyList[14]:
+                #    pos1_f15.append(rawData[0,iBlock][0,iTrial])
+                #elif pos1 == 1 and freq1 ==self.FL.frequencyList[16]:
+                #    pos1_f17.append(rawData[0,iBlock][0,iTrial])
+                #elif pos1 == 1 and freq1 ==self.FL.frequencyList[18]:
+                #    pos1_f19.append(rawData[0,iBlock][0,iTrial])
+                #elif pos1 == 1 and freq1 ==self.FL.frequencyList[20]:
+                #    pos1_f21.append(rawData[0,iBlock][0,iTrial])
+                #elif pos1 == 8 and freq1 ==self.FL.frequencyList[0]:
+                #    pos8_f1.append(rawData[0,iBlock][0,iTrial])
+                #elif pos1 == 8 and freq1 ==self.FL.frequencyList[2]:
+                #    pos8_f3.append(rawData[0,iBlock][0,iTrial])
+                #elif pos1 == 8 and freq1 ==self.FL.frequencyList[4]:
+                #    pos8_f5.append(rawData[0,iBlock][0,iTrial])
+                #elif pos1 == 8 and freq1 ==self.FL.frequencyList[6]:
+                #    pos8_f7.append(rawData[0,iBlock][0,iTrial])
+                #elif pos1 == 8 and freq1 ==self.FL.frequencyList[7]:
+                #    pos8_f8.append(rawData[0,iBlock][0,iTrial])
+                #elif pos1 == 8 and freq1 ==self.FL.frequencyList[8]:
+                #    pos8_f9.append(rawData[0,iBlock][0,iTrial])
+                #elif pos1 == 8 and freq1 ==self.FL.frequencyList[12]:
+                #    pos8_f13.append(rawData[0,iBlock][0,iTrial])
+                #elif pos1 == 8 and freq1 ==self.FL.frequencyList[13]:
+                #    pos8_f14.append(rawData[0,iBlock][0,iTrial])
+                #elif pos1 == 8 and freq1 ==self.FL.frequencyList[14]:
+                #    pos8_f15.append(rawData[0,iBlock][0,iTrial])
+                #elif pos1 == 8 and freq1 ==self.FL.frequencyList[16]:
+                #    pos8_f17.append(rawData[0,iBlock][0,iTrial])
+                #elif pos1 == 8 and freq1 ==self.FL.frequencyList[18]:
+                #    pos8_f19.append(rawData[0,iBlock][0,iTrial])
+                #elif pos1 == 8 and freq1 ==self.FL.frequencyList[20]:
+                #    pos8_f21.append(rawData[0,iBlock][0,iTrial])
 
-        data =      [stat.mean(pos1_f1), stat.mean(pos1_f3), stat.mean(pos1_f5), stat.mean(pos1_f7),
-                     stat.mean(pos1_f8), stat.mean(pos1_f9), stat.mean(pos1_f13), stat.mean(pos1_f14),
-                     stat.mean(pos1_f15), stat.mean(pos1_f17), stat.mean(pos1_f19), stat.mean(pos1_f21),
-                     stat.mean(pos7_f1), stat.mean(pos7_f3), stat.mean(pos7_f5), stat.mean(pos7_f7),
-                     stat.mean(pos7_f8), stat.mean(pos7_f9), stat.mean(pos7_f13), stat.mean(pos7_f14),
-                     stat.mean(pos7_f15), stat.mean(pos7_f17), stat.mean(pos7_f19), stat.mean(pos7_f21),
-                     stat.mean(pos8_f1), stat.mean(pos8_f3), stat.mean(pos8_f5), stat.mean(pos8_f7),
-                     stat.mean(pos8_f8), stat.mean(pos8_f9), stat.mean(pos8_f13), stat.mean(pos8_f14),
-                     stat.mean(pos8_f15), stat.mean(pos8_f17), stat.mean(pos8_f19), stat.mean(pos8_f21)]
+        #data =      [stat.mean(pos1_f1), stat.mean(pos1_f3), stat.mean(pos1_f5), stat.mean(pos1_f7),
+        #             stat.mean(pos1_f8), stat.mean(pos1_f9), stat.mean(pos1_f13), stat.mean(pos1_f14),
+        #             stat.mean(pos1_f15), stat.mean(pos1_f17), stat.mean(pos1_f19), stat.mean(pos1_f21),
+        #             stat.mean(pos7_f1), stat.mean(pos7_f3), stat.mean(pos7_f5), stat.mean(pos7_f7),
+        #             stat.mean(pos7_f8), stat.mean(pos7_f9), stat.mean(pos7_f13), stat.mean(pos7_f14),
+        #             stat.mean(pos7_f15), stat.mean(pos7_f17), stat.mean(pos7_f19), stat.mean(pos7_f21),
+        #             stat.mean(pos8_f1), stat.mean(pos8_f3), stat.mean(pos8_f5), stat.mean(pos8_f7),
+        #             stat.mean(pos8_f8), stat.mean(pos8_f9), stat.mean(pos8_f13), stat.mean(pos8_f14),
+        #             stat.mean(pos8_f15), stat.mean(pos8_f17), stat.mean(pos8_f19), stat.mean(pos8_f21)]
+
+        data =      [stat.mean(pos7_f1), stat.mean(pos7_f3), stat.mean(pos7_f5), stat.mean(pos7_f7),
+                     stat.mean(pos7_f8), stat.mean(pos7_f14),
+                     stat.mean(pos7_f15), stat.mean(pos7_f17), stat.mean(pos7_f19), stat.mean(pos7_f21)]
+
         return data
 
     def wrapper(self, ACC, RT):

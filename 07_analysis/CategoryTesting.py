@@ -9,9 +9,42 @@ from category import category
 from PositionFunction_General import Position_general
 tls.set_credentials_file(username='cs1471', api_key='9xknhmjhas')
 
+# (1.1) Define a trace-generating function (returns a Bar object)
+def make_trace_bar(x, y, name):
+    return go.Bar(
+        x     = x,
+        y     = y,            # take in the y-coords
+        name  = name,      # label for hover
+        xaxis = 'x1',
+        yaxis = 'y1',
+    )
+
+# (1.1) Define a trace-generating function (returns a line object)
+def make_trace_line(x, y, name, dash):
+     if dash == 'y':
+        return go.Scatter(
+            x     = x,
+            y     = y,            # take in the y-coords
+            name  = name,      # label for hover
+            xaxis = 'x1',                    # (!) both subplots on same x-axis
+            yaxis = 'y1',
+                line = dict(
+                    dash  = 'dash'
+                )
+        )
+     else:
+         return go.Scatter(
+            x     = x,
+            y     = y,            # take in the y-coords
+            name  = name,      # label for hover
+            xaxis = 'x1',                    # (!) both subplots on same x-axis
+            yaxis = 'y1',
+    )
+
+
 #Use when debugging or manually editing
-filename      = ('20160512_1431-MR1009_block6')
-fileDirectory = '/Users/courtney/GoogleDrive/Riesenhuber/05_2015_scripts/Vibrotactile/09_CategoryTesting/data/1009/'
+filename      = ('20160630_1337-MR1036_block6')
+fileDirectory = '/Users/courtney/GoogleDrive/Riesenhuber/05_2015_scripts/Vibrotactile/09_CategoryTesting/data/1036/'
 session       = 'Test'
 
 #load matfile
@@ -68,44 +101,12 @@ for i in range(5):
 #Generating figures
 #############################################################################
 
-# (1.1) Define a trace-generating function (returns a Bar object)
-def make_trace_bar(x, y, name):
-    return go.Bar(
-        x     = x,
-        y     = y,            # take in the y-coords
-        name  = name,      # label for hover
-        xaxis = 'x1',
-        yaxis = 'y1',
-    )
 
-# (1.1) Define a trace-generating function (returns a line object)
-def make_trace_line(x, y, name, dash):
-     if dash == 'y':
-        return go.Scatter(
-            x     = x,
-            y     = y,            # take in the y-coords
-            name  = name,      # label for hover
-            xaxis = 'x1',                    # (!) both subplots on same x-axis
-            yaxis = 'y1',
-                line = dict(
-                    dash  = 'dash'
-                )
-        )
-     else:
-         return go.Scatter(
-            x     = x,
-            y     = y,            # take in the y-coords
-            name  = name,      # label for hover
-            xaxis = 'x1',                    # (!) both subplots on same x-axis
-            yaxis = 'y1',
-    )
-
-#make trace containing each frequency pair
-x2 = ['[25,100]', '[27,91]', '[29,91]', '[31,83]', '[33,77]', '[36,71]', '[38,67]', '[40,62.5]', '[43,59]',
-      '[59, 43]', '[62.5, 40]', '[67, 38]', '[71, 36]','[77, 33]', '[83, 31]', '[91, 29]', '[91, 27]','[100, 25]']
+#make trace containing each frequency pair - THIS IS NOT RIGHT!!
+x2 = ['[25,100]', '[29,91]', '[33,77]', '[38,67]', '[40,62.5]',
+      '[62.5, 40]', '[67, 38]', '[77, 33]', '[91, 29]', '[100, 25]']
 x3 = ['100%', '90%', '80%', '70%', '65%', '60%', '40%', '35%', '30%', '20%', '10%', '0%']
-x4 = ['[25,100]', '[29,91]', '[33,77]', '[38,67]', '[40,62.5]', '[43,59]',
-      '[59, 43]', '[62.5, 40]', '[67, 38]', '[77, 33]', '[91, 29]', '[100, 25]']
+x4 = ['[25,100]', '[29,91]', '[33,77]', '[38,67]', '[40,62.5]', '[62.5, 40]', '[67, 38]', '[77, 33]', '[91, 29]', '[100, 25]']
 
 trace_PG_ACC_1  = make_trace_bar(x4, pos_acc[0:11], 'pos1')
 trace_PG_ACC_7  = make_trace_bar(x4, pos_acc[12:23], 'pos7')
