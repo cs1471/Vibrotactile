@@ -176,13 +176,17 @@ try
                %record subject response for mouse click v button press
                [sResp,responseFinishedTime]...
                    = getResponse(stimulusFinished, sOL, responseMapping, responseDuration);
+               %load stimulus for next trial
+               if withinTrialCounter ~= 1 && withinTrialCounter ~= length(numTrialsPerSession)
+                [stimLoadTime] = loadStimuli(stimuli(1:8,iTrial));
+               end
                
-               waitTime = exptdesign.trialDuration - (stimulusDuration + abs(RT));
- 
+               waitEOT = trialDuration-(responseDuration + stimulusDuration + stimLoadTime);
+               WaitSecs(waitEOT)
            else 
                stimulusFinished = GetSecs;
-               waitTime = trialDuration; 
                sResp = -1;
+               correctResponse = -1;
                waitEOT = 0;
                RT=0;
            end
@@ -196,22 +200,10 @@ try
                correctResponse = 2;
            end
            
-           %load stimulus for next trial
-           if withinTrialCounter ~= 1 && withinTrialCounter ~= length(numTrialsPerSession)
-               [stimLoadTime] = loadStimuli(stimuli(1:8,iTrial));
-           end
-           
-           if sResp == correctResponse
-               accuracy = 1;
-           else
-               accuracy = 0;
-           end
-           
            withinTrialCounter = withinTrialCounter + 1;
            totalTrialCounter = totalTrialCounter + 1;
            trialEndTime = GetSecs;
            
-           endOfTrialWaitTime = waitTime-stimLoadTime;
            
            %record parameters for the trial and block           
            trialOutput(iBlock,1).sResp(iTrial)                 = sResp;
@@ -317,7 +309,7 @@ function [sResp,responseFinishedTime]...
 % wait until response window passed or until there is an event
 startWaiting = GetSecs;
 mousePressed =0;
-    while startWaiting < (stimFinished + responseDuration)
+    while startWaiting < (stimFinished + responseDuration)&& mousePressed==0
         switch scannerOrLab
             case 's'
                 %if button pressed record response
