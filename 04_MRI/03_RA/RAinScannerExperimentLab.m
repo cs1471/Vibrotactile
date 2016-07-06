@@ -184,7 +184,6 @@ try
                stimulusFinished = GetSecs;
                waitTime = trialDuration; 
                sResp = -1;
-               waitEOT = 0;
                RT=0;
            end
            
@@ -232,7 +231,7 @@ try
            trialOutput(iBlock,1).trialStartTime(iTrial)        = trialStartTime;
            trialOutput(iBlock,1).trialEndTime(iTrial)          = trialEndTime;
            trialOutput(iBlock,1).trialDuration(iTrial)         = trialEndTime-trialStartTime;
-           trialOutput(iBlock,1).waitEOT(iTrial)               = waitEOT;
+           trialOutput(iBlock,1).waitTime(iTrial)               = waitTime;
            
         end
         blockEndTime = GetSecs;
