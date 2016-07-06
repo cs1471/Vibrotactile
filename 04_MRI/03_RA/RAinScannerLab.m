@@ -16,11 +16,6 @@ end
 
 exptdesign.subjectName = name;
 
-%Trial/Block/Run lengths
-exptdesign.numBlocks = 1;              
-exptdesign.numTrialsPerSession = 40;    
-exptdesign.numRuns = 1;
-
 %fixation location/duration         
 exptdesign.fixationImage = 'imgsscaled/fixation.bmp';  
 exptdesign.imageDirectory = 'imgsscaled/';  
@@ -31,6 +26,7 @@ exptdesign.response = 0;
 exptdesign.responseDuration = 2;                % amount of time to allow for a response in seconds
 exptdesign.responseBox = 0;             % Controls whether we are using the keyboard or the response box for subj. responses.
 exptdesign.scannerOrlab='l';
+exptdesing.debug = 0;
 
 %open com3 port for button boxes
 if exptdesign.responseBox == 1
@@ -40,6 +36,16 @@ if exptdesign.responseBox == 1
     exptdesign.boxHandle = CMUBox('Open', 'pst', 'COM3', 'norelease');
 end
 
+if exptdesign.debug
+    disp('WARNING!!! YOU ARE IN DEBUG MODE');
+    exptdesign.numBlocks = 1;              
+    exptdesign.numTrialsPerSession = 40;    
+    exptdesign.numRuns = 1;
+else
+    exptdesign.numBlocks = 1;              
+    exptdesign.numTrialsPerSession = 40;    
+    exptdesign.numRuns = 1;
+end
 %open com2 port for stimulator
 stimGenPTB('open')
 
