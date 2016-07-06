@@ -1,6 +1,11 @@
 % get subject info
-number = input('\n\nEnter Subject ID:\n\n','s');
-%number = '915';
+exptdesign.debug = 1;
+if exptdesign.debug
+    number = '915';
+else
+    number = input('\n\nEnter Subject ID:\n\n','s');
+end
+
 exptdesign.number = number;
 if isempty(number)
     name = [datestr(now,'yyyy-mm-dd-HH-MM-') 'MR000'];
@@ -26,7 +31,8 @@ exptdesign.response = 0;
 exptdesign.responseDuration = 2;                % amount of time to allow for a response in seconds
 exptdesign.responseBox = 0;             % Controls whether we are using the keyboard or the response box for subj. responses.
 exptdesign.scannerOrlab='l';
-exptdesing.debug = 0;
+exptdesign.stimulusLoadWindow = 1;
+exptdesign.stimulusPresentationTime = 1;
 
 %open com3 port for button boxes
 if exptdesign.responseBox == 1
@@ -39,7 +45,7 @@ end
 if exptdesign.debug
     disp('WARNING!!! YOU ARE IN DEBUG MODE');
     exptdesign.numBlocks = 1;              
-    exptdesign.numTrialsPerSession = 40;    
+    exptdesign.numTrialsPerSession = 10;    
     exptdesign.numRuns = 1;
 else
     exptdesign.numBlocks = 1;              

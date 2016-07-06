@@ -28,12 +28,13 @@ try
 
     % Open window with default settings:
     if exptdesign.debug
-        [w windowRect] = Screen('OpenWindow', screenNumber,[128 128 128], [0 0 800 800]); %for debugging
+        [w windowRect] = Screen('OpenWindow', screenNumber,[128 128 128], [0 0 250 250]); %for debugging
     else
         [w windowRect] = Screen('OpenWindow', screenNumber,[128 128 128]);
     end
     white = WhiteIndex(w); % pixel value for white
     black = BlackIndex(w); % pixel value for black
+    stimulusPresentationTime = exptdesign.stimulusPresentationTime;
 
     % Select specific text font, style and size, unless we're on Linux
     % where this combo is not available:
@@ -134,7 +135,7 @@ try
     % predetermined order (m sequence) 
     order = randperm(size(stimuli,2));
     stimuli = stimuli(:,order);
-    
+    responseDuration = exptdesign.responseDuration;
     totalTrialCounter = 1;
     for iBlock = 1:exptdesign.numBlocks %how many blocks to run this training session 
         blockStartTime = GetSecs;
@@ -170,12 +171,25 @@ try
                end
                stimulusFinished = GetSecs;
                stimulusDuration = stimulusFinished-stimulusOnset;
+               stimDurationOffset = stimulusPresentationTime - stimulusDuration;
+               WaitSecs(stimDurationOffset)
                
                %start response window
                responseStartTime=GetSecs;
                %record subject response for mouse click v button press
-               [sResp,responseFinishedTime]...
-                   = getResponse(stimulusFinished, sOL, responseMapping, responseDuration);
+               while GetSecs < (responseDuration) && mousePressed == 0
+                   [x,y,buttons] = GetMouse();
+                   disp('Entering while loop');
+                   if buttons(1)
+                       sResp = 1
+                       disp('Pressed button 1');
+                   elseif buttons(3)
+                       sResp = 2
+                       disp('Pressed button 2');
+                   end
+                   responseFinishedTime = GetSecs;
+                   mousePressed = 1;
+               end
                
                RT = responseFinishedTime - responseStartTime;
                waitTime = exptdesign.trialDuration - (stimulusDuration + abs(RT));
@@ -262,19 +276,18 @@ try
     Screen('CloseAll');
     Priority(0);
     
-    catch
+catch ME
     % This "catch" section executes in case of an error in the "try"
     if exptdesign.responseBox
         CMUBox('Close',exptdesign.boxHandle);
     end
-    
-    %Importantly, it closes the onscreen window if it's open.
+
     disp('Caught error and closing experiment nicely....');
     Screen('CloseAll');
     Priority(0);
     fclose('all');
-    psychrethrow(psychlasterror);
-
+    rethrow(ME);
+    %Importantly, it closes the onscreen window if it's open.
 end
 end
 
@@ -310,48 +323,4 @@ function [loadTime] = loadStimuli(stimuli)
         startTime = tic;
         stimGenPTB('load',s,t);
         loadTime=toc(startTime);
-end
-
-function [sResp,responseFinishedTime]...
-= getResponse(stimFinished, scannerOrLab,responseMapping, responseDuration)
-% wait until response window passed or until there is an event
-startWaiting = GetSecs;
-mousePressed =0;
-    while startWaiting < (stimFinished + responseDuration)
-        switch scannerOrLab
-            case 's'
-                %if button pressed record response
-                evt = CMUBox('GetEvent', exptdesign.boxHandle);
-                %sResp =1 is same, sResp = 2 if differnt 
-                if ~isempty(evt)
-                    response = evt.state;
-                    if response == responseMapping.same
-                        sResp = 1;
-                        mousePressed = 1;
-                    elseif response == responseMapping.different
-                        sResp = 2;
-                        mousePressed = 1;
-                    else
-                        sResp = -1;
-                    end
-                end
-                responseFinishedTime = evt.time;
-            case'l'
-                %check to see if a button is pressed
-                [x,y,buttons] = GetMouse();
-                if (~buttons(1) && ~buttons(3))
-                    continue;
-                else
-                    if buttons(1)
-                        sResp = 1;
-                    elseif buttons(3)
-                        sResp = 2;
-                    end
-                    responseFinishedTime = GetSecs;
-                    mousePressed = 1;    
-                end
-        end
-        startWaiting = GetSecs;
-    end
-     
 end
