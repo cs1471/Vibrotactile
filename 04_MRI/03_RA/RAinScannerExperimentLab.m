@@ -177,6 +177,7 @@ try
                [sResp,responseFinishedTime]...
                    = getResponse(stimulusFinished, sOL, responseMapping, responseDuration);
                
+               RT = responseFinishedTime - responseStartTime;
                waitTime = exptdesign.trialDuration - (stimulusDuration + abs(RT));
  
            else 

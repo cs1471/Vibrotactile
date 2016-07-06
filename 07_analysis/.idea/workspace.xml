@@ -2,15 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0794c37e-0125-4d6f-89ef-6834103a2107" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CategoryTrainingFigure_Funnel2.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/07_analysis.iml" afterPath="$PROJECT_DIR$/.idea/07_analysis.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AnalysisGUI/modules/CategoryTrainingFigure_Funnel.py" afterPath="$PROJECT_DIR$/AnalysisGUI/modules/CategoryTrainingFigure_Funnel.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CategoryTesting.py" afterPath="$PROJECT_DIR$/CategoryTesting.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/category.py" afterPath="$PROJECT_DIR$/category.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/freqDiscrimAnalysis_Category.py" afterPath="$PROJECT_DIR$/freqDiscrimAnalysis_Category.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/frequencyFunction_specific.py" afterPath="$PROJECT_DIR$/frequencyFunction_specific.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CategoryTrainingFigure_Funnel2.py" afterPath="$PROJECT_DIR$/CategoryTrainingFigure_Funnel2.py" />
     </list>
     <ignored path="07_analysis.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -34,8 +26,8 @@
       <file leaf-file-name="CategoryTrainingFigure_Funnel2.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CategoryTrainingFigure_Funnel2.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.22664835">
-              <caret line="44" column="45" selection-start-line="44" selection-start-column="45" selection-end-line="44" selection-end-column="45" />
+            <state vertical-scroll-proportion="0.26785713">
+              <caret line="46" column="18" selection-start-line="46" selection-start-column="18" selection-end-line="46" selection-end-column="18" />
               <folding>
                 <element signature="e#457#638#0" expanded="false" />
                 <element signature="e#751#1402#0" expanded="false" />
@@ -48,10 +40,9 @@
         <entry file="file://$PROJECT_DIR$/CategoryTesting.py">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="104" column="64" selection-start-line="104" selection-start-column="64" selection-end-line="104" selection-end-column="64" />
+              <caret line="151" column="34" selection-start-line="151" selection-start-column="34" selection-end-line="151" selection-end-column="34" />
               <folding>
-                <element signature="e#457#638#0" expanded="false" />
-                <element signature="e#751#1403#0" expanded="false" />
+                <marker date="1467822954000" expanded="false" signature="20:287" placeholder="import ..." />
               </folding>
             </state>
           </provider>
@@ -492,7 +483,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39983305" sideWeight="0.5018067" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32602194" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24475524" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24475524" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33566433" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -561,7 +552,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/CategoryTrainingFigure_Funnel.py</url>
-          <line>163</line>
+          <line>181</line>
           <option name="timeStamp" value="311" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
@@ -967,18 +958,17 @@
     <entry file="file://$PROJECT_DIR$/CategoryTesting.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="104" column="64" selection-start-line="104" selection-start-column="64" selection-end-line="104" selection-end-column="64" />
+          <caret line="151" column="34" selection-start-line="151" selection-start-column="34" selection-end-line="151" selection-end-column="34" />
           <folding>
-            <element signature="e#457#638#0" expanded="false" />
-            <element signature="e#751#1403#0" expanded="false" />
+            <marker date="1467822954000" expanded="false" signature="20:287" placeholder="import ..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/CategoryTrainingFigure_Funnel2.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.22664835">
-          <caret line="44" column="45" selection-start-line="44" selection-start-column="45" selection-end-line="44" selection-end-column="45" />
+        <state vertical-scroll-proportion="0.26785713">
+          <caret line="46" column="18" selection-start-line="46" selection-start-column="18" selection-end-line="46" selection-end-column="18" />
           <folding>
             <element signature="e#457#638#0" expanded="false" />
             <element signature="e#751#1402#0" expanded="false" />

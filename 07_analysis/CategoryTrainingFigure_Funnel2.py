@@ -42,9 +42,9 @@ def make_trace_line(x, y, name, dash):
     )
 
 #Use when debugging or manually editing
-filename      = ('20160705_1238-MR1040_block6')
-fileDirectory = '/Users/courtney/GoogleDrive/Riesenhuber/05_2015_scripts/Vibrotactile/01_CategoryTraining/data/1040/'
-session       = '3'
+filename      = ('20160705_1737-MR1038_block6')
+fileDirectory = '/Users/courtney/GoogleDrive/Riesenhuber/05_2015_scripts/Vibrotactile/01_CategoryTraining/data/1038/'
+session       = '6'
 
 #load matfile
 data = sio.loadmat(fileDirectory + filename, struct_as_record=True)
