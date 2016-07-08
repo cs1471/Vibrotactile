@@ -89,7 +89,7 @@ try
         exptdesign.scanStart = starttime;
         exptdesign.responseMapping=responseMapping;
     else 
-        exptdesign.scanStart = GetSecs;
+        exptdesign.exptStart = GetSecs;
         responseMapping = exptdesign.response;
     end
     
@@ -98,11 +98,9 @@ try
 
     %passes in response profile from wrapper function
     response = exptdesign.response;
-    responseDuration = exptdesign.responseDuration;
     trialDuration = exptdesign.trialDuration;
     numTrialsPerSession = exptdesign.numTrialsPerSession;
-    
-    sOL = exptdesign.scannerOrlab;
+    responseDuration = exptdesign.responseDuration;
    
     %Display experiment instructions
     if response == 0
@@ -135,7 +133,6 @@ try
     % predetermined order (m sequence) 
     order = randperm(size(stimuli,2));
     stimuli = stimuli(:,order);
-    responseDuration = exptdesign.responseDuration;
     totalTrialCounter = 1;
     for iBlock = 1:exptdesign.numBlocks %how many blocks to run this training session 
         blockStartTime = GetSecs;
@@ -152,7 +149,7 @@ try
            %draw fixation/reset timing
            Screen('DrawTexture', w, fixationTexture);
            [FixationVBLTimestamp FixationOnsetTime FixationFlipTimestamp FixationMissed] = ...
-               Screen('Flip',w, exptdesign.scanStart + 10*(iBlock) + 4*(totalTrialCounter-1));
+               Screen('Flip',w, exptdesign.exptStart + 10*(iBlock) + 4*(totalTrialCounter-1));
            
            %call function that generates stimuli for driver box
            stimulusOnset = GetSecs;
@@ -177,22 +174,22 @@ try
                %start response window
                responseStartTime=GetSecs;
                %record subject response for mouse click v button press
-               while GetSecs < (responseDuration) && mousePressed == 0
+               mousePressed = 0;
+               while (GetSecs < (responseStartTime + responseDuration)) && mousePressed == 0
                    [x,y,buttons] = GetMouse();
-                   disp('Entering while loop');
                    if buttons(1)
-                       sResp = 1
-                       disp('Pressed button 1');
+                       sResp = 1;
+                       mousePressed = 1;
                    elseif buttons(3)
-                       sResp = 2
-                       disp('Pressed button 2');
+                       sResp = 2;
+                       mousePressed = 1;
                    end
                    responseFinishedTime = GetSecs;
-                   mousePressed = 1;
+                   
                end
                
-               RT = responseFinishedTime - responseStartTime;
-               waitTime = exptdesign.trialDuration - (stimulusDuration + abs(RT));
+               RT = responseFinishedTime - responseStartTime
+               waitTime = exptdesign.trialDuration - (stimulusDuration + stimLoadTime + abs(RT));
  
            else 
                stimulusFinished = GetSecs;
