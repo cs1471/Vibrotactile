@@ -19,8 +19,8 @@ else
     mkdir(['./data/' number])
 end
 
-exptdesign.numSessions = 7; %number of blocks
-exptdesign.numTrialsPerSession = 5;
+exptdesign.numSessions = 1; %number of blocks
+exptdesign.numTrialsPerSession = 24;
 
 exptdesign.fixationImage = 'imgsscaled/fixation.bmp';  % image for the fixation cross
 exptdesign.blankImage = 'imgsscaled/blank.bmp';        % image for the blank screen

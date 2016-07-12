@@ -47,9 +47,9 @@ function vtSpeechTrainingExperiment_vcv(name, exptdesign)
         ll=.3;
         ul=.8;
         
-        if iBlock == 1, word_pairs = repmat(word_pairs_voicing,1,floor(exptdesign.numTrialsPerSession/length(word_pairs_voicing)));
-        elseif iBlock == 2, word_pairs = repmat(word_pairs_manner,1,floor(exptdesign.numTrialsPerSession/length(word_pairs_manner)));
-        elseif iBlock == 3, word_pairs = repmat(word_pairs_place,1,floor(exptdesign.numTrialsPerSession/length(word_pairs_place)));
+        if iBlock == 1, word_pairs = repmat(word_pairs_place,1,floor(exptdesign.numTrialsPerSession/length(word_pairs_place)));
+        %elseif iBlock == 2, word_pairs = repmat(word_pairs_manner,1,floor(exptdesign.numTrialsPerSession/length(word_pairs_manner)));
+        %elseif iBlock == 3, word_pairs = repmat(word_pairs_place,1,floor(exptdesign.numTrialsPerSession/length(word_pairs_place)));
         end
         
         stimOrder = randperm(length(word_pairs));

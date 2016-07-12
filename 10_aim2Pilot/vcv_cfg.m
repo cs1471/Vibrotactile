@@ -1,5 +1,6 @@
 
-audio_filename = 'audio\JohnsHopkins1986_SAL_EECS_DISC1_Side1_1vcvfemaleMONO.wav';
+audio_filename = 'audio\JohnsHopkins1986_SAL_EECS_DISC1_Side1_1vcvfemaleMONO_ampNormalized_-19dB.wav';
+%audio_filename = '/Volumes/MALONE/10_aim2Pilot/audio/JohnsHopkins1986_SAL_EECS_DISC1_Side1_1vcvfemaleMONO_ampNormalized_-19dB.wav';
 
 list_startSamples = [14270256;3227224;13565552;19523504;4212208;15239224;...
     9217208;20412392;5629624;16864848;6902896;18234216;1505504;9793784;...

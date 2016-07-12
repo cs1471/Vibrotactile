@@ -1,3 +1,5 @@
+    sca
+sca
 %vibrotactile speech training. called by vtSpeechTraining.m
 %PSM pmalone333@gmail.com
 
@@ -39,7 +41,7 @@ function vtSpeechTrainingExperiment_vowel(name, exptdesign)
     %fill primary buffer with waveform... tokens will be copied from this
     PsychPortAudio('FillBuffer', soundhandle, wavedata, 0, 1);  
 
-    for iBlock=5:exptdesign.numSessions %how many blocks to run this training session
+    for iBlock=1:exptdesign.numSessions %how many blocks to run this training session
         drawAndCenterText(w,['Training Block #' num2str(iBlock) ' of ' num2str(exptdesign.numSessions) '\n\n\n\n'...
             'Click the mouse to continue'],1);
 
@@ -47,13 +49,13 @@ function vtSpeechTrainingExperiment_vowel(name, exptdesign)
         ll=.3;
         ul=.8;
         
-        if iBlock == 1, word_pairs = repmat(word_pairs_length,1,floor(60/length(word_pairs_length)));
-        elseif iBlock == 2, word_pairs = repmat(word_pairs_H2L2,1,floor(60/length(word_pairs_H2L2)));
-        elseif iBlock == 3, word_pairs = repmat(word_pairs_H1L1,1,floor(60/length(word_pairs_H1L1)));
-        elseif iBlock == 4, word_pairs = repmat(word_pairs_M2L2,1,floor(60/length(word_pairs_M2L2)));
-        elseif iBlock == 5, word_pairs = repmat(word_pairs_M1L1,1,floor(60/length(word_pairs_M1L1)));
-        elseif iBlock == 6, word_pairs = repmat(word_pairs_H2M2,1,floor(60/length(word_pairs_H2M2)));
-        elseif iBlock == 7, word_pairs = repmat(word_pairs_H1M1,1,floor(60/length(word_pairs_H1M1)));
+        if iBlock == 1, word_pairs = repmat(word_pairs_H1L1,1,floor(60/length(word_pairs_H1L1)));
+        %elseif iBlock == 2, word_pairs = repmat(word_pairs_H2L2,1,floor(60/length(word_pairs_H2L2)));
+        %elseif iBlock == 3, word_pairs = repmat(word_pairs_H1L1,1,floor(60/length(word_pairs_H1L1)));
+        %elseif iBlock == 4, word_pairs = repmat(word_pairs_M2L2,1,floor(60/length(word_pairs_M2L2)));
+        %elseif iBlock == 5, word_pairs = repmat(word_pairs_M1L1,1,floor(60/length(word_pairs_M1L1)));
+        %elseif iBlock == 6, word_pairs = repmat(word_pairs_H2M2,1,floor(60/length(word_pairs_H2M2)));
+        %elseif iBlock == 7, word_pairs = repmat(word_pairs_H1M1,1,floor(60/length(word_pairs_H1M1)));
         end
         
         stimOrder = randperm(length(word_pairs));
