@@ -2,7 +2,7 @@
 % stimGen.m - driver for stimulator generator board
 %
 % SPE, 1/21/14, mod 2/19/15 for PTB serial driver
-function rtn = stimGen(cmd, chan, time)
+function rtn = stimGenPTB(cmd, chan, time)
 global SportH;  %serial port object handle
 
 % command definitions - make same as PIC code
@@ -200,14 +200,14 @@ end
             %fprintf('transferring to stimGen...');
             for i=1:n
                 % interleave time and chan info
-                val = time(i);
+                val = double(time(i));
                 % separate into bytes
                 barr(barrp) = uint8(floor(val/256));
                 barrp = barrp+1;
                 barr(barrp) = uint8(rem(val,256));
                 barrp = barrp+1;
                 
-                val = chan(i);
+                val = double(chan(i));
                 barr(barrp) = uint8(floor(val/256));
                 barrp = barrp+1;
                 barr(barrp) = uint8(rem(val,256));

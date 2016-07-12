@@ -23,6 +23,6 @@ function constructCategoryTrainingStimulus(stimulus)
     stimGen('load',s,t);
     rtn=-1;
     while rtn==-1
-        rtn=stimGen('start');
+        rtn=stimGenPTB('start');
     end
 end
