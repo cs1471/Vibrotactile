@@ -46,7 +46,7 @@ exptdesign.numTrialsPerSession = 144;    % number of trials per block for level 
 
 exptdesign.fixationImage = 'imgsscaled/fixation.bmp';  % image for the fixation cross
 exptdesign.blankImage = 'imgsscaled/blank.bmp';        % image for the blank screen
-exptdesign.maxLevel = 13;
+exptdesign.maxLevel = 14;
 
 exptdesign.giveFeedback=1;
 exptdesign.cat1label='imgsscaled/labelsGarkTrelp.png'; 
