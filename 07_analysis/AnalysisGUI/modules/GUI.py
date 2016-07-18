@@ -82,11 +82,14 @@ class GUI(tkinter.Frame):
 
 		fileDirectory = dataFilename[:-1 * len(filename)]				#file directory is the path up to the name
 
-		if sessionType == "Category Testing":
-			CategoryTesting(fileDirectory, filename[:-4])							#remove ".mat" from filename
-		elif sessionType == "Category Training":
-			CategoryTrainingFigure_Funnel(fileDirectory, filename[:-4], session)	#remove ".mat" from filename
-		elif sessionType == "Frequency Discrimination":
-			freqDiscrimAnalysis_Category(fileDirectory, filename[:-4])				#remove ".mat" from filename
-
-		self.status.set("Done: " + filename)
+		try:
+			if sessionType == "Category Testing":
+				CategoryTesting(fileDirectory, filename[:-4])							#remove ".mat" from filename
+			elif sessionType == "Category Training":
+				CategoryTrainingFigure_Funnel(fileDirectory, filename[:-4], session)	#remove ".mat" from filename
+			elif sessionType == "Frequency Discrimination":
+				freqDiscrimAnalysis_Category(fileDirectory, filename[:-4])				#remove ".mat" from filename
+		except:
+			self.status.set("Error: " + filename + " failed.")
+		else:
+			self.status.set("Done: " + filename)
