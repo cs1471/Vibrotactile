@@ -70,7 +70,7 @@ end
 stimGenPTB('open')
 
 %run all 6 runs right after the last 
-for iRuns = 1:exptdesign.numRuns
+for iRuns = 2:exptdesign.numRuns
     exptdesign.iRuns=iRuns;
     if iRuns == 1
         startOrNot = 'y';
