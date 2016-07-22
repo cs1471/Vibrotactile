@@ -14,7 +14,7 @@ end
 WaitSecs(0.25);
 
 %check if subject has data on file
-exptdesign.saveDir = ['./data_Trained_Localizer/' number];
+exptdesign.saveDir = ['./data_categorizationMVPA/' number];
 if ~exist(exptdesign.saveDir,'dir')
     mkdir(exptdesign.saveDir)
 end
@@ -25,19 +25,24 @@ exptdesign.subjectName = name;
 
 if exptdesign.debug 
     disp('WARNING!!! YOU ARE IN DEBUG MODE') 
-    exptdesign.numBlocks = 3;         
+    exptdesign.numBlocks = 5;         
     exptdesign.numTrialsPerSession = 6;    
     exptdesign.numRuns = 1;
 else
-    exptdesign.numBlocks = 28;         
+    exptdesign.numBlocks = 10;         
     exptdesign.numTrialsPerSession = 6;    
     exptdesign.numRuns = 6;
 end
 
+%generate categorization stimuli
+stimuli_generation_categorizationMVPA(exptdesign.numRuns);
+
 %fixation location/duration
 exptdesign.fixationDuration =0.700;
 exptdesign.stimulusPresentation = 0.300;
-exptdesign.fixationImage = 'imgsscaled/fixation.bmp';  
+exptdesign.fixationImage = 'imgsscaled/fixation.bmp';
+exptdesign.cat1label='imgsscaled/labelsGarkTrelp.png'; 
+exptdesign.cat2label='imgsscaled/labelsTrelpGark.png'; 
 exptdesign.imageDirectory = 'imgsscaled/';   
 
 % Decide which response mapping you are using
@@ -54,9 +59,10 @@ exptdesign.imageDirectory = 'imgsscaled/';
 % exptdesign.response = input('\n\nEnter response key profile (option 0 or 1):\n\n');
 % Line above is commented because now we need the RP to be 0 so that the
 % correct stimulus file is generated.
-exptdesign.response = 0;
-exptdesign.responseBox = 1; 
+exptdesign.response           = 0;
+exptdesign.responseBox        = 1; 
 exptdesign.interTrialInterval = 0.7;                % amount of time between trials
+exptdesign.responseTimeWindow = 3; % how long subjects have to respond at end of block
 
 %open com3 port for button boxes
 if exptdesign.responseBox
@@ -78,7 +84,7 @@ for iRuns = 1:exptdesign.numRuns
         startOrNot = input('Start the next run? y or n\n');
     end
     if strcmp(startOrNot,'y')==1
-        [trialOutput.run] = trainedOddballExperimentInScanner2(name,exptdesign);
+        [trialOutput.run] = categorizationMVPAExperiment(name,exptdesign);
     else
         fprintf(['Skipping run ' num2str(iRuns) '\n']);
     end
@@ -87,8 +93,9 @@ end
 %close com3 port
 if exptdesign.responseBox
     CMUBox('Close',exptdesign.boxHandle);
-    handle = ERRORDLG('Please ensure dip switches are set back to 4 and A');
-    disp(handle)
+%     handle = ERRORDLG('Please ensure dip switches are set back to 4 and A');
+    display('UNCOMMENT THE LINE ABOVE THIS ONE');
+%     disp(handle)
 end
 
 %close com2 port 
