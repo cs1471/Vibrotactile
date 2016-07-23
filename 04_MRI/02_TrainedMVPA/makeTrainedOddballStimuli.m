@@ -1,21 +1,20 @@
-function [stimuliAllRuns, f1, oddChannels] = makeTrainedOddballStimuli(numRuns, response)
+function [stimuliAllRuns, f1, oddChannels] = makeTrainedOddballStimuli(numRuns)
 
 if (nargin < 1)
     numRuns=6;
-    response=1;
 end
 
-    if response == 0
-        s1=[1 3 5];
-        s2=[9 11 13];
-        position = [s1; s2];
-        oddChannels = [1 7 13];
-    elseif response == 1
+%     if response == 0
         s1=[7];
         s2=[13];
-        position =[s1; s2];
+        position = [s1; s2];
         oddChannels = [2 8 14];
-    end
+%     elseif response == 1
+%         s1=[8];
+%         s2=[14];
+%         position =[s1; s2];
+%         oddChannels = [1 7 13];
+%     end
 
     %creat category prototype frequncies 
     f1=2.^([0:.1:2]+log2(25)); 

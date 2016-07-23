@@ -1,9 +1,8 @@
-function stimuliAllRuns = automateTrainedStimuli(nRuns,response)
+function stimuliAllRuns = automateTrainedStimuli(nRuns)
 
-nCond = 12;
+nCond = 7;
 if (nargin < 1) 
     nRuns = 6; 
-    response = 1;
 end
 
 %% Define the session master matrix.
@@ -11,14 +10,16 @@ end
 % an oddball during which run. 
 
 sessionMatrix = zeros(nCond,nRuns);
-sessionMatrix(:,1:3) = 1;
+sessionMatrix(1:7,1:4) = 1;
+sessionMatrix(1:2,5) = 1;
+
 
 % Randomize top half of the matrix
-topRandomized = [];
-while isempty(topRandomized)
-    for iRow = 1:nCond/2
-        if isequal(sum(sessionMatrix(1:nCond/2,:),1),[3 3 3 3 3 3])
-            topRandomized = 1;
+matrixRandomized = [];
+while isempty(matrixRandomized)
+    for iRow = 1:nCond
+        if isequal(sum(sessionMatrix(1:nCond,:),1),[5 5 5 5 5 5])
+            matrixRandomized = 1;
             fprintf('Randomized the top half\n');
             break
         else
@@ -29,25 +30,9 @@ while isempty(topRandomized)
     end
 end
 
-% Randomize the bottom half of the matrix
-bottomRandomized = [];
-while isempty(bottomRandomized)
-    for iRow = nCond/2+1:nCond
-        if isequal(sum(sessionMatrix(nCond/2+1:nCond,:),1),[3 3 3 3 3 3])
-            bottomRandomized = 1;
-            fprintf('Randomized the bottom half\n');
-            break
-        else
-            % randomize on
-            bottomIdx = randperm(6);
-            sessionMatrix(iRow,:) = sessionMatrix(iRow,bottomIdx);        
-        end
-    end
-end
-
 % Do a final check
-if isequal(sum(sessionMatrix,1),[6 6 6 6 6 6]) &&...
-        isequal(sum(sessionMatrix,2),3*ones(1,nCond)')
+if isequal(sum(sessionMatrix,1),[5 5 5 5 5 5]) &&...
+        isequal(sum(sessionMatrix,2),[5 5 4 4 4 4 4]')
     fprintf('Passed the final check!\n')
 else 
     error = input('Did not pass final check\n');
@@ -55,15 +40,15 @@ end
 
 
 %% Generate the raw matrix of stimuli for each run and a raw metadata struct.
-[stimuliAllRuns,f1,oddChannels] = makeTrainedOddballStimuli(nRuns,response);
+[stimuliAllRuns,f1,oddChannels] = makeTrainedOddballStimuli(nRuns);
 
 % Make meta data
 metaData = cell(1,nRuns);
 
 for iRun = 1:nRuns
     metaData{iRun}.dataKey(:,1) = stimuliAllRuns{1}(:,1);
-    metaData{iRun}.dataKey(:,2) = mat2cell([1:14 1:14]',ones(1,28),1);
-    metaData{iRun}.conditionIndices = [1:14 1:14]';
+    metaData{iRun}.dataKey(:,2) = mat2cell([1:7 1:7 1:7 1:7]',ones(1,28),1);
+    metaData{iRun}.conditionIndices = [1:7 1:7 1:7 1:7]';
     metaData{iRun}.oddballPosition = zeros(1,28)';
 end
 
@@ -92,7 +77,7 @@ for iRun = 1:nRuns
     while isempty(oddballSpread)
         for iOddIdx = 1:length(oddIdx)
         oddBlock = oddIdx(iOddIdx);
-           if ~ismember(96,sum(cellfun(@length,stimuliAllRuns{iRun}(:,2:6)),1))
+           if ~ismember(112,sum(cellfun(@length,stimuliAllRuns{iRun}(:,2:6)),1))
                oddballSpread = 1;
                display('Oddball spread within blocks!')
                break
@@ -104,14 +89,14 @@ for iRun = 1:nRuns
         end
     end
     
-    % Finally, randomize the blocks so that you get two oddball blocks
-    % in the first 8, second 8, and third 8 blocks. 
+    % Finally, randomize the blocks so that you get at least 1 oddball block
+    % in the first 7, second 7, and third 7 and fourth 7 blocks. 
     blocksSpread = [];
     while isempty(blocksSpread)
-       if numel(find(sum(cellfun(@length,stimuliAllRuns{iRun}(1:7,  2:6)),1) < 32)) == 2 && ...
-          numel(find(sum(cellfun(@length,stimuliAllRuns{iRun}(8:14, 2:6)),1) < 32)) == 2 && ...
-          numel(find(sum(cellfun(@length,stimuliAllRuns{iRun}(15:21,2:6)),1) < 32)) == 2 && ...
-          numel(find(sum(cellfun(@length,stimuliAllRuns{iRun}(22:28,2:6)),1) < 32)) == 2
+       if numel(find(sum(cellfun(@length,stimuliAllRuns{iRun}(1:7,  2:6)),1) < 28)) >= 1 && ...
+          numel(find(sum(cellfun(@length,stimuliAllRuns{iRun}(8:14, 2:6)),1) < 28)) >= 1 && ...
+          numel(find(sum(cellfun(@length,stimuliAllRuns{iRun}(15:21,2:6)),1) < 28)) >= 1 && ...
+          numel(find(sum(cellfun(@length,stimuliAllRuns{iRun}(22:28,2:6)),1) < 28)) >= 1
                
            blockSpread = 1;
            display('Blocks have been spread too!')
@@ -129,15 +114,15 @@ end
 
 
 for iRun = 1:nRuns
-    % Does each run have 6 oddballs?
-    if length(find(cellfun(@length,stimuliAllRuns{iRun}) == 3)) ~= 6
+    % Does each run have 5 oddballs?
+    if length(find(cellfun(@length,stimuliAllRuns{iRun}) == 3)) ~= 5
         error = input(['something is wrong with run ' int2str(iRun) ' oddballs']);
     else
         display('oddball numbers are correct')
     end
 end
 %% Save the matrix and metadata
-save(['./stimuliAllRunsRP' int2str(response) '.mat'],'stimuliAllRuns','metaData');
+save(['./stimuliAllRuns.mat'],'stimuliAllRuns','metaData');
 
 end
 

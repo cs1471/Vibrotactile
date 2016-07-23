@@ -34,6 +34,9 @@ else
     exptdesign.numRuns = 6;
 end
 
+% Create the random stimuli file
+automateTrainedStimuli(exptdesign.numRuns);
+
 %fixation location/duration
 exptdesign.fixationDuration =0.700;
 exptdesign.stimulusPresentation = 0.300;
