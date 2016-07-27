@@ -89,12 +89,9 @@ try
     drawAndCenterText(w,['\nOn each trial, you will feel 6 vibrations \n'...
              'You will indicate the vibration that felt different from the other 5 vibrations\n'...
              'by pushing the button.'  ],1)
-   
-    %passes in response profile from wrapper function
-    response = exptdesign.response;
 
     %load training stimuli
-    load(['stimuliAllRunsRP' int2str(response) '_PRACTICE.mat']);
+    load('stimuliAllRuns_PRACTICE.mat');
     stimuli = stimuliAllRuns{runCounter};
     
     totalTrialCounter = 1;

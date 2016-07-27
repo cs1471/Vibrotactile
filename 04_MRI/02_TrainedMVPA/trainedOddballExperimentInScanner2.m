@@ -99,7 +99,7 @@ try
     response = exptdesign.response;
 
     %load training stimuli
-    load(['stimuliAllRunsRP' int2str(response) '.mat']);
+    load('stimuliAllRunsRP.mat');
     stimuli = stimuliAllRuns{runCounter};
     
     totalTrialCounter = 1;

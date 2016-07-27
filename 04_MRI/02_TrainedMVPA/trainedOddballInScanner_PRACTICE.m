@@ -41,7 +41,8 @@ exptdesign.imageDirectory = 'imgsscaled/';
 % end
 
 
-exptdesign.response = input('\n\nEnter response key profile (option 0 or 1):\n\n');
+% exptdesign.response = input('\n\nEnter response key profile (option 0 or
+% 1):\n\n'); % we no longer have response profiles.
 exptdesign.responseBox = 1; 
 exptdesign.interTrialInterval = 0.7;                % amount of time between trials
 
