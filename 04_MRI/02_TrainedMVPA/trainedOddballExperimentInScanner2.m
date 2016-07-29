@@ -99,7 +99,7 @@ try
     response = exptdesign.response;
 
     %load training stimuli
-    load('stimuliAllRunsRP.mat');
+    load('stimuliAllRuns.mat');
     stimuli = stimuliAllRuns{runCounter};
     
     totalTrialCounter = 1;
