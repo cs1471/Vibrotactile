@@ -88,7 +88,7 @@ try
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %		SESSIONS 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    for iBlock=1:exptdesign.numSessions
+    for sessionNum=1:exptdesign.numSessions
        
         numTrials=exptdesign.numTrialsPerSession;
        
@@ -141,7 +141,7 @@ try
         %		TRIALS          %
         %%%%%%%%%%%%%%%%%%%%%%%%%
         %  Set up the output data structure for all trials in this session
-        trialOutput(iBlock).sessionNum = iBlock;
+        trialOutput(sessionNum).sessionNum = sessionNum;
 
         disp('Finished setting up session :');
         toc;
@@ -190,39 +190,36 @@ try
                 
             
             % load first VT stim
-            stimGenPTB('load',stimuli{iTrial,2},stimuli{iTrial,3});
+            %stimGenPTB('load',stimuli{iTrial,2},stimuli{iTrial,3});
             
             Screen('DrawTexture', w, fixationTexture);
             Screen('FillRect',w,black,[0 0 32 32]);  % This is the stimulus marker block for the photodiode
             [stimulus1VBLTimestamp, stimulus1OnsetTime, stimulus1FlipTimestamp, stimulus1Missed] = Screen('Flip',w);
             % deliver first VT stim
-            stimGenPTB('start')
+            %stimGenPTB('start')
             
             % ISI duration 200-400 ms
             wait_ISI = (ceil(isiDuration(1)* rand(1)) + (isiDuration(2)-isiDuration(1))) / 1000;
             WaitSecs(wait_ISI);
             
             % load second VT stim
-            stimGenPTB('load',stimuli{iTrial,5},stimuli{iTrial,6});
+            %stimGenPTB('load',stimuli{iTrial,5},stimuli{iTrial,6});
             
             Screen('DrawTexture', w, fixationTexture);
             Screen('FillRect',w,black,[0 0 32 32]);  % This is the stimulus marker block for the photodiode
             [stimulus2VBLTimestamp, stimulus2OnsetTime, stimulus2FlipTimestamp, stimulus2Missed] = Screen('Flip',w);
             % deliver second VT stim
-            stimGenPTB('start')
+            %stimGenPTB('start')
             
             
             
-            responseStartTime = 0;
             responseFinishedTime = 0; % default to 0 if no subject response on this trial
-            sResp = -1; % default to -1 if no subject response on this trial
+            numericalanswer = -1; % default to -1 if no subject response on this trial
             if noRespCounter == numNoResp
-                drawAndCenterText(w,'Same or different?');
-                responseStartTime = GetSecs;
                 if exptdesign.waitForResponse
-                    sResp = getAnimalResponseMouseWait();
+                    numericalanswer = getAnimalResponseMouseWait();
                 else
-                    sResp = getAnimalResponseMouse(exptdesign.responseDuration);
+                    numericalanswer = getAnimalResponseMouse(exptdesign.responseDuration);
                 end
                 responseFinishedTime = GetSecs;
             end
@@ -240,15 +237,16 @@ try
             trialOutput(iBlock).stimulus2FlipTimestamp(iTrial)  = stimulus2FlipTimestamp;
             trialOutput(iBlock).stimulus1Missed(iTrial)         = stimulus1Missed;
             trialOutput(iBlock).stimulus2Missed(iTrial)         = stimulus2Missed;
-            trialOutput(iBlock).ISI_duration(iTrial)            = wait_ISI;
-            trialOutput(iBlock).ITI_duration(iTrial)            = wait_ITI;
+            trialOutput(iBlock).ISI_duration(iTrial)            = ISI_duration;
+            trialOutput(iBlock).ITI_duration(iTrial)            = ITI_duration;
+            trialOutput(iBlock).response(iTrial)                = numericalanswer;
             trialOutput(iBlock).responseFinishedTime(iTrial)    = responseFinishedTime;
             trialOutput(iBlock).responseStartTime(iTrial)       = responseStartTime;
             trialOutput(iBlock).responseFinishedTime(iTrial)    = responseFinishedTime;
             trialOutput(iBlock).RT(iTrial)                      = responseFinishedTime-responseStartTime;
             trialOutput(iBlock).sResp(iTrial)                   = sResp;
-            %trialOutput(iBlock).correctResponse(iTrial)         = correctResponse;
-            %trialOutput(iBlock).accuracy(iTrial)                = accuracy;
+            trialOutput(iBlock).correctResponse(iTrial)         = correctResponse;
+            trialOutput(iBlock).accuracy(iTrial)                = accuracy;
             
             WaitSecs(wait_ITI);
 
@@ -269,7 +267,7 @@ try
             %  Close all open textures
             Screen('Close', fixationTexture);     
             
-            if mod(iTrial, 49)==0
+            if mod(trial, 49)==0
                 drawAndCenterText(w, 'Please take a quick blink break, press any key to continue.',1);
             end
         

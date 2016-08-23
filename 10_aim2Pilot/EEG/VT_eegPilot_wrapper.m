@@ -4,7 +4,7 @@
 % PSM 8/2016 pmalone333@gmail.com
 
 %% EEG related settings
-exptdesign.netstationPresent   = 1;            % controls whether or not netstation is present
+exptdesign.netstationPresent   = 0;            % controls whether or not netstation is present
 exptdesign.netstationIP        = '10.0.0.45';  % IP address of the netstation computer
 exptdesign.netstationSyncLimit = 2;            % limit under which to sync the netstation computer and the Psychtoolbox IN MILLISECONDS
 
@@ -37,4 +37,6 @@ exptdesign.usespace         = 0;                            % use space bar to s
 exptdesign.fixationImage = 'imgs/fixation.bmp';   % image for the fixation cross
 exptdesign.blankImage    = 'imgs/blank.bmp';      % image for the blank screen
 
+% begin experiment 
+stimGenPTB('open');
 [trialoutput] = VT_eegPilot_experiment(name,exptdesign);
