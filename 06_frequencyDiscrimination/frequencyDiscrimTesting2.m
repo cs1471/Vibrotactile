@@ -34,7 +34,7 @@ else
 end
 
 exptdesign.numBlocks = 7;              % number of blocks
-exptdesign.numTrialsPerSession = 72; 
+exptdesign.numTrialsPerSession = 60; 
 exptdesign.numPracticeTrials = 20;
 
 

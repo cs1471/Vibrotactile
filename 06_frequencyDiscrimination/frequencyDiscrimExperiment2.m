@@ -20,7 +20,7 @@ function frequencyDiscrimExperiment2(exptdesign)
     
     responseTime = exptdesign.responseTime;
     
-    load('frequencyDiscrimStimuli2.mat');
+    load('frequencyDiscrimStimuli3.mat');
 
     for iBlock=1:exptdesign.numBlocks
         if iBlock == 1 && strcmp(exptdesign.preOrPostTrain,'1') %% run practice trials only for pre-training session
