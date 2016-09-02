@@ -19,6 +19,6 @@ stimuliDifferent = [repmat(proto1,1,5),                     repmat(proto2,1,5), 
                     proto2, proto3, proto4,proto5,proto6    proto1, proto3, proto4,proto5,proto6    proto1, proto2, proto4,proto5,proto6   proto1, proto2, proto3,proto5,proto6   proto1,proto2,proto3,proto4,proto6    proto1,proto2,proto3,proto4,proto5  ];
                  
 stimuli = [stimuliSame, stimuliDifferent];
-stimuli = repmat(stimuli,1,1);
+stimuli = repmat(stimuli,1,2);
 
 save ('frequencyDiscrimStimuli3.mat','stimuli')
