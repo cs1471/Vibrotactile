@@ -73,6 +73,7 @@ end
 stimGenPTB('open')
 
 %run all 6 runs right after the last 
+%%%CHANGE BACK TO 1%%%%%%%%%%%
 for iRuns = 1:exptdesign.numRuns
     exptdesign.iRuns=iRuns;
     if iRuns == 1
