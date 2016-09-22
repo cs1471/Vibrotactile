@@ -7,19 +7,22 @@ from CategoryTrainingFigure_Funnel import CategoryTrainingFigure_Funnel
 from CategoryTesting import CategoryTesting
 
 class GUI(tkinter.Frame):
-	def __init__(self, master=None):
+	def __init__(self, master=None, debug = False, repoDir = ""):
 		tkinter.Frame.__init__(self, master)
+		self.debug = debug
+		self.repoDir = repoDir		#location of the Vibrotactile git repository on the computer running this script
 		self.grid()
 		self.createWidgets()
 
 
 	def createWidgets(self):
-		self.options = [{"Name": "Category Testing", "SessionRequired": False},
-					{"Name": "Category Training", "SessionRequired": True},
-					{"Name": "Frequency Discrimination", "SessionRequired": False}]
+		self.options = [{"Name": "Category Testing", "SessionRequired": False, "Directory": self.repoDir + "Vibrotactile\\09_CategoryTesting\\data\\"},
+					{"Name": "Category Training", "SessionRequired": True, "Directory": self.repoDir + "Vibrotactile\\01_CategoryTraining\\data\\"},
+					{"Name": "Frequency Discrimination", "SessionRequired": False, "Directory": self.repoDir + "Vibrotactile\\06_frequencyDiscrimination\\data\\"}]
 			#Name is the string that goes in the menu; SessionRequired is whether the Session field is enabled
 		self.sessionType = tkinter.StringVar()							#variable to hold choice
-		self.sessionType.set("Category Training")						#set default option as Category Training
+		self.selectedOption = 1;										#index of default option: 1 == Category Training
+		self.sessionType.set(self.options[self.selectedOption]["Name"])						#set default option in menu
 
 		self.optionMenu = tkinter.OptionMenu(self, self.sessionType, *[option["Name"] for option in self.options], command = self.updateSessionField)
 		self.optionMenu.grid(row = 0, columnspan = 2)					#drop-down list with script options
@@ -28,7 +31,6 @@ class GUI(tkinter.Frame):
 		self.chooseFileButton.grid(row = 2, column = 0, padx = 2)		#open file choice dialog for data file
 
 		self.chosenFile = tkinter.StringVar()
-		self.initialDir = ""											#the directory that the file choice dialog opens to
 		self.chosenFileField = tkinter.Entry(self, textvariable = self.chosenFile, width = 40, justify = tkinter.RIGHT)
 		self.chosenFileField.grid(row = 2, column = 1)					#shows which data file was selected
 
@@ -50,22 +52,16 @@ class GUI(tkinter.Frame):
 
 
 	def chooseFile(self):												#file choice dialog
-		filename = filedialog.askopenfilename(initialdir = self.initialDir, filetypes = [("MATLAB Data Files", ".mat"), ("All Files", ".*")])
+		filename = filedialog.askopenfilename(initialdir = self.options[self.selectedOption]["Directory"], filetypes = [("MATLAB Data Files", ".mat"), ("All Files", ".*")])
 		self.chosenFile.set(filename)
-
-		#update initial directory
-		if "\\" in filename:										#if the file path uses backslashes
-			self.initialDir = filename[:-1 * len(filename.split("\\")[-1])]
-		else:															#if the file path uses forward slashes
-			self.initialDir = filename[:-1 * len(filename.split("/")[-1])]
 
 		self.chosenFileField.focus()
 		self.chosenFileField.icursor(tkinter.END)						#so that the filename is visible
 
 
 	def updateSessionField(self, event = None):							#session field is enabled or not based on chosen script
-		optionIndex = [option["Name"] for option in self.options].index(self.sessionType.get())
-		if self.options[optionIndex]["SessionRequired"]:
+		self.selectedOption = [option["Name"] for option in self.options].index(self.sessionType.get())
+		if self.options[self.selectedOption]["SessionRequired"]:
 			self.sessionField["state"] = tkinter.NORMAL
 		else:
 			self.sessionField["state"] = tkinter.DISABLED
@@ -82,14 +78,24 @@ class GUI(tkinter.Frame):
 
 		fileDirectory = dataFilename[:-1 * len(filename)]				#file directory is the path up to the name
 
-		try:
+		if not(self.debug):
+			try:
+				if sessionType == "Category Testing":
+					CategoryTesting(fileDirectory, filename[:-4])							#remove ".mat" from filename
+				elif sessionType == "Category Training":
+					CategoryTrainingFigure_Funnel(fileDirectory, filename[:-4], session)	#remove ".mat" from filename
+				elif sessionType == "Frequency Discrimination":
+					freqDiscrimAnalysis_Category(fileDirectory, filename[:-4])				#remove ".mat" from filename
+			except:
+				self.status.set("Error: " + filename + " failed.")
+			else:
+				self.status.set("Done: " + filename)
+		else:
 			if sessionType == "Category Testing":
 				CategoryTesting(fileDirectory, filename[:-4])							#remove ".mat" from filename
 			elif sessionType == "Category Training":
 				CategoryTrainingFigure_Funnel(fileDirectory, filename[:-4], session)	#remove ".mat" from filename
 			elif sessionType == "Frequency Discrimination":
 				freqDiscrimAnalysis_Category(fileDirectory, filename[:-4])				#remove ".mat" from filename
-		except:
-			self.status.set("Error: " + filename + " failed.")
-		else:
+
 			self.status.set("Done: " + filename)
