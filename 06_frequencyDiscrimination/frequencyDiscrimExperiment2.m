@@ -23,7 +23,7 @@ function frequencyDiscrimExperiment2(exptdesign)
     load('frequencyDiscrimStimuli3.mat');
 
     for iBlock=1:exptdesign.numBlocks
-        if iBlock == 1 && strcmp(exptdesign.preOrPostTrain,'1') %% run practice trials only for pre-training session
+        if iBlock == 1
             drawAndCenterText(w, ['Please review instructions\n\n'...
                 'Please click a mouse button to advance'],1)
             
