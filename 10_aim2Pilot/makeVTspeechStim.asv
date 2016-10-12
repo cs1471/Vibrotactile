@@ -1,0 +1,31 @@
+word_pairs_voicing = {{'aba1','apa1'},{'ada1','ata1'},{'ava1','afa1'},...
+    {'aga1','aka1'},{'aza1','asa1'},{'apa1','aba1'},{'ata1','ada1'},...
+    {'afa1','ava1'},{'aka1','aga1'},{'asa1','aza1'},{'aba1','apa2'},...
+    {'ada1','ata2'},{'ava1','afa2'},{'aga1','aka2'},{'aza1','asa2'},...
+    {'apa2','aba1'},{'ata2','ada1'},{'afa2','ava1'},{'aka2','aga1'},...
+    {'asa1','aza2'},{'aba2','apa1'},{'ada2','ata2'},{'ava1','afa2'},...
+    {'aga1','aka2'},{'aza1','asa1'},{'apa2','aba2'},{'ata1','ada2'},...
+    {'afa1','ava2'},{'aka1','aga1'},{'asa2','aza2'}};
+
+word_pairs_place = {{'apa','ata'},{'aba','aga'},{'ava','aza'},...
+    {'afa','asa'},{'ama','ana'}};
+
+word_pairs_manner = {{'ada','aza'},{'aza','ana'},{'aba','ama'}...
+    {'ada','ana'},{'ata','asa'}};
+
+voicing_stim = cell(6,5);
+manner_stim = cell(6,5);
+place_stim = cell(6,5);
+
+for i=1:length(word_pairs_voicing)
+    load(['sampledPulseFiles/volume_2point25_outputGain_50/' word_pairs_voicing{i}{1}]);
+    voicing_stim(1,i) = word_pairs_voicing{i}{1};
+    voicing_stim(2,i) = tactStim{1}{1};
+    voicing_stim(3,i) = tactStim{1}{2};
+    clear tactStim
+    load(['sampledPulseFiles/volume_2point25_outputGain_50/' word_pairs_voicing{i}{2}]);
+    voicing_stim(4,i) = word_pairs_voicing{i}{2};
+    voicing_stim(5,i) = tactStim{1}{1};
+    voicing_stim(6,i) = tactStim{1}{2};
+    clear tactStim
+end
