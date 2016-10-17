@@ -52,8 +52,9 @@ end
             
             % try to open
             try
-                
-                [SportH,e]  = IOPort('OpenSerialPort',chan,'BaudRate=19200 FlowControl=None Parity=None DataBits=8 StopBits=1');
+                % old baud rate 19200 - changed after Silvio updated
+                % firmware
+                [SportH,e]  = IOPort('OpenSerialPort',chan,'BaudRate=57600 FlowControl=None Parity=None DataBits=8 StopBits=1');
                 if numel(e) > e
                     fprintf('Serial Port Open error: %s\n',e);
                     return;
