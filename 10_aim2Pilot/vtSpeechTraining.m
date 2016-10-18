@@ -19,12 +19,12 @@ else
     mkdir(['./data/' number])
 end
 
-exptdesign.numSessions = 2; %number of blocks
-exptdesign.numTrialsPerSession = 10;
+exptdesign.numSessions = 6; %number of blocks
+exptdesign.numTrialsPerSession = 60;
 
 exptdesign.fixationImage = 'imgsscaled/fixation.bmp';  % image for the fixation cross
 exptdesign.blankImage = 'imgsscaled/blank.bmp';        % image for the blank screen
 
-stimGenPTB('open');
+stimGenPTB('open','COM1');
 vtSpeechTrainingExperiment(name,exptdesign);
 stimGenPTB('close');

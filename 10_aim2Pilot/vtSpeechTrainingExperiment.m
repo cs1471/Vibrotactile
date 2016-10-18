@@ -29,17 +29,23 @@ function vtSpeechTrainingExperiment(name, exptdesign)
     
     vcv_cfg %load vowel-consonant-vowel config file 
     load VTspeechStim.mat;
+    
+    % each block trains a phonetic feature
+    % randomize order of blocks
+    feature_block = {'voicing','manner','place'};
+    feature_block = repmat(feature_block,1,exptdesign.numSessions/3);
+    block_order = randperm(length(feature_block));
+    feature_block = feature_block(block_order);
+    
 
     for iBlock=1:exptdesign.numSessions %how many blocks to run this training session
         drawAndCenterText(w,['Training Block #' num2str(iBlock) ' of ' num2str(exptdesign.numSessions) '\n\n\n\n'...
             'Click the mouse to continue'],1);
+        
 
-        if iBlock == 1, word_pairs = repmat(word_pairs_voicing,1,floor(exptdesign.numTrialsPerSession/length(word_pairs_voicing)));
-        elseif iBlock == 2, word_pairs = repmat(word_pairs_manner,1,floor(exptdesign.numTrialsPerSession/length(word_pairs_manner)));
-        elseif iBlock == 3, word_pairs = repmat(word_pairs_place,1,floor(exptdesign.numTrialsPerSession/length(word_pairs_place)));
-        elseif iBlock == 4, word_pairs = repmat(word_pairs_voicing,1,floor(exptdesign.numTrialsPerSession/length(word_pairs_voicing)));
-        elseif iBlock == 5, word_pairs = repmat(word_pairs_manner,1,floor(exptdesign.numTrialsPerSession/length(word_pairs_manner)));
-        elseif iBlock == 6, word_pairs = repmat(word_pairs_place,1,floor(exptdesign.numTrialsPerSession/length(word_pairs_place)));
+        if strcmp(feature_block{iBlock},'voicing'), word_pairs = repmat(word_pairs_voicing,1,floor(exptdesign.numTrialsPerSession/length(word_pairs_voicing)));
+        elseif strcmp(feature_block{iBlock},'manner'), word_pairs = repmat(word_pairs_manner,1,floor(exptdesign.numTrialsPerSession/length(word_pairs_manner)));
+        elseif strcmp(feature_block{iBlock},'place'), word_pairs = repmat(word_pairs_place,1,floor(exptdesign.numTrialsPerSession/length(word_pairs_place)));
         end
         
         stimOrder = randperm(length(word_pairs));
@@ -76,12 +82,20 @@ function vtSpeechTrainingExperiment(name, exptdesign)
             %after 300-800 ms, present the 2 VT speech stimuli
             %wait1 = ll + (ul-ll).*rand(1);
             %WaitSecs(wait1);
-        
+            tic;
             stimGenPTB('load',VTspeechStim{2,word1_ind},VTspeechStim{1,word1_ind});
+            toc;
+            tic;
             stimGenPTB('start');
-            
+            tic;
+            toc;
+            toc;
+            tic;
             stimGenPTB('load',VTspeechStim{2,word2_ind},VTspeechStim{1,word2_ind});
+            toc;
+            tic;
             stimGenPTB('start');
+            toc;
             
 
             %show the two arm images at a latency of .6+wait1 seconds
@@ -148,6 +162,7 @@ function vtSpeechTrainingExperiment(name, exptdesign)
         end
     %record parameters for the block
     trialOutput(iBlock).order=stimOrder;
+    trialOutput(iBlock).feature_block = feature_block{iBlock};
     trialOutput(iBlock).stimuli=word_pairs;
     trialOutput(iBlock).stimuliToken=[word1_ind word2_ind];
     trialOutput(iBlock).accuracyForBlock=accuracyForBlock;
