@@ -14,8 +14,11 @@ position = repmat(position,1,size(frequency,2));
 % category 1 = lower frequency @ position closer to wrist
 category(frequency(1,:)>frequency(2,:))=2;
 category(frequency(1,:)<frequency(2,:))=1;
+
+% stim IDs for EEG 
+stimID = [3 4 5 6 7 8 9];
          
-stimuli = [frequency; position; category];
+stimuli = [frequency; position; category; stimID];
 
 save('aim1EEGstimuli','stimuli');
 end
