@@ -25,6 +25,6 @@ exptdesign.numTrialsPerSession = 60;
 exptdesign.fixationImage = 'imgsscaled/fixation.bmp';  % image for the fixation cross
 exptdesign.blankImage = 'imgsscaled/blank.bmp';        % image for the blank screen
 
-stimGenPTB('open','COM1');
+stimGenPTB('open','COM4');
 vtSpeechTrainingExperiment(name,exptdesign);
 stimGenPTB('close');
