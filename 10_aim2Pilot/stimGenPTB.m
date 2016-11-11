@@ -212,10 +212,12 @@ end
                 barrp = barrp+1;
                 barr(barrp) = uint8(rem(val,256));
                 barrp = barrp+1;
-                % delay a tad
-                dly=toc();
-                while toc()<(dly+0.01)
-                end
+                % delay a tad - commented out on 11/11/16 according to
+                % Silvio's suggestion to fix the long load times for aim 2
+                % sitmuli 
+%                 dly=toc(); 
+%                 while toc()<(dly+0.01)
+%                 end
             end
             
             % send packet

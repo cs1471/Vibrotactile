@@ -2,7 +2,7 @@
 % stimGen.m - driver for stimulator generator board
 %
 % SPE, 1/21/14, mod 2/19/15 for PTB serial driver
-function rtn = stimGen(cmd, chan, time)
+function rtn = stimGenPTB(cmd, chan, time)
 global SportH;  %serial port object handle
 
 % command definitions - make same as PIC code
@@ -45,15 +45,14 @@ end
         case 'open' % open serial connection on specified port
             % default to serial COM1
             if exist('chan','var') == 0
-                chan = 'COM2';
+                chan = 'COM1';
             end
             
             % open port
             
             % try to open
             try
-                % old baud rate 19200 - changed after Silvio updated
-                % firmware
+                
                 [SportH,e]  = IOPort('OpenSerialPort',chan,'BaudRate=57600 FlowControl=None Parity=None DataBits=8 StopBits=1');
                 if numel(e) > e
                     fprintf('Serial Port Open error: %s\n',e);
@@ -201,22 +200,24 @@ end
             %fprintf('transferring to stimGen...');
             for i=1:n
                 % interleave time and chan info
-                val = time(i);
+                val = double(time(i));
                 % separate into bytes
                 barr(barrp) = uint8(floor(val/256));
                 barrp = barrp+1;
                 barr(barrp) = uint8(rem(val,256));
                 barrp = barrp+1;
                 
-                val = chan(i);
+                val = double(chan(i));
                 barr(barrp) = uint8(floor(val/256));
                 barrp = barrp+1;
                 barr(barrp) = uint8(rem(val,256));
                 barrp = barrp+1;
-                % delay a tad
-                dly=toc();
-                while toc()<(dly+0.01)
-                end
+                % delay a tad - commented out on 11/11/16 according to
+                % Silvio's suggestion to fix the long load times for aim 2
+                % sitmuli 
+%                 dly=toc(); 
+%                 while toc()<(dly+0.01)
+%                 end
             end
             
             % send packet
